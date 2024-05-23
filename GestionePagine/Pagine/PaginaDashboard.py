@@ -74,6 +74,85 @@ class PaginaDashboard(PaginaGenerica): #Singleton
         self.__tabellaDashboard.RefreshFrameDispositivi()
 
 
+        #FRAME DELLE SCRITTE SOPRA LA TABELLA
+        self.__fFrameTextLabel = tk.Frame(master = self.__fFrameInternoCanvasScorrevole)
+        self.__fFrameTextLabel.place(x = SPAZIO_LATI_PAGINA_DISPOSITIVI, y = SPAZIO_ALTO_PAGINA_DISPOSITIVI, width = self.__dimensioniTabellaDashboard[0], height = Impostazioni.personalizzazioni.altezza_elemento_tabella_paginaDashboard, anchor = "nw")
+        self.__fFrameTextLabel.columnconfigure(0, weight = int(100 * PROPORZIONI_NOME_DISPOSITIVO_FRAMEDASHBOARD))
+        self.__fFrameTextLabel.columnconfigure(1, weight = int(100 * PROPORZIONI_INDIRIZZO_DISPOSITIVO_FRAMEDASHBOARD))
+        self.__fFrameTextLabel.columnconfigure(2, weight = int(100 * PROPORZIONI_PORTA_DISPOSITIVO_FRAMEDASHBOARD))
+        self.__fFrameTextLabel.columnconfigure(3, weight = int(100 * PROPORZIONI_TEMPOPING_DISPOSITIVO_FRAMEDASHBOARD))
+        self.__fFrameTextLabel.columnconfigure(4, weight = int(100 * PROPORZIONI_STATUS_DISPOSITIVO_TABELLA_DASHBOARD))
+        self.__fFrameTextLabel.columnconfigure(5, weight = int(100 * PROPORZIONI_PINGMANUALE_DISPOSITIVO_TABELLA_DASHBOARD))
+        self.__fFrameTextLabel.rowconfigure(0, weight = 1)
+        self.__fFrameTextLabel.grid_propagate(False)
+        self.__fFrameTextLabel.pack_propagate(False)
+
+
+        # FRAME SUPPORTO SCRITTA NOME
+        self.__fFrameScrittaNome = tk.Frame(master = self.__fFrameTextLabel, bg = Impostazioni.Tema.IGetColoriSfondo("secondario")[1], highlightbackground= Impostazioni.Tema.IGetColoriSfondo("secondario")[3], highlightthickness=1)
+        self.__fFrameScrittaNome.grid(row = 0, column = 0, sticky = "nsew")
+        self.__fFrameScrittaNome.rowconfigure(0, weight = 1)
+        self.__fFrameScrittaNome.columnconfigure(0, weight = 1)
+        self.__fFrameScrittaNome.grid_propagate(False)
+        self.__fFrameScrittaNome.pack_propagate(False)
+
+        # FRAME SUPPORTO SCRITTA INDIRIZZO IP
+        self.__fFrameScrittaIndirizzoIP = tk.Frame(master = self.__fFrameTextLabel, bg = Impostazioni.Tema.IGetColoriSfondo("secondario")[1], highlightbackground= Impostazioni.Tema.IGetColoriSfondo("secondario")[3], highlightthickness=1)
+        self.__fFrameScrittaIndirizzoIP.grid(row = 0, column = 1, sticky = "nsew")
+        self.__fFrameScrittaIndirizzoIP.rowconfigure(0, weight = 1)
+        self.__fFrameScrittaIndirizzoIP.columnconfigure(0, weight = 1)
+        self.__fFrameScrittaIndirizzoIP.grid_propagate(False)
+        self.__fFrameScrittaIndirizzoIP.pack_propagate(False)
+
+        # FRAME SUPPORTO SCRITTA PORTA
+        self.__fFrameScrittaPorta = tk.Frame(master = self.__fFrameTextLabel, bg = Impostazioni.Tema.IGetColoriSfondo("secondario")[1], highlightbackground= Impostazioni.Tema.IGetColoriSfondo("secondario")[3], highlightthickness=1)
+        self.__fFrameScrittaPorta.grid(row = 0, column = 2, sticky = "nsew")
+        self.__fFrameScrittaPorta.rowconfigure(0, weight = 1)
+        self.__fFrameScrittaPorta.columnconfigure(0, weight = 1)
+        self.__fFrameScrittaPorta.grid_propagate(False)
+        self.__fFrameScrittaPorta.pack_propagate(False)
+
+        # FRAME SUPPORTO SCRITTA TEMPO TRA PING
+        self.__fFrameScrittaTempoTraPing = tk.Frame(master = self.__fFrameTextLabel, bg = Impostazioni.Tema.IGetColoriSfondo("secondario")[1], highlightbackground= Impostazioni.Tema.IGetColoriSfondo("secondario")[3], highlightthickness=1)
+        self.__fFrameScrittaTempoTraPing.grid(row = 0, column = 3, sticky = "nsew")
+        self.__fFrameScrittaTempoTraPing.rowconfigure(0, weight = 1)
+        self.__fFrameScrittaTempoTraPing.columnconfigure(0, weight = 1)
+        self.__fFrameScrittaTempoTraPing.grid_propagate(False)
+        self.__fFrameScrittaTempoTraPing.pack_propagate(False)
+
+        # FRAME SUPPORTO SCRITTA STATUS
+        self.__fFrameScrittaStatus = tk.Frame(master = self.__fFrameTextLabel, bg = Impostazioni.Tema.IGetColoriSfondo("secondario")[1], highlightbackground= Impostazioni.Tema.IGetColoriSfondo("secondario")[3], highlightthickness=1)
+        self.__fFrameScrittaStatus.grid(row = 0, column = 4, sticky = "nsew")
+        self.__fFrameScrittaStatus.rowconfigure(0, weight = 1)
+        self.__fFrameScrittaStatus.columnconfigure(0, weight = 1)
+        self.__fFrameScrittaStatus.grid_propagate(False)
+        self.__fFrameScrittaStatus.pack_propagate(False)
+
+        # FRAME SUPPORTO SCRITTA PING MANUALE
+        self.__fFrameScrittaPingManuale = tk.Frame(master = self.__fFrameTextLabel, bg = Impostazioni.Tema.IGetColoriSfondo("secondario")[1], highlightbackground= Impostazioni.Tema.IGetColoriSfondo("secondario")[3], highlightthickness=1)
+        self.__fFrameScrittaPingManuale.grid(row = 0, column = 5, sticky = "nsew")
+        self.__fFrameScrittaPingManuale.rowconfigure(0, weight = 1)
+        self.__fFrameScrittaPingManuale.columnconfigure(0, weight = 1)
+        self.__fFrameScrittaPingManuale.grid_propagate(False)
+        self.__fFrameScrittaPingManuale.pack_propagate(False)
+
+        #SCRITTE SOPRA LA TABELLA
+        self.__textLabels = []
+        # Create and position the text labels
+        for i in range(6):
+            textLabel = tk.Label(master= self.__fFrameScrittaNome if i==0 else self.__fFrameScrittaIndirizzoIP if i==1 else self.__fFrameScrittaPorta if i==2 else self.__fFrameScrittaTempoTraPing if i==3 else self.__fFrameScrittaStatus if i==4 else self.__fFrameScrittaPingManuale,
+                                text = "NOME DISPOSITIVO" if i==0 else "INDIRIZZO IP" if i==1 else "PORTA" if i==2 else "FREQUENZA PING (sec)" if i==3 else "status" if i==4 else "ping manuale",
+                                font=("Arial", 12),
+                                fg=Impostazioni.Tema.IGetFontColor("sottotitolo"),
+                                bg=Impostazioni.Tema.IGetColoriSfondo("secondario")[1]
+                                )
+            textLabel.grid(row = 0, column = i, sticky="nsew")
+            textLabel.pack(side="left")
+            #textLabel.configure(highlightthickness = 1, highlightcolor = Impostazioni.Tema.IGetColoriSfondo("secondario")[3])
+            self.__textLabels.append(textLabel)
+
+
+
         # EVENT BIND
         self.__fFramePrincipale.bind("<MouseWheel>", lambda event : self.__cCanvasScorrevole.yview_scroll(int(-event.delta * Impostazioni.sistema.sensibilita_scorrimento_rotella), "units"))
         self.__fFrameInternoCanvasScorrevole.bind("<MouseWheel>", lambda event : self.__cCanvasScorrevole.yview_scroll(int(-event.delta * Impostazioni.sistema.sensibilita_scorrimento_rotella), "units"))
@@ -131,6 +210,8 @@ class PaginaDashboard(PaginaGenerica): #Singleton
 
         self.__cCanvasScorrevole.delete(self.__ultimoCanvasId)
         self.__ultimoCanvasId = thisCanvasId
+
+        self.__fFrameTextLabel.place(x = SPAZIO_LATI_PAGINA_DISPOSITIVI, y = SPAZIO_ALTO_PAGINA_DISPOSITIVI, width = self.__dimensioniTabellaDashboard[0], height = Impostazioni.personalizzazioni.altezza_elemento_tabella_paginaDashboard, anchor = "nw")
 
         #Resize tabella
         self.__tabellaDashboard.ChangeDim(

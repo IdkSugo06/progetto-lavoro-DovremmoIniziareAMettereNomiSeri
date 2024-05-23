@@ -1,3 +1,4 @@
+import Utility.Impostazioni.Impostazioni as Impostazioni 
 from Utility.FUtility import *
 
 
@@ -17,6 +18,10 @@ class MyInputWidget(tk.Frame): #it will occupy the whole frame
     def Set(self, value : any) -> int:
         return 0
     
+    # METODI PERSONALIZZAZIONE
+    def AggiornaColoriTema(self):
+        return
+
     # METODI EVENTO
     def myBind(self, evento : str, funzione):
         return

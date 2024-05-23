@@ -39,11 +39,9 @@ class InterfacciaGestioneDispositivi:
 
     # COSTRUTTORE
     def __init__(self):
-        InterfacciaGestioneDispositivi.IAddDispositivo("Router", "172.16.0.1", 0, 1)  
-        InterfacciaGestioneDispositivi.IAddDispositivo("Router", "www.google.com", 0, 1)  
-        InterfacciaGestioneDispositivi.IAddDispositivo("Router", "www.youtube.it", 0, 1)  
+        InterfacciaGestioneDispositivi.IAddDispositivo("Router", "172.16.0.1", 0, 1)   
         for i in range(20):
-            InterfacciaGestioneDispositivi.IAddDispositivo("Router", "www.youtube.it", 0, 1)  
+            InterfacciaGestioneDispositivi.IAddDispositivo("Router", "www.youtubethr.it", 0, 1)  
         pass
 
 

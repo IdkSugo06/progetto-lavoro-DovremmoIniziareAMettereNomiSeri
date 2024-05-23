@@ -12,7 +12,9 @@ class FrameImpostazioniIntabellabile(ElementoIntabellabile):
                  y : int = 0,
                  width : int = 250, 
                  height : int = 50,):
-        self.__colore = Impostazioni.Tema.IGetColoriSfondo("secondario")[2]
+        
+        #Attributi colori
+        self.__coloreSfondo = Impostazioni.Tema.IGetColoriSfondo("secondario")[1]
         self.__coloreBordo = Impostazioni.Tema.IGetColoriSfondo("secondario")[3]
         
 
@@ -24,14 +26,14 @@ class FrameImpostazioniIntabellabile(ElementoIntabellabile):
                  width, 
                  height,
                  False,
-                 colore = self.__colore,
+                 colore = self.__coloreSfondo,
                  coloreBordo = self.__coloreBordo,
                  spessoreBordo = 0)
         
 
 
         # CREO IL FRAME PRINCIPALE
-        self.__fFramePrincipale = tk.Frame(self, bg = self.__colore, highlightbackground="#DDDDDD", highlightthickness=1)
+        self.__fFramePrincipale = tk.Frame(self, bg = self.__coloreSfondo, highlightbackground="#DDDDDD", highlightthickness=1)
         self.__fFramePrincipale.grid(row = 0, column = 0, sticky = "nsew")
         self.__fFramePrincipale.rowconfigure(0, weight = 1)
         self.__fFramePrincipale.columnconfigure(0, weight = 100)  #questo peso cambia la grandezza del widget
@@ -41,7 +43,7 @@ class FrameImpostazioniIntabellabile(ElementoIntabellabile):
 
         # FRAME SUPPORTO SCRITTA NOME
         self.__fFrameScrittaImpostazione = tk.Frame(master = self.__fFramePrincipale, 
-                                                    bg = self.__colore, 
+                                                    bg = self.__coloreSfondo, 
                                                     highlightbackground = self.__coloreBordo)
         self.__fFrameScrittaImpostazione.grid(row = 0, column = 0, sticky = "nsew")
         self.__fFrameScrittaImpostazione.rowconfigure(0,weight=1) 
@@ -54,13 +56,13 @@ class FrameImpostazioniIntabellabile(ElementoIntabellabile):
                                          text= tipoImpostazione, 
                                          font = Impostazioni.Tema.IGetFont("testo"), 
                                          fg = Impostazioni.Tema.IGetFontColor("testo"),
-                                         bg = self.__colore)
+                                         bg = self.__coloreSfondo)
         self.__lScrittaImpostazione.pack(side = "left")
         
 
         # Frame Widget che starà a destra   questo
         self.__fFrameInputWidget = tk.Frame(master = self.__fFramePrincipale, 
-                                            bg = self.__colore, 
+                                            bg = self.__coloreSfondo, 
                                             highlightbackground= self.__coloreBordo)
         self.__fFrameInputWidget.grid(row = 0, column = 1, sticky = "nsew")
         self.__fFrameInputWidget.rowconfigure(0, weight = 1)
@@ -82,6 +84,7 @@ class FrameImpostazioniIntabellabile(ElementoIntabellabile):
         self.Show()
 
 
+
     # METODI
     def myBind(self, evento : str, funzione):
 
@@ -92,6 +95,24 @@ class FrameImpostazioniIntabellabile(ElementoIntabellabile):
         self.__fFrameInputWidget.bind(evento, funzione)
         self.__myIWwidget.myBind(evento, funzione)
 
-
     def GetWidget(self):
         return self.__myIWwidget
+    
+
+    # METODI PERSONALIZZAZIONE
+    def AggiornaColoriTema(self):
+        self.__coloreSfondo = Impostazioni.Tema.IGetColoriSfondo("secondario")[2]
+        self.__coloreBordo = Impostazioni.Tema.IGetColoriSfondo("secondario")[3]
+        self.__tipoFont =  Impostazioni.Tema.IGetFont("testo")
+        self.__coloreFont = Impostazioni.Tema.IGetFontColor("testo")
+        self.AggiornaColori()
+
+    def AggiornaColori(self):
+        #Frame
+        self.configure(background=self.__coloreSfondo, highlightcolor=self.__coloreBordo)
+        self.__fFramePrincipale.configure(background=self.__coloreSfondo, highlightcolor=self.__coloreBordo)
+        self.__fFrameInputWidget.configure(background=self.__coloreSfondo, highlightcolor=self.__coloreBordo)
+        self.__fFrameScrittaImpostazione.configure(background=self.__coloreSfondo, highlightcolor=self.__coloreBordo)
+        #Label
+        self.__lScrittaImpostazione.configure(background=self.__coloreSfondo, font = self.__tipoFont, foreground = self.__coloreFont, highlightcolor=self.__coloreBordo)
+        self.__myIWwidget.AggiornaColoriTema()

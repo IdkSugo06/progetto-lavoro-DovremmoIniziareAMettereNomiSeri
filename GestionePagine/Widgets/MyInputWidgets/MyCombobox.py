@@ -8,23 +8,22 @@ class MyCombobox(MyInputWidget):
     def Init(args: dict): #Il dizionario dev'essere completo
         return MyCombobox(master = args["master"],
                            values = args["values"], 
-                           command = args["command"], 
-                           coloreInterno = args["coloreInterno"], 
-                           coloreFont = args["coloreFont"], 
-                           coloreSelezione = args["coloreSelezione"])
+                           command = args["command"])
 
     # COSTRUTTORE
     def __init__(self, master : tk.Frame,
                  values : list[str] = (),
-                 command : any = lambda : None,     #command dev'essere void
-                 coloreInterno : str = "#FFFFFF",
-                 coloreFont : str = "#000000",
-                 coloreSelezione : str = "#FFFFFF"):
+                 command : any = lambda : None     #command dev'essere void
+                ):
 
         #Attributi
         self.__values = values
         self.__command = command
 
+        #Colori
+        self.__coloreInterno = Impostazioni.Tema.IGetColoriSfondo("secondario")[2]
+        self.__coloreFont =  Impostazioni.Tema.IGetFontColor("testo")
+        self.__coloreSelezione = Impostazioni.Tema.IGetColoriSfondo("terziario")[1]
 
         #Se values è vuoto
         if len(self.__values) == 0:
@@ -44,9 +43,9 @@ class MyCombobox(MyInputWidget):
                                          textvariable = self.__cbCombobox_str,
                                          state = 'readonly',
                                          foreground = "#000000",
-                                         background = coloreInterno)
-        self.__cbCombobox.option_add("*TCombobox*Listbox*Foreground", coloreFont)
-        self.__cbCombobox.option_add("*TCombobox*Listbox*Background", coloreInterno)
+                                         background = self.__coloreInterno)
+        self.__cbCombobox.option_add("*TCombobox*Listbox*Foreground", self.__coloreFont)
+        self.__cbCombobox.option_add("*TCombobox*Listbox*Background", self.__coloreInterno)
 
         self.__cbCombobox.grid(row=0,column=0,sticky="nsew")
         self.__cbCombobox["values"] = self.__values
@@ -54,6 +53,7 @@ class MyCombobox(MyInputWidget):
 
         #Bind events
         self.myBind("<<ComboboxSelected>>", self.__Event_stateChanged)
+
 
 
     # GETTER E SETTER
@@ -65,6 +65,8 @@ class MyCombobox(MyInputWidget):
     def ChangeColor(self, coloreInterno : str, coloreFlag : str = "", colorePremuto : str = ""):
         self.__cbCheckbox.configure(bg = coloreInterno, activebackground = colorePremuto, fg = coloreFlag)
 
+
+
     # METHODS
     def Disable(self):
         self.__cbCombobox["state"] = "readonly"
@@ -72,6 +74,22 @@ class MyCombobox(MyInputWidget):
     def Enable(self):
         self.__cbCombobox["state"] = "normal"        
     
+
+    
+    # METODI PERSONALIZZAZIONE
+    def AggiornaColoriTema(self):
+        #Colori
+        self.__coloreInterno = Impostazioni.Tema.IGetColoriSfondo("secondario")[2]
+        self.__coloreFont =  Impostazioni.Tema.IGetFontColor("testo")
+        self.__coloreSelezione = Impostazioni.Tema.IGetColoriSfondo("terziario")[1]
+        #Combobox
+        self.__cbCombobox.configure(foreground = "#000000", background = self.__coloreInterno)
+        self.__cbCombobox.option_add("*TCombobox*Listbox*Foreground", self.__coloreFont)
+        self.__cbCombobox.option_add("*TCombobox*Listbox*Background", self.__coloreInterno)
+        
+
+
+
     # EVENT METHODS
     def __Event_stateChanged(self, eventTk = None):
         self.__command()

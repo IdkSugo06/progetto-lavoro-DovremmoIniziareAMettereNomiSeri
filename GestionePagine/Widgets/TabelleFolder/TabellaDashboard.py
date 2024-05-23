@@ -58,7 +58,12 @@ class TabellaDashboard(TabellaScorribile):
     # AGGIORNA FRAMES E MOSTRA
     def CaricaTabella(self):
         self.RefreshFrameDispositivi(aggiornaAttributi = True)
+        l = [(e.GetDispositivoAssociato().GetNome(), e.GetDispositivoAssociato().GetStatusConnessione()) for e in self._elementiIntabellabili]
+        print(l)
         self.Show()
+        s = [(e.GetDispositivoAssociato().GetNome(), e.GetDispositivoAssociato().GetStatusConnessione()) for e in self._elementiIntabellabili]
+        print(s)
+
 
     #Aggiorna i frame e gli attributi di essi
     def RefreshFrameDispositivi(self, aggiornaAttributi : bool = False): 
@@ -75,36 +80,36 @@ class TabellaDashboard(TabellaScorribile):
                                                                     aggiornaAttributi = False) #Li aggiornerò dopo aver riassegnato gli id
 
         self.ResetIds()
-        
-        #Aggiorna gli attributi
-        if aggiornaAttributi:
-            self.RefreshAttributiElementi()
 
     def ResetIds(self):
         #Per ogni dispositivo, riassegna l'id del frame all'idPosizionale per evitare crash se sono stati rimossi dispositivi
         self.__numOf_dispositiviOffline = 0
         numOf_dispositiviTotali = GestoreDispositivi.IGetNumDispositivi()
         i_dispositiviOnline = numOf_dispositiviTotali - 1
-
+        lista = [None] * numOf_dispositiviTotali
         i_dispositivo = 0
         for dispositivo in GestoreDispositivi.IGetListaDispositivi():
             #Ogni dispositivo online sarà posizionato in fondo alla lista, quelli offline sopra
             statusConnessione = dispositivo.GetStatusConnessione()[1]
-
             #Se lo stato connessioni è true, dal basso li inserisco
             if statusConnessione == True:
                 dispositivo.SetIdPosElementoDashboardAssociato(i_dispositiviOnline)
-                self._elementiIntabellabili[i_dispositiviOnline].AssociaDispositivo(i_dispositivo)
+                self._elementiIntabellabili[i_dispositiviOnline].AssociaDispositivo(i_dispositivo, aggiornamentoForzato = True)
+                lista[i_dispositiviOnline] = True
+                print(i_dispositiviOnline,True)
                 i_dispositiviOnline -= 1
             #Altrimenti li inserisco dall'alto
             elif statusConnessione == False:
                 dispositivo.SetIdPosElementoDashboardAssociato(self.__numOf_dispositiviOffline)
-                self._elementiIntabellabili[self.__numOf_dispositiviOffline].AssociaDispositivo(i_dispositivo)
+                self._elementiIntabellabili[self.__numOf_dispositiviOffline].AssociaDispositivo(i_dispositivo, aggiornamentoForzato = True)
+                lista[self.__numOf_dispositiviOffline] = False
+                print(self.__numOf_dispositiviOffline,False)
                 self.__numOf_dispositiviOffline += 1
 
             #Aggiorno gli id dei frame
             i_dispositivo += 1  
-
+        print(lista)
+        print("Lunghezza: ", len(self._elementiIntabellabili))
 
 
     # METODI PERSONALIZZAZIONE

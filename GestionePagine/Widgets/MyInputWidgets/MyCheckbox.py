@@ -16,6 +16,11 @@ class MyCheckbox(MyInputWidget):
         #Attributi
         self.__command = command
 
+        #Colori
+        self.__coloreInterno = Impostazioni.Tema.IGetColoriSfondo("secondario")[2]
+        self.__coloreFlag =  Impostazioni.Tema.IGetFontColor("testo")
+        self.__colorePremuto = Impostazioni.Tema.IGetColoriSfondo("terziario")[1]
+
         #Se il colore non è specificato
         if colorePremuto == "": colorePremuto = coloreInterno
 
@@ -35,6 +40,8 @@ class MyCheckbox(MyInputWidget):
         #Bind events
         self.myBind("<<ComboboxSelected>>", self.__Event_stateChanged)
 
+
+
     # GETTER E SETTER
     def Set(self, value : bool):
         self.__cbCheckbox_bool.set(value)
@@ -53,7 +60,15 @@ class MyCheckbox(MyInputWidget):
         self.__cbCheckbox.configure(state = "enabled")
 
 
-     # EVENT METHODS
+    # METODI PERSONALIZZAZIONE
+    def AggiornaColoriTema(self):
+        self.__coloreInterno = Impostazioni.Tema.IGetColoriSfondo("secondario")[2]
+        self.__coloreFlag =  Impostazioni.Tema.IGetFontColor("testo")
+        self.__colorePremuto = Impostazioni.Tema.IGetColoriSfondo("terziario")[1]
+        self.__cbCheckbox.configure(background = self.__coloreInterno, activebackground = self.__colorePremuto, fg = self.__coloreFlag)
+
+
+    # EVENT METHODS
     def __Event_stateChanged(self, eventTk = None):
         self.__command()
 

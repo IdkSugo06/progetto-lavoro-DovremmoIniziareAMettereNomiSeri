@@ -8,6 +8,7 @@ tempoLastUpdate = 0.001
 mousePosFrameCorrente = [0,0]
 mousePosFramePrecedente = [0,0]
 semaforoSpegnimento = Lock()
+semaforoUpdateThreadFinito = Lock()
 sensibilita_scorrimento_rotella = (8.3/120)
 coeff_stabilizzazione_connessione = 0.05
 sleepTimeBetweenUpdate = 1

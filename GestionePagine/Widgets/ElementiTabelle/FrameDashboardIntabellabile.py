@@ -166,16 +166,16 @@ class FrameDashboardIntabellabile(ElementoIntabellabile):
 
 
     # GETTER E SETTER
-    def GetDispositivoAssociato(self):
+    def GetDispositivoAssociato(self) -> Dispositivo:
         return GestoreDispositivi.IGetDispositivo(self.__idDispositivoAssociato)
 
 
 
     # METODI AGGIORNAMENTO FRAME
-    def AssociaDispositivo(self, idDispositvo : int):
+    def AssociaDispositivo(self, idDispositvo : int, aggiornamentoForzato : bool = False):
 
         #Controllo se è un nuovo dispositivo
-        if (self.__idDispositivoAssociato == idDispositvo and False):
+        if (self.__idDispositivoAssociato == idDispositvo and not aggiornamentoForzato):
             return
 
         #Se no aggiorno i valori
@@ -183,6 +183,7 @@ class FrameDashboardIntabellabile(ElementoIntabellabile):
         self.RefreshAttributiElemento()
 
     def RefreshAttributiElemento(self):
+        print(self.__idDispositivoAssociato)
         dispositivo = GestoreDispositivi.IGetDispositivo(self.__idDispositivoAssociato)
         self.__vScrittaNome_str.set(dispositivo.GetNome())
         self.__vScrittaIndirizzoIP_str.set(dispositivo.GetHost())

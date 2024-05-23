@@ -25,34 +25,29 @@ class  TabellaImpostazioni(TabellaScorribile):
                         elementWidth = elementWidth,
                         elementHeight = elementHeight,
                         coloreSfondo = Impostazioni.Tema.IGetColoriSfondo("secondario")[1],
-                        coloreElementi = Impostazioni.Tema.IGetColoriSfondo("secondario")[2]
+                        coloreElementi = Impostazioni.Tema.IGetColoriSfondo("secondario")[2],
+                        coloreBordoElementi = Impostazioni.Tema.IGetColoriSfondo("terziario")[0]
                         )
         
 
         # IMPOSTAZIONE SISTEMA (elementi della tabella)
         #self.__AggiungiImpostazione("SISTEMA", MyCheckbox,ProporzionePeso = 0.1,args=[None,Impostazioni.Tema.IGetColoriSfondo("secondario")[1], Impostazioni.Tema.IGetColoriSfondo("primario"),Impostazioni.Tema.IGetColoriSfondo("secondario")[0]]) 
         self.__AggiungiImpostazione(
-                                    tipoImpostazione = "TEMA",
+                                    tipoImpostazione = "Tema",
                                     tipoWidget = MyCombobox,
                                     argomentiCostruttoreWidget = {
                                                             "values" : Impostazioni.Tema.IGetKeyTemi_listFormat(),
-                                                            "command" : self.__CheckBox_TemaCambiato, 
-                                                            "coloreInterno" : Impostazioni.Tema.IGetColoriSfondo("secondario")[2],
-                                                            "coloreFont" : Impostazioni.Tema.IGetFontColor("testo"),
-                                                            "coloreSelezione" : Impostazioni.Tema.IGetColoriSfondo("terziario")[1]
+                                                            "command" : self.__CheckBox_TemaCambiato
                                                             },
                                     proporzionePeso = 0.15
                                     )
         
         self.__AggiungiImpostazione(
-                                    tipoImpostazione = "FPS", 
+                                    tipoImpostazione = "non worka", 
                                     tipoWidget = MyCombobox, 
                                     argomentiCostruttoreWidget = {
                                                             "values" : ["50","30","10"],
-                                                            "command" : self.__CheckBox_FPSCambiato,
-                                                            "coloreInterno" : Impostazioni.Tema.IGetColoriSfondo("secondario")[2],
-                                                            "coloreFont" : Impostazioni.Tema.IGetFontColor("testo"),
-                                                            "coloreSelezione" : Impostazioni.Tema.IGetColoriSfondo("terziario")[1]
+                                                            "command" : self.__CheckBox_FPSCambiato
                                                             },
                                     proporzionePeso = 0.15
                                     )
@@ -77,6 +72,17 @@ class  TabellaImpostazioni(TabellaScorribile):
         for elementoIntabellabile in self._elementiIntabellabili:
             elementoIntabellabile.Update(deltaTime)
 
+    # METODI PERSONALIZZAZIONE
+    def AggiornaColoriTema(self):
+        #Aggiorno i colori
+        coloreSfondo = Impostazioni.Tema.IGetColoriSfondo("secondario")[1],
+        coloreElementi = Impostazioni.Tema.IGetColoriSfondo("secondario")[2],
+        coloreBordoElementi = Impostazioni.Tema.IGetColoriSfondo("terziario")[0]
+        self.CambioColore(coloreSfondo, coloreElementi, coloreBordoElementi, cambioColoreElementi = False)
+        
+        #Per ogni elemento aggiorno i colori
+        for elemento in self._elementiIntabellabili:
+            elemento.AggiornaColoriTema()
 
     # METODI EVENTO
     def __CheckBox_TemaCambiato(self):

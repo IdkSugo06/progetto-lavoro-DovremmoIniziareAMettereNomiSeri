@@ -73,7 +73,6 @@ class MyImageTk:
         self._resizedImage = self._originalImage.resize(dim)
         self._resizedImageTk = ImageTk.PhotoImage(self._resizedImage)
 
-
     def ChangeImage(self, newPath : int, qualitaImmagineRichiesta : tuple[int] = Impostazioni.personalizzazioni.qualita_immagini_default ):
         #Cerco di accedere alla path
         try:

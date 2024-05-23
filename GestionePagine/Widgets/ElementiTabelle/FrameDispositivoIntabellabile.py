@@ -218,10 +218,10 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
         self.__vScrittaTempoPing_str.set(str(dispositivo.GetTempoTraPing()))
 
     def __ModificaDispositivoAssociato(self, eventTk = None):
-        InterfacciaGestioneDispositivi.IRemoveDispositivo(self.__idDispositivoAssociato)
         GestorePagine.ICaricaPagina(PaginaGenerica.GetIdPagina(NOME_INTERNO_PAGINA_MODIFICA_DISPOSITIVO), self.__idDispositivoAssociato)
 
     def __EliminaDispositivoAssociato(self, eventTk = None):
+        InterfacciaGestioneDispositivi.IRemoveDispositivo(self.__idDispositivoAssociato)
         GestorePagine.IRicaricaPagina()
 
 
@@ -247,11 +247,18 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
         self.__fFrameScrittaNome.configure(background=self.__coloreSfondo, highlightcolor=self.__coloreBordo)
         self.__fFrameScrittaIndirizzoIP.configure(background=self.__coloreSfondo, highlightcolor=self.__coloreBordo)
         self.__fFrameScrittaPorta.configure(background=self.__coloreSfondo, highlightcolor=self.__coloreBordo)
+        self.__fFrameScrittaTempoPing.configure(background=self.__coloreSfondo, highlightcolor=self.__coloreBordo)
+        self.__fFrameSupportoBottoni.configure(background=self.__coloreSfondo, highlightcolor=self.__coloreBordo)
+        self.__fFrameBottoneModifica.configure(background=self.__coloreSfondo, highlightcolor=self.__coloreBordo)
+        self.__fFrameBottoneElimina.configure(background=self.__coloreSfondo, highlightcolor=self.__coloreBordo)
+        #Canvas
+        self.__cCanvasBottoneElimina.configure(background=self.__coloreSfondo)
+        self.__cCanvasBottoneModifica.configure(background=self.__coloreSfondo)
         #Labels
         self.__lScrittaNome.configure(background=self.__coloreSfondo, foreground=self.__coloreTesto, highlightcolor=self.__coloreBordo)
         self.__lScrittaIndirizzoIP.configure(background=self.__coloreSfondo, foreground=self.__coloreTesto, highlightcolor=self.__coloreBordo)
         self.__lScrittaPorta.configure(background=self.__coloreSfondo, foreground=self.__coloreTesto, highlightcolor=self.__coloreBordo)
-
+        self.__lScrittaTempoPing.configure(background=self.__coloreSfondo, foreground=self.__coloreTesto, highlightcolor=self.__coloreBordo)
 
 
     # METODI EVENTI
@@ -261,10 +268,18 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
         self.__fFrameScrittaNome.configure(background=self.__coloreSfondoEvidenziato)
         self.__fFrameScrittaIndirizzoIP.configure(background=self.__coloreSfondoEvidenziato)
         self.__fFrameScrittaPorta.configure(background=self.__coloreSfondoEvidenziato)
+        self.__fFrameScrittaTempoPing.configure(background=self.__coloreSfondoEvidenziato)
+        self.__fFrameSupportoBottoni.configure(background=self.__coloreSfondoEvidenziato)
+        self.__fFrameBottoneModifica.configure(background=self.__coloreSfondoEvidenziato)
+        self.__fFrameBottoneElimina.configure(background=self.__coloreSfondoEvidenziato)
+        #Canvas
+        self.__cCanvasBottoneElimina.configure(background=self.__coloreSfondoEvidenziato)
+        self.__cCanvasBottoneModifica.configure(background=self.__coloreSfondoEvidenziato)
         #Labels
         self.__lScrittaNome.configure(background=self.__coloreSfondoEvidenziato)
         self.__lScrittaIndirizzoIP.configure(background=self.__coloreSfondoEvidenziato)
         self.__lScrittaPorta.configure(background=self.__coloreSfondoEvidenziato)
+        self.__lScrittaTempoPing.configure(background=self.__coloreSfondoEvidenziato)
 
     def __TogliEvidenziatura(self):
         #Frame
@@ -272,10 +287,19 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
         self.__fFrameScrittaNome.configure(background=self.__coloreSfondo)
         self.__fFrameScrittaIndirizzoIP.configure(background=self.__coloreSfondo)
         self.__fFrameScrittaPorta.configure(background=self.__coloreSfondo)
+        self.__fFrameScrittaTempoPing.configure(background=self.__coloreSfondo)
+        self.__fFrameSupportoBottoni.configure(background=self.__coloreSfondo)
+        self.__fFrameBottoneModifica.configure(background=self.__coloreSfondo)
+        self.__fFrameBottoneElimina.configure(background=self.__coloreSfondo)
+        #Canvas
+        self.__cCanvasBottoneElimina.configure(background=self.__coloreSfondo)
+        self.__cCanvasBottoneModifica.configure(background=self.__coloreSfondo)
         #Labels
         self.__lScrittaNome.configure(background=self.__coloreSfondo)
         self.__lScrittaIndirizzoIP.configure(background=self.__coloreSfondo)
         self.__lScrittaPorta.configure(background=self.__coloreSfondo)
+        self.__lScrittaTempoPing.configure(background=self.__coloreSfondo)
+        
 
     def __CursorEntered(self, tkEvent = None):
         self.__Evidenzia()

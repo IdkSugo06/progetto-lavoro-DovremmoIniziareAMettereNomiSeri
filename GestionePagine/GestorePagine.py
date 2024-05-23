@@ -96,12 +96,10 @@ class GestorePagine(): #Singleton
     @staticmethod
     def EventConfigureCalled(eventTk = None):
         if eventTk.widget == eventTk.widget.winfo_toplevel():
-            #GestorePagine.IHidePagina()
             Impostazioni.sistema.dimensioniFinestra[0] = eventTk.width
             Impostazioni.sistema.dimensioniFinestra[1] = eventTk.height
             Impostazioni.sistema.ConfigureHandler.ChangeCapted()
     def __ResizeRequested(self):
-        #self.__Mostra()
         self.__menu.CambioDimFrame()
         self.__pagine[self.__idPaginaCaricataAttualmente].CambioDimFrame()
 
@@ -147,7 +145,6 @@ class GestorePagine(): #Singleton
         self.__fFramePagina.grid(row = 0, column = 1, sticky = "nsew")
         self.__fFrameMenu.grid_propagate(False)
 
-        self.__window.protocol("WM_DELETE_WINDOW", self.ChiusuraFinestraEvento)
         Impostazioni.sistema.ConfigureHandler.SetNotifier(self.__ResizeRequested)
         self.__window.bind("<FocusIn>", self.EventFocusIn)
         self.__window.bind("<FocusOut>", self.EventFocusOut)
@@ -201,22 +198,6 @@ class GestorePagine(): #Singleton
         self.__pagine[self.__idPaginaCaricataAttualmente].UpdatePagina(deltaTime)
         Impostazioni.IUpdateMousePos(self.__window.winfo_pointerx(), self.__window.winfo_pointery())
     
-    @staticmethod
-    def ChiusuraFinestraEvento():
-        #Avvia un thread cui funzione è quella di terminare il processo
-        #in modo da non bloccare l'esecuzione del mainloop
-        LOG.log("Richiesta autorizzazione chiusura finestra...")
-        t = Thread(target = GestorePagine.GetGestorePagine().__ChiusuraFinestra)
-        t.start()
-        
-    def __ChiusuraFinestra(self):
-        #Attendo il semaforo per non terminare mentre viene eseguito un update
-        Impostazioni.sistema.semaforoSpegnimento.acquire()
-        Impostazioni.sistema.running = False
-        LOG.log("Autorizzazione chiusura finestra approvata")
-        self.__window.quit()
-        LOG.log("Finestra chiusa")
-        Impostazioni.sistema.semaforoSpegnimento.release()
 
 #Inizializzo il gestore pagina
 GestorePagine.Init()

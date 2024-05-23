@@ -15,7 +15,7 @@ class MyFatalError(MyEvent):
 class MyThemeChanged(MyEvent):
     functionsBound = []
     def __init__(self):
-        super().__init__(FATAL_ERROR_VALUE)
+        super().__init__()
         for function in MyThemeChanged.functionsBound:
             function()
     

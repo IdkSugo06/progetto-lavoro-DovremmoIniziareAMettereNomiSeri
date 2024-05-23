@@ -162,11 +162,17 @@ class PaginaModificaDispositivo(PaginaGenerica): #Singleton
     
     # METODI EVENTI
     def __TentaModificaDispositivo(self):
+        tempFloat = 1
+        try:
+            tempFloat = float(self.__myBarraInserimentoTempoTraPing.Get())
+        except:
+            self.__myBarraInserimentoTempoTraPing.Set("1")
+            return
         InterfacciaGestioneDispositivi.IModificaDispositivo(self.__idDispositivoAssociato,
                                                             self.__myBarraInserimentoNome.Get(), 
                                                             self.__myBarraInserimentoIpHost.Get(), 
                                                             self.__myBarraInserimentoPorta.Get(),
-                                                            self.__myBarraInserimentoTempoTraPing.Get()
+                                                            tempFloat
                                                             )
         GestorePagine.ICaricaPaginaConNome(NOME_INTERNO_PAGINA_DISPOSITIVI)
 

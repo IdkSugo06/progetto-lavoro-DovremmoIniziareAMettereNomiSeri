@@ -140,7 +140,8 @@ class PaginaDispositivi(PaginaGenerica): #Singleton
                                                       text_color = Impostazioni.Tema.IGetFontColor("sottotitolo"),
                                                       border_color = Impostazioni.Tema.IGetColoriSfondo("secondario")[3],
                                                       hover_color = Impostazioni.Tema.IGetColoriSfondo("terziario")[1],
-                                                      font = Impostazioni.Tema.IGetFont_ctkFormat("sottotitolo"))
+                                                      font = Impostazioni.Tema.IGetFont_ctkFormat("sottotitolo"),
+                                                      bg_color = self.__coloreSfondo)
         
     def CambioDimFrame(self):
         #Resize dimensioni

@@ -1,7 +1,1 @@
-: Richiesta autorizzazione chiusura finestra...
-: Autorizzazione chiusura finestra approvata
-: Finestra chiusa
-: Richiesta autorizzazione chiusura finestra...
-: Autorizzazione chiusura finestra approvata
-: Finestra chiusa
-: Main loop concluso
+FILE_LOG: LOG DISABLED

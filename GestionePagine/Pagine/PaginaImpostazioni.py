@@ -5,7 +5,7 @@ from GestionePagine.Widgets.TabelleFolder.TabellaImpostazioni import *
 class PaginaImpostazioni(PaginaGenerica): #Singleton
     #Creo un'istanza statica
     paginaImpostazioni = None
-    sfondoPaginaImpostazioni = Impostazioni.Tema.IGetColoriSfondo("primario")
+    sfondoPaginaImpostazioni = Impostazioni.Tema.IGetColoriSfondo("secondario")[1]
 
     # COSTRUTTORE E GETTER INSTANZA STATICA
     @staticmethod
@@ -50,7 +50,7 @@ class PaginaImpostazioni(PaginaGenerica): #Singleton
         self.__fFrameInternoCanvasScorrevole.grid_propagate(False)
         self.__fFrameInternoCanvasScorrevole.pack_propagate(False)
         # GENERO IL FRAME
-        self.__cCanvasScorrevole.create_window((0,0),
+        self.__ultimoCanvasId = self.__cCanvasScorrevole.create_window((0,0),
                                               window = self.__fFrameInternoCanvasScorrevole,
                                               anchor = "nw", 
                                               width = self.__dimensioniPaginaScorrevole[0],
@@ -87,5 +87,46 @@ class PaginaImpostazioni(PaginaGenerica): #Singleton
 
     def UpdatePagina(self, deltaTime : float = 0):
         self.__tabellaImpostazioni.Update(deltaTime)
+
+
+
+    # METODI PERSONALIZZAZIONI 
+    def AggiornaColoriTema(self):
+        self.__coloreSfondo = Impostazioni.Tema.IGetColoriSfondo("secondario")[1]
+        self.__tabellaImpostazioni.AggiornaColoriTema()
+        self.AggiornaColori()
+
+    def AggiornaColori(self):
+        self.__fFrameInternoCanvasScorrevole.configure(background=self.__coloreSfondo)
+        self.__cCanvasScorrevole.configure(background=self.__coloreSfondo)
+        
+    def CambioDimFrame(self):
+        #Resize dimensioni
+        self.__dimensioniPagina = [int(Impostazioni.sistema.dimensioniFinestra[0] * (1 - PROPORZIONE_MENU_PAGINA)), Impostazioni.sistema.dimensioniFinestra[1]]
+        self.__dimensioniPaginaScorrevole = [self.__dimensioniPagina[0], ALTEZZA_PAGINA_DISPOSITIVI]
+        self.__dimensioniTabellaImpostazioni[0] = int(self.__dimensioniPagina[0] - SPAZIO_LATI_PAGINA_DISPOSITIVI * 2)
+        
+        #Resize canvas scorrevole
+        self.__cCanvasScorrevole.configure(scrollregion = (0, 0, Impostazioni.sistema.dimensioniFinestra[0] * (1-PROPORZIONE_MENU_PAGINA), ALTEZZA_PAGINA_DASHBOARD))
+        thisCanvasId = self.__cCanvasScorrevole.create_window((0,0),
+                                              window = self.__fFrameInternoCanvasScorrevole,
+                                              anchor = "nw", 
+                                              width =  self.__dimensioniPaginaScorrevole[0],
+                                              height = self.__dimensioniPaginaScorrevole[1])
+
+        self.__cCanvasScorrevole.delete(self.__ultimoCanvasId)
+        self.__ultimoCanvasId = thisCanvasId
+        
+        #Resize tabella
+        self.__tabellaImpostazioni.ChangeDim(
+                                            xPos = SPAZIO_LATI_PAGINA_DISPOSITIVI,
+                                            yPos = SPAZIO_ALTO_PAGINA_DISPOSITIVI,
+                                            tableWidth = self.__dimensioniTabellaImpostazioni[0],
+                                            tableHeight = self.__dimensioniTabellaImpostazioni[1],
+                                            elementWidth = self.__dimensioniTabellaImpostazioni[0],
+                                            elementHeight = Impostazioni.personalizzazioni.altezza_elemento_tabella_paginaDispositivi,
+                                            coloreSfondo = Impostazioni.Tema.IGetColoriSfondo("secondario")[1],
+                                            coloreElementi = Impostazioni.Tema.IGetColoriSfondo("secondario")[2],
+                                            coloreBordoElementi = Impostazioni.Tema.IGetColoriSfondo("secondario")[3])
 
 PaginaImpostazioni.Init()

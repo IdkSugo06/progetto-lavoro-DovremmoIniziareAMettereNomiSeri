@@ -63,6 +63,8 @@ class GestoreDispositivi:
     @staticmethod
     def IDecostruttore():
         GestoreDispositivi.__gestoreConnessioni.__clearConnessioni()
+        Dispositivo.semaforoThreadAttivi.acquire()
+        Dispositivo.semaforoThreadAttivi.release()
 
     # COSTRUTTORE
     def __init__(self):
@@ -100,6 +102,7 @@ class GestoreDispositivi:
         self.__informazioniConnessioniDispositivi = []
         self.__numOf_dispositivi = 0
         self.__semaforoAccessiStatusConnessione.release()
+
 
     #Ritorna le stabilità di connessioni
     def __getStatConnessioni(self) -> list[tuple[int,bool,str,int]]: #Ritorna una lista (idDispositivo : int, status : bool, host : str, stabilitàConnessione : int): 

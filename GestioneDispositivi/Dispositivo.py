@@ -7,6 +7,9 @@ class Dispositivo:
     numOfDispositivi = 0
     funzioneNotificaStatoCambiato = lambda x,y : x #Dovra supportare self.__funzioneNotifica(dispositivo, stato)
     pausaFinitaEvent = Event()
+    numOf_threadAttivi = 0
+    semaforoThreadAttivi = Lock()
+    semaforoAccessoNumOf_threadAttivi = Lock()
 
 
     # COSTRUTTORE
@@ -126,6 +129,13 @@ class Dispositivo:
 
     # STATI INVIO PING
     def __ThreadInvioPing(self):
+        #Se è il primo thread, acquisice il semaforo
+        Dispositivo.semaforoAccessoNumOf_threadAttivi.acquire()
+        Dispositivo.numOf_threadAttivi += 1
+        if Dispositivo.numOf_threadAttivi == 1:
+            Dispositivo.semaforoThreadAttivi.acquire()
+        Dispositivo.semaforoAccessoNumOf_threadAttivi.release()
+
         #Finche runna
         while self.__running:
 
@@ -139,6 +149,12 @@ class Dispositivo:
             if result[1] == True:
                 self.__PingPerso_4pp() #Esce quando ping true trovato
                 
+        #Se è l'ultimo thread, rilascia il semaforo
+        Dispositivo.semaforoAccessoNumOf_threadAttivi.acquire()
+        Dispositivo.numOf_threadAttivi -= 1
+        if Dispositivo.numOf_threadAttivi == 0:
+            Dispositivo.semaforoThreadAttivi.release()
+        Dispositivo.semaforoAccessoNumOf_threadAttivi.release()
 
     def __PingPerso_4pp(self): #4 ping protocol
         #Finche runna

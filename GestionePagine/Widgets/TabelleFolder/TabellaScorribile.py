@@ -43,7 +43,7 @@ class TabellaScorribile(tk.Frame): #Occuperà tutto lo spazio disponibile
         #Creo il canvas scorrevole
         self.__cCanvasScorrevole = tk.Canvas(master = self, 
                                              scrollregion = (0, 0, self.__dimensioniTabella[0], 0),
-                                             bg = self._coloreSfondo, highlightbackground= Impostazioni.Tema.IGetColoriSfondo("secondario")[2])
+                                             bg = self._coloreSfondo, highlightbackground= self._coloreBordoElementi)
         self.__cCanvasScorrevole.configure(yscrollincrement='1')
         self.__cCanvasScorrevole.grid(row = 0, column = 0, sticky = "nsew")
         self.__cCanvasScorrevole.grid_propagate(False)
@@ -167,8 +167,8 @@ class TabellaScorribile(tk.Frame): #Occuperà tutto lo spazio disponibile
         self._coloreBordoElementi = coloreBordoElementi
 
         #Aggiorno i colori
-        self.__cCanvasScorrevole.configure(background=coloreSfondo)
-        self.__fFrameInternoCanvasScorrevole.configure(background=coloreSfondo)
+        self.__cCanvasScorrevole.configure(background=coloreSfondo, highlightbackground= self._coloreBordoElementi)
+        self.__fFrameInternoCanvasScorrevole.configure(background=coloreSfondo, highlightbackground= self._coloreBordoElementi)
 
         if cambioColoreElementi == False:
             return
@@ -192,7 +192,6 @@ class TabellaScorribile(tk.Frame): #Occuperà tutto lo spazio disponibile
         self.place(x = xPos, y = yPos, width = tableWidth, height = tableHeight)
         self.__dimensioniTabella = [tableWidth, tableHeight]
         self.dimensioniElemento = [elementWidth, elementHeight]
-        self._pointerCanvas = 0
         self.CambioColore(coloreSfondo, coloreElementi, coloreBordoElementi)
         self.RefreshAttributiElementi()
         self.Show()

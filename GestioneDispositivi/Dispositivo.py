@@ -13,9 +13,8 @@ class Dispositivo:
 
 
     # COSTRUTTORE
-    def __init__(self, nomeMacchina : str, host : str, porta : str, timeTraPing : float = 1): #command sarà una funzione chiamata ogni volta che lo stato viene aggiornato, note: deve prendere come parametro la referenza al Dispositivo
-        Dispositivo.numOfDispositivi += 1
-        self.__idPosizionale = Dispositivo.numOfDispositivi - 1
+    def __init__(self, nomeMacchina : str, host : str, porta : str, timeTraPing : float = 1, idPosizionale : int = 0): #command sarà una funzione chiamata ogni volta che lo stato viene aggiornato, note: deve prendere come parametro la referenza al Dispositivo
+        self.__idPosizionale = idPosizionale
         
         #Attributi dispositivo
         self.__nomeMacchina = nomeMacchina
@@ -29,7 +28,7 @@ class Dispositivo:
         
         #Attributi aggiornamento
         self.__timeBetweenPing_sec = timeTraPing
-        self.__idPosElementoDashboardAssociato = Dispositivo.numOfDispositivi - 1
+        self.__idPosElementoDashboardAssociato = idPosizionale
 
         #Attributi thread
         self.__iBufferCircolare = 0
@@ -44,8 +43,10 @@ class Dispositivo:
     def myDeconstructor(self):
         #Interrompo l'esecuzione del thread 
         self.__running = False
+        Dispositivo.numOfDispositivi -= 1
         #Setto l'evento per sbloccare l'attesa
         self.__eventoAttesaPing.set()
+
 
     # GETTER E SETTER DI ATTRIBUTI DISPOSITIVO
     def GetHost(self):
@@ -141,6 +142,8 @@ class Dispositivo:
 
             #Attendo che non sia in pausa per inviare un nuovo pacchetto
             Dispositivo.pausaFinitaEvent.wait()
+            if not self.__running: 
+                return
 
             #Controllo il ping
             result = self.InvioPing(setWhen = "WhenFalse")
@@ -155,6 +158,7 @@ class Dispositivo:
         if Dispositivo.numOf_threadAttivi == 0:
             Dispositivo.semaforoThreadAttivi.release()
         Dispositivo.semaforoAccessoNumOf_threadAttivi.release()
+        print("NumOf thread attivi", Dispositivo.numOf_threadAttivi)
 
     def __PingPerso_4pp(self): #4 ping protocol
         #Finche runna
@@ -163,6 +167,7 @@ class Dispositivo:
 
             #Attendo che non sia in pausa per inviare un nuovo pacchetto
             Dispositivo.pausaFinitaEvent.wait()
+            if not self.__running: return
 
             #Controllo il ping
             result = self.InvioPing(attesa = 1, setWhen = "WhenTrue")
@@ -181,6 +186,7 @@ class Dispositivo:
 
             #Attendo che non sia in pausa per inviare un nuovo pacchetto
             Dispositivo.pausaFinitaEvent.wait()
+            if not self.__running: return
 
             #Controllo il ping
             result = self.InvioPing(attesa = 1, setWhen = "WhenTrue")

@@ -98,7 +98,6 @@ class TabellaScorribile(tk.Frame): #Occuperà tutto lo spazio disponibile
     #Aggiunge e rimuove gli elementiTabellabili in base a quanti ne mancano e l'iteratore
     def RefreshNumeroFrame(self, numElementiRichiesti : int, funzioneItoCostruttoreEl = lambda i : ElementoIntabellabile(), aggiornaAttributi : bool = False): 
         numElementiAttuale = self._numOf_elementiIntabellabili 
-        
         #Se si deve aggiungere o rimuovere dispositivi, poi aggiorno
         if numElementiRichiesti > numElementiAttuale:
             for i in range(numElementiAttuale, numElementiRichiesti):
@@ -110,6 +109,7 @@ class TabellaScorribile(tk.Frame): #Occuperà tutto lo spazio disponibile
         #Se richiesto aggiorno gli attributi
         if aggiornaAttributi == True: 
             self.RefreshAttributiElementi()  
+
 
     #Per ogni elemento, aggiorno gli attributi
     def RefreshAttributiElementi(self):  #Aggiorna posizione e dimensione di ogni elemento

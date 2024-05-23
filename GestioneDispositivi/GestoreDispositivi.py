@@ -76,7 +76,7 @@ class GestoreDispositivi:
     # METODI
     def __addConnessione(self, nome : str, host : str, porta : str, timeTraPing : float):
         self.__semaforoAccessiStatusConnessione.acquire()
-        self.__informazioniConnessioniDispositivi.append(Dispositivo(nome, host, porta, timeTraPing))
+        self.__informazioniConnessioniDispositivi.append(Dispositivo(nome, host, porta, timeTraPing, self.__numOf_dispositivi))
         self.__numOf_dispositivi += 1
         self.__semaforoAccessiStatusConnessione.release()
 
@@ -88,8 +88,8 @@ class GestoreDispositivi:
     def __rimuoviConnessione(self, Iddisp): 
         self.__semaforoAccessiStatusConnessione.acquire()
         dispositivo = self.__informazioniConnessioniDispositivi.pop(Iddisp)
-        dispositivo.myDeconstructor()
         self.__numOf_dispositivi -= 1
+        dispositivo.myDeconstructor()
         for i in range(Iddisp, self.__numOf_dispositivi):
             self.__informazioniConnessioniDispositivi[i].DecreseId()
         self.__semaforoAccessiStatusConnessione.release()

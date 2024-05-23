@@ -255,10 +255,10 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
         self.__cCanvasBottoneElimina.configure(background=self.__coloreSfondo)
         self.__cCanvasBottoneModifica.configure(background=self.__coloreSfondo)
         #Labels
-        self.__lScrittaNome.configure(background=self.__coloreSfondo, foreground=self.__coloreTesto, highlightcolor=self.__coloreBordo)
-        self.__lScrittaIndirizzoIP.configure(background=self.__coloreSfondo, foreground=self.__coloreTesto, highlightcolor=self.__coloreBordo)
-        self.__lScrittaPorta.configure(background=self.__coloreSfondo, foreground=self.__coloreTesto, highlightcolor=self.__coloreBordo)
-        self.__lScrittaTempoPing.configure(background=self.__coloreSfondo, foreground=self.__coloreTesto, highlightcolor=self.__coloreBordo)
+        self.__lScrittaNome.configure(background=self.__coloreSfondo, font = self.__fontTesto, foreground=self.__coloreTesto, highlightcolor=self.__coloreBordo)
+        self.__lScrittaIndirizzoIP.configure(background=self.__coloreSfondo, font = self.__fontTesto, foreground=self.__coloreTesto, highlightcolor=self.__coloreBordo)
+        self.__lScrittaPorta.configure(background=self.__coloreSfondo, font = self.__fontTesto, foreground=self.__coloreTesto, highlightcolor=self.__coloreBordo)
+        self.__lScrittaTempoPing.configure(background=self.__coloreSfondo, font = self.__fontTesto, foreground=self.__coloreTesto, highlightcolor=self.__coloreBordo)
 
 
     # METODI EVENTI

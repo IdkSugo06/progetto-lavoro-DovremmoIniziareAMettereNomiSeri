@@ -166,6 +166,8 @@ class FrameDashboardIntabellabile(ElementoIntabellabile):
 
 
     # GETTER E SETTER
+    def GetIdAssociato(self) -> Dispositivo:
+        return self.__idDispositivoAssociato
     def GetDispositivoAssociato(self) -> Dispositivo:
         return GestoreDispositivi.IGetDispositivo(self.__idDispositivoAssociato)
 
@@ -183,7 +185,6 @@ class FrameDashboardIntabellabile(ElementoIntabellabile):
         self.RefreshAttributiElemento()
 
     def RefreshAttributiElemento(self):
-        print(self.__idDispositivoAssociato)
         dispositivo = GestoreDispositivi.IGetDispositivo(self.__idDispositivoAssociato)
         self.__vScrittaNome_str.set(dispositivo.GetNome())
         self.__vScrittaIndirizzoIP_str.set(dispositivo.GetHost())
@@ -222,10 +223,10 @@ class FrameDashboardIntabellabile(ElementoIntabellabile):
         self.__fFrameScrittaPorta.configure(background=self.__coloreSfondo, highlightcolor=self.__coloreBordo)
         self.__fFrameScrittaTempoTraPing.configure(background=self.__coloreSfondo, highlightcolor=self.__coloreBordo)
         #Labels
-        self.__lScrittaNome.configure(background=self.__coloreSfondo, foreground=self.__coloreTesto, highlightcolor=self.__coloreBordo)
-        self.__lScrittaIndirizzoIP.configure(background=self.__coloreSfondo, foreground=self.__coloreTesto, highlightcolor=self.__coloreBordo)
-        self.__lScrittaPorta.configure(background=self.__coloreSfondo, foreground=self.__coloreTesto, highlightcolor=self.__coloreBordo)
-        self.__lScrittaTempoTraPing.configure(background=self.__coloreSfondo, foreground=self.__coloreTesto, highlightcolor=self.__coloreBordo)
+        self.__lScrittaNome.configure(background=self.__coloreSfondo, font = self.__fontTesto, foreground=self.__coloreTesto, highlightcolor=self.__coloreBordo)
+        self.__lScrittaIndirizzoIP.configure(background=self.__coloreSfondo, font = self.__fontTesto, foreground=self.__coloreTesto, highlightcolor=self.__coloreBordo)
+        self.__lScrittaPorta.configure(background=self.__coloreSfondo, font = self.__fontTesto,  foreground=self.__coloreTesto, highlightcolor=self.__coloreBordo)
+        self.__lScrittaTempoTraPing.configure(background=self.__coloreSfondo, font = self.__fontTesto, foreground=self.__coloreTesto, highlightcolor=self.__coloreBordo)
         #Canvas
         self.__cCanvasStatusDispositivo.configure(background=self.__coloreSfondo, highlightcolor=self.__coloreBordo)
         #Bottone

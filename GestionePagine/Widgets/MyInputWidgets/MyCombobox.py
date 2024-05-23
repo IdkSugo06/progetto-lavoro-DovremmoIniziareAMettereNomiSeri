@@ -45,7 +45,7 @@ class MyCombobox(MyInputWidget):
                                          foreground = "#000000",
                                          background = self.__coloreInterno)
         self.__cbCombobox.option_add("*TCombobox*Listbox*Foreground", self.__coloreFont)
-        self.__cbCombobox.option_add("*TCombobox*Listbox*Background", self.__coloreInterno)
+        self.__cbCombobox.option_add("*TCombobox*Listbox*Background", "#FF0000")
 
         self.__cbCombobox.grid(row=0,column=0,sticky="nsew")
         self.__cbCombobox["values"] = self.__values
@@ -62,10 +62,20 @@ class MyCombobox(MyInputWidget):
     def Get(self):
         return self.__cbCombobox_str.get()
     
+    
+    # METODI PERSONALIZZAZIONE
+    def AggiornaColoriTema(self):
+        #Colore
+        self.__coloreInterno = Impostazioni.Tema.IGetColoriSfondo("secondario")[2]
+        self.__colorePremuto = Impostazioni.Tema.IGetColoriSfondo("terziario")[1]
+        self.__coloreFont =  Impostazioni.Tema.IGetFontColor("testo")   
+        #Colore combox
+        self.__cbCombobox.configure(background = self.__coloreInterno)
+        self.__cbCombobox.option_add("*TCombobox*Listbox*Foreground", self.__coloreFont)
+        self.__cbCombobox.option_add("*TCombobox*Listbox*Background", "#00DD00")
+                                    
     def ChangeColor(self, coloreInterno : str, coloreFlag : str = "", colorePremuto : str = ""):
-        self.__cbCheckbox.configure(bg = coloreInterno, activebackground = colorePremuto, fg = coloreFlag)
-
-
+        self.__cbCombobox.configure(bg = coloreInterno, fg = coloreFlag)
 
     # METHODS
     def Disable(self):
@@ -73,21 +83,7 @@ class MyCombobox(MyInputWidget):
 
     def Enable(self):
         self.__cbCombobox["state"] = "normal"        
-    
-
-    
-    # METODI PERSONALIZZAZIONE
-    def AggiornaColoriTema(self):
-        #Colori
-        self.__coloreInterno = Impostazioni.Tema.IGetColoriSfondo("secondario")[2]
-        self.__coloreFont =  Impostazioni.Tema.IGetFontColor("testo")
-        self.__coloreSelezione = Impostazioni.Tema.IGetColoriSfondo("terziario")[1]
-        #Combobox
-        self.__cbCombobox.configure(foreground = "#000000", background = self.__coloreInterno)
-        self.__cbCombobox.option_add("*TCombobox*Listbox*Foreground", self.__coloreFont)
-        self.__cbCombobox.option_add("*TCombobox*Listbox*Background", self.__coloreInterno)
-        
-
+          
 
 
     # EVENT METHODS

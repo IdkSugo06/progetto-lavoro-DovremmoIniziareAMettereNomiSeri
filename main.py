@@ -44,7 +44,7 @@ def main():
         t.join()
   
       #Creo la funzione per distruggere la finestra
-    def QuitEvento():
+    def QuitEvento(eventTk = None):
         t = Thread(target=Exit)
         t.start()
 

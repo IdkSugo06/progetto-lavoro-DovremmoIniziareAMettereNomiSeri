@@ -5,9 +5,10 @@
       "terziario": ["#565656", "#656565"]
     },
     "fonts_temaDefault": {
-      "titolo": ["arial", 18, "#FFFFFF", ["bold"]],
+      "titolo": ["arial", 24, "#FFFFFF", ["italic", "bold"]],
       "sottotitolo": ["arial", 16, "#FFFFFF", ["italic"]],
       "testo": ["arial", 12, "#FFFFFF", []],
+      "testoDisabilitato": ["arial", 12, "#FFFFFF", []],
       "modificatoreFinePath" : "_temaDefault"
     },
 
@@ -20,6 +21,7 @@
       "titolo": ["arial", 18, "#000000", ["bold"]],
       "sottotitolo": ["arial", 16, "#000000", ["italic"]],
       "testo": ["arial", 12, "#000000", []],
+      "testoDisabilitato": ["arial", 12, "#000000", []],
       "modificatoreFinePath" : "_temaChiaro"
     },
 

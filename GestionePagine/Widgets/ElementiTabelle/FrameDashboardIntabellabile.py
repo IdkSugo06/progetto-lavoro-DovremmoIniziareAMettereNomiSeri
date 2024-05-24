@@ -213,6 +213,9 @@ class FrameDashboardIntabellabile(ElementoIntabellabile):
         self.__coloreBordo = Impostazioni.Tema.IGetColoriSfondo("secondario")[3]
         self.__fontTesto = Impostazioni.Tema.IGetFont("testo")
         self.__coloreTesto = Impostazioni.Tema.IGetFontColor("testo")
+        self.__myMImgStatusDispositivo.ChangePaths(newPathsDict = {"offline" : Impostazioni.Tema.IGetPathTemaCorrente(Impostazioni.PATH_IMG_STATUS_OFFLINE_PAG_DASHBOARD),
+                                                                   "online" : Impostazioni.Tema.IGetPathTemaCorrente(Impostazioni.PATH_IMG_STATUS_ONLINE_PAG_DASHBOARD)})
+        self.__myMImgStatusDispositivo.ResizeAll(DIMENSIONI_IMMAGINE_STATUS_DASHBOARD[0], DIMENSIONI_IMMAGINE_STATUS_DASHBOARD[1])
         self.AggiornaColori()
 
     def AggiornaColori(self):

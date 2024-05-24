@@ -65,6 +65,7 @@ class GestoreDispositivi:
         GestoreDispositivi.__gestoreConnessioni.__clearConnessioni()
         Dispositivo.semaforoThreadAttivi.acquire()
         Dispositivo.semaforoThreadAttivi.release()
+        Dispositivo.pausaFinitaEvent.set() #Se sono in pausa, li faccio continuare, finiranno di distruggersi correttamente
 
     # COSTRUTTORE
     def __init__(self):
@@ -72,6 +73,9 @@ class GestoreDispositivi:
         self.__numOf_dispositivi = 0
         self.__precisioneCalcoloStabilita=0.01
         self.__semaforoAccessiStatusConnessione = Lock()
+
+    def __del__(self):
+        self.IDecostruttore()
 
     # METODI
     def __addConnessione(self, nome : str, host : str, porta : str, timeTraPing : float):

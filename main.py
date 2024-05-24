@@ -50,9 +50,11 @@ def main():
 
     def Exit():
         #Chiamo tutti i distruttori prima di chiudere la finestra
+        LOG.log("Avvio decostruttori")
         GestoreDispositivi.IDecostruttore()
-        LOG.IDecostruttore()
+        LOG.log("Decostruttore dispositivi eseguito")
         GestoreInvioMail.IDecostruttore()
+        LOG.log("Distruttore gestore email eseguito")
         LOG.log("Distruttori chiamati")
 
         #Chiudo la finestra
@@ -62,9 +64,12 @@ def main():
         Impostazioni.sistema.running = False
         Impostazioni.sistema.semaforoUpdateThreadFinito.acquire()
         GestorePagine.IGetWindow().quit()
+        Impostazioni.sistema.semaforoUpdateThreadFinito.release()
         LOG.log("Finestra chiusa, fine programma")
         Impostazioni.sistema.semaforoSpegnimento.release()
 
+        #Decostruttore log
+        LOG.IDecostruttore()
     
       #Avvio il programma
     GestorePagine.IGetWindow().bind("<Escape>", QuitEvento)

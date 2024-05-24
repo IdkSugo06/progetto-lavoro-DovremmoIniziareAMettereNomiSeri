@@ -1,1 +1,39 @@
-FILE_LOG: LOG DISABLED
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Avvio decostruttori
+: Decostruttore dispositivi eseguito
+: Distruttori chiamati
+: Distruttori chiamati
+: Richiesta autorizzazione chiusura finestra....
+: Autorizzazione chiusura finestra approvata
+: Update thread concluso
+: Finestra chiusa, fine programma
+: Main loop concluso

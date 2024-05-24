@@ -122,24 +122,24 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
 
 
         # DEFINISCO PROPORZIONI BOTTONI SPAZIO BOTTONI
-        rapportoSpaziAltoBottoni = 0.05
-        rapportoSpaziLatoBottoni = 0.10
-        mantieniProporzioniImmagine = False
-        self.__proporzioneBottoniPaginaX = PROPORZIONE_LARGHEZZA_TABELLA_DISPOSITIVI_LARGHEZZA_PAGINA * PROPORZIONI_TASTI_MODDEL_TABELLA_DISPOSITIVI * (1 - rapportoSpaziLatoBottoni * 3.5) * 0.5
-        self.__proporzioneBottoniAltezzaElDispositivo = (1 - rapportoSpaziAltoBottoni * 2)
+        self.__rapportoSpaziAltoBottoni = 0.05
+        self.__rapportoSpaziLatoBottoni = 0.10
+        self.__mantieniProporzioniImmagine = False
+        self.__proporzioneBottoniPaginaX = PROPORZIONE_LARGHEZZA_TABELLA_DISPOSITIVI_LARGHEZZA_PAGINA * PROPORZIONI_TASTI_MODDEL_TABELLA_DISPOSITIVI * (1 - self.__rapportoSpaziLatoBottoni * 3.5) * 0.5
+        self.__proporzioneBottoniAltezzaElDispositivo = (1 - self.__rapportoSpaziAltoBottoni * 2)
         dimBottoni = self.__getDimensioniPulsantiBottoni()
 
         # SUPPORTO BOTTONI
         self.__fFrameSupportoBottoni = tk.Frame(master = self.__fFramePrincipale, bg =  self.__coloreSfondo, highlightbackground=  self.__coloreBordo, highlightthickness=0.5)
         self.__fFrameSupportoBottoni.grid(row = 0, column = 4, sticky = "nsew")
-        self.__fFrameSupportoBottoni.rowconfigure(0, weight = int(100 * rapportoSpaziAltoBottoni))
-        self.__fFrameSupportoBottoni.rowconfigure(1, weight = int(100 * (1 - rapportoSpaziAltoBottoni * 2)))
-        self.__fFrameSupportoBottoni.rowconfigure(2, weight = int(100 * rapportoSpaziAltoBottoni))
-        self.__fFrameSupportoBottoni.columnconfigure(0, weight = int(100 * rapportoSpaziLatoBottoni))
-        self.__fFrameSupportoBottoni.columnconfigure(1, weight = int(100 * (1 - rapportoSpaziLatoBottoni * 3.5) * 0.5))
-        self.__fFrameSupportoBottoni.columnconfigure(2, weight = int(100 * rapportoSpaziLatoBottoni * 1.5))
-        self.__fFrameSupportoBottoni.columnconfigure(3, weight = int(100 * (1 - rapportoSpaziLatoBottoni * 3.5) * 0.5))
-        self.__fFrameSupportoBottoni.columnconfigure(4, weight = int(100 * rapportoSpaziLatoBottoni))
+        self.__fFrameSupportoBottoni.rowconfigure(0, weight = int(100 * self.__rapportoSpaziAltoBottoni))
+        self.__fFrameSupportoBottoni.rowconfigure(1, weight = int(100 * (1 - self.__rapportoSpaziAltoBottoni * 2)))
+        self.__fFrameSupportoBottoni.rowconfigure(2, weight = int(100 * self.__rapportoSpaziAltoBottoni))
+        self.__fFrameSupportoBottoni.columnconfigure(0, weight = int(100 * self.__rapportoSpaziLatoBottoni))
+        self.__fFrameSupportoBottoni.columnconfigure(1, weight = int(100 * (1 - self.__rapportoSpaziLatoBottoni * 3.5) * 0.5))
+        self.__fFrameSupportoBottoni.columnconfigure(2, weight = int(100 * self.__rapportoSpaziLatoBottoni * 1.5))
+        self.__fFrameSupportoBottoni.columnconfigure(3, weight = int(100 * (1 - self.__rapportoSpaziLatoBottoni * 3.5) * 0.5))
+        self.__fFrameSupportoBottoni.columnconfigure(4, weight = int(100 * self.__rapportoSpaziLatoBottoni))
         self.__fFrameSupportoBottoni.grid_propagate(False)
         self.__fFrameSupportoBottoni.pack_propagate(False)
 
@@ -159,7 +159,7 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
         self.__cCanvasBottoneModifica.pack_propagate(False)
         #Creo il bottone
         self.__myImgbBottoneModifica = MyImageButton(canvas = self.__cCanvasBottoneModifica, command = lambda event : self.__ModificaDispositivoAssociato(event), path = Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMG_BOTTONE_MODIFICA_PAG_DISPOSITIVI))
-        self.__myImgbBottoneModifica.Resize(dimBottoni[0], dimBottoni[1], mantieniProporzioniImmagine)
+        self.__myImgbBottoneModifica.Resize(dimBottoni[0], dimBottoni[1], self.__mantieniProporzioniImmagine)
         self.__myImgbBottoneModifica.Show()
         
 
@@ -179,7 +179,7 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
         self.__cCanvasBottoneElimina.pack_propagate(False)
         #Creo il bottone
         self.__myImgbBottoneElimina = MyImageButton(canvas = self.__cCanvasBottoneElimina, command = lambda event : self.__EliminaDispositivoAssociato(event), path = Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMG_BOTTONE_ELIMINAZIONE_PAG_DISPOSITIVI))
-        self.__myImgbBottoneElimina.Resize(dimBottoni[0], dimBottoni[1], mantieniProporzioniImmagine)
+        self.__myImgbBottoneElimina.Resize(dimBottoni[0], dimBottoni[1], self.__mantieniProporzioniImmagine)
         self.__myImgbBottoneElimina.Show()
 
 
@@ -239,6 +239,13 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
         self.__coloreBordo = Impostazioni.Tema.IGetColoriSfondo("secondario")[3]
         self.__fontTesto = Impostazioni.Tema.IGetFont("testo")
         self.__coloreTesto = Impostazioni.Tema.IGetFontColor("testo")
+        dimBottoni = self.__getDimensioniPulsantiBottoni()
+        self.__myImgbBottoneModifica.ChangeImage(Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMG_BOTTONE_MODIFICA_PAG_DISPOSITIVI))
+        self.__myImgbBottoneModifica.Resize(dimBottoni[0], dimBottoni[1], self.__mantieniProporzioniImmagine)
+        self.__myImgbBottoneModifica.Show()
+        self.__myImgbBottoneElimina.ChangeImage(Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMG_BOTTONE_ELIMINAZIONE_PAG_DISPOSITIVI))
+        self.__myImgbBottoneElimina.Resize(dimBottoni[0], dimBottoni[1], self.__mantieniProporzioniImmagine)
+        self.__myImgbBottoneElimina.Show()
         self.AggiornaColori()
 
     def AggiornaColori(self):

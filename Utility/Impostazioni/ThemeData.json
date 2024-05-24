@@ -20,7 +20,7 @@
       "titolo": ["arial", 18, "#000000", ["bold"]],
       "sottotitolo": ["arial", 16, "#000000", ["italic"]],
       "testo": ["arial", 12, "#000000", []],
-      "modificatoreFinePath" : "_temaDefault"
+      "modificatoreFinePath" : "_temaChiaro"
     },
 
     "coloriSfondo_tema2": {

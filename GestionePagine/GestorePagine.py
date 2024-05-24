@@ -1,5 +1,5 @@
 from GestionePagine.Pagine.PaginaGenerica import *
-from GestioneDispositivi.InterfacciaGestoreDispositivi import *
+from GestioneDispositivi.InterfacciaGestioneDispositivi import *
 
 
 #Gestirà il caricamento pagina, conterra tutte le pagine, 
@@ -95,6 +95,13 @@ class GestorePagine(): #Singleton
         Impostazioni.sleepTimeBetweenUpdate = 0.5
     @staticmethod
     def EventConfigureCalled(eventTk = None):
+
+        #Quando il metodo quit viene chiamato, il configure viene chiamato as well, controllo se l'esecuzione del programma è finita
+        Impostazioni.sistema.semaforoSpegnimento.acquire()
+        if Impostazioni.sistema.running == False: return
+        Impostazioni.sistema.semaforoSpegnimento.release()
+        
+        #Se è il thread principale, chiamo i change
         if eventTk.widget == eventTk.widget.winfo_toplevel():
             Impostazioni.sistema.dimensioniFinestra[0] = eventTk.width
             Impostazioni.sistema.dimensioniFinestra[1] = eventTk.height

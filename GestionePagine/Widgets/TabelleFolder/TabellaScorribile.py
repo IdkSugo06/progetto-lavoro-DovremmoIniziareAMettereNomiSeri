@@ -167,8 +167,8 @@ class TabellaScorribile(tk.Frame): #Occuperà tutto lo spazio disponibile
         self._coloreBordoElementi = coloreBordoElementi
 
         #Aggiorno i colori
-        self.__cCanvasScorrevole.configure(background=coloreSfondo, highlightbackground= self._coloreBordoElementi)
-        self.__fFrameInternoCanvasScorrevole.configure(background=coloreSfondo, highlightbackground= self._coloreBordoElementi)
+        self.__cCanvasScorrevole.configure(background=coloreSfondo, highlightthickness=0)
+        self.__fFrameInternoCanvasScorrevole.configure(background=coloreSfondo, highlightthickness=0)
 
         if cambioColoreElementi == False:
             return

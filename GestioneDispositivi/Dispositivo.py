@@ -4,7 +4,6 @@ from GestioneDispositivi.GestoreInvioEmail import *
 class Dispositivo:
 
     param = '-n 1' if os.sys.platform.lower() == 'win32' else '-c 1'
-    numOfDispositivi = 0
     funzioneNotificaStatoCambiato = lambda x,y : x #Dovra supportare self.__funzioneNotifica(dispositivo, stato)
     pausaFinitaEvent = Event()
     numOf_threadAttivi = 0
@@ -41,11 +40,7 @@ class Dispositivo:
         self.InizializzazioneThreadInvioPing()
     
     def myDeconstructor(self):
-        #Interrompo l'esecuzione del thread 
-        self.__running = False
-        Dispositivo.numOfDispositivi -= 1
-        #Setto l'evento per sbloccare l'attesa
-        self.__eventoAttesaPing.set()
+        self.InizializzazioneDistruttoreThread()
 
 
     # GETTER E SETTER DI ATTRIBUTI DISPOSITIVO
@@ -121,7 +116,12 @@ class Dispositivo:
     # UPDATE PING
     def InizializzazioneThreadInvioPing(self):
         self.__running = True
-        t = Thread(target=self.__ThreadInvioPing)
+        t = Thread(target=self.__AvvioThread)
+        t.start()
+    def InizializzazioneDistruttoreThread(self):
+        self.__running = False
+        self.__eventoAttesaPing.set()
+        t = Thread(target=self.__DistruttoreThread)
         t.start()
     
     def PingManuale(self):
@@ -129,21 +129,31 @@ class Dispositivo:
 
 
     # STATI INVIO PING
-    def __ThreadInvioPing(self):
+    def __AvvioThread(self):
         #Se è il primo thread, acquisice il semaforo
         Dispositivo.semaforoAccessoNumOf_threadAttivi.acquire()
         Dispositivo.numOf_threadAttivi += 1
         if Dispositivo.numOf_threadAttivi == 1:
             Dispositivo.semaforoThreadAttivi.acquire()
         Dispositivo.semaforoAccessoNumOf_threadAttivi.release()
+        self.__ThreadInvioPing()
 
+    def __DistruttoreThread(self):
+        #Se è l'ultimo thread, rilascia il semaforo
+        Dispositivo.semaforoAccessoNumOf_threadAttivi.acquire()
+        Dispositivo.numOf_threadAttivi -= 1
+        if Dispositivo.numOf_threadAttivi == 0:
+            Dispositivo.semaforoThreadAttivi.release()
+        Dispositivo.semaforoAccessoNumOf_threadAttivi.release()
+
+    def __ThreadInvioPing(self):
         #Finche runna
         while self.__running:
 
             #Attendo che non sia in pausa per inviare un nuovo pacchetto
             Dispositivo.pausaFinitaEvent.wait()
             if not self.__running: 
-                return
+                break
 
             #Controllo il ping
             result = self.InvioPing(setWhen = "WhenFalse")
@@ -151,14 +161,6 @@ class Dispositivo:
             #Il ping è stato rilevato falso 
             if result[1] == True:
                 self.__PingPerso_4pp() #Esce quando ping true trovato
-                
-        #Se è l'ultimo thread, rilascia il semaforo
-        Dispositivo.semaforoAccessoNumOf_threadAttivi.acquire()
-        Dispositivo.numOf_threadAttivi -= 1
-        if Dispositivo.numOf_threadAttivi == 0:
-            Dispositivo.semaforoThreadAttivi.release()
-        Dispositivo.semaforoAccessoNumOf_threadAttivi.release()
-        print("NumOf thread attivi", Dispositivo.numOf_threadAttivi)
 
     def __PingPerso_4pp(self): #4 ping protocol
         #Finche runna
@@ -219,7 +221,7 @@ class Dispositivo:
     def __ping(self):
         try:
             #Invio il ping
-            command = f"ping {Dispositivo.param} {self.__host} -w 200"
+            command = f"ping {Dispositivo.param} -l 1 {self.__host} -w 200"
             subprocessResult = subprocess.run(command, capture_output=True, text=True, timeout=1)
 
             # Se il returncode è 0, nessun errore

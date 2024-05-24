@@ -66,7 +66,7 @@ class PaginaDispositivi(PaginaGenerica): #Singleton
                                                 self.__dimensioniPagina[1] - SPAZIO_ALTO_PAGINA_DISPOSITIVI * 2]
         self.__tabellaDispositivi = TabellaDispositivi(master = self.__fFrameInternoCanvasScorrevole,
                                             xPos = SPAZIO_LATI_PAGINA_DISPOSITIVI,
-                                            yPos = SPAZIO_ALTO_PAGINA_DISPOSITIVI,
+                                            yPos = SPAZIO_ALTO_PAGINA_DISPOSITIVI + Impostazioni.personalizzazioni.altezza_elemento_tabella_paginaDispositivi,
                                             tableWidth = self.__dimensioniTabellaDispositivi[0],
                                             tableHeight = self.__dimensioniTabellaDispositivi[1],
                                             elementWidth = self.__dimensioniTabellaDispositivi[0],
@@ -255,7 +255,7 @@ class PaginaDispositivi(PaginaGenerica): #Singleton
         #Resize tabella
         self.__tabellaDispositivi.ChangeDim(
                                             xPos = SPAZIO_LATI_PAGINA_DISPOSITIVI,
-                                            yPos = SPAZIO_ALTO_PAGINA_DISPOSITIVI,
+                                            yPos = SPAZIO_ALTO_PAGINA_DISPOSITIVI + Impostazioni.personalizzazioni.altezza_elemento_tabella_paginaDispositivi,
                                             tableWidth = self.__dimensioniTabellaDispositivi[0],
                                             tableHeight = self.__dimensioniTabellaDispositivi[1],
                                             elementWidth = self.__dimensioniTabellaDispositivi[0],

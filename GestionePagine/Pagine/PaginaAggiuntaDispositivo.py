@@ -6,21 +6,21 @@ from GestionePagine.Widgets.Widgets import *
 #(useremo il polimorfismo)
 class PaginaAggiuntaDispositivo(PaginaGenerica): #Singleton
     #Creo un'istanza statica
-    __paginaRegistrazione = None
+    __paginaAggiuntaDispositivo = None
 
     # INTERFACCE
     @staticmethod
     def Init(): #Inizializzo l'istanza statica (il costruttore aggiungerà l'istanza statica alla lista nel gestorePagine)
         #Se l'istanza non è ancora stata creata, la creo
-        if PaginaAggiuntaDispositivo.__paginaRegistrazione == None:
-            PaginaAggiuntaDispositivo.__paginaRegistrazione = PaginaAggiuntaDispositivo()
+        if PaginaAggiuntaDispositivo.__paginaAggiuntaDispositivo == None:
+            PaginaAggiuntaDispositivo.__paginaAggiuntaDispositivo = PaginaAggiuntaDispositivo()
     @staticmethod
     def GetPaginaRegistrazione(): #Metodo per accedere all'istanza statica
         #Se l'istanza non è ancora stata creata, la creo
-        if PaginaAggiuntaDispositivo.__paginaRegistrazione == None:
-            PaginaAggiuntaDispositivo.__paginaRegistrazione = PaginaAggiuntaDispositivo()
+        if PaginaAggiuntaDispositivo.__paginaAggiuntaDispositivo == None:
+            PaginaAggiuntaDispositivo.__paginaAggiuntaDispositivo = PaginaAggiuntaDispositivo()
         #Ritorno l'istanza statica
-        return PaginaAggiuntaDispositivo.__paginaRegistrazione 
+        return PaginaAggiuntaDispositivo.__paginaAggiuntaDispositivo 
     
     # COSTRUTTORE
     def __init__(self): #Definisco il layout e aggiungo la pagina al gestorePagine
@@ -28,6 +28,13 @@ class PaginaAggiuntaDispositivo(PaginaGenerica): #Singleton
         PaginaGenerica.AggiungiPagina(NOME_INTERNO_PAGINA_AGGIUNGI_DISPOSITIVO)
         GestorePagine.IAddPagina(self)
 
+        #Attributi colore e font
+        self.__fontTesto = 
+        self.__coloreFontTesto = 
+        self.__fontTitolo = 
+        self.__coloreFontTitolo = 
+        self.__coloreSfondo = 
+        self.   
         COLORE_SFONDO_SCHEDA_ACCESSO = "#EBEBEB"
 
         #Definisco il layout della pagina

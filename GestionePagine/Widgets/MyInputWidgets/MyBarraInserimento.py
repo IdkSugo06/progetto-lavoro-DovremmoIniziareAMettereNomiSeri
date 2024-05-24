@@ -1,12 +1,19 @@
 from Utility.FUtility import * 
+import Utility.Impostazioni.Impostazioni as Impostazioni
 
 #Barra di inserimento personalizzata, contiene metodi per leggere e scrivere in qualsiasi momento
 #Classe derivata da una classe di tkInter
 class MyBarraInserimento(ttk.Entry):
-    def __init__(self, master, text : str = "", coloreSelezione :str = "#000000", coloreDeselezione : str = "#969696", looseContentOnFirstFocus : bool = False, hover : bool = True):
+    def __init__(self, master, text : str = "", looseContentOnFirstFocus : bool = False, hover : bool = True):
         #Salvo i colori selezione e deselezione passati come parametro
-        self.coloreSelezione = coloreSelezione
-        self.coloreDeselezione = coloreDeselezione
+        self.coloreSfondo = Impostazioni.Tema.IGetColoriSfondo("terziario")[1]
+        self.coloreSfondoDisabilitato  = Impostazioni.Tema.IGetColoriSfondo("secondario")[2]
+        self.font = Impostazioni.Tema.IGetFont("testo")
+        self.coloreFont = "#555555"
+        self.coloreFontDisabilitato = "#AAAAAA"
+        #self.coloreFont = Impostazioni.Tema.IGetFontColor("testo")
+        #self.coloreFontDisabilitato = Impostazioni.Tema.IGetFontColor("testoDisabilitato")
+
         self.alreadyFocussedOnce = not looseContentOnFirstFocus
         self.hover = hover
 
@@ -16,9 +23,10 @@ class MyBarraInserimento(ttk.Entry):
 
         #Inizializzo la barra di ricerca
         super().__init__(master = master,
-                        text = text, 
                         textvariable = self.barraInserimento_str, 
-                        foreground = self.coloreDeselezione
+                        foreground = self.coloreFontDisabilitato,
+                        font = self.font,
+                        background = self.coloreSfondo
                         )
         
         #Associo gli eventi focus in e out con i metodi
@@ -26,7 +34,7 @@ class MyBarraInserimento(ttk.Entry):
         self.bind('<FocusOut>', lambda event, _self = self : MyBarraInserimento.BarraRicercaDeselezionata(_self, event))
 
         if not self.hover:
-            self.configure(foreground = self.coloreSelezione)
+            self.configure(foreground = self.coloreSfondo)
 
     
     # GETTER E SETTER
@@ -43,17 +51,31 @@ class MyBarraInserimento(ttk.Entry):
         self.hover = _bool
 
 
+    # METODI PERSONALIZZAZIONE 
+    def AggiornaColoriTema(self):
+        #Aggiorno gli attributi dei colori
+        self.coloreSfondo = Impostazioni.Tema.IGetColoriSfondo("terziario")[1]
+        self.coloreSfondoDisabilitato  = Impostazioni.Tema.IGetColoriSfondo("secondario")[2]
+        self.font = Impostazioni.Tema.IGetFont("testo")
+        self.coloreFont = "#555555"
+        self.coloreFontDisabilitato = "#AAAAAA"
+        #self.coloreFont = Impostazioni.Tema.IGetFontColor("testo")
+        #self.coloreFontDisabilitato = Impostazioni.Tema.IGetFontColor("testoDisabilitato")
+        #Configuro la barra
+        self.configure(foreground = self.coloreFontDisabilitato, font = self.font, background = self.coloreSfondo)
+
+
     # METODI EVENTI
     def BarraRicercaSelezionata(self, event):
         if not self.alreadyFocussedOnce:
             self.barraInserimento_str.set("")
 
         if self.hover:
-            self.configure(foreground = self.coloreSelezione)
+            self.configure(foreground = self.coloreFont, background = self.coloreSfondo)
     
     def BarraRicercaDeselezionata(self, event):
         if self.hover:
-            self.configure(foreground = self.coloreDeselezione)
+            self.configure(foreground = self.coloreFontDisabilitato, background = self.coloreSfondoDisabilitato)
 
     def myBind(self, evento : str, funzione):
         self.bind(evento, funzione)

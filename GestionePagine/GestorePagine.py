@@ -87,7 +87,7 @@ class GestorePagine(): #Singleton
     def Event_MyThemeChanged(self):
         self.__menu.AggiornaColoriTema()      
         for pagina in self.__pagine:
-            pagina.AggiornaColoriTema()
+            pagina.AggiornaColoriTema()       
     @staticmethod
     def EventFocusIn(eventTk = None):
         Impostazioni.sleepTimeBetweenUpdate = 0.02

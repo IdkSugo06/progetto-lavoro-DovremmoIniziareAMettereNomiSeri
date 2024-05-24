@@ -2,32 +2,33 @@ from GestionePagine.GestorePagine import *
 from GestionePagine.Widgets.Tabelle import *
 
 #Stati di una statemachine (stati derivati da paginaGenerica, statemachine : GestorePagine)
-class PaginaDashboard(PaginaGenerica): #Singleton
+class PaginaDispositivi(PaginaGenerica): #Singleton
     #Creo un'istanza statica
-    paginaDashboard = None
+    paginaDispositivi = None
 
     # COSTRUTTORE E GETTER INSTANZA STATICA
     @staticmethod
     def Init():
-        if PaginaDashboard.paginaDashboard == None:
-            PaginaDashboard.paginaDashboard = PaginaDashboard()
+        if PaginaDispositivi.paginaDispositivi == None:
+            PaginaDispositivi.paginaDispositivi = PaginaDispositivi()
     @staticmethod
-    def GetPaginaDashboard():
-        if PaginaDashboard.paginaDashboard == None:
-            PaginaDashboard.paginaDashboard = PaginaDashboard()  
-        return PaginaDashboard.paginaDashboard
+    def GetPaginaDispositivi():
+        if PaginaDispositivi.paginaDispositivi == None:
+            PaginaDispositivi.paginaDispositivi = PaginaDispositivi()  
+        return PaginaDispositivi.paginaDispositivi
     
 
     # COSTRUTTORE 
     def __init__(self):
-        
-        #Attributi
+
+        #Salvo i colori
         self.__coloreSfondo = Impostazioni.Tema.IGetColoriSfondo("secondario")[1]
 
+
         #Aggiungo la pagina
-        PaginaGenerica.AggiungiPagina(NOME_INTERNO_PAGINA_DASHBOARD)
+        PaginaGenerica.AggiungiPagina(NOME_INTERNO_PAGINA_DISPOSITIVI)
         GestorePagine.IAddPagina(self)
-        self.__dimensioniPagina = [int(Impostazioni.sistema.dimensioniFinestra[0] * (1 - PROPORZIONE_MENU_PAGINA)), Impostazioni.sistema.dimensioniFinestra[1]]
+        self.__dimensioniPagina = [int(Impostazioni.sistema.dimensioniFinestra[0] * (1 - Impostazioni.PROPORZIONE_MENU_PAGINA)), Impostazioni.sistema.dimensioniFinestra[1]]
         self.__dimensioniPaginaScorrevole = [self.__dimensioniPagina[0], ALTEZZA_PAGINA_DISPOSITIVI]
     
         # FRAME PRINCIPALE
@@ -61,28 +62,51 @@ class PaginaDashboard(PaginaGenerica): #Singleton
 
 
         # CREO LA TABELLA
-        self.__dimensioniTabellaDashboard = [int(self.__dimensioniPagina[0] - SPAZIO_LATI_PAGINA_DISPOSITIVI * 2),
+        self.__dimensioniTabellaDispositivi = [int(self.__dimensioniPagina[0] - SPAZIO_LATI_PAGINA_DISPOSITIVI * 2),
                                                 self.__dimensioniPagina[1] - SPAZIO_ALTO_PAGINA_DISPOSITIVI * 2]
-        # CREO LE TABELLE
-        self.__tabellaDashboard = TabellaDashboard(master = self.__fFrameInternoCanvasScorrevole,
+        self.__tabellaDispositivi = TabellaDispositivi(master = self.__fFrameInternoCanvasScorrevole,
                                             xPos = SPAZIO_LATI_PAGINA_DISPOSITIVI,
                                             yPos = SPAZIO_ALTO_PAGINA_DISPOSITIVI,
-                                            tableWidth = self.__dimensioniTabellaDashboard[0],
-                                            tableHeight = self.__dimensioniTabellaDashboard[1],
-                                            elementWidth = self.__dimensioniTabellaDashboard[0],
-                                            elementHeight = Impostazioni.personalizzazioni.altezza_elemento_tabella_paginaDashboard)
-        self.__tabellaDashboard.RefreshFrameDispositivi()
+                                            tableWidth = self.__dimensioniTabellaDispositivi[0],
+                                            tableHeight = self.__dimensioniTabellaDispositivi[1],
+                                            elementWidth = self.__dimensioniTabellaDispositivi[0],
+                                            elementHeight = Impostazioni.personalizzazioni.altezza_elemento_tabella_paginaDispositivi)
+        self.__tabellaDispositivi.RefreshFrameDispositivi()
+
+
+        # FRAME SUPPORTO AGGIUNTA DISPOSITIVO
+        self.__fFrameBottoneAggiuntaDispositivo = tk.Frame(master = self.__fFrameInternoCanvasScorrevole)
+        self.__dimBottone = (150, 40)
+        self.__offsetBottone = (8,8)
+        self.__fFrameBottoneAggiuntaDispositivo.place(x = SPAZIO_LATI_PAGINA_DISPOSITIVI + self.__dimensioniTabellaDispositivi[0] - (self.__dimBottone[0] + self.__offsetBottone[0]), 
+                                                      y = SPAZIO_ALTO_PAGINA_DISPOSITIVI - (self.__dimBottone[1] + self.__offsetBottone[1]), width = self.__dimBottone[0], height = self.__dimBottone[1], anchor= "nw")
+        self.__fFrameBottoneAggiuntaDispositivo.columnconfigure(0, weight = 1)
+        self.__fFrameBottoneAggiuntaDispositivo.rowconfigure(0, weight = 1)
+        self.__fFrameBottoneAggiuntaDispositivo.grid_propagate(False)
+        self.__fFrameBottoneAggiuntaDispositivo.pack_propagate(False)
+        # BOTTONE AGGIUNTA DISPOSITIVO
+        self.__bBottoneAggiuntaDispositivo = ctk.CTkButton(master = self.__fFrameBottoneAggiuntaDispositivo,
+                                                        command = self.AggiungiDispositivo, 
+                                                        text="+ Dispositivo",
+                                                        fg_color = Impostazioni.Tema.IGetColoriSfondo("secondario")[2],
+                                                        font = Impostazioni.Tema.IGetFont_ctkFormat("sottotitolo"),
+                                                        text_color = Impostazioni.Tema.IGetFontColor("sottotitolo"),
+                                                        bg_color = self.__coloreSfondo,
+                                                        hover_color = Impostazioni.Tema.IGetColoriSfondo("terziario")[1],
+                                                        border_color = Impostazioni.Tema.IGetColoriSfondo("secondario")[3],
+                                                        border_width = 2,
+                                                        corner_radius = 15)
+        self.__bBottoneAggiuntaDispositivo.grid(row = 0, column=0, sticky="nsew")
 
 
         #FRAME DELLE SCRITTE SOPRA LA TABELLA
         self.__fFrameTextLabel = tk.Frame(master = self.__fFrameInternoCanvasScorrevole)
-        self.__fFrameTextLabel.place(x = SPAZIO_LATI_PAGINA_DISPOSITIVI, y = SPAZIO_ALTO_PAGINA_DISPOSITIVI, width = self.__dimensioniTabellaDashboard[0], height = Impostazioni.personalizzazioni.altezza_elemento_tabella_paginaDashboard, anchor = "nw")
-        self.__fFrameTextLabel.columnconfigure(0, weight = int(100 * PROPORZIONI_NOME_DISPOSITIVO_FRAMEDASHBOARD))
-        self.__fFrameTextLabel.columnconfigure(1, weight = int(100 * PROPORZIONI_INDIRIZZO_DISPOSITIVO_FRAMEDASHBOARD))
-        self.__fFrameTextLabel.columnconfigure(2, weight = int(100 * PROPORZIONI_PORTA_DISPOSITIVO_FRAMEDASHBOARD))
-        self.__fFrameTextLabel.columnconfigure(3, weight = int(100 * PROPORZIONI_TEMPOPING_DISPOSITIVO_FRAMEDASHBOARD))
-        self.__fFrameTextLabel.columnconfigure(4, weight = int(100 * PROPORZIONI_STATUS_DISPOSITIVO_TABELLA_DASHBOARD))
-        self.__fFrameTextLabel.columnconfigure(5, weight = int(100 * PROPORZIONI_PINGMANUALE_DISPOSITIVO_TABELLA_DASHBOARD))
+        self.__fFrameTextLabel.place(x = SPAZIO_LATI_PAGINA_DISPOSITIVI, y = SPAZIO_ALTO_PAGINA_DISPOSITIVI, width = self.__dimensioniTabellaDispositivi[0], height = Impostazioni.personalizzazioni.altezza_elemento_tabella_paginaDispositivi, anchor = "nw")
+        self.__fFrameTextLabel.columnconfigure(0, weight = int(100 * PROPORZIONI_NOME_DISPOSITIVO_FRAMEDISPOSITIVO))
+        self.__fFrameTextLabel.columnconfigure(1, weight = int(100 * PROPORZIONI_INDIRIZZO_DISPOSITIVO_FRAMEDISPOSITIVO))
+        self.__fFrameTextLabel.columnconfigure(2, weight = int(100 * PROPORZIONI_PORTA_DISPOSITIVO_FRAMEDISPOSITIVO))
+        self.__fFrameTextLabel.columnconfigure(3, weight = int(100 * PROPORZIONI_TEMPOPING_DISPOSITIVO_FRAMEDISPOSITIVO))
+        self.__fFrameTextLabel.columnconfigure(4, weight = int(100 * PROPORZIONI_TASTI_MODDEL_TABELLA_DISPOSITIVI))
         self.__fFrameTextLabel.rowconfigure(0, weight = 1)
         self.__fFrameTextLabel.grid_propagate(False)
         self.__fFrameTextLabel.pack_propagate(False)
@@ -120,38 +144,28 @@ class PaginaDashboard(PaginaGenerica): #Singleton
         self.__fFrameScrittaTempoTraPing.grid_propagate(False)
         self.__fFrameScrittaTempoTraPing.pack_propagate(False)
 
-        # FRAME SUPPORTO SCRITTA STATUS
-        self.__fFrameScrittaStatus = tk.Frame(master = self.__fFrameTextLabel, bg = Impostazioni.Tema.IGetColoriSfondo("secondario")[1], highlightbackground= Impostazioni.Tema.IGetColoriSfondo("secondario")[3], highlightthickness=1)
-        self.__fFrameScrittaStatus.grid(row = 0, column = 4, sticky = "nsew")
-        self.__fFrameScrittaStatus.rowconfigure(0, weight = 1)
-        self.__fFrameScrittaStatus.columnconfigure(0, weight = 1)
-        self.__fFrameScrittaStatus.grid_propagate(False)
-        self.__fFrameScrittaStatus.pack_propagate(False)
-
-        # FRAME SUPPORTO SCRITTA PING MANUALE
-        self.__fFrameScrittaPingManuale = tk.Frame(master = self.__fFrameTextLabel, bg = Impostazioni.Tema.IGetColoriSfondo("secondario")[1], highlightbackground= Impostazioni.Tema.IGetColoriSfondo("secondario")[3], highlightthickness=1)
-        self.__fFrameScrittaPingManuale.grid(row = 0, column = 5, sticky = "nsew")
-        self.__fFrameScrittaPingManuale.rowconfigure(0, weight = 1)
-        self.__fFrameScrittaPingManuale.columnconfigure(0, weight = 1)
-        self.__fFrameScrittaPingManuale.grid_propagate(False)
-        self.__fFrameScrittaPingManuale.pack_propagate(False)
+        # FRAME SUPPORTO SCRITTA TASTI MODDEL
+        self.__fFrameScrittaTastiModdel = tk.Frame(master = self.__fFrameTextLabel, bg = Impostazioni.Tema.IGetColoriSfondo("secondario")[1], highlightbackground= Impostazioni.Tema.IGetColoriSfondo("secondario")[3], highlightthickness=1)
+        self.__fFrameScrittaTastiModdel.grid(row = 0, column = 4, sticky = "nsew")
+        self.__fFrameScrittaTastiModdel.rowconfigure(0, weight = 1)
+        self.__fFrameScrittaTastiModdel.columnconfigure(0, weight = 1)
+        self.__fFrameScrittaTastiModdel.grid_propagate(False)
+        self.__fFrameScrittaTastiModdel.pack_propagate(False)
 
         #SCRITTE SOPRA LA TABELLA
         self.__textLabels = []
         # Create and position the text labels
-        for i in range(6):
-            textLabel = tk.Label(master= self.__fFrameScrittaNome if i==0 else self.__fFrameScrittaIndirizzoIP if i==1 else self.__fFrameScrittaPorta if i==2 else self.__fFrameScrittaTempoTraPing if i==3 else self.__fFrameScrittaStatus if i==4 else self.__fFrameScrittaPingManuale,
-                                text = "Nome dispositivo" if i==0 else "Indirizzo ip" if i==1 else "Porta" if i==2 else "Frequenza ping (sec)" if i==3 else "Status" if i==4 else "Ping",
+        for i in range(5):
+            textLabel = tk.Label(master= self.__fFrameScrittaNome if i==0 else self.__fFrameScrittaIndirizzoIP if i==1 else self.__fFrameScrittaPorta if i==2 else self.__fFrameScrittaTempoTraPing if i==3 else self.__fFrameScrittaTastiModdel,
+                                text = "Nome dispositivo" if i==0 else "Indirizzo ip" if i==1 else "Porta" if i==2 else "Frequenza ping (sec)" if i==3 else "",
                                 font=Impostazioni.Tema.IGetFont("testo"),
                                 fg=Impostazioni.Tema.IGetFontColor("testo"),
                                 bg=Impostazioni.Tema.IGetColoriSfondo("secondario")[1]
                                 )
-            textLabel.grid(row = 0, column = i, sticky="nsew")
+            textLabel.grid(row = 0, column = i, sticky="nsew", rowspan=1, columnspan=1)
             textLabel.pack(side="left")
             #textLabel.configure(highlightthickness = 1, highlightcolor = Impostazioni.Tema.IGetColoriSfondo("secondario")[3])
             self.__textLabels.append(textLabel)
-
-
 
         # EVENT BIND
         self.__fFramePrincipale.bind("<MouseWheel>", lambda event : self.__cCanvasScorrevole.yview_scroll(int(-event.delta * Impostazioni.sistema.sensibilita_scorrimento_rotella), "units"))
@@ -159,61 +173,66 @@ class PaginaDashboard(PaginaGenerica): #Singleton
         
                                            
 
+
     # METODI CAMBIO PAGINA E UPDATE
     def CaricaPagina(self, args = []):
         #Mostro la pagina
         self.MostraPagina()
 
         #Aggiorno i dispositivi
-        self.__tabellaDashboard.CaricaTabella()
+        self.__tabellaDispositivi.CaricaTabella()
 
     def NascondiPagina(self):
         self.__fFramePrincipale.grid_forget()
-        #Metto in pausa i processi
-        Dispositivo.pausaFinitaEvent.clear()
 
     def MostraPagina(self):
         self.__fFramePrincipale.grid_propagate(True)
         self.__fFramePrincipale.grid(row = 0, column = 0, sticky = "nsew")
         self.__fFramePrincipale.grid_propagate(False)
-        Dispositivo.pausaFinitaEvent.set()
 
     def UpdatePagina(self, deltaTime : float = 0): #Disabled
-        return
-        #Chiamo l'update
-        #self.__tabellaDashboard.Update(deltaTime)
-
+        return 
+    
 
     # METODI PERSONALIZZAZIONE
     def AggiornaColoriTema(self):
         self.__coloreSfondo = Impostazioni.Tema.IGetColoriSfondo("secondario")[1]
-        self.__tabellaDashboard.AggiornaColoriTema()
+        self.__tabellaDispositivi.AggiornaColoriTema()
         self.AggiornaColori()
 
     def AggiornaColori(self):
         self.__fFrameInternoCanvasScorrevole.configure(background=self.__coloreSfondo)
         self.__cCanvasScorrevole.configure(background=self.__coloreSfondo)
-
-        #Cambio i colore della barra della tabella
+        self.__bBottoneAggiuntaDispositivo.configure( require_redraw = True,
+                                                      fg_color = Impostazioni.Tema.IGetColoriSfondo("secondario")[2],
+                                                      text_color = Impostazioni.Tema.IGetFontColor("sottotitolo"),
+                                                      border_color = Impostazioni.Tema.IGetColoriSfondo("secondario")[3],
+                                                      hover_color = Impostazioni.Tema.IGetColoriSfondo("terziario")[1],
+                                                      font = Impostazioni.Tema.IGetFont_ctkFormat("sottotitolo"),
+                                                      bg_color = self.__coloreSfondo)
+        
+        #Cambio i colori della barra della tabella
         coloreSfondo = Impostazioni.Tema.IGetColoriSfondo("secondario")[2]
         coloreBordo = Impostazioni.Tema.IGetColoriSfondo("secondario")[3]
         self.__fFrameScrittaNome.configure(background=coloreSfondo, highlightcolor=coloreBordo)
         self.__fFrameScrittaIndirizzoIP.configure(background=coloreSfondo, highlightcolor=coloreBordo)
         self.__fFrameScrittaPorta.configure(background=coloreSfondo, highlightcolor=coloreBordo)
         self.__fFrameScrittaTempoTraPing.configure(background=coloreSfondo, highlightcolor=coloreBordo)
-        self.__fFrameScrittaStatus.configure(background=coloreSfondo, highlightcolor=coloreBordo)
-        self.__fFrameScrittaPingManuale.configure(background=coloreSfondo, highlightcolor=coloreBordo)
+        self.__fFrameScrittaTastiModdel.configure(background=coloreSfondo, highlightcolor=coloreBordo)
         for textLabel in self.__textLabels:
             textLabel.configure(background = coloreSfondo,
                                  font = Impostazioni.Tema.IGetFont("testo"), 
                                  foreground = Impostazioni.Tema.IGetFontColor("testo"), 
                                  highlightcolor = coloreBordo)
+            
         
     def CambioDimFrame(self):
         #Resize dimensioni
         self.__dimensioniPagina = [int(Impostazioni.sistema.dimensioniFinestra[0] * (1 - PROPORZIONE_MENU_PAGINA)), Impostazioni.sistema.dimensioniFinestra[1]]
         self.__dimensioniPaginaScorrevole = [self.__dimensioniPagina[0], ALTEZZA_PAGINA_DISPOSITIVI]
-        self.__dimensioniTabellaDashboard[0] = int(self.__dimensioniPagina[0] - SPAZIO_LATI_PAGINA_DISPOSITIVI * 2)
+        self.__dimensioniTabellaDispositivi[0] = int(self.__dimensioniPagina[0] - SPAZIO_LATI_PAGINA_DISPOSITIVI * 2)
+        
+              
         
         #Resize canvas scorrevole
         self.__cCanvasScorrevole.configure(scrollregion = (0, 0, Impostazioni.sistema.dimensioniFinestra[0] * (1-PROPORZIONE_MENU_PAGINA), ALTEZZA_PAGINA_DASHBOARD))
@@ -226,18 +245,27 @@ class PaginaDashboard(PaginaGenerica): #Singleton
         self.__cCanvasScorrevole.delete(self.__ultimoCanvasId)
         self.__ultimoCanvasId = thisCanvasId
 
-        self.__fFrameTextLabel.place(x = SPAZIO_LATI_PAGINA_DISPOSITIVI, y = SPAZIO_ALTO_PAGINA_DISPOSITIVI, width = self.__dimensioniTabellaDashboard[0], height = Impostazioni.personalizzazioni.altezza_elemento_tabella_paginaDashboard, anchor = "nw")
+         #Ripos button
+        self.__fFrameBottoneAggiuntaDispositivo.place(x = SPAZIO_LATI_PAGINA_DISPOSITIVI + self.__dimensioniTabellaDispositivi[0] - (self.__dimBottone[0] + self.__offsetBottone[0]), 
+                                                      y = SPAZIO_ALTO_PAGINA_DISPOSITIVI - (self.__dimBottone[1] + self.__offsetBottone[1]), width = self.__dimBottone[0], height = self.__dimBottone[1], anchor= "nw")
+        
+        self.__fFrameTextLabel.place(x = SPAZIO_LATI_PAGINA_DISPOSITIVI, y = SPAZIO_ALTO_PAGINA_DISPOSITIVI, width = self.__dimensioniTabellaDispositivi[0], height = Impostazioni.personalizzazioni.altezza_elemento_tabella_paginaDashboard, anchor = "nw")
+
 
         #Resize tabella
-        self.__tabellaDashboard.ChangeDim(
+        self.__tabellaDispositivi.ChangeDim(
                                             xPos = SPAZIO_LATI_PAGINA_DISPOSITIVI,
                                             yPos = SPAZIO_ALTO_PAGINA_DISPOSITIVI,
-                                            tableWidth = self.__dimensioniTabellaDashboard[0],
-                                            tableHeight = self.__dimensioniTabellaDashboard[1],
-                                            elementWidth = self.__dimensioniTabellaDashboard[0],
+                                            tableWidth = self.__dimensioniTabellaDispositivi[0],
+                                            tableHeight = self.__dimensioniTabellaDispositivi[1],
+                                            elementWidth = self.__dimensioniTabellaDispositivi[0],
                                             elementHeight = Impostazioni.personalizzazioni.altezza_elemento_tabella_paginaDispositivi,
                                             coloreSfondo = Impostazioni.Tema.IGetColoriSfondo("secondario")[1],
                                             coloreElementi = Impostazioni.Tema.IGetColoriSfondo("secondario")[2],
                                             coloreBordoElementi = Impostazioni.Tema.IGetColoriSfondo("secondario")[3])
 
-PaginaDashboard.Init()
+    # METODI EVENTI
+    def AggiungiDispositivo(self):
+        GestorePagine.ICaricaPaginaConNome(NOME_INTERNO_PAGINA_AGGIUNGI_DISPOSITIVO)
+
+PaginaDispositivi.Init()

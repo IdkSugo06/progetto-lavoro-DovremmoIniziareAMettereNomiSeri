@@ -65,6 +65,21 @@ class Menu:
         self.__listaMenu.EvidenziaPaginaSelezionata(nomePaginaInternoSelezionato)
 
 
+    # METODI PERSONALIZZAZIONE
+    def AggiornaColoriTema(self):
+        self.__coloreSfondo = Impostazioni.Tema.IGetColoriSfondo("secondario")[1]
+        self.__listaMenu.AggiornaColoriTema()
+        self.AggiornaColori()
+
+    def AggiornaColori(self):
+        self.__cCanvasLogo.configure(background=self.__coloreSfondo)
+
+        #Cambio i colore della barra della tabella
+        coloreSfondo = Impostazioni.Tema.IGetColoriSfondo("secondario")[2]
+        coloreBordo = Impostazioni.Tema.IGetColoriSfondo("secondario")[3]
+        self.__fFrameLogo.configure(background=coloreSfondo, highlightcolor=coloreBordo)
+        self.__fFrameListaMenu.configure(background=coloreSfondo, highlightcolor=coloreBordo)
+        
     # METODI EVENTI    
     # METODO RICONFIGURAZIONE
     def CambioFont(self):

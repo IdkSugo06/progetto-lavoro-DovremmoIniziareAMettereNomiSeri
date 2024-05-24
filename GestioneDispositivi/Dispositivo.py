@@ -119,13 +119,16 @@ class Dispositivo:
         t = Thread(target=self.__AvvioThread)
         t.start()
     def InizializzazioneDistruttoreThread(self):
+        self.__semaforoStatus.acquire()
         self.__running = False
+        self.__semaforoStatus.release()
         self.__eventoAttesaPing.set()
         t = Thread(target=self.__DistruttoreThread)
         t.start()
     
     def PingManuale(self):
         self.__eventoAttesaPing.set()
+        LOG.log("Ping eseguito")
 
 
     # STATI INVIO PING
@@ -205,11 +208,10 @@ class Dispositivo:
         
         #Invio il ping
         pingResult = self.__ping()
-        
+
         #Se online aggiorno lo stato
         if (setWhen == "Always") or (setWhen == "WhenTrue") and pingResult or (setWhen == "WhenFalse" and not pingResult):
-            self.SetPingResult(pingResult)
-            setted = True
+            setted = self.SetPingResult(pingResult) #True se ok, False se qualcosa è andato storto
         else:
             setted = False
         

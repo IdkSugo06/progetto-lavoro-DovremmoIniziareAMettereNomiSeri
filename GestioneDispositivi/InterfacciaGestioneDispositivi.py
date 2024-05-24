@@ -41,12 +41,10 @@ class InterfacciaGestioneDispositivi:
     def __init__(self):
         InterfacciaGestioneDispositivi.IAddDispositivo("Router", "172.16.0.1", 0, 1)   
 
-        for i in range(30):
+        for i in range(10):
             InterfacciaGestioneDispositivi.IAddDispositivo("Router", "www.google.com", 0, 1) 
-        for i in range(30):
+        for i in range(10):
             InterfacciaGestioneDispositivi.IAddDispositivo("Router", "www.youtube.it", 0, 1) 
-        for i in range(30):
-            InterfacciaGestioneDispositivi.IAddDispositivo("Router", "www.twitch.com", 0, 1) 
         pass
 
 

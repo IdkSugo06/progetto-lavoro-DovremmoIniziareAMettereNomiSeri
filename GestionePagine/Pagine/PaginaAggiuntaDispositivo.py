@@ -34,7 +34,7 @@ class PaginaAggiuntaDispositivo(PaginaGenerica): #Singleton
         self.__coloreBordo = Impostazioni.Tema.IGetColoriSfondo("terziario")[0]
         self.__fontTesto = Impostazioni.Tema.IGetFont("testo")
         self.__coloreFontTesto = Impostazioni.Tema.IGetFontColor("testo")
-        self.__fontTitolo = Impostazioni.Tema.IGetFont("titolo")
+        self.__fontTitolo = Impostazioni.Tema.IGetFont("titolo", dimensione = 32)
         self.__coloreFontTitolo = Impostazioni.Tema.IGetFontColor("titolo")
         
 
@@ -127,7 +127,7 @@ class PaginaAggiuntaDispositivo(PaginaGenerica): #Singleton
         self.__fFrameScrittaAggiuntaDispositivo.grid(row = 0, column=4, columnspan=2, sticky="nsew")
         self.__fFrameScrittaAggiuntaDispositivo.grid_propagate(False)
         self.__lScrittaAggiuntaDispositivo = tk.Label(master = self.__fFrameScrittaAggiuntaDispositivo, text = "Aggiungi dispositivo", background=self.__coloreSfondoInterno, font = self.__fontTitolo,  foreground = self.__coloreFontTitolo)
-        self.__lScrittaAggiuntaDispositivo.pack(side = "left", expand=True, fill = "both")
+        self.__lScrittaAggiuntaDispositivo.pack(side = "left", fill = "both")
         #Creo la scritta name
         self.__fFrameSupportoNome = tk.Frame(master = self.__fFrameSchedaAggiuntaDispositivo, background = self.__coloreSfondoInterno)
         self.__fFrameSupportoNome.grid(row = 2, column = 2, columnspan=3, sticky= "nsew")
@@ -136,7 +136,7 @@ class PaginaAggiuntaDispositivo(PaginaGenerica): #Singleton
         self.__fFrameSupportoNome.grid_propagate(False)
         self.__fFrameSupportoNome.pack_propagate(False)
         self.__lScrittaNome = tk.Label(master = self.__fFrameSupportoNome, text = "Nome macchina:", background=self.__coloreSfondoInterno, font = self.__fontTesto, foreground = self.__coloreFontTesto)
-        self.__lScrittaNome.pack(side = "left", fill = "both",expand=True)
+        self.__lScrittaNome.pack(side = "left", fill = "both")
         #Creo l'entry inserimento name
         self.__myBarraInserimentoNome = MyBarraInserimento(master = self.__fFrameSchedaAggiuntaDispositivo, text = "Nome macchina", looseContentOnFirstFocus = True)
         self.__myBarraInserimentoNome.grid(row = 3, column = 2, columnspan=3, sticky="nsew")
@@ -148,7 +148,7 @@ class PaginaAggiuntaDispositivo(PaginaGenerica): #Singleton
         self.__fFrameSupportoIpHost.grid_propagate(False)
         self.__fFrameSupportoIpHost.pack_propagate(False)
         self.__lScrittaIpHost = tk.Label(master = self.__fFrameSupportoIpHost, text = "Ip host:", background= self.__coloreSfondoInterno, font = self.__fontTesto, foreground = self.__coloreFontTesto)
-        self.__lScrittaIpHost.pack(side = "left", fill = "both",expand=True)
+        self.__lScrittaIpHost.pack(side = "left", fill = "both")
         #Creo l'entry inserimento ipHost
         self.__myBarraInserimentoIpHost = MyBarraInserimento(master = self.__fFrameSchedaAggiuntaDispositivo, text = "Ip host", looseContentOnFirstFocus = True)
         self.__myBarraInserimentoIpHost.grid(row = 6, column = 2, columnspan=3, sticky="nsew")
@@ -160,7 +160,7 @@ class PaginaAggiuntaDispositivo(PaginaGenerica): #Singleton
         self.__fFrameSupportoPorta.grid_propagate(False)
         self.__fFrameSupportoPorta.pack_propagate(False)
         self.__lScrittaPorta = tk.Label(master = self.__fFrameSupportoPorta, text = "Porta:", background= self.__coloreSfondoInterno, font = self.__fontTesto, foreground = self.__coloreFontTesto)
-        self.__lScrittaPorta.pack(side = "left", fill = "both",expand=True)
+        self.__lScrittaPorta.pack(side = "left", fill = "both")
         #Creo l'entry inserimento porta
         self.__myBarraInserimentoPorta = MyBarraInserimento(master = self.__fFrameSchedaAggiuntaDispositivo, text = "Porta", looseContentOnFirstFocus = True)
         self.__myBarraInserimentoPorta.grid(row = 9, column = 2, columnspan=3, sticky="nsew")
@@ -172,7 +172,7 @@ class PaginaAggiuntaDispositivo(PaginaGenerica): #Singleton
         self.__fFrameSupportoTempoTraPing.grid_propagate(False)
         self.__fFrameSupportoTempoTraPing.pack_propagate(False)
         self.__lScrittaTempoTraPing = tk.Label(master = self.__fFrameSupportoTempoTraPing, text = "Tempo tra ping:", background= self.__coloreSfondoInterno, font = self.__fontTesto, foreground = self.__coloreFontTesto)
-        self.__lScrittaTempoTraPing.pack(side = "left", fill = "both",expand=True)
+        self.__lScrittaTempoTraPing.pack(side = "left", fill = "both")
         #Creo l'entry inserimento porta
         self.__myBarraInserimentoTempoTraPing = MyBarraInserimento(master = self.__fFrameSchedaAggiuntaDispositivo, text = "Tempo tra ping", looseContentOnFirstFocus = True)
         self.__myBarraInserimentoTempoTraPing.grid(row = 12, column = 2, columnspan=3, sticky="nsew")
@@ -211,7 +211,7 @@ class PaginaAggiuntaDispositivo(PaginaGenerica): #Singleton
         self.__coloreBordo = Impostazioni.Tema.IGetColoriSfondo("terziario")[0]
         self.__fontTesto = Impostazioni.Tema.IGetFont("testo")
         self.__coloreFontTesto = Impostazioni.Tema.IGetFontColor("testo")
-        self.__fontTitolo = Impostazioni.Tema.IGetFont("titolo")
+        self.__fontTitolo = Impostazioni.Tema.IGetFont("titolo", dimensione = 32)
         self.__coloreFontTitolo = Impostazioni.Tema.IGetFontColor("titolo")
 
         #Aggiornamento colore scritte

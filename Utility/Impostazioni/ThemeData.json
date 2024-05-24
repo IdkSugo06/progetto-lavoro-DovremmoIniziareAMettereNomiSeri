@@ -5,7 +5,7 @@
       "terziario": ["#565656", "#656565"]
     },
     "fonts_temaDefault": {
-      "titolo": ["arial", 24, "#FFFFFF", ["italic", "bold"]],
+      "titolo": ["arial", 36, "#FFFFFF", ["italic", "bold"]],
       "sottotitolo": ["arial", 16, "#FFFFFF", ["italic"]],
       "testo": ["arial", 12, "#FFFFFF", []],
       "testoDisabilitato": ["arial", 12, "#FFFFFF", []],

@@ -71,17 +71,21 @@ class Tema:
             LOG.log("Errore durante la ricerca del colore: " + str(tipoColore) + "; per: " + str(Tema.__keyTemaCaricatoAttualmente), LOG_ERROR)
 
     @staticmethod 
-    def IGetFont_ctkFormat(fontCategory : str) -> tuple:
+    def IGetFont_ctkFormat(fontCategory : str, dimensione : int = None) -> tuple:
         try:
             font = Tema.__GetTemaCaricatoAttualmente().__dictfont[fontCategory]
+            if dimensione != None:
+                font[1] = int(dimensione)
             result = (font[0], font[1], font[3][0]) if len(font[3]) > 0 else  (font[0], font[1]) 
             return result
         except:
             LOG.log("Errore durante la ricerca di un font: " + str(fontCategory) + "; per: " + str(Tema.__keyTemaCaricatoAttualmente), LOG_ERROR)
     @staticmethod    
-    def IGetFont(fontCategory : str) -> str: #esempio "arial 18 bold"
+    def IGetFont(fontCategory : str, dimensione : int = None) -> str: #esempio "arial 18 bold"
         try:
             font = Tema.__GetTemaCaricatoAttualmente().__dictfont[fontCategory]
+            if dimensione != None:
+                font[1] = int(dimensione)
             modificatore = (" " + font[3][0]) if len(font[3]) > 0 else ""
             return font[0] + " " + str(font[1]) + str(modificatore)
         except:

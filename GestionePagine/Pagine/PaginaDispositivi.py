@@ -23,7 +23,8 @@ class PaginaDispositivi(PaginaGenerica): #Singleton
 
         #Salvo i colori
         self.__coloreSfondo = Impostazioni.Tema.IGetColoriSfondo("secondario")[1]
-
+        self.__font = Impostazioni.Tema.IGetFont("testo")
+        self.__fontColor = Impostazioni.Tema.IGetFontColor("testo")
 
         #Aggiungo la pagina
         PaginaGenerica.AggiungiPagina(NOME_INTERNO_PAGINA_DISPOSITIVI)
@@ -72,6 +73,26 @@ class PaginaDispositivi(PaginaGenerica): #Singleton
                                             elementWidth = self.__dimensioniTabellaDispositivi[0],
                                             elementHeight = Impostazioni.personalizzazioni.altezza_elemento_tabella_paginaDispositivi)
         self.__tabellaDispositivi.RefreshFrameDispositivi()
+
+
+        #FRAME SUPPORTO TITOLO
+        self.__fFrameTitoloDispositivi = tk.Frame(master = self.__fFrameInternoCanvasScorrevole, background = self.__coloreSfondo)
+        self.__fFrameTitoloDispositivi.place(x = SPAZIO_LATI_PAGINA_DASHBOARD + SPAZIO_LATI_PAGINA_DASHBOARD // 2, 
+                                           y = SPAZIO_ALTO_PAGINA_DASHBOARD // 2, 
+                                           width = self.__dimensioniTabellaDispositivi[0] // 2,
+                                           height = SPAZIO_ALTO_PAGINA_DASHBOARD // 2)
+        self.__fFrameTitoloDispositivi.rowconfigure(0, weight=0)
+        self.__fFrameTitoloDispositivi.columnconfigure(0, weight=0)
+        self.__fFrameTitoloDispositivi.grid_propagate(False)
+        self.__fFrameTitoloDispositivi.pack_propagate(False)
+        #LABEL TITOLO
+        self.__lTitoloDispositivi = tk.Label(master = self.__fFrameTitoloDispositivi,
+                                            text = "Dispositivi",
+                                            background = self.__coloreSfondo,
+                                            foreground = Impostazioni.Tema.IGetFontColor("titolo"),
+                                            font = Impostazioni.Tema.IGetFont("titolo")
+                                           )
+        self.__lTitoloDispositivi.pack(side = "left", fill="both", anchor="sw")
 
 
         # FRAME SUPPORTO AGGIUNTA DISPOSITIVO
@@ -158,9 +179,9 @@ class PaginaDispositivi(PaginaGenerica): #Singleton
         for i in range(5):
             textLabel = tk.Label(master= self.__fFrameScrittaNome if i==0 else self.__fFrameScrittaIndirizzoIP if i==1 else self.__fFrameScrittaPorta if i==2 else self.__fFrameScrittaTempoTraPing if i==3 else self.__fFrameScrittaTastiModdel,
                                 text = "Nome dispositivo" if i==0 else "Indirizzo ip" if i==1 else "Porta" if i==2 else "Frequenza ping (sec)" if i==3 else "",
-                                font=Impostazioni.Tema.IGetFont("testo"),
-                                fg=Impostazioni.Tema.IGetFontColor("testo"),
-                                bg=Impostazioni.Tema.IGetColoriSfondo("secondario")[1]
+                                bg = self.__coloreSfondo,
+                                font = self.__font,
+                                fg = self.__fontColor
                                 )
             textLabel.grid(row = 0, column = i, sticky="nsew", rowspan=1, columnspan=1)
             textLabel.pack(side="left")
@@ -201,6 +222,14 @@ class PaginaDispositivi(PaginaGenerica): #Singleton
         self.AggiornaColori()
 
     def AggiornaColori(self):
+
+        #Aggiorno i colori del titolo
+        self.__fFrameTitoloDispositivi.configure(background = self.__coloreSfondo)
+        self.__lTitoloDispositivi.configure(background = self.__coloreSfondo,
+                                          foreground = Impostazioni.Tema.IGetFontColor("titolo"),
+                                          font = Impostazioni.Tema.IGetFont("titolo"))
+        
+        #
         self.__fFrameInternoCanvasScorrevole.configure(background=self.__coloreSfondo)
         self.__cCanvasScorrevole.configure(background=self.__coloreSfondo)
         self.__bBottoneAggiuntaDispositivo.configure( require_redraw = True,

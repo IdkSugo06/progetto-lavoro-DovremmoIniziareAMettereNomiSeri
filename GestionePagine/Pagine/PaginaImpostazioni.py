@@ -27,7 +27,10 @@ class PaginaImpostazioni(PaginaGenerica): #Singleton
         GestorePagine.IAddPagina(self)
         self.__dimensioniPagina = [int(Impostazioni.sistema.dimensioniFinestra[0] * (1 - Impostazioni.sistema.PROPORZIONE_MENU_PAGINA)), Impostazioni.sistema.dimensioniFinestra[1]]
         self.__dimensioniPaginaScorrevole = [self.__dimensioniPagina[0], ALTEZZA_PAGINA_IMPOSTAZIONI]
-    
+
+        #Attributi colori
+        self.__coloreSfondo = Impostazioni.Tema.IGetColoriSfondo("secondario")[1]
+                                                                               
         # FRAME PRINCIPALE
         self.__fFramePrincipale = tk.Frame(master = GestorePagine.IGetFramePagina())
         self.__fFramePrincipale.columnconfigure(0, weight = 1)
@@ -68,7 +71,26 @@ class PaginaImpostazioni(PaginaGenerica): #Singleton
                                             elementWidth = self.__dimensioniTabellaImpostazioni[0],
                                             elementHeight = Impostazioni.personalizzazioni.altezza_elemento_tabella_paginaDispositivi)
 
-         # EVENT BIND
+        #FRAME SUPPORTO TITOLO
+        self.__fFrameTitoloImpostazioni = tk.Frame(master = self.__fFrameInternoCanvasScorrevole, background = self.__coloreSfondo)
+        self.__fFrameTitoloImpostazioni.place(x = SPAZIO_LATI_PAGINA_IMPOSTAZIONI + SPAZIO_LATI_PAGINA_IMPOSTAZIONI//2, 
+                                           y = SPAZIO_ALTO_PAGINA_IMPOSTAZIONI // 2, 
+                                           width = self.__dimensioniTabellaImpostazioni[0] // 2,
+                                           height = SPAZIO_ALTO_PAGINA_IMPOSTAZIONI // 2)
+        self.__fFrameTitoloImpostazioni.rowconfigure(0, weight=0)
+        self.__fFrameTitoloImpostazioni.columnconfigure(0, weight=0)
+        self.__fFrameTitoloImpostazioni.grid_propagate(False)
+        self.__fFrameTitoloImpostazioni.pack_propagate(False)
+        #LABEL TITOLO
+        self.__lTitoloImpostazioni = tk.Label(master = self.__fFrameTitoloImpostazioni,
+                                            text = "Settings",
+                                            background = self.__coloreSfondo,
+                                            foreground = Impostazioni.Tema.IGetFontColor("titolo"),
+                                            font = Impostazioni.Tema.IGetFont("titolo")
+                                           )
+        self.__lTitoloImpostazioni.pack(side = "left", fill="both", anchor="sw")
+
+        # EVENT BIND
         self.__fFramePrincipale.bind("<MouseWheel>", lambda event : self.__cCanvasScorrevole.yview_scroll(int(-event.delta * Impostazioni.sistema.sensibilita_scorrimento_rotella), "units"))
         self.__fFrameInternoCanvasScorrevole.bind("<MouseWheel>", lambda event : self.__cCanvasScorrevole.yview_scroll(int(-event.delta * Impostazioni.sistema.sensibilita_scorrimento_rotella), "units"))
          
@@ -99,6 +121,12 @@ class PaginaImpostazioni(PaginaGenerica): #Singleton
     def AggiornaColori(self):
         self.__fFrameInternoCanvasScorrevole.configure(background=self.__coloreSfondo)
         self.__cCanvasScorrevole.configure(background=self.__coloreSfondo)
+
+        #Aggiorno i colori del titolo
+        self.__fFrameTitoloImpostazioni.configure(background = self.__coloreSfondo)
+        self.__lTitoloImpostazioni.configure(background = self.__coloreSfondo,
+                                          foreground = Impostazioni.Tema.IGetFontColor("titolo"),
+                                          font = Impostazioni.Tema.IGetFont("titolo"))
         
     def CambioDimFrame(self):
         #Resize dimensioni

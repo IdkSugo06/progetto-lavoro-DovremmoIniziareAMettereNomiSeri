@@ -177,7 +177,7 @@ class FrameDashboardIntabellabile(ElementoIntabellabile):
     def AssociaDispositivo(self, idDispositvo : int, aggiornamentoForzato : bool = False):
 
         #Controllo se è un nuovo dispositivo
-        if (self.__idDispositivoAssociato == idDispositvo and not aggiornamentoForzato):
+        if ((self.__idDispositivoAssociato == idDispositvo and not aggiornamentoForzato) and False):
             return
 
         #Se no aggiorno i valori

@@ -103,6 +103,9 @@ class GestoreDispositivi:
         self.__semaforoAccessiStatusConnessione.acquire()
         for dispositivo in self.__informazioniConnessioniDispositivi:
             dispositivo.myDeconstructor()
+        #Mi accerto che tutti i thread siano stati distrutti prima di svuotare la lista
+        Dispositivo.semaforoThreadAttivi.acquire()
+        Dispositivo.semaforoThreadAttivi.release()
         self.__informazioniConnessioniDispositivi = []
         self.__numOf_dispositivi = 0
         self.__semaforoAccessiStatusConnessione.release()

@@ -23,6 +23,8 @@ class PaginaDashboard(PaginaGenerica): #Singleton
         
         #Attributi
         self.__coloreSfondo = Impostazioni.Tema.IGetColoriSfondo("secondario")[1]
+        self.__font = Impostazioni.Tema.IGetFont("testo")
+        self.__fontColor = Impostazioni.Tema.IGetFontColor("testo")
 
         #Aggiungo la pagina
         PaginaGenerica.AggiungiPagina(NOME_INTERNO_PAGINA_DASHBOARD)
@@ -73,6 +75,24 @@ class PaginaDashboard(PaginaGenerica): #Singleton
                                             elementHeight = Impostazioni.personalizzazioni.altezza_elemento_tabella_paginaDashboard)
         self.__tabellaDashboard.RefreshFrameDispositivi()
 
+        #FRAME SUPPORTO TITOLO
+        self.__fFrameTitoloDashboard = tk.Frame(master = self.__fFrameInternoCanvasScorrevole, background = self.__coloreSfondo)
+        self.__fFrameTitoloDashboard.place(x = SPAZIO_LATI_PAGINA_DASHBOARD + SPAZIO_LATI_PAGINA_DASHBOARD//2, 
+                                           y = SPAZIO_ALTO_PAGINA_DASHBOARD // 2, 
+                                           width = self.__dimensioniTabellaDashboard[0] // 2,
+                                           height = SPAZIO_ALTO_PAGINA_DASHBOARD // 2)
+        self.__fFrameTitoloDashboard.rowconfigure(0, weight=0)
+        self.__fFrameTitoloDashboard.columnconfigure(0, weight=0)
+        self.__fFrameTitoloDashboard.grid_propagate(False)
+        self.__fFrameTitoloDashboard.pack_propagate(False)
+        #LABEL TITOLO
+        self.__lTitoloDashboard = tk.Label(master = self.__fFrameTitoloDashboard,
+                                            text= "Dashboard",
+                                            background = self.__coloreSfondo,
+                                            foreground = Impostazioni.Tema.IGetFontColor("titolo"),
+                                            font = Impostazioni.Tema.IGetFont("titolo")
+                                           )
+        self.__lTitoloDashboard.pack(side = "left", fill="both", anchor="sw")
 
         #FRAME DELLE SCRITTE SOPRA LA TABELLA
         self.__fFrameTextLabel = tk.Frame(master = self.__fFrameInternoCanvasScorrevole)
@@ -142,9 +162,9 @@ class PaginaDashboard(PaginaGenerica): #Singleton
         for i in range(6):
             textLabel = tk.Label(master= self.__fFrameScrittaNome if i==0 else self.__fFrameScrittaIndirizzoIP if i==1 else self.__fFrameScrittaPorta if i==2 else self.__fFrameScrittaTempoTraPing if i==3 else self.__fFrameScrittaStatus if i==4 else self.__fFrameScrittaPingManuale,
                                 text = "Nome dispositivo" if i==0 else "Indirizzo ip" if i==1 else "Porta" if i==2 else "Frequenza ping (sec)" if i==3 else "Status" if i==4 else "Ping",
-                                font=Impostazioni.Tema.IGetFont("testo"),
-                                fg=Impostazioni.Tema.IGetFontColor("testo"),
-                                bg=Impostazioni.Tema.IGetColoriSfondo("secondario")[1]
+                                font = self.__font,
+                                fg = self.__fontColor,
+                                bg = self.__coloreSfondo
                                 )
             textLabel.grid(row = 0, column = i, sticky="nsew")
             textLabel.pack(side="left")
@@ -193,6 +213,12 @@ class PaginaDashboard(PaginaGenerica): #Singleton
     def AggiornaColori(self):
         self.__fFrameInternoCanvasScorrevole.configure(background=self.__coloreSfondo)
         self.__cCanvasScorrevole.configure(background=self.__coloreSfondo)
+
+        #Aggiorno i colori del titolo
+        self.__fFrameTitoloDashboard.configure(background = self.__coloreSfondo)
+        self.__lTitoloDashboard.configure(background = self.__coloreSfondo,
+                                          foreground = Impostazioni.Tema.IGetFontColor("titolo"),
+                                          font = Impostazioni.Tema.IGetFont("titolo"))
 
         #Cambio i colore della barra della tabella
         coloreSfondo = Impostazioni.Tema.IGetColoriSfondo("secondario")[2]

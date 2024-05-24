@@ -1,3 +1,32 @@
+: Ping eseguito
+: Ping eseguito
+: Ping eseguito
+: Mail inviata
+: Ping eseguito
+: Ping eseguito
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Mail inviata
+: Ping eseguito
+: Mail inviata
+: Ping eseguito
+: Mail inviata
+: Ping eseguito
 : Avvio decostruttori
 : Decostruttore dispositivi eseguito
 : Distruttore gestore email eseguito

@@ -8,6 +8,8 @@ class ListaMenu(tk.Frame): #Occuperà tutto il frame master occupabile
                  listaPagine : list = [] #Formato ("nomePaginaInterno", "pathImmagine", "nomePaginaMostrato")
                  ):
         
+        #Attributi colori
+        self.__coloreSfondo = Impostazioni.Tema.IGetColoriSfondo("secondario")[1]
 
         #Imposto alcuni attributi 
         self.__master = master
@@ -20,7 +22,7 @@ class ListaMenu(tk.Frame): #Occuperà tutto il frame master occupabile
            
         
         # FRAME PRINCIPALE
-        super().__init__(master = self.__master, bg = Impostazioni.Tema.IGetColoriSfondo("secondario")[1])
+        super().__init__(master = self.__master, bg = self.__coloreSfondo)
         self.grid(row = 0, column = 0, sticky = "nsew")
         self.rowconfigure(0, weight = 1)
         self.columnconfigure(0, weight = 1)
@@ -32,14 +34,14 @@ class ListaMenu(tk.Frame): #Occuperà tutto il frame master occupabile
         configurazioneCanvas = max(len(listaPagine) * Impostazioni.personalizzazioni.altezza_elemento_tabella_menu, self.__dimensioniListaMenu[1] - 0*Impostazioni.personalizzazioni.altezza_elemento_tabella_menu)
         self.__cCanvasScorrevole = tk.Canvas(master = self, 
                                              scrollregion = (0, 0, self.__dimensioniListaMenu[0], configurazioneCanvas),
-                                             bg = Impostazioni.Tema.IGetColoriSfondo("secondario")[1],
+                                             bg = self.__coloreSfondo,
                                              highlightthickness=0)
         self.__cCanvasScorrevole.grid(row = 0, column = 0, sticky = "nsew")
         self.__cCanvasScorrevole.grid_propagate(False)
         self.__cCanvasScorrevole.pack_propagate(False)
 
         # CREO IL FRAME CONTENUTO DA CANVAS
-        self.__fFrameInternoCanvasScorrevole = tk.Frame(master = self, bg = Impostazioni.Tema.IGetColoriSfondo("secondario")[1])
+        self.__fFrameInternoCanvasScorrevole = tk.Frame(master = self, bg = self.__coloreSfondo)
         self.__fFrameInternoCanvasScorrevole.place(x = 0, y = 0, width = self.__dimensioniListaMenu[0], height = len(listaPagine) * Impostazioni.personalizzazioni.altezza_elemento_tabella_menu,anchor= "nw")
         self.__fFrameInternoCanvasScorrevole.columnconfigure(0, weight = 1)
         self.__fFrameInternoCanvasScorrevole.rowconfigure(0, weight = 1)
@@ -107,6 +109,23 @@ class ListaMenu(tk.Frame): #Occuperà tutto il frame master occupabile
             contatoreElementi += 1
         
 
+
+    # METODI PERSONALIZZAZIONE
+    def AggiornaColoriTema(self):
+        #Aggiorno i colori
+        self.__coloreSfondo = Impostazioni.Tema.IGetColoriSfondo("secondario")[1]
+        self.AggiornaColore()
+    
+        #Per ogni elemento aggiorno i colori
+        for elemento in self.__listaElementi:
+            elemento.AggiornaColoriTema()
+        self.__elementoImpostazione.AggiornaColoriTema()
+        self.EvidenziaPaginaSelezionata(NOME_INTERNO_PAGINA_IMPOSTAZIONI)
+
+    def AggiornaColore(self):
+        self.__fFrameInternoCanvasScorrevole.configure(background = self.__coloreSfondo)
+        self.__cCanvasScorrevole.configure(background = self.__coloreSfondo)
+            
     def CambioFont(self):
         pass 
     

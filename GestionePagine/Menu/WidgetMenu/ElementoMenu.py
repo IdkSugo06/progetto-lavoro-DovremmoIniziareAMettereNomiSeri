@@ -16,6 +16,7 @@ class ElementoMenu(tk.Frame): #Occuperà meno del frame a disposizione
                  xPos : int = 0,
                  yPos : int = 0
                 ):
+                
 
         #Attributi pagina
         self.__master = master
@@ -30,9 +31,11 @@ class ElementoMenu(tk.Frame): #Occuperà meno del frame a disposizione
         self.__coloreStandard = Impostazioni.Tema.IGetColoriSfondo("secondario")[2]
         self.__coloreEvidenziato = Impostazioni.Tema.IGetColoriSfondo("terziario")[0]
         self.__coloreSelezionato = Impostazioni.Tema.IGetColoriSfondo("terziario")[1]
+        self.__font = Impostazioni.Tema.IGetFont("testo")
+        self.__coloreFont = Impostazioni.Tema.IGetFontColor("testo")
 
         #Creo il frame principale
-        super().__init__(master = self.__master, width = width, height = height, bg = Impostazioni.Tema.IGetColoriSfondo("secondario")[2])
+        super().__init__(master = self.__master, width = width, height = height, bg = self.__coloreStandard)
         self.place(x = xPos, y = yPos, width = width, height = height, anchor = "nw")
         self.rowconfigure(0, weight = int(100 * PROPORZIONE_ELEMENTO_MENU_SPAZI_VUOTI_ALTEZZA))
         self.rowconfigure(1, weight = int(100 * (1-PROPORZIONE_ELEMENTO_MENU_SPAZI_VUOTI_ALTEZZA)))
@@ -56,7 +59,7 @@ class ElementoMenu(tk.Frame): #Occuperà meno del frame a disposizione
 #TODO implementa supporto immagine e resize !|||||||||!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!|||||||||!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         # FRAME SUPPORTO SCRITTA
-        self.__fFrameScrittaPagina = tk.Frame(master = self, bg = Impostazioni.Tema.IGetColoriSfondo("secondario")[2])
+        self.__fFrameScrittaPagina = tk.Frame(master = self, bg = self.__coloreStandard)
         self.__fFrameScrittaPagina.grid(row = 1, column = 2, sticky = "nsew")
         self.__fFrameScrittaPagina.rowconfigure(0, weight = 1)
         self.__fFrameScrittaPagina.columnconfigure(0, weight = 1)
@@ -68,9 +71,9 @@ class ElementoMenu(tk.Frame): #Occuperà meno del frame a disposizione
         #Creo la scritta
         self.__lScrittaPagina = tk.Label(master = self.__fFrameScrittaPagina, 
                                          textvariable = self.__vScrittaPagina_str, 
-                                         font = Impostazioni.Tema.IGetFont("sottotitolo"), 
-                                         fg = Impostazioni.Tema.IGetFontColor("sottotitolo"),
-                                         bg = Impostazioni.Tema.IGetColoriSfondo("secondario")[2])
+                                         font = self.__font, 
+                                         fg =  self.__coloreFont,
+                                         bg = self.__coloreStandard)
         self.__lScrittaPagina.pack(side = "left")
 
 
@@ -97,7 +100,21 @@ class ElementoMenu(tk.Frame): #Occuperà meno del frame a disposizione
         self.__fFrameScrittaPagina.configure(background=colore)
         self.__lScrittaPagina.configure(background=colore)
 
-    
+
+     # METODI PERSONALIZZAZIONE
+    def AggiornaColoriTema(self):
+        self.__coloreStandard = Impostazioni.Tema.IGetColoriSfondo("secondario")[2]
+        self.__coloreEvidenziato = Impostazioni.Tema.IGetColoriSfondo("terziario")[0]
+        self.__coloreSelezionato = Impostazioni.Tema.IGetColoriSfondo("terziario")[1]
+        self.__font = Impostazioni.Tema.IGetFont("testo")
+        self.__coloreFont = Impostazioni.Tema.IGetFontColor("testo")
+        
+        #Lo imposto come selezionato e faccio partire la deselezione elemento 
+        self.__elementoSelezionato = True
+        self.CambioColore(self.__coloreSelezionato)
+        self.__lScrittaPagina.configure(background=self.__coloreSelezionato, font = self.__font, fg= self.__coloreFont)
+
+
     # METODI UPDATE
     def Update(self, deltaTime : float = 0): #Disabled
         return              

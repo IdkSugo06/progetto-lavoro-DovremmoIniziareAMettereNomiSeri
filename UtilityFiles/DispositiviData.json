@@ -1,0 +1,9 @@
+{
+	"dispositivi" : {
+		"0" : {	"nomeMacchina" : "Google Italia","host" : "www.google.it","porta" : "0","timeTraPing" : "1.0"},
+		"1" : {	"nomeMacchina" : "Youtube Italia","host" : "www.youtube.it","porta" : "1","timeTraPing" : "30.0"},
+		"2" : {	"nomeMacchina" : "Router","host" : "172.0.16.2","porta" : "2","timeTraPing" : "0.1"},
+		"3" : {	"nomeMacchina" : "Google America","host" : "www.google.us","porta" : "Whatever","timeTraPing" : "3600.0"},
+		"4" : {	"nomeMacchina" : "Google Cina","host" : "www.google.cn","porta" : "5","timeTraPing" : "60.0"}
+	}
+}

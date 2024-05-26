@@ -177,7 +177,7 @@ class FrameDashboardIntabellabile(ElementoIntabellabile):
     def AssociaDispositivo(self, idDispositvo : int, aggiornamentoForzato : bool = False):
 
         #Controllo se è un nuovo dispositivo
-        if (self.__idDispositivoAssociato == idDispositvo and not aggiornamentoForzato):
+        if ((self.__idDispositivoAssociato == idDispositvo and not aggiornamentoForzato) and False):
             return
 
         #Se no aggiorno i valori
@@ -213,6 +213,9 @@ class FrameDashboardIntabellabile(ElementoIntabellabile):
         self.__coloreBordo = Impostazioni.Tema.IGetColoriSfondo("secondario")[3]
         self.__fontTesto = Impostazioni.Tema.IGetFont("testo")
         self.__coloreTesto = Impostazioni.Tema.IGetFontColor("testo")
+        self.__myMImgStatusDispositivo.ChangePaths(newPathsDict = {"offline" : Impostazioni.Tema.IGetPathTemaCorrente(Impostazioni.PATH_IMG_STATUS_OFFLINE_PAG_DASHBOARD),
+                                                                   "online" : Impostazioni.Tema.IGetPathTemaCorrente(Impostazioni.PATH_IMG_STATUS_ONLINE_PAG_DASHBOARD)})
+        self.__myMImgStatusDispositivo.ResizeAll(DIMENSIONI_IMMAGINE_STATUS_DASHBOARD[0], DIMENSIONI_IMMAGINE_STATUS_DASHBOARD[1])
         self.AggiornaColori()
 
     def AggiornaColori(self):

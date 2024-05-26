@@ -50,21 +50,28 @@ def main():
 
     def Exit():
         #Chiamo tutti i distruttori prima di chiudere la finestra
+        LOG.log("Avvio decostruttori")
+        Impostazioni.sistema.semaforoSpegnimento.acquire()
+        Impostazioni.sistema.running = False
         GestoreDispositivi.IDecostruttore()
-        LOG.IDecostruttore()
+        Impostazioni.sistema.semaforoSpegnimento.release()
+        LOG.log("Decostruttore dispositivi eseguito")
         GestoreInvioMail.IDecostruttore()
+        LOG.log("Distruttore gestore email eseguito")
         LOG.log("Distruttori chiamati")
 
         #Chiudo la finestra
         LOG.log("Richiesta autorizzazione chiusura finestra....")
         Impostazioni.sistema.semaforoSpegnimento.acquire()
         LOG.log("Autorizzazione chiusura finestra approvata")
-        Impostazioni.sistema.running = False
         Impostazioni.sistema.semaforoUpdateThreadFinito.acquire()
         GestorePagine.IGetWindow().quit()
+        Impostazioni.sistema.semaforoUpdateThreadFinito.release()
         LOG.log("Finestra chiusa, fine programma")
         Impostazioni.sistema.semaforoSpegnimento.release()
 
+        #Decostruttore log
+        LOG.IDecostruttore()
     
       #Avvio il programma
     GestorePagine.IGetWindow().bind("<Escape>", QuitEvento)
@@ -78,3 +85,4 @@ def AvvioProgramma():
 
 #Inizializzo l'avvio
 AvvioProgramma()
+

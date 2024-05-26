@@ -1,5 +1,5 @@
 from GestionePagine.Pagine.PaginaGenerica import *
-from GestioneDispositivi.InterfacciaGestoreDispositivi import *
+from GestioneDispositivi.InterfacciaGestioneDispositivi import *
 
 
 #Gestirà il caricamento pagina, conterra tutte le pagine, 
@@ -85,8 +85,9 @@ class GestorePagine(): #Singleton
         LOG.log("Main loop concluso")
 
     def Event_MyThemeChanged(self):
+        self.__menu.AggiornaColoriTema()      
         for pagina in self.__pagine:
-            pagina.AggiornaColoriTema()        
+            pagina.AggiornaColoriTema()       
     @staticmethod
     def EventFocusIn(eventTk = None):
         Impostazioni.sleepTimeBetweenUpdate = 0.02
@@ -95,11 +96,26 @@ class GestorePagine(): #Singleton
         Impostazioni.sleepTimeBetweenUpdate = 0.5
     @staticmethod
     def EventConfigureCalled(eventTk = None):
+        #Quando il metodo quit viene chiamato, il configure viene chiamato as well, controllo se l'esecuzione del programma è finita
+        Impostazioni.sistema.semaforoSpegnimento.acquire()
+        if Impostazioni.sistema.running == False: 
+            Impostazioni.sistema.semaforoSpegnimento.release()
+            return
+        Impostazioni.sistema.semaforoSpegnimento.release()
+
+        #Se è il thread principale, chiamo i change
         if eventTk.widget == eventTk.widget.winfo_toplevel():
             Impostazioni.sistema.dimensioniFinestra[0] = eventTk.width
             Impostazioni.sistema.dimensioniFinestra[1] = eventTk.height
             Impostazioni.sistema.ConfigureHandler.ChangeCapted()
+         #Finche non ho finito il resize, nn posso chiudere
+
     def __ResizeRequested(self):
+        Impostazioni.sistema.semaforoSpegnimento.acquire()
+        if Impostazioni.sistema.running == False: 
+            Impostazioni.sistema.semaforoSpegnimento.release()
+            return
+        Impostazioni.sistema.semaforoSpegnimento.release()
         self.__menu.CambioDimFrame()
         self.__pagine[self.__idPaginaCaricataAttualmente].CambioDimFrame()
 

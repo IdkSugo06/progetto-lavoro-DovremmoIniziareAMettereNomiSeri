@@ -16,7 +16,7 @@ from math import *
 import random
 
 import smtplib
-import subprocess
+import pythonping
 
 import os
 from threading import * 

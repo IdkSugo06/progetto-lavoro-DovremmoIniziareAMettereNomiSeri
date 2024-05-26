@@ -44,8 +44,8 @@ class MyCombobox(MyInputWidget):
                                          state = 'readonly',
                                          foreground = "#000000",
                                          background = self.__coloreInterno)
-        self.__cbCombobox.option_add("*TCombobox*Listbox*Foreground", self.__coloreFont)
-        self.__cbCombobox.option_add("*TCombobox*Listbox*Background", "#FF0000")
+        self.__cbCombobox.option_add("*TCombobox*Listbox*Foreground", "#222222")
+        self.__cbCombobox.option_add("*TCombobox*Listbox*Background", "#FFFFFF")
 
         self.__cbCombobox.grid(row=0,column=0,sticky="nsew")
         self.__cbCombobox["values"] = self.__values
@@ -71,8 +71,6 @@ class MyCombobox(MyInputWidget):
         self.__coloreFont =  Impostazioni.Tema.IGetFontColor("testo")   
         #Colore combox
         self.__cbCombobox.configure(background = self.__coloreInterno)
-        self.__cbCombobox.option_add("*TCombobox*Listbox*Foreground", self.__coloreFont)
-        self.__cbCombobox.option_add("*TCombobox*Listbox*Background", "#00DD00")
                                     
     def ChangeColor(self, coloreInterno : str, coloreFlag : str = "", colorePremuto : str = ""):
         self.__cbCombobox.configure(bg = coloreInterno, fg = coloreFlag)

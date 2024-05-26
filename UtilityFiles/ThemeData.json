@@ -1,0 +1,64 @@
+{
+  "temi":{
+
+    "temaDefault" : { 
+      "coloriSfondo": {
+        "primario": "#2C2C2C",
+        "secondario": ["#050505", "#202020", "#252525", "#A0A0A0"],
+        "terziario": ["#565656", "#656565"]
+      },
+      "fonts": {
+        "titolo": ["arial", 36, "#FFFFFF", ["italic", "bold"]],
+        "sottotitolo": ["arial", 16, "#FFFFFF", ["italic"]],
+        "testo": ["arial", 12, "#FFFFFF", []],
+        "testoDisabilitato": ["arial", 12, "#FFFFFF", []],
+        "modificatoreFinePath" : "_temaDefault"
+      }
+    },
+
+
+    "temaChiaro" : {
+      "coloriSfondo": {
+        "primario": "#2C2C2C",
+        "secondario": ["#FFFFFF", "#FCFCFC", "#F5F5F5", "#BBBBBB"],
+        "terziario": ["#BBBBBB", "#40ABD7"]
+      },
+      "fonts": {
+        "titolo": ["arial", 36, "#000000", ["bold"]],
+        "sottotitolo": ["arial", 16, "#000000", ["italic"]],
+        "testo": ["arial", 12, "#000000", []],
+        "testoDisabilitato": ["arial", 12, "#000000", []],
+        "modificatoreFinePath" : "_temaChiaro"
+      }
+    },
+
+    "temaBlu" : {
+      "coloriSfondo": {
+        "primario": "#2C2C2C",
+        "secondario": ["#151520", "#252555", "#202050", "#AAAAAA"],
+        "terziario": ["#444466", "#777788"]
+      },
+      "fonts": {
+        "titolo": ["arial", 36, "#FFFFFF", ["bold"]],
+        "sottotitolo": ["arial", 14, "#FFFFFF", []],
+        "testo": ["arial", 12, "#FFFFFF", []],
+        "modificatoreFinePath" : "_temaDefault"
+      }
+    },
+
+
+    "temaC" : {
+      "coloriSfondo": {
+        "primario": "#2C2C2C",
+        "secondario": ["#151520", "#252555", "#202050", "#AAAAAA"],
+        "terziario": ["#444466", "#777788"]
+      },
+      "fonts": {
+        "titolo": ["arial", 36, "#FFFFFF", ["bold"]],
+        "sottotitolo": ["arial", 14, "#FFFFFF", []],
+        "testo": ["arial", 12, "#FFFFFF", []],
+        "modificatoreFinePath" : "_temaDefault"
+      }
+    }
+  }
+}

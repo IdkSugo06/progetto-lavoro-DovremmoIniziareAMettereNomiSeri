@@ -1,5 +1,6 @@
 from GestioneDispositivi.GestoreDispositivi import *
 from GestioneDispositivi.Dispositivo import *
+import json
 
 
 class GestoreDispositivi:
@@ -19,7 +20,7 @@ class GestoreDispositivi:
     # INTERFACCE
     @staticmethod
     def IAddInformazioneDispositivoConnessione(nome : str, host : str, porta : str, timeTraPing : float):
-        return GestoreDispositivi.__gestoreConnessioni.__addConnessione(nome, host, porta, timeTraPing)
+        return GestoreDispositivi.__gestoreConnessioni.__addConnessione(nome, host, porta, float(timeTraPing))
     @staticmethod
     def IModificaInformazioneDispositivoConnessione(idPosizionale : int, nome : str, host : str, porta : str, tempoTraPing : float):
         return GestoreDispositivi.__gestoreConnessioni.__modificaConnessione(idPosizionale, nome, host, porta, tempoTraPing)
@@ -62,9 +63,11 @@ class GestoreDispositivi:
 
     @staticmethod
     def IDecostruttore():
+        GestoreDispositivi.__gestoreConnessioni.__SalvaDispositiviSuFile()
         GestoreDispositivi.__gestoreConnessioni.__clearConnessioni()
         Dispositivo.semaforoThreadAttivi.acquire()
         Dispositivo.semaforoThreadAttivi.release()
+        Dispositivo.pausaFinitaEvent.set() #Se sono in pausa, li faccio continuare, finiranno di distruggersi correttamente
 
     # COSTRUTTORE
     def __init__(self):
@@ -72,6 +75,50 @@ class GestoreDispositivi:
         self.__numOf_dispositivi = 0
         self.__precisioneCalcoloStabilita=0.01
         self.__semaforoAccessiStatusConnessione = Lock()
+        self.__LeggiDispositiviDaFile() #Inizializzerà la listaInformazioniConnessioni
+
+    def __LeggiDispositiviDaFile(self):
+        with open(PATH_JSON_DISPOSITIVI, 'r') as file:
+            data = json.load(file)
+
+        #Leggo il file dei dispositivi
+        try:
+            dispositiviJson = data["dispositivi"]
+        except:
+            LOG.log("Errore durante la ricerca dei dispositivi: ", LOG_ERROR)
+            return
+        #Inizializzo i dispositivi
+        for key in dispositiviJson:
+            try:
+                dispositivoSingoloJson = dispositiviJson[key]
+                self.__addConnessione(nome = dispositivoSingoloJson["nomeMacchina"],
+                                      host = dispositivoSingoloJson["host"],
+                                      porta = dispositivoSingoloJson["porta"],
+                                      timeTraPing = float(dispositivoSingoloJson["timeTraPing"]))
+            except Exception as e:
+                LOG.log("Errore durante il caricamento del dispositivo: " + str(key) + " errore: " + str(e), LOG_ERROR)
+
+        
+    def __SalvaDispositiviSuFile(self):
+        #Creo la stringa dei dispositivi
+        newStr = '{\n\t\"dispositivi\" : {'
+        i_dispositivo = 0
+        for dispositivo in self.__informazioniConnessioniDispositivi:
+            newLine = f'\n\t\t"{i_dispositivo}" : '
+            newLine += '{\t\"nomeMacchina\" : \"' + dispositivo.GetNome() + "\""
+            newLine += ',\"host\" : \"' + dispositivo.GetHost() + "\""
+            newLine += ',\"porta\" : \"' + dispositivo.GetPorta() + "\""
+            newLine += ',\"timeTraPing\" : \"' + str(dispositivo.GetTempoTraPing()) + "\""
+            newLine += "},"
+            newStr += newLine
+            i_dispositivo += 1
+        newStr = newStr[:-1] +"\n\t}\n}"
+        
+        #Scrivo sul file la stringa calcolata
+        filestream = open(PATH_JSON_DISPOSITIVI, "w")
+        filestream.write(newStr)
+        filestream.close()
+
 
     # METODI
     def __addConnessione(self, nome : str, host : str, porta : str, timeTraPing : float):
@@ -99,6 +146,9 @@ class GestoreDispositivi:
         self.__semaforoAccessiStatusConnessione.acquire()
         for dispositivo in self.__informazioniConnessioniDispositivi:
             dispositivo.myDeconstructor()
+        #Mi accerto che tutti i thread siano stati distrutti prima di svuotare la lista
+        Dispositivo.semaforoThreadAttivi.acquire()
+        Dispositivo.semaforoThreadAttivi.release()
         self.__informazioniConnessioniDispositivi = []
         self.__numOf_dispositivi = 0
         self.__semaforoAccessiStatusConnessione.release()
@@ -126,18 +176,6 @@ class GestoreDispositivi:
         #L'array avrà valore massimo 
         return InsertionSort(outputArray, lambda t : t[0][3] > t[1][3])
 
-
-    # METODI PING
-    def __ping_host(self, host) -> bool:
-        try:
-            param = '-n 1' if os.sys.platform.lower() == 'win32' else '-c 1'
-            command = f"ping {param} {host} -w 200"
-            result = subprocess.run(command, capture_output=True, text=True, timeout=1)
-
-            # Se il returncode è 0, nessun errore
-            return result.returncode == 0
-        except subprocess.TimeoutExpired:
-            return False
         
     def __AggiornamentoStatusConnessioni(self):
         #Creo i threads

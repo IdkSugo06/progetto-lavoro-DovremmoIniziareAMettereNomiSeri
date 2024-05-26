@@ -40,13 +40,17 @@ class ConfigureHandler:
         t = Thread(target=ConfigureHandler.__Thread_StartConfigureMethods)
         t.start()
 
+
     @staticmethod
     def __Thread_StartConfigureMethods():
         #Finche capta cambiamenti nel frame, aspetta e riprova
         ConfigureHandler.__configureThreadStarted = True
         while ConfigureHandler.__changeCapted:
+            
             ConfigureHandler.__changeCapted = False
             time.sleep(ConfigureHandler.__timeBetweenConfigures)
         #Altrimenti chiama il notificatore e finisce
+
         ConfigureHandler.__notifier()
         ConfigureHandler.__configureThreadStarted = False
+

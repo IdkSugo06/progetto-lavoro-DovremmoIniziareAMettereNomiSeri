@@ -6,12 +6,13 @@ import os
 # PATH IMMAGINI UTILITY
 PATH_CARTELLA_CORRENTE = os.getcwd()
 PATH_IMMAGINI  = os.path.join(PATH_CARTELLA_CORRENTE, "Immagini")
-PATH_IMMAGINE_LOGO = os.path.join(PATH_IMMAGINI, "ImmagineDashboardStatusOnline.png")
+PATH_IMMAGINE_LOGO = os.path.join(PATH_IMMAGINI, "ImmagineLogo.png")
 PATH_IMG_STATUS_ONLINE_PAG_DASHBOARD = os.path.join(PATH_IMMAGINI, "ImmagineDashboardStatusOnline.png")
 PATH_IMG_STATUS_OFFLINE_PAG_DASHBOARD = os.path.join(PATH_IMMAGINI, "ImmagineDashboardStatusOffline.png")
 PATH_IMG_BOTTONE_MODIFICA_PAG_DISPOSITIVI = os.path.join(PATH_IMMAGINI, "ImmagineBottoneModificaPagDispositivo.png")
 PATH_IMG_BOTTONE_ELIMINAZIONE_PAG_DISPOSITIVI = os.path.join(PATH_IMMAGINI, "ImmagineBottoneEliminaPagDispositivo.png")
-PATH_JSON_TEMI= os.path.join(PATH_CARTELLA_CORRENTE,"Utility","Impostazioni","ThemeData.json")
+PATH_JSON_TEMI = os.path.join(PATH_CARTELLA_CORRENTE,"UtilityFiles","ThemeData.json")
+PATH_JSON_DISPOSITIVI = os.path.join(PATH_CARTELLA_CORRENTE,"UtilityFiles","DispositiviData.json")
 LOG_PATH = os.path.join(PATH_CARTELLA_CORRENTE,"UtilityFiles","log.txt")
 
 

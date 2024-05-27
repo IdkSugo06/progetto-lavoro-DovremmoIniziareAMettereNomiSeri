@@ -75,7 +75,7 @@ class GestoreDispositivi:
         self.__numOf_dispositivi = 0
         self.__precisioneCalcoloStabilita=0.01
         self.__semaforoAccessiStatusConnessione = Lock()
-        self.__LeggiDispositiviDaFile() #Inizializzerà la listaInformazioniConnessioni
+        self.__LeggiDispositiviDaFile() #Inizializzerà la listaInformazioniConnessioni 
 
     def __LeggiDispositiviDaFile(self):
         with open(PATH_JSON_DISPOSITIVI, 'r') as file:

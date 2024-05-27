@@ -19,7 +19,7 @@ class InterfacciaGestioneDispositivi:
     # INTERFACCIA
     @staticmethod
     def IAddDispositivo(nome : str, host : str, porta : str, timeTraPing : float):
-        GestoreDispositivi.IAddInformazioneDispositivoConnessione(nome, host, porta, timeTraPing)
+        GestoreDispositivi.IAddInformazioneDispositivoConnessione(str(nome), str(host), str(porta), timeTraPing)
 
     @staticmethod
     def IModificaDispositivo(idDispositvo : int, nome : str, host : str, porta : str, tempoTraPing : float):
@@ -39,9 +39,6 @@ class InterfacciaGestioneDispositivi:
 
     # COSTRUTTORE
     def __init__(self):
-        InterfacciaGestioneDispositivi.IAddDispositivo("Router", "172.16.0.1", 0, 1)   
-        for i in range(20):
-            InterfacciaGestioneDispositivi.IAddDispositivo("Router", "www.youtubethr.it", 0, 1)  
         pass
 
 

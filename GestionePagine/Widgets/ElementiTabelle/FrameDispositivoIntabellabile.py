@@ -1,7 +1,7 @@
 from GestionePagine.Widgets.ElementiTabelle.ElementoIntabellabile import *
 
 class FrameDispositivoIntabellabile(ElementoIntabellabile):
-
+    
     def __init__(self,
                  master, 
                  x : int = 0, 
@@ -234,6 +234,9 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
 
 
     # METODI PERSONALIZZAZIONE
+    @staticmethod 
+    def AggiornaImmagineTema():
+        return
     def AggiornaColoriTema(self):
         self.__coloreSfondo = Impostazioni.Tema.IGetColoriSfondo("secondario")[2]
         self.__coloreSfondoEvidenziato = Impostazioni.Tema.IGetColoriSfondo("terziario")[0]

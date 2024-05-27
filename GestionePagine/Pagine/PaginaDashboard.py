@@ -73,7 +73,6 @@ class PaginaDashboard(PaginaGenerica): #Singleton
                                             tableHeight = self.__dimensioniTabellaDashboard[1],
                                             elementWidth = self.__dimensioniTabellaDashboard[0],
                                             elementHeight = Impostazioni.personalizzazioni.altezza_elemento_tabella_paginaDashboard)
-        self.__tabellaDashboard.RefreshFrameDispositivi()
 
         #FRAME SUPPORTO TITOLO
         self.__fFrameTitoloDashboard = tk.Frame(master = self.__fFrameInternoCanvasScorrevole, background = self.__coloreSfondo)
@@ -196,7 +195,6 @@ class PaginaDashboard(PaginaGenerica): #Singleton
         self.__fFramePrincipale.grid_propagate(True)
         self.__fFramePrincipale.grid(row = 0, column = 0, sticky = "nsew")
         self.__fFramePrincipale.grid_propagate(False)
-        Dispositivo.pausaFinitaEvent.set()
 
     def UpdatePagina(self, deltaTime : float = 0): #Disabled
         return

@@ -21,7 +21,7 @@ class Dispositivo:
 
         #Attributi connessione
         self.__last5pigs = [False] * 5
-        self.__status = [False, True] #(Era offline?, è offline?)
+        self.__status = [False, False] #(Era online?, è online?)
         self.__stabilitaConnessione = 0
         
         #Attributi aggiornamento
@@ -31,6 +31,7 @@ class Dispositivo:
         #Attributi thread
         self.__iBufferCircolare = 0
         self.__semaforoStatus = Lock()
+        self.__semaforoCambioStato = Lock()
         self.__eventoAttesaPing = Event()
         self.__running = False
         self.__funzioneNotificaStatoCambiato = Dispositivo.funzioneNotificaStatoCambiato
@@ -73,7 +74,7 @@ class Dispositivo:
     # GETTER E SETTER STATO CONNESSIONE E STABILITA
     def SetPingResult(self, pingResult : bool):
         #Semaforo per accedere alla zona critica
-        self.__semaforoStatus.acquire()
+        self.__semaforoCambioStato.acquire()
 
         if not self.__running: #Interrotto durante l'acquire 
             return False
@@ -87,27 +88,27 @@ class Dispositivo:
         #Calcolo lo status
         self.__status[0] = self.__status[1]
         self.__status[1] = pingResult
-        self.__semaforoStatus.release()
     
         #Se cè stato un cambio status, lo chiamo la notifica
         if self.__status[0] != self.__status[1]:
             self.__funzioneNotificaStatoCambiato(self, self.__status[1])
+        self.__semaforoCambioStato.release()
         return True
 
+    def GetStatusConnessione_senzaSemaforo(self) -> bool:
+        return self.__status
     def GetStatusConnessione(self) -> bool:
         self.__semaforoStatus.acquire()
         _b = self.__status
         self.__semaforoStatus.release()
         return _b
-    def GetStatusConnessioneHasChanged(self) -> bool: #True se era connesso e ora no, e viceversa, ritorna (Changed?, (WasDown?, IsDown?))
+    def GetStatusConnessioneHasChanged(self) -> bool: #True se era connesso e ora no, e viceversa, ritorna (Changed?, (WasUp?, IsUp?))
         self.__semaforoStatus.acquire()
         _b = [self.__status[0] == (not self.__status[1]), self.__status.copy()]
         self.__semaforoStatus.release()
         return _b
     def GetStabilitaConnessione(self) -> float:
-        self.__semaforoStatus.acquire()
         _f = self.__stabilitaConnessione
-        self.__semaforoStatus.release()
         return _f
     
     
@@ -118,9 +119,11 @@ class Dispositivo:
         t.start()
 	
     def InizializzazioneDistruttoreThread(self):
+        self.__semaforoCambioStato.acquire()
         self.__semaforoStatus.acquire()
         self.__running = False
         self.__semaforoStatus.release()
+        self.__semaforoCambioStato.release()
         self.__eventoAttesaPing.set()
         t = Thread(target=self.__DistruttoreThread)
         t.start()
@@ -148,6 +151,12 @@ class Dispositivo:
         Dispositivo.semaforoAccessoNumOf_threadAttivi.release()
 
     def __ThreadInvioPing(self):
+        #Attendo che il programma sia pronto e invio un pacchetto per aggiornare lo stato (parte da falso)
+        Dispositivo.pausaFinitaEvent.wait()
+        if not self.__running: 
+            return
+        result = self.InvioPing(setWhen = "WhenTrue")
+
         #Finche runna
         while self.__running:
 
@@ -174,7 +183,6 @@ class Dispositivo:
 
             #Controllo il ping
             result = self.InvioPing(attesa = 1, setWhen = "WhenTrue")
-
             #Ritorno se trovato un ping vero
             if result[1] == True:
                 return result
@@ -234,3 +242,4 @@ class Dispositivo:
     def InvioMail(self):
         LOG.log("Mail inviata (yet to be implemented)")
     
+Dispositivo.pausaFinitaEvent.clear()

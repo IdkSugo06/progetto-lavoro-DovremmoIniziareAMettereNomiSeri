@@ -1,1 +1,8 @@
-FILE_LOG: LOG DISABLED
+: Avvio decostruttori
+: Decostruttore dispositivi eseguito
+: Distruttore gestore email eseguito
+: Distruttori chiamati
+: Richiesta autorizzazione chiusura finestra....
+: Autorizzazione chiusura finestra approvata
+: Update thread concluso
+: Finestra chiusa, fine programma

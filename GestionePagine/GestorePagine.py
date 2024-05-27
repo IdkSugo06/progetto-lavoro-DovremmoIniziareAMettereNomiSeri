@@ -1,5 +1,5 @@
 from GestionePagine.Pagine.PaginaGenerica import *
-from GestioneDispositivi.InterfacciaGestioneDispositivi import *
+from GestioneDispositivi.InterfacciaGestoreDispositivi import *
 
 
 #Gestirà il caricamento pagina, conterra tutte le pagine, 

@@ -51,19 +51,19 @@ class ElementoMenu(tk.Frame): #Occuperà meno del frame a disposizione
         #Creo due sottoframe, uno per l'eventuale immagine da mostrare, l'altro per il testo
 
         # FRAME SUPPORTO IMMAGINE
-        self.__fFrameImmagine = tk.Frame(master = self)
-        self.__fFrameImmagine.grid(row = 1, column = 1, sticky = "nsew")
-        self.__fFrameImmagine.rowconfigure(0, weight = 1)
-        self.__fFrameImmagine.columnconfigure(0, weight = 1)
-        self.__fFrameImmagine.grid_propagate(False)
-#TODO implementa supporto immagine e resize !|||||||||!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!|||||||||!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        self.__fFrameImmagine = tk.Frame(master = self, highlightthickness = 0)
+        self.__fFrameImmagine.place(x = 0, y = 0, width = DIMENSIONI_IMMAGINE_ELEMENTO_MENU[0]+1, height = DIMENSIONI_IMMAGINE_ELEMENTO_MENU[1])
+        #Creo il canvas per l'immagine
+        self.__cCanvasImmagine = tk.Canvas(master = self.__fFrameImmagine, background = self.__coloreStandard, highlightthickness= 0)
+        self.__cCanvasImmagine.place(x = 0, y = 0, width = DIMENSIONI_IMMAGINE_ELEMENTO_MENU[0]+1, height = DIMENSIONI_IMMAGINE_ELEMENTO_MENU[1])
+        #Creo l'immagine
+        self.__myImgImmagine = MyImageTk(canvas = self.__cCanvasImmagine, path = Impostazioni.Tema.IGetPathTemaCorrente(self.__pathImmagine))
+        self.__myImgImmagine.Resize(width = DIMENSIONI_IMMAGINE_ELEMENTO_MENU[0], height = DIMENSIONI_IMMAGINE_ELEMENTO_MENU[1])
+        self.__myImgImmagine.Show()
 
         # FRAME SUPPORTO SCRITTA
         self.__fFrameScrittaPagina = tk.Frame(master = self, bg = self.__coloreStandard)
-        self.__fFrameScrittaPagina.grid(row = 1, column = 2, sticky = "nsew")
-        self.__fFrameScrittaPagina.rowconfigure(0, weight = 1)
-        self.__fFrameScrittaPagina.columnconfigure(0, weight = 1)
-        self.__fFrameScrittaPagina.grid_propagate(False)
+        self.__fFrameScrittaPagina.place(x = DIMENSIONI_IMMAGINE_ELEMENTO_MENU[0] + 1, y = 0, width = 250, height = Impostazioni.personalizzazioni.altezza_elemento_tabella_menu)
         self.__fFrameScrittaPagina.pack_propagate(False)
         #Creo la variabile della scritta
         self.__vScrittaPagina_str = tk.StringVar() 
@@ -74,7 +74,7 @@ class ElementoMenu(tk.Frame): #Occuperà meno del frame a disposizione
                                          font = self.__font, 
                                          fg =  self.__coloreFont,
                                          bg = self.__coloreStandard)
-        self.__lScrittaPagina.pack(side = "left")
+        self.__lScrittaPagina.pack(side = "left", fill = "both", expand = True)
 
 
         #Bindo gli eventi importanti
@@ -108,6 +108,11 @@ class ElementoMenu(tk.Frame): #Occuperà meno del frame a disposizione
         self.__coloreSelezionato = Impostazioni.Tema.IGetColoriSfondo("terziario")[1]
         self.__font = Impostazioni.Tema.IGetFont("testo")
         self.__coloreFont = Impostazioni.Tema.IGetFontColor("testo")
+
+        #Cambio la path dell'immagine
+        self.__myImgImmagine.ChangeImage(newPath = Impostazioni.Tema.IGetPathTemaCorrente(self.__pathImmagine))
+        self.__myImgImmagine.Resize(width = DIMENSIONI_IMMAGINE_ELEMENTO_MENU[0], height = DIMENSIONI_IMMAGINE_ELEMENTO_MENU[1])
+        self.__myImgImmagine.Show()
         
         #Lo imposto come selezionato e faccio partire la deselezione elemento 
         self.__elementoSelezionato = True

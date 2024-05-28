@@ -89,12 +89,12 @@ class Dispositivo:
         #Calcolo lo status
         self.__status[0] = self.__status[1]
         self.__status[1] = pingResult
-    
+
         #Se cè stato un cambio status, lo chiamo la notifica
-        if self.__status[0] != self.__status[1]:
+        if self.__status[0] != self.__status[1] or self.__ultimoStatoRegistrato != self.__status[1]:
             self.__funzioneNotificaStatoCambiato(self.__idPosizionale, self.__status[1])
             self.__ultimoStatoRegistrato = self.__status[1]
-            
+    
         self.__semaforoCambioStato.release()
         return True
 
@@ -133,6 +133,7 @@ class Dispositivo:
     
     def PingManuale(self):
         self.__eventoAttesaPing.set()
+        LOG.log("Ping manuale inviato")
 
 
     # STATI INVIO PING
@@ -147,33 +148,35 @@ class Dispositivo:
 
     def __DistruttoreThread(self):
         #Se è l'ultimo thread, rilascia il semaforo
+        self.__eventoAttesaPing.set()
         Dispositivo.semaforoAccessoNumOf_threadAttivi.acquire()
         Dispositivo.numOf_threadAttivi -= 1
         if Dispositivo.numOf_threadAttivi == 0:
             Dispositivo.semaforoThreadAttivi.release()
+            LOG.log("Thread terminati correttamente")
         Dispositivo.semaforoAccessoNumOf_threadAttivi.release()
 
     def __ThreadInvioPing(self):
         #Attendo che il programma sia pronto e invio un pacchetto per aggiornare lo stato (parte da falso)
-        Dispositivo.pausaFinitaEvent.wait()
-        if not self.__running: 
-            return
-        result = self.InvioPing(setWhen = "WhenTrue")
-
         #Finche runna
+        setWhen = "Always"
         while self.__running:
 
             #Attendo che non sia in pausa per inviare un nuovo pacchetto
             Dispositivo.pausaFinitaEvent.wait()
             if not self.__running: 
                 break
-
             #Controllo il ping
-            result = self.InvioPing(setWhen = "WhenFalse")
+            result = self.InvioPing(setWhen = setWhen)
+            setWhen = "WhenFalse"
 
             #Il ping è stato rilevato falso 
-            if result[1] == True:
+            if result[0] == False:
                 self.__PingPerso_4pp() #Esce quando ping true trovato
+            
+            #Attendo
+            self.__eventoAttesaPing.wait(self.__timeBetweenPing_sec)
+            self.__eventoAttesaPing.clear()
 
     def __PingPerso_4pp(self): #4 ping protocol
         #Finche runna
@@ -185,7 +188,7 @@ class Dispositivo:
             if not self.__running: return
 
             #Controllo il ping
-            result = self.InvioPing(attesa = 1, setWhen = "WhenTrue")
+            result = self.InvioPing(setWhen = "WhenTrue")
             #Ritorno se trovato un ping vero
             if result[1] == True:
                 return result
@@ -193,6 +196,10 @@ class Dispositivo:
             numOf_pingMissed += 1
             if numOf_pingMissed == 4:
                 return self.__HostDisconnesso() 
+
+            #Attendo
+            self.__eventoAttesaPing.wait(1)
+            self.__eventoAttesaPing.clear()
 
     def __HostDisconnesso(self):
         self.InvioMail()
@@ -203,18 +210,18 @@ class Dispositivo:
             if not self.__running: return
 
             #Controllo il ping
-            result = self.InvioPing(attesa = 1, setWhen = "WhenTrue")
+            result = self.InvioPing(setWhen = "WhenTrue")
 
             #Ritorno se trovato un ping vero
             if result[1] == True:
                 return result
+            
+            #Attendo
+            self.__eventoAttesaPing.wait(1)
+            self.__eventoAttesaPing.clear()
 
     # PROCEDURE INVIO PING
-    def InvioPing(self, attesa : float = "", setWhen : str = "Always"): #setWhen must be in ("WhenTrue","WhenFalse","Always", "Never"), return is (pingResult, setted?) 
-        #Se l'attesa non è specificata, default
-        if attesa == "":
-            attesa = self.__timeBetweenPing_sec
-        
+    def InvioPing(self, setWhen : str = "Always"): #setWhen must be in ("WhenTrue","WhenFalse","Always", "Never"), return is (pingResult, setted?)       
         #Invio il ping
         pingResult = self.__ping()
 
@@ -224,9 +231,6 @@ class Dispositivo:
         else:
             setted = False
         
-        #Attendo e ritorno
-        self.__eventoAttesaPing.wait(attesa)
-        self.__eventoAttesaPing.clear()
         return (pingResult, setted)
 
     def __ping(self):

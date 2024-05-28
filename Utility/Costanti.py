@@ -11,10 +11,10 @@ PATH_IMG_STATUS_ONLINE_PAG_DASHBOARD = os.path.join(PATH_IMMAGINI, "ImmagineDash
 PATH_IMG_STATUS_OFFLINE_PAG_DASHBOARD = os.path.join(PATH_IMMAGINI, "ImmagineDashboardStatusOffline.png")
 PATH_IMG_BOTTONE_MODIFICA_PAG_DISPOSITIVI = os.path.join(PATH_IMMAGINI, "ImmagineBottoneModificaPagDispositivo.png")
 PATH_IMG_BOTTONE_ELIMINAZIONE_PAG_DISPOSITIVI = os.path.join(PATH_IMMAGINI, "ImmagineBottoneEliminaPagDispositivo.png")
+PATH_IMG_ICONA_DISPOSITIVO = os.path.join(PATH_IMMAGINI, "ImmagineDispositivo.png")
 PATH_JSON_TEMI = os.path.join(PATH_CARTELLA_CORRENTE,"UtilityFiles","ThemeData.json")
 PATH_JSON_DISPOSITIVI = os.path.join(PATH_CARTELLA_CORRENTE,"UtilityFiles","DispositiviData.json")
 LOG_PATH = os.path.join(PATH_CARTELLA_CORRENTE,"UtilityFiles","log.txt")
-
 
 
 DIMENSIONI_IMMAGINE_LOGO = (25,25)
@@ -62,16 +62,18 @@ NOME_INTERNO_PAGINA_IMPOSTAZIONI = "paginaImpostazioni"
 
 # COSTANTI MENU
 PROPORZIONE_MENU_PAGINA = round(1/4,2)
-PROPORZIONE_IMMAGINE_SCRITTA_ELEMENTO_MENU = round(1/25,2)
+PROPORZIONE_IMMAGINE_SCRITTA_ELEMENTO_MENU = round(1/15,2)
 PROPORZIONE_ELEMENTO_MENU_SPAZI_VUOTI_LARGHEZZA = round(1/60,2)
 PROPORZIONE_ELEMENTO_MENU_SPAZI_VUOTI_ALTEZZA = round(1/20,2)
 PROPORZIONE_LISTA_MENU_ALTEZZA_PAGINA = round(4/5,2)
+DIMENSIONI_IMMAGINE_ELEMENTO_MENU = (25,25)
 
 PAGINA_DEFAULT = NOME_INTERNO_PAGINA_DASHBOARD
+TUPLA_PAGINA_IMPOSTAZIONI = (NOME_INTERNO_PAGINA_IMPOSTAZIONI, os.path.join(PATH_IMMAGINI,"ImmagineDispositivo.png"), "Impostazioni")
 LISTA_PAGINE_MENU = [
-    #("nomePaginaInterno", "pathImmagine", "nomePaginaMostrato")
-    (NOME_INTERNO_PAGINA_DISPOSITIVI, "pathLogoPaginaDispositivi.jpeg", "Dispositivi"),
-    (NOME_INTERNO_PAGINA_DASHBOARD, "paginaDasboardImg.jpeg", "Dashboard")
+    #("nomePaginaInterno", "pathImmagine", "nomePaginaMostrato") 
+    (NOME_INTERNO_PAGINA_DISPOSITIVI, os.path.join(PATH_IMMAGINI,"ImmagineDispositivo.png"), "Dispositivi"),
+    (NOME_INTERNO_PAGINA_DASHBOARD, os.path.join(PATH_IMMAGINI,"ImmagineDispositivo.png"), "Dashboard")
 ]
 
 # IMPOSTAZIONI GENERALI FINESTRA

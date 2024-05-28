@@ -2,8 +2,6 @@ from GestionePagine.Widgets.Immagini.MyMultiImage import *
 
 class MySharedMultiImg:
 
-    
-
     # COSTRUTTORE
     def __init__(self, pathsDict : dict[str : str], qualitaImmagineRichiesta : tuple[int] = Impostazioni.personalizzazioni.qualita_immagini_default):
 

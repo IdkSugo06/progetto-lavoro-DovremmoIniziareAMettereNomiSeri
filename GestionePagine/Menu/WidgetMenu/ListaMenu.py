@@ -31,7 +31,7 @@ class ListaMenu(tk.Frame): #Occuperà tutto il frame master occupabile
         self.__elementoImpostazione = None
 
         # CREO IL CANVAS
-        configurazioneCanvas = max(len(listaPagine) * Impostazioni.personalizzazioni.altezza_elemento_tabella_menu, self.__dimensioniListaMenu[1] - 0*Impostazioni.personalizzazioni.altezza_elemento_tabella_menu)
+        configurazioneCanvas = max(len(listaPagine) * Impostazioni.personalizzazioni.altezza_elemento_tabella_menu, self.__dimensioniListaMenu[1])
         self.__cCanvasScorrevole = tk.Canvas(master = self, 
                                              scrollregion = (0, 0, self.__dimensioniListaMenu[0], configurazioneCanvas),
                                              bg = self.__coloreSfondo,
@@ -86,9 +86,9 @@ class ListaMenu(tk.Frame): #Occuperà tutto il frame master occupabile
         self.__listaElementi = []
         contatoreElementi = 0
         self.__elementoImpostazione = ElementoMenu(master = self.__cCanvasScorrevole, 
-                                            nomePaginaInterno = NOME_INTERNO_PAGINA_IMPOSTAZIONI,
-                                            pathImmagine = ".png", 
-                                            nomePaginaMostrato = "Impostazioni",  
+                                            nomePaginaInterno = TUPLA_PAGINA_IMPOSTAZIONI[0],
+                                            pathImmagine = TUPLA_PAGINA_IMPOSTAZIONI[1], 
+                                            nomePaginaMostrato = TUPLA_PAGINA_IMPOSTAZIONI[2],  
                                             xPos = 0, 
                                             yPos = self.__dimensioniListaMenu[1] - Impostazioni.personalizzazioni.altezza_elemento_tabella_menu + 5,
                                             width = self.__dimensioniListaMenu[0],

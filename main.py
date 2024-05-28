@@ -29,7 +29,7 @@ def main():
             Impostazioni.sistema.semaforoSpegnimento.release()
             time.sleep(Impostazioni.sistema.sleepTimeBetweenUpdate)
         
-        LOG.log("Update thread concluso")
+        LOG.log("Thread update pagine concluso")
         Impostazioni.sistema.semaforoUpdateThreadFinito.release()
         
   

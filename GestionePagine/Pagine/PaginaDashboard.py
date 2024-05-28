@@ -66,7 +66,7 @@ class PaginaDashboard(PaginaGenerica): #Singleton
         self.__dimensioniTabellaDashboard = [int(self.__dimensioniPagina[0] - SPAZIO_LATI_PAGINA_DISPOSITIVI * 2),
                                                 self.__dimensioniPagina[1] - SPAZIO_ALTO_PAGINA_DISPOSITIVI * 2]
         # CREO LE TABELLE
-        self.__tabellaDashboard = TabellaDashboard(master = self.__fFrameInternoCanvasScorrevole,
+        self.__tabellaDashboard = FakeTabellaDashboard(master = self.__fFrameInternoCanvasScorrevole,
                                             xPos = SPAZIO_LATI_PAGINA_DISPOSITIVI,
                                             yPos = SPAZIO_ALTO_PAGINA_DISPOSITIVI + Impostazioni.personalizzazioni.altezza_elemento_tabella_paginaDashboard,
                                             tableWidth = self.__dimensioniTabellaDashboard[0],
@@ -182,7 +182,6 @@ class PaginaDashboard(PaginaGenerica): #Singleton
     def CaricaPagina(self, args = []):
         #Mostro la pagina
         self.MostraPagina()
-
         #Aggiorno i dispositivi
         self.__tabellaDashboard.CaricaTabella()
 

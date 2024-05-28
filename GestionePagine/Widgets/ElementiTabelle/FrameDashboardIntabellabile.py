@@ -172,25 +172,26 @@ class FrameDashboardIntabellabile(ElementoIntabellabile):
 
 
     # METODI AGGIORNAMENTO FRAME
-    def AssociaDispositivo(self, idDispositvo : int, aggiornamentoForzato : bool = False):
+    def AggiornaAttributiElemento(self, idDispositivo : int, status : bool = None):
+        self.AssociaDispositivo(idDispositvo = idDispositivo, aggiornamentoForzato = True, status = status)
 
+    def AssociaDispositivo(self, idDispositvo : int, aggiornamentoForzato : bool = False, status : bool = None):
         #Controllo se è un nuovo dispositivo
-        if ((self.__idDispositivoAssociato == idDispositvo and not aggiornamentoForzato) and False):
+        if (self.__idDispositivoAssociato == idDispositvo and not aggiornamentoForzato):
             return
         
         #Se no aggiorno i valori
         self.__idDispositivoAssociato = idDispositvo
-        self.RefreshAttributiElemento()
+        self.RefreshAttributiElemento(status)
 
-    def RefreshAttributiElemento(self):
-        print(self.__idDispositivoAssociato)
-        d = GestoreDispositivi.IGetDispositivo(0)
+    def RefreshAttributiElemento(self, status : bool = None):
         dispositivo = GestoreDispositivi.IGetDispositivo(self.__idDispositivoAssociato)
         self.__vScrittaNome_str.set(dispositivo.GetNome())
         self.__vScrittaIndirizzoIP_str.set(dispositivo.GetHost())
         self.__vScrittaPorta_str.set(dispositivo.GetPorta())
         self.__vScrittaTempoTraPing_str.set(str(dispositivo.GetTempoTraPing()))
-        self.SetStatus(dispositivo.GetStatusConnessione()[1])
+        if status == None: status = dispositivo.GetStatusConnessione() 
+        self.SetStatus(status)
 
     def SetStatus(self, status : bool):
         if status == True: 
@@ -219,7 +220,7 @@ class FrameDashboardIntabellabile(ElementoIntabellabile):
         self.__coloreBordo = Impostazioni.Tema.IGetColoriSfondo("secondario")[3]
         self.__fontTesto = Impostazioni.Tema.IGetFont("testo")
         self.__coloreTesto = Impostazioni.Tema.IGetFontColor("testo")
-        pathKey = "online" if GestoreDispositivi.IGetDispositivo(self.__idDispositivoAssociato).GetStatusConnessione()[1] == True else "offline"
+        pathKey = "online" if GestoreDispositivi.IGetDispositivo(self.__idDispositivoAssociato).GetStatusConnessione() == True else "offline"
         self.__mySMIi_status = FrameDashboardIntabellabile.__mySMI_statusImage.Show(canvas = self.__cCanvasStatusDispositivo, pathKey = pathKey, instanceId = self.__mySMIi_status)
         self.AggiornaColori()
 

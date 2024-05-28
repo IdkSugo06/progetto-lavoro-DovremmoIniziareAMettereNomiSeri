@@ -3,7 +3,7 @@ from GestioneDispositivi.GestoreInvioEmail import *
 #Lo status si aggiorna solo quando viene calcolato un ping, dopo 5 ping falliti, mail
 class Dispositivo:
 
-    funzioneNotificaStatoCambiato = lambda x,y : x #Dovra supportare self.__funzioneNotifica(dispositivo, stato)
+    funzioneNotificaStatoCambiato = lambda x,y : x #Dovra supportare self.__funzioneNotifica(idDispositivo, status)
     pausaFinitaEvent = Event()
     numOf_threadAttivi = 0
     semaforoThreadAttivi = Lock()
@@ -22,6 +22,7 @@ class Dispositivo:
         #Attributi connessione
         self.__last5pigs = [False] * 5
         self.__status = [False, False] #(Era online?, è online?)
+        self.__ultimoStatoRegistrato = False
         self.__stabilitaConnessione = 0
         
         #Attributi aggiornamento
@@ -91,7 +92,9 @@ class Dispositivo:
     
         #Se cè stato un cambio status, lo chiamo la notifica
         if self.__status[0] != self.__status[1]:
-            self.__funzioneNotificaStatoCambiato(self, self.__status[1])
+            self.__funzioneNotificaStatoCambiato(self.__idPosizionale, self.__status[1])
+            self.__ultimoStatoRegistrato = self.__status[1]
+            
         self.__semaforoCambioStato.release()
         return True
 
@@ -99,7 +102,7 @@ class Dispositivo:
         return self.__status
     def GetStatusConnessione(self) -> bool:
         self.__semaforoStatus.acquire()
-        _b = self.__status
+        _b = self.__ultimoStatoRegistrato
         self.__semaforoStatus.release()
         return _b
     def GetStatusConnessioneHasChanged(self) -> bool: #True se era connesso e ora no, e viceversa, ritorna (Changed?, (WasUp?, IsUp?))
@@ -229,7 +232,7 @@ class Dispositivo:
     def __ping(self):
         try:
             #Invio il ping
-            result = pythonping.ping(target=self.__host, timeout = 0.2, count = 1, size = 1)
+            result = pythonping.ping(target=self.__host, timeout = 1, count = 1, size = 1)
             if result.success():
                 return True
             else:

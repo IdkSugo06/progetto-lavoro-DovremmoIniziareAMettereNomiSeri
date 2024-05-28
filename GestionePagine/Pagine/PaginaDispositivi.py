@@ -95,6 +95,30 @@ class PaginaDispositivi(PaginaGenerica): #Singleton
         self.__lTitoloDispositivi.pack(side = "left", fill="both", anchor="sw")
 
 
+
+  
+        # Place the scrollbar on the right side of the canvas
+        self.__tabellaDispositivi.MakeScrollBar(self.__fFrameInternoCanvasScorrevole)
+        self.__tabellaDispositivi.GetScrollBar().place(x = self.__dimensioniTabellaDispositivi[0] + SPAZIO_LATI_PAGINA_DISPOSITIVI, y = SPAZIO_ALTO_PAGINA_DISPOSITIVI, height = self.__dimensioniPaginaScorrevole[1], width = SPAZIO_LATI_PAGINA_DISPOSITIVI)
+
+
+
+        #FRAME SUPPORTO SEARCH BAR
+        self.__fFrameSearchBar = tk.Frame(master = self.__fFrameInternoCanvasScorrevole, background = self.__coloreSfondo)
+        self.__fFrameSearchBar.place(x = self.__dimensioniTabellaDispositivi[0]//3, 
+                                           y = SPAZIO_ALTO_PAGINA_DASHBOARD // 2 +25, 
+                                           width = self.__dimensioniTabellaDispositivi[0] // 4,
+                                           height = 30)
+        self.__fFrameSearchBar.rowconfigure(0, weight=0)
+        self.__fFrameSearchBar.columnconfigure(0, weight=0)
+        self.__fFrameSearchBar.grid_propagate(False)
+        self.__fFrameSearchBar.pack_propagate(False)
+        #SEARCH BAR
+        self.__entrySearch = tk.Entry(master = self.__fFrameSearchBar, 
+                                        font = self.__font)
+        self.__entrySearch.pack(side = "left", fill="both", anchor="sw")
+
+
         # FRAME SUPPORTO AGGIUNTA DISPOSITIVO
         self.__fFrameBottoneAggiuntaDispositivo = tk.Frame(master = self.__fFrameInternoCanvasScorrevole)
         self.__dimBottone = (150, 40)
@@ -194,7 +218,10 @@ class PaginaDispositivi(PaginaGenerica): #Singleton
         
                                            
 
-
+    #METODO SEARCHBAR
+    def FiltraNomeDispositivo(self, event):
+        nome=self.__entrySearch.get()
+        #todo: fai in modo che filtri in base al nome
     # METODI CAMBIO PAGINA E UPDATE
     def CaricaPagina(self, args = []):
         #Mostro la pagina
@@ -277,6 +304,9 @@ class PaginaDispositivi(PaginaGenerica): #Singleton
                                                       y = SPAZIO_ALTO_PAGINA_DISPOSITIVI - (self.__dimBottone[1] + self.__offsetBottone[1]), width = self.__dimBottone[0], height = self.__dimBottone[1], anchor= "nw")
         
         self.__fFrameTextLabel.place(x = SPAZIO_LATI_PAGINA_DISPOSITIVI, y = SPAZIO_ALTO_PAGINA_DISPOSITIVI, width = self.__dimensioniTabellaDispositivi[0], height = Impostazioni.personalizzazioni.altezza_elemento_tabella_paginaDashboard, anchor = "nw")
+
+        #riposiziono scrollbar
+        self.__tabellaDispositivi.GetScrollBar().place(x = self.__dimensioniTabellaDispositivi[0] + SPAZIO_LATI_PAGINA_DISPOSITIVI, y = SPAZIO_ALTO_PAGINA_DISPOSITIVI, height = self.__dimensioniPaginaScorrevole[1], width = SPAZIO_LATI_PAGINA_DISPOSITIVI)
 
 
         #Resize tabella

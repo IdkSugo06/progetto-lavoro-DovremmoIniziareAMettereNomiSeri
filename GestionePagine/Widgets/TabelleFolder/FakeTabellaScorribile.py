@@ -54,6 +54,9 @@ class FakeTabellaScorribile(tk.Frame):
 
 
     # GETTER E SETTER    
+    def GetFrame(self):
+        return self
+
     def AggiungiElemento(self, elemento : ElementoIntabellabile):
         elemento.myBind("<MouseWheel>", lambda event : self.__Event_MouswheelScroll(event))
         self._elementiIntabellabili.append(elemento)
@@ -73,7 +76,7 @@ class FakeTabellaScorribile(tk.Frame):
         
         self._elementiIntabellabili[idElemento - self._indiciElementiInterni[0]].AggiornaAttributiElemento(self._funzionePopolamentoLista(idElemento))
 
-    def RefreshNumeroFrame(self, numElementiRichiesti : int, funzioneCostruttoreDaId : any = lambda x : ElementoIntabellabile(master=tk.Frame()), aggiornaAttributi : bool = True):
+    def RefreshNumeroFrame(self, numElementiRichiesti : int, funzioneCostruttoreDaId : any = lambda x : ElementoIntabellabile(master=tk.Frame())):
         #Aggiorno i valori di scroll
         self._numOf_elementiFinti = numElementiRichiesti
         numElementiRichiesti = min(numElementiRichiesti, self._numOf_elementiMassimo)
@@ -93,6 +96,12 @@ class FakeTabellaScorribile(tk.Frame):
         
         self.__SetPointerPosition(self._puntatoreInizioTabella, show = False) #Esegue check dei bordi ecc.. 
         self.Show()
+
+    def AggiornaAttributi(self):
+        i_elemento = self._indiciElementiInterni[0]
+        for elemento in self._elementiIntabellabili:
+            elemento.AggiornaAttributiElemento(self._funzionePopolamentoLista(i_elemento))
+            i_elemento += 1
 
     def Show(self):
         dimEly = self._dimensioniElemento[1] #local reassignment for faster access
@@ -114,8 +123,8 @@ class FakeTabellaScorribile(tk.Frame):
         altezzaElementi = self._numOf_elementiFinti * self._dimensioniElemento[1]
         if self._puntatoreInizioTabella < 0:
             self._puntatoreInizioTabella = 0
-        elif (self._puntatoreInizioTabella + self._dimensioniTabella[1])> altezzaElementi - 2:
-            self._puntatoreInizioTabella = (altezzaElementi - self._dimensioniTabella[1]) - 2
+        elif (self._puntatoreInizioTabella + self._dimensioniTabella[1] + self._dimensioniElemento[1]) > altezzaElementi - 2:
+            self._puntatoreInizioTabella = (altezzaElementi - self._dimensioniTabella[1]) - 2 - self._dimensioniElemento[1]
 
         #Controllo chi è dentro e chi fuori dalla tabella dopo
         idPrimoDentroOra = floor((self._puntatoreInizioTabella + 2) / self._dimensioniElemento[1]) 
@@ -136,24 +145,21 @@ class FakeTabellaScorribile(tk.Frame):
 
         #Aumento il ptr e borders check
         kScroll = int(pixelToScroll * Impostazioni.sistema.sensibilita_scorrimento_rotella)
-        fine = False
         self._puntatoreInizioTabella += kScroll
         if self._puntatoreInizioTabella < 1:
             self._puntatoreInizioTabella = 1
-        elif (self._puntatoreInizioTabella + altezzaSchermo) > self._altezzaElementi - 2:
-            fine = True
-            self._puntatoreInizioTabella = (self._altezzaElementi - altezzaSchermo) - 2
+        elif (self._puntatoreInizioTabella + altezzaSchermo + altezzaElementoSingolo) > self._altezzaElementi - 2:
+            self._puntatoreInizioTabella = (self._altezzaElementi - altezzaSchermo) - 2 - altezzaElementoSingolo
 
         #Controllo chi è dentro e chi fuori dalla tabella dopo
         idPrimoDentroOra = floor((self._puntatoreInizioTabella + 2) / altezzaElementoSingolo) 
         idUltimoDentroOra = ceil((((self._puntatoreInizioTabella + altezzaSchermo)) / altezzaElementoSingolo)) - 1
-        
+
         #Nascondo e mostro quelli entrati/usciti
         if idPrimoDentroOra > self._indiciElementiInterni[0]:
             #Scroll verso il basso
             i_inizioLista = idPrimoDentroOra - self._indiciElementiInterni[0]
             i_fineLista = len(self._elementiIntabellabili) - 1
-            if fine: i_fineLista -= 1
             self._elementiIntabellabili = self._elementiIntabellabili[i_inizioLista:] + self._elementiIntabellabili[:i_inizioLista]
             for i in range(i_fineLista - i_inizioLista, i_fineLista + 1):
                 self._elementiIntabellabili[i].AggiornaAttributiElemento(self._funzionePopolamentoLista(idPrimoDentroOra + i))
@@ -222,6 +228,6 @@ class FakeTabellaScorribile(tk.Frame):
         self._dimensioniElemento = [elementWidth, elementHeight]
         #Aggiorno i numeri elementi
         self._numOf_elementiMassimo = (tableHeight // elementHeight) + 1
-        self.RefreshNumeroFrame(self._numOf_elementiFinti, aggiornaAttributi = False)
+        self.RefreshNumeroFrame(self._numOf_elementiFinti)
         self.__SetPointerPosition(self._puntatoreInizioTabella, show = False) #Esegue check dei bordi ecc..
         self.Show()

@@ -1,9 +1,1 @@
-: Avvio decostruttori
-: Thread terminati correttamente
-: Decostruttore dispositivi eseguito
-: Distruttore gestore email eseguito
-: Distruttori chiamati
-: Richiesta autorizzazione chiusura finestra....
-: Autorizzazione chiusura finestra approvata
-: Thread update pagine concluso
-: Finestra chiusa, fine programma
+FILE_LOG: LOG DISABLED

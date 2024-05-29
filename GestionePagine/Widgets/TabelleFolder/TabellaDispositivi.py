@@ -1,7 +1,7 @@
-from GestionePagine.Widgets.TabelleFolder.TabellaScorribile import *
+from GestionePagine.Widgets.TabelleFolder.FakeTabellaScorribile import *
 from GestionePagine.Widgets.ElementiTabelle.FrameDispositivoIntabellabile import *
 
-class  TabellaDispositivi(TabellaScorribile):
+class  TabellaDispositivi(FakeTabellaScorribile):
 
 
     # COSTRUTTORE
@@ -21,6 +21,7 @@ class  TabellaDispositivi(TabellaScorribile):
         #Chiamo il costruttore della classe padre
         super().__init__(
                         master = master,
+                        funzionePopolamentoListaPerIndice = lambda i : i,
                         xPos = xPos,
                         yPos = yPos,
                         tableWidth = tableWidth,
@@ -63,17 +64,15 @@ class  TabellaDispositivi(TabellaScorribile):
     def RefreshFrameDispositivi(self, aggiornaAttributi : bool = False): 
         numDispositiviRichiesto = len(GestoreDispositivi.IGetListaDispositivi())
         #Aggiunge e rimuove gli elementi in base a quanti ne mancano e l'iteratore
-        self.RefreshNumeroFrame(numDispositiviRichiesto, lambda i : FrameDispositivoIntabellabile(master = self.GetFrameTabella(),
+        self.RefreshNumeroFrame(numDispositiviRichiesto, lambda i : FrameDispositivoIntabellabile(master = self.GetFrame(),
                                                                     x = 0, 
-                                                                    y = self._numOf_elementiIntabellabili * self.dimensioniElemento[1], 
-                                                                    width = self.dimensioniElemento[0], 
-                                                                    height = self.dimensioniElemento[1],
+                                                                    y = self._numOf_elementiIntabellabili * self._dimensioniElemento[1], 
+                                                                    width = self._dimensioniElemento[0], 
+                                                                    height = self._dimensioniElemento[1],
                                                                     isShown = True,
-                                                                    idDispositivo = i),
-                                                                    aggiornaAttributi = False)
-        if aggiornaAttributi:
-            self.RefreshAttributiElementi()
-
+                                                                    idDispositivo = i))
+        if aggiornaAttributi: 
+            self.AggiornaAttributi()
 
 
     # METODI PERSONALIZZAZIONE

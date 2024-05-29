@@ -202,6 +202,9 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
 
 
     # METODI GESTIONE DISPOSITIVI
+    def AggiornaAttributiElemento(self, i_dispositivo : int):
+        self.AssociaDispositivo(i_dispositivo)
+        
     def AssociaDispositivo(self, idDispositivo : int):
         #Controllo se è un nuovo dispositivo
         if (self.__idDispositivoAssociato == idDispositivo):

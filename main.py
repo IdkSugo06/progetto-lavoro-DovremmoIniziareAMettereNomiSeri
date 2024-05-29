@@ -2,7 +2,12 @@ from GestionePagine.Pagine.Pagine import *
 
 #Definisco il main
 def main():
-        
+
+    #Creo la funzione per distruggere la finestra
+    def QuitEvento(eventTk = None):
+        t = Thread(target = Exit)
+        t.start()
+         
     #Creo una funzione che verrà eseguita sempre da un thread separato
     def Update():
         chrono = Chrono()
@@ -14,7 +19,7 @@ def main():
         
             #Se viene rilevato un evento di errore fatale, interrompi il programma
             if MyEventHandler.CheckFatalErrorOccurred():
-                GestorePagine.ChiusuraFinestraEvento()
+                QuitEvento()
                 return 
     
             #Controllo se continuare
@@ -38,15 +43,10 @@ def main():
         t = Thread(target=Update)
         t.start()
         #Assegno la funzione di uscita
-        GestorePagine.IGetWindow().protocol("WM_DELETE_WINDOW", QuitEvento)
         GestorePagine.ICaricaPagina(PaginaGenerica.GetIdPagina(PAGINA_DEFAULT))
+        GestorePagine.IGetWindow().protocol("WM_DELETE_WINDOW", QuitEvento)
         GestorePagine.IMainLoop()
         t.join()
-  
-      #Creo la funzione per distruggere la finestra
-    def QuitEvento(eventTk = None):
-        t = Thread(target=Exit)
-        t.start()
 
     def Exit():
         #Chiamo tutti i distruttori prima di chiudere la finestra
@@ -73,9 +73,9 @@ def main():
         #Decostruttore log
         LOG.IDecostruttore()
     
-      #Avvio il programma
-    GestorePagine.IGetWindow().bind("<Escape>", QuitEvento)
+    #Avvio il programma
     Start()  
+    GestorePagine.IGetWindow().bind("<Escape>", QuitEvento)
 
 
 #Avvio il main
@@ -85,4 +85,3 @@ def AvvioProgramma():
 
 #Inizializzo l'avvio
 AvvioProgramma()
-

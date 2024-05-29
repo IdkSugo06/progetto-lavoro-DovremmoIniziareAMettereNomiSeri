@@ -116,6 +116,24 @@ class Dispositivo:
     
     
     # UPDATE PING
+    @staticmethod
+    def ThreadInizializzato():
+        #Se è il primo thread, acquisice il semaforo
+        Dispositivo.semaforoAccessoNumOf_threadAttivi.acquire()
+        Dispositivo.numOf_threadAttivi += 1
+        if Dispositivo.numOf_threadAttivi == 1:
+            Dispositivo.semaforoThreadAttivi.acquire()
+        Dispositivo.semaforoAccessoNumOf_threadAttivi.release()
+    
+    @staticmethod
+    def ThreadDistrutto():
+        Dispositivo.semaforoAccessoNumOf_threadAttivi.acquire()
+        Dispositivo.numOf_threadAttivi -= 1
+        if Dispositivo.numOf_threadAttivi == 0:
+            Dispositivo.semaforoThreadAttivi.release()
+            LOG.log("Thread terminati correttamente")
+        Dispositivo.semaforoAccessoNumOf_threadAttivi.release()
+
     def InizializzazioneThreadInvioPing(self):
         self.__running = True
         t = Thread(target=self.__AvvioThread)
@@ -128,7 +146,7 @@ class Dispositivo:
         self.__semaforoStatus.release()
         self.__semaforoCambioStato.release()
         self.__eventoAttesaPing.set()
-        t = Thread(target=self.__DistruttoreThread)
+        t = Thread(target = self.__DistruttoreThread)
         t.start()
     
     def PingManuale(self):
@@ -138,23 +156,12 @@ class Dispositivo:
 
     # STATI INVIO PING
     def __AvvioThread(self):
-        #Se è il primo thread, acquisice il semaforo
-        Dispositivo.semaforoAccessoNumOf_threadAttivi.acquire()
-        Dispositivo.numOf_threadAttivi += 1
-        if Dispositivo.numOf_threadAttivi == 1:
-            Dispositivo.semaforoThreadAttivi.acquire()
-        Dispositivo.semaforoAccessoNumOf_threadAttivi.release()
         self.__ThreadInvioPing()
 
     def __DistruttoreThread(self):
         #Se è l'ultimo thread, rilascia il semaforo
         self.__eventoAttesaPing.set()
-        Dispositivo.semaforoAccessoNumOf_threadAttivi.acquire()
-        Dispositivo.numOf_threadAttivi -= 1
-        if Dispositivo.numOf_threadAttivi == 0:
-            Dispositivo.semaforoThreadAttivi.release()
-            LOG.log("Thread terminati correttamente")
-        Dispositivo.semaforoAccessoNumOf_threadAttivi.release()
+        self.ThreadDistrutto()
 
     def __ThreadInvioPing(self):
         #Attendo che il programma sia pronto e invio un pacchetto per aggiornare lo stato (parte da falso)

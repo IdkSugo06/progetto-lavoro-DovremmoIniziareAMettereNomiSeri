@@ -41,6 +41,7 @@ class FakeTabellaDashboard(FakeTabellaScorribile):
     def CaricaTabella(self):
         GestoreDispositivi.IOrdinaListaDispositivi()
         self.RefreshFrameDispositivi()
+        print("pausa set")
         Dispositivo.pausaFinitaEvent.set()
         
 
@@ -55,8 +56,7 @@ class FakeTabellaDashboard(FakeTabellaScorribile):
                                                                     width = self._dimensioniElemento[0], 
                                                                     height = self._dimensioniElemento[1],
                                                                     isShown = True,
-                                                                    idDispositivo = i),
-                                                                    aggiornaAttributi = True) #Li aggiornerò dopo aver riassegnato gli id
+                                                                    idDispositivo = i)) #Li aggiornerò dopo aver riassegnato gli id
 
         self.__semaforoPosizionamentoDispositivi.release()
     

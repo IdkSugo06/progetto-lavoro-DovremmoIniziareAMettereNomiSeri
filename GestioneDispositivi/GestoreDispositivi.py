@@ -70,6 +70,7 @@ class GestoreDispositivi:
         GestoreDispositivi.GetGestoreConnessioni().__SalvaDispositiviSuFile()
         GestoreDispositivi.GetGestoreConnessioni().__clearConnessioni()
         Dispositivo.semaforoThreadAttivi.acquire()
+        LOG.log("Semaforo thread ping attivi spento")
         Dispositivo.semaforoThreadAttivi.release()
         Dispositivo.pausaFinitaEvent.set() #Se sono in pausa, li faccio continuare, finiranno di distruggersi correttamente
         GestoreDispositivi.__gestoreConnessioni = None
@@ -226,6 +227,9 @@ class GestoreDispositivi:
     # METODI ADD MOD CLEAR
     def __addConnessione(self, nome : str, host : str, porta : str, timeTraPing : float): #Riordinamento NON necessario
         self.__semaforoAccessiStatusConnessione.acquire()
+        #Se è il primo thread, acquisice il semaforo
+        Dispositivo.ThreadInizializzato()
+
         #Aggiungo il dispositivo
         self.__dispositivi.append(Dispositivo(nome, host, porta, timeTraPing, self.__numOf_dispositivi))
     

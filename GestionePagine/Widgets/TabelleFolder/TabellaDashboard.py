@@ -35,13 +35,13 @@ class FakeTabellaDashboard(FakeTabellaScorribile):
         GestoreDispositivi.ISetFunzioneNotificaCambioStatus(self.__Notifica_CambioStatoDispositivo)
 
 
+
     # AGGIORNA FRAMES E MOSTRA
     def GetFrameTabella(self):
         return self
     def CaricaTabella(self):
         GestoreDispositivi.IOrdinaListaDispositivi()
         self.RefreshFrameDispositivi()
-        print("pausa set")
         Dispositivo.pausaFinitaEvent.set()
         
 
@@ -59,8 +59,23 @@ class FakeTabellaDashboard(FakeTabellaScorribile):
                                                                     idDispositivo = i)) #Li aggiornerò dopo aver riassegnato gli id
 
         self.__semaforoPosizionamentoDispositivi.release()
+
+    # FUNZIONI NOTIFICA
+    def __Notifica_CambioStatoDispositivo(self, idDispositivo : int, nuovoStato : bool = True): #Viene chiamata quando c'è un cambio stato
+        idDispSuListaOrdinata = GestoreDispositivi.IGetIdListaOrdinataDaIdDispositivo(idDispositivo)
+        if idDispSuListaOrdinata < self._indiciElementiInterni[0] or idDispSuListaOrdinata > self._indiciElementiInterni[1]:
+            return
+        self._elementiIntabellabili[idDispSuListaOrdinata - self._indiciElementiInterni[0]].AggiornaAttributiElemento(idDispositivo = idDispositivo, status = nuovoStato)
     
-    # METODI PERSONALIZZAZIONE
+    def __Notifica_AggiornamentoElementoNecessario(self, idElemento):
+        return
+    def __Notifica_SwapElementi(self, idElemento1, idElemento2):
+        return
+    def __Notifica_OrdinamentoListaNecessario(self):
+        return 
+
+
+    # METODI RESIZE E PERSONALIZZAZIONE
     def AggiornaColoriTema(self):
         #Aggiorno i colori
         coloreSfondo = Impostazioni.Tema.IGetColoriSfondo("secondario")[1],
@@ -73,15 +88,6 @@ class FakeTabellaDashboard(FakeTabellaScorribile):
         for elemento in self._elementiIntabellabili:
             elemento.AggiornaColoriTema()
 
-
-    # FUNZIONI NOTIFICA
-    def __Notifica_CambioStatoDispositivo(self, idDispositivo : int, nuovoStato : bool = True): #Viene chiamata quando c'è un cambio stato
-        idDispSuListaOrdinata = GestoreDispositivi.IGetIdListaOrdinataDaIdDispositivo(idDispositivo)
-        if idDispSuListaOrdinata < self._indiciElementiInterni[0] or idDispSuListaOrdinata > self._indiciElementiInterni[1]:
-            return
-        self._elementiIntabellabili[idDispSuListaOrdinata - self._indiciElementiInterni[0]].AggiornaAttributiElemento(idDispositivo = idDispositivo, status = nuovoStato)
-
-    # METODI RESIZE E PERSONALIZZAZIONE
     def CambioColore(self, coloreSfondo : str, coloreElementi : str, coloreBordoElementi : str, cambioColoreElementi : bool = False):
         #Imposto i colori
         self._coloreSfondo = coloreSfondo
@@ -120,4 +126,7 @@ class FakeTabellaDashboard(FakeTabellaScorribile):
         #Aggiorno i numeri elementi
         self._numOf_elementiMassimo = (tableHeight // elementHeight) + 1
         self.RefreshFrameDispositivi()
+        #Cambio la dimensione degli elementi
+        for elemento in self._elementiIntabellabili:
+            elemento.SetDim(self._dimensioniElemento[0], self._dimensioniElemento[1])
         self.Show()

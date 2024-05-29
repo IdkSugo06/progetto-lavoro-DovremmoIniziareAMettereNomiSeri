@@ -230,4 +230,7 @@ class FakeTabellaScorribile(tk.Frame):
         self._numOf_elementiMassimo = (tableHeight // elementHeight) + 1
         self.RefreshNumeroFrame(self._numOf_elementiFinti)
         self.__SetPointerPosition(self._puntatoreInizioTabella, show = False) #Esegue check dei bordi ecc..
+        #Cambio la dimensione degli elementi
+        for elemento in self._elementiIntabellabili:
+            elemento.SetDim(self._dimensioniElemento[0], self._dimensioniElemento[1])
         self.Show()

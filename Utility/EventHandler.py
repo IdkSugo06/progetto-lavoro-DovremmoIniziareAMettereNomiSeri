@@ -1,24 +1,65 @@
 FATAL_ERROR_VALUE = 3
 
+# ABSTRACT CLASS
 class MyEvent:
     def __init__(self, lvlErrore : int = 0, descrizione : str = ""):
         self.lvlErrore = lvlErrore
         self.descrizione = descrizione
 
+# GENERIC ERROR
 class MyFatalError(MyEvent):
     functionsBound = []
-    def __init__(self):
+    def __init__(self, args : dict[str : any]):
         super().__init__(FATAL_ERROR_VALUE)
         for function in MyFatalError.functionsBound:
             function()
 
+# THEME
 class MyThemeChanged(MyEvent):
     functionsBound = []
-    def __init__(self):
+    def __init__(self, args : dict[str : any]):
         super().__init__()
         for function in MyThemeChanged.functionsBound:
             function()
-    
+
+# DEVICES
+class MyDispositivoAggiunto(MyEvent):
+    functionsBound = []
+    def __init__(self, args : dict[tuple("idDispositivo") : any]): 
+        super().__init__()
+        for function in MyDispositivoAggiunto.functionsBound:
+            function(args["idDispositivo"])
+
+class MyDispositivoRimosso(MyEvent):
+    functionsBound = []
+    def __init__(self, args : dict[tuple("idDispositivo") : any]): 
+        super().__init__()
+        for function in MyDispositivoRimosso.functionsBound:
+            function(args["idDispositivo"])
+
+class MyDispositivoModificato(MyEvent):
+    functionsBound = []
+    def __init__(self, args : dict[tuple("idDispositivo") : any]): 
+        super().__init__()
+        for function in MyDispositivoModificato.functionsBound:
+            function(args["idDispositivo"])
+
+class MyStatoDispositivoCambiato(MyEvent):
+    functionsBound = []
+    def __init__(self, args : dict[tuple("idDispositivo", "stato") : any]): 
+        super().__init__()
+        for function in MyDispositivoModificato.functionsBound:
+            function(args["idDispositivo"], args["stato"])               
+
+# FILTERS
+class MyFilterChanged(MyEvent):
+    functionsBound = []
+    def __init__(self, args : dict[tuple("tipoFiltro", "codice", "args") : any]):
+        super().__init__()
+        for function in MyFilterChanged.functionsBound:
+            function(args["tipoFiltro", args["codice"], args["args"]])
+
+            
 
 #Singleton
 class MyEventHandler:
@@ -49,8 +90,8 @@ class MyEventHandler:
         return MyEventHandler.__myEventHandler
     
     @staticmethod
-    def Throw(eventType : type):
-        MyEventHandler.__myEventHandler.__throw(eventType())
+    def Throw(eventType : type, args : dict[str : any] = None):
+        MyEventHandler.__myEventHandler.__throw(eventType(args))
     @staticmethod
     def CheckFatalErrorOccurred():
         return MyEventHandler.__myEventHandler.fatalErrorOccurred

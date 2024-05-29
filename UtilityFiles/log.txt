@@ -1,3 +1,17 @@
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.google.it", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.google.it", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.google.it", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.google.it", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.google.it", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.google.it", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.google.it", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.google.it", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.google.it", try verify your DNS or host file
+: Mail inviata (yet to be implemented)
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.google.it", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.google.it", try verify your DNS or host file
+: Mail inviata (yet to be implemented)
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.google.it", try verify your DNS or host file
 : Avvio decostruttori
 : Thread terminati correttamente
 : Semaforo thread ping attivi spento

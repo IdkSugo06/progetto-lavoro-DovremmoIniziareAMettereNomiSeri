@@ -113,9 +113,10 @@ class GestoreDispositivi:
             idSuListaOrdinata = self.__posizioneDispositiviSuListaOrdinata[idDispositivo] 
         return idSuListaOrdinata
     
-    def __CambioStatusDispositivoRilevato(self, idPosDispositivo1 : int, nuovoStato : bool):
+    def __CambioStatusDispositivoRilevato(self, idDispositivo : int, nuovoStato : bool):
         self.__semaforoPosizionamentoDispositivi.acquire()
-        self.__CambioStatusDispositivoRilevato_OffOn(idPosDispositivo1, nuovoStato)
+        MyEventHandler.Throw(MyStatoDispositivoCambiato, args = {"idDispositivo" : idDispositivo, "stato" : nuovoStato})
+        self.__CambioStatusDispositivoRilevato_OffOn(idDispositivo, nuovoStato)
         self.__semaforoPosizionamentoDispositivi.release()
 
     def __CambioStatusDispositivoRilevato_OffOn(self, idPosDispositivo1 : int, nuovoStato : bool):
@@ -154,6 +155,7 @@ class GestoreDispositivi:
     def __OrdinaDispositivi(self):
         self.__semaforoPosizionamentoDispositivi.acquire()
         self.__OrdinaDispositivi_OffOn()
+        MyEventHandler.Throw(MyFiltroRebuildNeeded)
         self.__semaforoPosizionamentoDispositivi.release()
 
     def __OrdinaDispositivi_OffOn(self):
@@ -238,12 +240,15 @@ class GestoreDispositivi:
         self.__idDispositiviOrdinatiPerOffOn.append(self.__numOf_dispositivi)
         #Aumento il numero di dispositivi
         self.__numOf_dispositiviOffline += 1
+
+        MyEventHandler.Throw(MyDispositivoAggiunto, args = {"idDispositivo" : self.__numOf_dispositivi - 1})
         self.__numOf_dispositivi += 1
         self.__semaforoAccessiStatusConnessione.release()
 
     def __modificaConnessione(self, idPosizionale : int, nome : str, host : str, porta : str, tempoTraPing : float):
         self.__semaforoAccessiStatusConnessione.acquire()
-        GestoreDispositivi.GetGestoreConnessioni().__dispositivi[idPosizionale].Modifica(nome, host, porta, tempoTraPing)
+        self.__dispositivi[idPosizionale].Modifica(nome, host, porta, tempoTraPing)
+        MyEventHandler.Throw(MyDispositivoModificato, args = {"idDispositivo" : idPosizionale})
         self.__semaforoAccessiStatusConnessione.release()
 
     def __rimuoviConnessione(self, Iddisp : int): #Riordinamento necessario
@@ -261,7 +266,8 @@ class GestoreDispositivi:
             self.__dispositivi[i].DecreseId()
         
         #Diminuisco il numero di elementi
-        self.__numOf_dispositivi -= 1
+        MyEventHandler.Throw(MyDispositivoRimosso, args = {"idDispositivo" : self.__numOf_dispositivi - 1})
+        self.__numOf_dispositivi -= 1 
         self.__semaforoAccessiStatusConnessione.release()
 
     def __clearConnessioni(self):

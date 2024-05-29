@@ -177,7 +177,7 @@ class FrameDashboardIntabellabile(ElementoIntabellabile):
 
     def AssociaDispositivo(self, idDispositvo : int, aggiornamentoForzato : bool = False, status : bool = None):
         #Controllo se è un nuovo dispositivo
-        if (self.__idDispositivoAssociato == idDispositvo and not aggiornamentoForzato):
+        if ((self.__idDispositivoAssociato == idDispositvo) and not aggiornamentoForzato):
             return
         
         #Se no aggiorno i valori
@@ -190,7 +190,8 @@ class FrameDashboardIntabellabile(ElementoIntabellabile):
         self.__vScrittaIndirizzoIP_str.set(dispositivo.GetHost())
         self.__vScrittaPorta_str.set(dispositivo.GetPorta())
         self.__vScrittaTempoTraPing_str.set(str(dispositivo.GetTempoTraPing()))
-        if status == None: status = dispositivo.GetStatusConnessione() 
+        if status == None: 
+            status = dispositivo.GetStatusConnessione() 
         self.SetStatus(status)
 
     def SetStatus(self, status : bool):

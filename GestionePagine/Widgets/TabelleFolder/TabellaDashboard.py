@@ -1,8 +1,9 @@
 from GestionePagine.Widgets.TabelleFolder.FakeTabellaScorribile import *
 from GestionePagine.Widgets.ElementiTabelle.FrameDashboardIntabellabile import *
+from GestioneFiltri.GestoreFiltri import * 
+
 
 class FakeTabellaDashboard(FakeTabellaScorribile):
-
 
     # COSTRUTTORE
     def __init__(self, 
@@ -32,8 +33,11 @@ class FakeTabellaDashboard(FakeTabellaScorribile):
         
         #Attributi ordinamento frame
         self.__semaforoPosizionamentoDispositivi = Lock()
-        GestoreDispositivi.ISetFunzioneNotificaCambioStatus(self.__Notifica_CambioStatoDispositivo)
-
+        self.__gestoreFiltri = GestoreFiltri(nomeFiltro = "statusOffOn")
+        MyEventHandler.BindEvent(eventType = MyFilterChanged, functionToBind = lambda args : self.__Notifica_CambioStatoDispositivo(args))
+        MyEventHandler.BindEvent(eventType = MyFilterElementChanged, functionToBind = lambda idElemento : self.__Notifica_AggiornamentoElementoNecessario(idElemento))
+        MyEventHandler.BindEvent(eventType = MyFilterRefreshed, functionToBind = self.__Notifica_RefreshListaNecessario)
+        MyEventHandler.BindEvent(eventType = MyFilterRebuilt, functionToBind = self.__Notifica_RebuildListaNecessario)
 
 
     # AGGIORNA FRAMES E MOSTRA
@@ -49,7 +53,7 @@ class FakeTabellaDashboard(FakeTabellaScorribile):
     def RefreshFrameDispositivi(self): 
         #Aggiorno il numero di frame
         self.__semaforoPosizionamentoDispositivi.acquire()
-        numDispositiviRichiesto = len(GestoreDispositivi.IGetListaDispositivi())
+        numDispositiviRichiesto = self.__gestoreFiltri.GetNumElementi()
         self.RefreshNumeroFrame(numDispositiviRichiesto, lambda i : FrameDashboardIntabellabile(master = self.GetFrameTabella(),
                                                                     x = 0, 
                                                                     y = 0, 
@@ -62,17 +66,18 @@ class FakeTabellaDashboard(FakeTabellaScorribile):
 
     # FUNZIONI NOTIFICA
     def __Notifica_CambioStatoDispositivo(self, idDispositivo : int, nuovoStato : bool = True): #Viene chiamata quando c'è un cambio stato
-        idDispSuListaOrdinata = GestoreDispositivi.IGetIdListaOrdinataDaIdDispositivo(idDispositivo)
-        if idDispSuListaOrdinata < self._indiciElementiInterni[0] or idDispSuListaOrdinata > self._indiciElementiInterni[1]:
+        LOG.log("A notification was not handled in: \"TabellaDashboard\"", LOG_WARNING)
+    def __Notifica_AggiornamentoElementoNecessario(self, idElemento : int):
+        idFakeElemento = idElemento - self._indiciElementiInterni[0]
+        print("cambio Funcz tabella", idElemento, idFakeElemento)
+        if idFakeElemento < 0 or idFakeElemento > self._numOf_elementiMassimo - 1: 
             return
-        self._elementiIntabellabili[idDispSuListaOrdinata - self._indiciElementiInterni[0]].AggiornaAttributiElemento(idDispositivo = idDispositivo, status = nuovoStato)
-    
-    def __Notifica_AggiornamentoElementoNecessario(self, idElemento):
-        return
-    def __Notifica_SwapElementi(self, idElemento1, idElemento2):
-        return
-    def __Notifica_OrdinamentoListaNecessario(self):
-        return 
+        print("allgood")
+        self._elementiIntabellabili[idFakeElemento].AggiornaAttributiElemento(idDispositivo = self.__gestoreFiltri.GetIdDispositivo(idElemento))
+    def __Notifica_RefreshListaNecessario(self):
+        self.RefreshFrameDispositivi() 
+    def __Notifica_RebuildListaNecessario(self):
+        self.RefreshFrameDispositivi()
 
 
     # METODI RESIZE E PERSONALIZZAZIONE

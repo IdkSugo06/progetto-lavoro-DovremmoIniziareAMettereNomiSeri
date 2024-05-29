@@ -25,39 +25,74 @@ class MyThemeChanged(MyEvent):
 # DEVICES
 class MyDispositivoAggiunto(MyEvent):
     functionsBound = []
-    def __init__(self, args : dict[tuple("idDispositivo") : any]): 
+    def __init__(self, args : dict[tuple(("idDispositivo")) : any]): 
         super().__init__()
         for function in MyDispositivoAggiunto.functionsBound:
             function(args["idDispositivo"])
 
 class MyDispositivoRimosso(MyEvent):
     functionsBound = []
-    def __init__(self, args : dict[tuple("idDispositivo") : any]): 
+    def __init__(self, args : dict[tuple(("idDispositivo")) : any]): 
         super().__init__()
         for function in MyDispositivoRimosso.functionsBound:
             function(args["idDispositivo"])
 
 class MyDispositivoModificato(MyEvent):
     functionsBound = []
-    def __init__(self, args : dict[tuple("idDispositivo") : any]): 
+    def __init__(self, args : dict[tuple(("idDispositivo")) : any]): 
         super().__init__()
         for function in MyDispositivoModificato.functionsBound:
             function(args["idDispositivo"])
 
 class MyStatoDispositivoCambiato(MyEvent):
     functionsBound = []
-    def __init__(self, args : dict[tuple("idDispositivo", "stato") : any]): 
+    def __init__(self, args : dict[tuple(("idDispositivo", "stato")) : any]): 
         super().__init__()
-        for function in MyDispositivoModificato.functionsBound:
+        for function in MyStatoDispositivoCambiato.functionsBound:
             function(args["idDispositivo"], args["stato"])               
+
+class MyFiltroRefreshNeeded(MyEvent):
+    functionsBound = []
+    def __init__(self, args : dict[str : any]): 
+        super().__init__()
+        for function in MyFiltroRefreshNeeded.functionsBound:
+            function()  
+
+class MyFiltroRebuildNeeded(MyEvent):
+    functionsBound = []
+    def __init__(self, args : dict[str : any]): 
+        super().__init__()
+        for function in MyFiltroRebuildNeeded.functionsBound:
+            function()    
 
 # FILTERS
 class MyFilterChanged(MyEvent):
     functionsBound = []
-    def __init__(self, args : dict[tuple("tipoFiltro", "codice", "args") : any]):
+    def __init__(self, args : dict[tuple(("tipoFiltro", "codice", "args")) : any]):
         super().__init__()
         for function in MyFilterChanged.functionsBound:
             function(args["tipoFiltro", args["codice"], args["args"]])
+
+class MyFilterRefreshed(MyEvent):
+    functionsBound = []
+    def __init__(self, args : dict[str : any]):
+        super().__init__()
+        for function in MyFilterRefreshed.functionsBound:
+            function()
+
+class MyFilterRebuilt(MyEvent):
+    functionsBound = []
+    def __init__(self, args : dict[str : any]):
+        super().__init__()
+        for function in MyFilterRebuilt.functionsBound:
+            function()
+
+class MyFilterElementChanged(MyEvent):
+    functionsBound = []
+    def __init__(self, args : dict[tuple("idElemento") : any]):
+        super().__init__()
+        for function in MyFilterElementChanged.functionsBound:
+            function(args["idElemento"])
 
             
 

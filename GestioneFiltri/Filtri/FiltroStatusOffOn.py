@@ -16,23 +16,36 @@ class FiltroStatusOffOn(FiltroGenerico):
     @staticmethod
     def _Notifica_ModificatoDispositivo(idDispositivo : int):
         return #La modifica non cambia lo stato
+    @staticmethod
+    def _Notifica_OrdinaLista():
+        FiltroStatusOffOn.GetFiltro()._OrdinaLista()
+    @staticmethod
+    def _Notifica_RebuildLista():
+        FiltroStatusOffOn.GetFiltro()._RebuildLista()
 
-
+    # ISTANZA STATICA
     _filtroStatus = None
-    #Costruttore
+    
+    # COSTRUTTORI
+    @staticmethod
+    def Init():
+        if FiltroStatusOffOn._filtroStatus == None:
+            FiltroStatusOffOn._filtroStatus = FiltroStatusOffOn()
     @staticmethod
     def GetFiltro():
         if FiltroStatusOffOn._filtroStatus == None:
             FiltroStatusOffOn._filtroStatus = FiltroStatusOffOn()
         return FiltroStatusOffOn._filtroStatus
     
-    def _init_(self):
-        super().__init__(self)
+    def __init__(self):
+        super().__init__("statusOffOn")
         self._numOf_dispositiviOffline = 0
-        MyEventHandler.BindEvent(eventType = MyDispositivoAggiunto, functionToBind = lambda args : FiltroStatusOffOn._Notifica_AggiuntoDispositivo(args))
-        MyEventHandler.BindEvent(eventType = MyDispositivoRimosso, functionToBind = lambda args : FiltroStatusOffOn._Notifica_RimossoDispositivo(args))
-        MyEventHandler.BindEvent(eventType = MyDispositivoModificato, functionToBind = lambda args : FiltroStatusOffOn._Notifica_ModificatoDispositivo(args))
-        MyEventHandler.BindEvent(eventType = MyStatoDispositivoCambiato, functionToBind = lambda args : FiltroStatusOffOn._Notifica_CambioStatoDispositivo(args))
+        MyEventHandler.BindEvent(eventType = MyDispositivoAggiunto, functionToBind = lambda idDispositivo : FiltroStatusOffOn._Notifica_AggiuntoDispositivo(idDispositivo))
+        MyEventHandler.BindEvent(eventType = MyDispositivoRimosso, functionToBind = lambda idDispositivo : FiltroStatusOffOn._Notifica_RimossoDispositivo(idDispositivo))
+        MyEventHandler.BindEvent(eventType = MyDispositivoModificato, functionToBind = lambda idDispositivo : FiltroStatusOffOn._Notifica_ModificatoDispositivo(idDispositivo))
+        MyEventHandler.BindEvent(eventType = MyStatoDispositivoCambiato, functionToBind = lambda idDispositivo, nuovoStato : FiltroStatusOffOn._Notifica_CambioStatoDispositivo(idDispositivo, nuovoStato))
+        MyEventHandler.BindEvent(eventType = MyFiltroRefreshNeeded, functionToBind = FiltroStatusOffOn._Notifica_OrdinaLista)
+        MyEventHandler.BindEvent(eventType = MyFiltroRebuildNeeded, functionToBind = FiltroStatusOffOn._Notifica_RebuildLista)
 
     
     # ORDINAMENTO LISTA
@@ -45,14 +58,15 @@ class FiltroStatusOffOn(FiltroGenerico):
             idDispositivo2 = self._listaOrdinata[self._numOf_dispositiviOffline]
             self._numOf_dispositiviOffline += 1
         
-        #Se i dispositivi sono gli stessi cambio lo stato e basta
-        if idDispositivo1 == idDispositivo2:
-            MyEventHandler.Throw(MyFilterChanged, {"tipoFiltro" : FiltroStatusOffOn, "codice" : "cambioStato", "args" : [idDispositivo1, nuovoStato]})
-            return
 
         #Mi salvo gli id dei dispositivi sulla lista ordinata attuale
         idSuListaOrdinataDisp1 = self._idDispToIdListaOrdinata[idDispositivo1] 
         idSuListaOrdinataDisp2 = self._idDispToIdListaOrdinata[idDispositivo2] 
+        print("cambio ")
+        #Se i dispositivi sono gli stessi cambio lo stato e basta
+        if idSuListaOrdinataDisp1 == idSuListaOrdinataDisp2:
+            MyEventHandler.Throw(MyFilterElementChanged, {"idElemento" : idSuListaOrdinataDisp1, "stato" : nuovoStato})
+            return
         
         #Inverto gli id nella lista di associazione id
         self._idDispToIdListaOrdinata[idDispositivo1] = idSuListaOrdinataDisp2
@@ -62,8 +76,8 @@ class FiltroStatusOffOn(FiltroGenerico):
         self._listaOrdinata[idSuListaOrdinataDisp2] = idDispositivo1
 
         #Notifico il cambio
-        MyEventHandler.Throw(MyFilterChanged, {"tipoFiltro" : FiltroStatusOffOn, "codice" : "cambioStato", "args" : [idDispositivo1, nuovoStato]})
-        MyEventHandler.Throw(MyFilterChanged, {"tipoFiltro" : FiltroStatusOffOn, "codice" : "cambioStato", "args" : [idDispositivo2, not nuovoStato]})
+        MyEventHandler.Throw(MyFilterElementChanged, {"idElemento" : idSuListaOrdinataDisp1, "stato" : nuovoStato})
+        MyEventHandler.Throw(MyFilterElementChanged, {"idElemento" : idSuListaOrdinataDisp2, "stato" : not nuovoStato})
     
     def _AggiungiDispositivo(self, idDispositivo : int):
         #L'elmento inizializzato sarà offline, lo aggiungo come primo elemento alla lista
@@ -106,7 +120,12 @@ class FiltroStatusOffOn(FiltroGenerico):
                 self._numOf_dispositiviOffline += 1
             i_dispositivo += 1
     
-    def _RicreaLista(self):
-        self._listaOrdinata = [None] * GestoreDispositivi.IGetNumDispositivi()
-        self._idDispToIdListaOrdinata = [None] * GestoreDispositivi.IGetNumDispositivi()
+    def _RebuildLista(self):
+        self._numOf_elementi = GestoreDispositivi.IGetNumDispositivi()
+        self._listaOrdinata = [None] * self._numOf_elementi
+        self._idDispToIdListaOrdinata = [None] * self._numOf_elementi
+        print(self._numOf_elementi, self._listaOrdinata, self._idDispToIdListaOrdinata)
         self._OrdinaLista()
+
+
+FiltroStatusOffOn.Init()

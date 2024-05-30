@@ -104,7 +104,7 @@ class PaginaModificaDispositivo(PaginaGenerica): #Singleton
 
 
         # FRAME LOGO
-        self.__fFrameLogo = tk.Frame(master = self.__fFrameSchedaModificaDispositivo, background=self.__coloreSfondoInterno) #Creo il logo in alto a sinistra
+        self.__fFrameLogo = tk.Frame(master = self.__fFrameSchedaModificaDispositivo, background=self.__coloreSfondoInterno, highlightthickness = 0) #Creo il logo in alto a sinistra
         self.__fFrameLogo.grid(row = 0, column=1, columnspan=2, sticky="nsew")
         self.__fFrameLogo.columnconfigure(0, weight = 1)
         self.__fFrameLogo.rowconfigure(0, weight = 5)
@@ -120,7 +120,7 @@ class PaginaModificaDispositivo(PaginaGenerica): #Singleton
         self.__cCanvasLogo.grid(row = 0, column = 0, sticky = "nsew") 
         self.__myImgLogo = MyImageTk(self.__cCanvasLogo, Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMMAGINE_LOGO))
         self.__myImgLogo.Resize(int((1/18) * Impostazioni.sistema.dimensioniFinestra[0]),
-                              int((1/18) * Impostazioni.sistema.dimensioniFinestra[1]))
+                              int((1/12) * Impostazioni.sistema.dimensioniFinestra[1]))
         self.__myImgLogo.Show()
 
         

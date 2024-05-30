@@ -120,6 +120,26 @@ class PaginaDispositivi(PaginaGenerica): #Singleton
         self.__bBottoneAggiuntaDispositivo.grid(row = 0, column=0, sticky="nsew")
 
 
+        #FRAME SUPPORTO COMBOBOX FILTRI
+        self.__fFrameComboboxFiltri = tk.Frame(master = self.__fFrameInternoCanvasScorrevole)
+        self.__dimCombobox = (150, 40)
+        self.__offsetCombobox = (8,8)
+        self.__fFrameComboboxFiltri.place(x = self.__dimensioniTabellaDispositivi[0] - (self.__dimCombobox[0] + self.__offsetCombobox[0]) - (self.__dimBottone[0] + self.__offsetBottone[0]), 
+                                                      y = SPAZIO_ALTO_PAGINA_DISPOSITIVI - (self.__dimCombobox[1] + self.__offsetCombobox[1]), width = self.__dimCombobox[0], height = self.__dimCombobox[1], anchor= "nw")
+        self.__fFrameComboboxFiltri.columnconfigure(0, weight = 1)
+        self.__fFrameComboboxFiltri.rowconfigure(0, weight = 1)
+        self.__fFrameComboboxFiltri.grid_propagate(False)
+        self.__fFrameComboboxFiltri.pack_propagate(False)
+
+        # COMBOBOX FILTRI
+        self.__cComboboxCambioFiltro = MyCombobox(master = self.__fFrameComboboxFiltri,
+                                                        command = None,
+                                                        values= ["Alfabetico", ""]
+                                                        )
+        self.__cComboboxCambioFiltro.grid(row = 0, column=0, sticky="nsew")
+
+
+
         #FRAME DELLE SCRITTE SOPRA LA TABELLA
         self.__fFrameTextLabel = tk.Frame(master = self.__fFrameInternoCanvasScorrevole)
         self.__fFrameTextLabel.place(x = SPAZIO_LATI_PAGINA_DISPOSITIVI, y = SPAZIO_ALTO_PAGINA_DISPOSITIVI, width = self.__dimensioniTabellaDispositivi[0], height = Impostazioni.personalizzazioni.altezza_elemento_tabella_paginaDispositivi, anchor = "nw")

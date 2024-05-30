@@ -118,7 +118,7 @@ class PaginaAggiuntaDispositivo(PaginaGenerica): #Singleton
         self.__cCanvasLogo.grid(row = 0, column = 0, sticky = "nsew") 
         self.__myImgLogo = MyImageTk(self.__cCanvasLogo, Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMMAGINE_LOGO))
         self.__myImgLogo.Resize(int((1/18) * Impostazioni.sistema.dimensioniFinestra[0]),
-                              int((1/18) * Impostazioni.sistema.dimensioniFinestra[1]))
+                              int((1/12) * Impostazioni.sistema.dimensioniFinestra[1]))
         self.__myImgLogo.Show()
 
         

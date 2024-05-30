@@ -1,4 +1,5 @@
 from Utility.FUtility import *
+import Utility.Impostazioni.Impostazioni as Impostazioni
 import json
 
 
@@ -9,30 +10,27 @@ class Tema:
 
     @staticmethod
     def Init():
-        Tema.__temi_dictStrToTema["temaDefault"] = Tema("temaDefault")
-
-    #legge il file e ne "estrae" i dati, se non è stato passato un tema specifico imposto il primo/default, altrimnti imposto il tema passato come parametro e se non lo trova va nell'except
-    def __init__(self, themeName=None):
         with open(PATH_JSON_TEMI, 'r') as file:
-            data = json.load(file)
-        if themeName == None:
-            self.__coloriSfondo = data.get("coloriSfondo_temaDefault")
-            self.__dictfont = data.get("fonts_temaDefault")
+            temi = json.load(file).get("temi") #Dizionario di temi
+        #Per ogni tema lo appendo ai temi
+        for tema in temi:
+            Tema.__temi_dictStrToTema[tema] = Tema(temi[tema])
+            if Tema.__temi_dictStrToTema[tema] == None:
+                LOG.log("Errore durante la lettura di un tema: " + str(tema), LOG_ERROR)
+                del Tema.__temi_dictStrToTema[tema]
 
-            #Provo ad accedere al modificatore, se non cè lo imposto default
-            
-        else:
-            try:
-                self.__coloriSfondo = data.get("coloriSfondo_"+themeName)
-                self.__dictfont = data.get("fonts_"+themeName)
-
-                #Provo ad accedere al modificatore, se non specificato lo imposto default
-                self.__modificatoreFinePath = self.__dictfont["modificatoreFinePath"]
-                if self.__modificatoreFinePath == "":
-                    self.__modificatoreFinePath = "_temaDefault"
-            except:
-                LOG.log("Errore durante la ricerca del tema: " + str(themeName), LOG_ERROR)
-
+    #legge il file e ne "estrae" i dati, se non è stato passato un tema specifico imposto il primo/default, altrimnti imposto il tema passato come parametro e se non lo trova va nell'except    
+    def __init__(self, tema : dict[str : dict[str : str]]):
+        #Mi salvo i dizionari
+        try:
+            self.__coloriSfondo = tema["coloriSfondo"]
+            self.__dictfont = tema["fonts"]
+            #Cerco il modificatore path, se non trovato uso il default
+            self.__modificatoreFinePath = self.__dictfont["modificatoreFinePath"]
+            if self.__modificatoreFinePath == "":
+                self.__modificatoreFinePath = "_temaDefault"
+        except Exception as e:
+            return None
 
     @staticmethod
     def __GetTemaCaricatoAttualmente(): #Returna tema, temaDefault se non trovato
@@ -43,11 +41,6 @@ class Tema:
             Tema.Init()
             return Tema.__temi_dictStrToTema["temaDefault"]
         
-    @staticmethod
-    def ICaricaNuovoTema(nomeTema : str, impostaComeAttuale : bool = True) -> None:
-        Tema.__temi_dictStrToTema[nomeTema] = Tema(nomeTema)
-        if impostaComeAttuale: Tema.__keyTemaCaricatoAttualmente = nomeTema
-
     @staticmethod
     def IImpostaTemaAttuale(nomeTema : str) -> None:
         Tema.__keyTemaCaricatoAttualmente = nomeTema
@@ -69,6 +62,7 @@ class Tema:
             return Tema.__GetTemaCaricatoAttualmente().__coloriSfondo[tipoColore]
         except:
             LOG.log("Errore durante la ricerca del colore: " + str(tipoColore) + "; per: " + str(Tema.__keyTemaCaricatoAttualmente), LOG_ERROR)
+            return ("#000000", "#FFFFFF")
 
     @staticmethod 
     def IGetFont_ctkFormat(fontCategory : str, dimensione : int = None) -> tuple:
@@ -80,6 +74,7 @@ class Tema:
             return result
         except:
             LOG.log("Errore durante la ricerca di un font: " + str(fontCategory) + "; per: " + str(Tema.__keyTemaCaricatoAttualmente), LOG_ERROR)
+            return ("arial","9")
     @staticmethod    
     def IGetFont(fontCategory : str, dimensione : int = None) -> str: #esempio "arial 18 bold"
         try:
@@ -90,6 +85,7 @@ class Tema:
             return font[0] + " " + str(font[1]) + str(modificatore)
         except:
             LOG.log("Errore durante la ricerca di un font: " + str(fontCategory) + "; per: " + str(Tema.__keyTemaCaricatoAttualmente), LOG_ERROR)
+            return "arial 9"
 
     @staticmethod    
     def IGetFontColor(fontCategory : str) -> str: #esempio "#FFFFFF"
@@ -98,6 +94,7 @@ class Tema:
             return font[2]
         except:
             LOG.log("Errore durante la ricerca di un font: " + str(fontCategory) + "; per: " + str(Tema.__keyTemaCaricatoAttualmente), LOG_ERROR)
+            return "#FFFFFF"
 
     @staticmethod
     def IGetPathTemaCorrente(pathOriginale : str) -> str: #ritorna la path relativa al tema
@@ -107,6 +104,4 @@ class Tema:
 
 #inizializzazione temi
 Tema.Init()
-Tema.ICaricaNuovoTema("temaChiaro", False)
-Tema.ICaricaNuovoTema("temaCaprio", False)
 Tema.IImpostaTemaAttuale("temaDefault")

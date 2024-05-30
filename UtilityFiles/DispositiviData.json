@@ -1,0 +1,8 @@
+{
+	"dispositivi" : {
+		"0" : {	"nomeMacchina" : "Nome macchina","host" : "Ip host (es: 192.0.0.1 / www.google.com)","porta" : "Porta","timeTraPing" : "1.0"},
+		"1" : {	"nomeMacchina" : "Nome macchina","host" : "Ip host (es: 192.0.0.1 / www.google.com)","porta" : "Porta","timeTraPing" : "1.080987"},
+		"2" : {	"nomeMacchina" : "Nome macchina","host" : "Ip host (es: 192.0.0.1 / www.google.com)","porta" : "Porta","timeTraPing" : "1.0"},
+		"3" : {	"nomeMacchina" : "Nome macchina","host" : "Ip host (es: 192.0.0.1 / www.google.com)","porta" : "Porta","timeTraPing" : "1.0"}
+	}
+}

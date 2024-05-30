@@ -42,15 +42,6 @@ class  TabellaImpostazioni(TabellaScorribile):
                                     proporzionePeso = 0.15
                                     )
         
-        self.__AggiungiImpostazione(
-                                    tipoImpostazione = "non worka", 
-                                    tipoWidget = MyCombobox, 
-                                    argomentiCostruttoreWidget = {
-                                                            "values" : ["50","30","10"],
-                                                            "command" : self.__CheckBox_FPSCambiato
-                                                            },
-                                    proporzionePeso = 0.15
-                                    )
         
 
     # ADD IMPOSTAZIONE
@@ -86,7 +77,4 @@ class  TabellaImpostazioni(TabellaScorribile):
 
     # METODI EVENTO
     def __CheckBox_TemaCambiato(self):
-        Impostazioni.Tema.IImpostaTemaAttuale(self._elementiIntabellabili[0].GetWidget().Get())
-
-    def __CheckBox_FPSCambiato(self):
         Impostazioni.Tema.IImpostaTemaAttuale(self._elementiIntabellabili[0].GetWidget().Get())

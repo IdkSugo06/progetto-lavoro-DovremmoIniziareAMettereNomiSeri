@@ -118,7 +118,7 @@ class TabellaScorribile(tk.Frame): #Occuperà tutto lo spazio disponibile
         if self._pointerCanvas < 1:
             self._pointerCanvas = 1
         elif self._pointerCanvas + self.__dimensioniTabella[1] > altezzaElementi:
-            self._pointerCanvas = (altezzaElementi - self.__dimensioniTabella[1]) - 1
+            self._pointerCanvas = (altezzaElementi - self.__dimensioniTabella[1]) - 2
 
         #Visualizzati da idPrimo e idUltimo compreso
         idPrimoDentro = floor(self._pointerCanvas / self.dimensioniElemento[1])
@@ -228,7 +228,7 @@ class TabellaScorribile(tk.Frame): #Occuperà tutto lo spazio disponibile
         if self._pointerCanvas < 1:
             self._pointerCanvas = 1
         elif self._pointerCanvas + altezzaSchermo > altezzaElementi:
-            self._pointerCanvas = (altezzaElementi - altezzaSchermo) - 1
+            self._pointerCanvas = (altezzaElementi - altezzaSchermo) - 2
 
         #Controllo chi è dentro e chi fuori dalla tabella dopo
         idPrimoDentroOra = floor(self._pointerCanvas / altezzaElementoSingolo) 

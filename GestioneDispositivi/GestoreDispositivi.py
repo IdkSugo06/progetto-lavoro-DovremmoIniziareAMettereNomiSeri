@@ -1,5 +1,6 @@
 from GestioneDispositivi.GestoreDispositivi import *
 from GestioneDispositivi.Dispositivo import *
+import json
 
 
 class GestoreDispositivi:
@@ -16,153 +17,171 @@ class GestoreDispositivi:
         return GestoreDispositivi.__gestoreConnessioni
 
 
-    # INTERFACCE
+    # INTERFACCE ADD MOD CLEAR
     @staticmethod
     def IAddInformazioneDispositivoConnessione(nome : str, host : str, porta : str, timeTraPing : float):
-        return GestoreDispositivi.__gestoreConnessioni.__addConnessione(nome, host, porta, timeTraPing)
+        return GestoreDispositivi.GetGestoreConnessioni().__addConnessione(nome, host, porta, float(timeTraPing))
     @staticmethod
     def IModificaInformazioneDispositivoConnessione(idPosizionale : int, nome : str, host : str, porta : str, tempoTraPing : float):
-        return GestoreDispositivi.__gestoreConnessioni.__modificaConnessione(idPosizionale, nome, host, porta, tempoTraPing)
+        return GestoreDispositivi.GetGestoreConnessioni().__modificaConnessione(idPosizionale, nome, host, porta, tempoTraPing)
     @staticmethod
     def IRemoveInformazioneDispositivoConnessione(idDispositivo : int):
-        return GestoreDispositivi.__gestoreConnessioni.__rimuoviConnessione(idDispositivo)
+        return GestoreDispositivi.GetGestoreConnessioni().__rimuoviConnessione(idDispositivo)
     @staticmethod
     def IClearInformazioniConnessioniDispositivi():
-        return GestoreDispositivi.__gestoreConnessioni.__clearConnessioni()
+        return GestoreDispositivi.GetGestoreConnessioni().__clearConnessioni()
 
+    # INTERFACCE GET INFO DISPOSITIVI
     @staticmethod
     def IGetDispositivo(idPosizionale : int) -> Dispositivo:
-        return GestoreDispositivi.__gestoreConnessioni.__informazioniConnessioniDispositivi[idPosizionale]
-    
-    @staticmethod
-    def IGetStatConnessioni() -> list[tuple[int,bool,str,int]]: #Ritorna una lista (idDispositivo : int, status : bool, host : str, stabilitàConnessione : int)
-        return GestoreDispositivi.__gestoreConnessioni.__getStatConnessioni()
-
-    @staticmethod
-    def IAggiornamentoStatusConnessioni():
-        t = Thread(target=GestoreDispositivi.__gestoreConnessioni.__AggiornamentoStatusConnessioni)
-        t.start()
-
+        return GestoreDispositivi.GetGestoreConnessioni().__dispositivi[idPosizionale]
     @staticmethod
     def IGetListaDispositivi():
-        return GestoreDispositivi.__gestoreConnessioni.__informazioniConnessioniDispositivi
+        return GestoreDispositivi.GetGestoreConnessioni().__dispositivi
+    @staticmethod
+    def IOrdinaListaDispositivi():
+        return GestoreDispositivi.GetGestoreConnessioni().__OrdinaDispositivi()
     @staticmethod
     def IGetNumDispositivi():
-        return GestoreDispositivi.__gestoreConnessioni.__numOf_dispositivi
+        return GestoreDispositivi.GetGestoreConnessioni().__numOf_dispositivi
 
+    # INTERFACCE COMUNICAZIONE CON DISPOSITIVI
     @staticmethod
-    def ISetFunzioneNotificaCambioStatus(funzioneNotificaStatoCambiato : any): #Aggiorna la funzione da chiamare quando il dispositivo cambia stato
-        Dispositivo.funzioneNotificaStatoCambiato = funzioneNotificaStatoCambiato
-        for dispositivo in GestoreDispositivi.__gestoreConnessioni.__informazioniConnessioniDispositivi:
-            dispositivo.SetFunzioneNotificaCambioStatus(funzioneNotificaStatoCambiato)
+    def IPingManuale(idDispositivo : int):
+        GestoreDispositivi.GetGestoreConnessioni().__dispositivi[idDispositivo].PingManuale()
+    
 
-    @staticmethod
-    def IPingManuale(idDispositivo):
-        GestoreDispositivi.__gestoreConnessioni.__informazioniConnessioniDispositivi[idDispositivo].PingManuale()
-
+    # COSTRUTTORE E DECOSTRUTTORE
     @staticmethod
     def IDecostruttore():
-        GestoreDispositivi.__gestoreConnessioni.__clearConnessioni()
+        if GestoreDispositivi.__gestoreConnessioni == None: return
+        GestoreDispositivi.GetGestoreConnessioni().__SalvaDispositiviSuFile()
+        GestoreDispositivi.GetGestoreConnessioni().__clearConnessioni()
         Dispositivo.semaforoThreadAttivi.acquire()
+        LOG.log("Semaforo thread ping attivi spento")
         Dispositivo.semaforoThreadAttivi.release()
         Dispositivo.pausaFinitaEvent.set() #Se sono in pausa, li faccio continuare, finiranno di distruggersi correttamente
-
-    # COSTRUTTORE
-    def __init__(self):
-        self.__informazioniConnessioniDispositivi = []
-        self.__numOf_dispositivi = 0
-        self.__precisioneCalcoloStabilita=0.01
-        self.__semaforoAccessiStatusConnessione = Lock()
+        GestoreDispositivi.__gestoreConnessioni = None
 
     def __del__(self):
-        self.IDecostruttore()
+        GestoreDispositivi.IDecostruttore()
 
-    # METODI
-    def __addConnessione(self, nome : str, host : str, porta : str, timeTraPing : float):
+    def __init__(self):
+        #Attributi dispositivi
+        self.__dispositivi = []
+        self.__numOf_dispositivi = 0
+        #Metadata ordinamento dispositivi
+        self.__precisioneCalcoloStabilita = 0.01
+        #Semaforo per add mod e clear dispositivi
+        self.__semaforoAccessiStatusConnessione = Lock()
+        self.__semaforoPosizionamentoDispositivi = Lock()
+        #Setto le funzioni di cambio stato e notifica cambio stato
+        Dispositivo.funzioneNotificaStatoCambiato = self.__CambioStatusDispositivoRilevato
+        #Inizializzerà la listaInformazioniConnessioni 
+        self.__LeggiDispositiviDaFile() 
+        self.__OrdinaDispositivi()
+
+
+    # METODI ORDINAMENTO DISPOSITIVI    
+    def __CambioStatusDispositivoRilevato(self, idDispositivo : int, nuovoStato : bool):
+        self.__semaforoPosizionamentoDispositivi.acquire()
+        MyEventHandler.Throw(MyStatoDispositivoCambiato, args = {"idDispositivo" : idDispositivo, "stato" : nuovoStato})
+        self.__semaforoPosizionamentoDispositivi.release()
+    
+    def __OrdinaDispositivi(self):
+        self.__semaforoPosizionamentoDispositivi.acquire()
+        MyEventHandler.Throw(MyFiltroRebuildNeeded)
+        self.__semaforoPosizionamentoDispositivi.release()
+
+
+    # SALVATAGGIO SU FILE
+    def __LeggiDispositiviDaFile(self):
+        with open(PATH_JSON_DISPOSITIVI, 'r') as file:
+            data = json.load(file)
+
+        #Leggo il file dei dispositivi
+        try:
+            dispositiviJson = data["dispositivi"]
+        except:
+            LOG.log("Errore durante la ricerca dei dispositivi: ", LOG_ERROR)
+            return
+        #Inizializzo i dispositivi
+        for key in dispositiviJson:
+            try:
+                dispositivoSingoloJson = dispositiviJson[key]
+                self.__addConnessione(nome = dispositivoSingoloJson["nomeMacchina"],
+                                      host = dispositivoSingoloJson["host"],
+                                      porta = dispositivoSingoloJson["porta"],
+                                      timeTraPing = float(dispositivoSingoloJson["timeTraPing"]))
+            except Exception as e:
+                LOG.log("Errore durante il caricamento del dispositivo: " + str(key) + " errore: " + str(e), LOG_ERROR)
+        
+    def __SalvaDispositiviSuFile(self):
+        #Creo la stringa dei dispositivi
+        newStr = '{\n\t\"dispositivi\" : {'
+        i_dispositivo = 0
+        for dispositivo in self.__dispositivi:
+            newLine = f'\n\t\t"{i_dispositivo}" : '
+            newLine += '{\t\"nomeMacchina\" : \"' + dispositivo.GetNome() + "\""
+            newLine += ',\"host\" : \"' + dispositivo.GetHost() + "\""
+            newLine += ',\"porta\" : \"' + dispositivo.GetPorta() + "\""
+            newLine += ',\"timeTraPing\" : \"' + str(dispositivo.GetTempoTraPing()) + "\""
+            newLine += "},"
+            newStr += newLine
+            i_dispositivo += 1
+        newStr = newStr[:-1] +"\n\t}\n}"
+        
+        #Scrivo sul file la stringa calcolata
+        filestream = open(PATH_JSON_DISPOSITIVI, "w")
+        filestream.write(newStr)
+        filestream.close()
+
+
+    # METODI ADD MOD CLEAR
+    def __addConnessione(self, nome : str, host : str, porta : str, timeTraPing : float): #Riordinamento NON necessario
         self.__semaforoAccessiStatusConnessione.acquire()
-        self.__informazioniConnessioniDispositivi.append(Dispositivo(nome, host, porta, timeTraPing, self.__numOf_dispositivi))
+        #Se è il primo thread, acquisice il semaforo
+        Dispositivo.ThreadInizializzato()
+
+        #Aggiungo il dispositivo
+        self.__dispositivi.append(Dispositivo(nome, host, porta, timeTraPing, self.__numOf_dispositivi))
+
+        #Lancio l'evento
+        MyEventHandler.Throw(MyDispositivoAggiunto, args = {"idDispositivo" : self.__numOf_dispositivi - 1})
         self.__numOf_dispositivi += 1
         self.__semaforoAccessiStatusConnessione.release()
 
     def __modificaConnessione(self, idPosizionale : int, nome : str, host : str, porta : str, tempoTraPing : float):
         self.__semaforoAccessiStatusConnessione.acquire()
-        GestoreDispositivi.__gestoreConnessioni.__informazioniConnessioniDispositivi[idPosizionale].Modifica(nome, host, porta, tempoTraPing)
+        self.__dispositivi[idPosizionale].Modifica(nome, host, porta, tempoTraPing)
+        MyEventHandler.Throw(MyDispositivoModificato, args = {"idDispositivo" : idPosizionale})
         self.__semaforoAccessiStatusConnessione.release()
 
-    def __rimuoviConnessione(self, Iddisp): 
+    def __rimuoviConnessione(self, idDispositivo : int): #Riordinamento necessario
         self.__semaforoAccessiStatusConnessione.acquire()
-        dispositivo = self.__informazioniConnessioniDispositivi.pop(Iddisp)
-        self.__numOf_dispositivi -= 1
+        #Rimuovo il dispositivo dalla lista e chiamo il decostruttore
+        dispositivo = self.__dispositivi.pop(idDispositivo)
         dispositivo.myDeconstructor()
-        for i in range(Iddisp, self.__numOf_dispositivi):
-            self.__informazioniConnessioniDispositivi[i].DecreseId()
+
+        #Decremento gli id della lista
+        for i in range(idDispositivo, self.__numOf_dispositivi - 1):
+            self.__dispositivi[i].DecreseId()
+        
+        #Diminuisco il numero di elementi
+        self.__numOf_dispositivi -= 1 
+        MyEventHandler.Throw(MyDispositivoRimosso, args = {"idDispositivo" : self.__numOf_dispositivi})
         self.__semaforoAccessiStatusConnessione.release()
 
-    
     def __clearConnessioni(self):
         self.__semaforoAccessiStatusConnessione.acquire()
-        for dispositivo in self.__informazioniConnessioniDispositivi:
+        for dispositivo in self.__dispositivi:
             dispositivo.myDeconstructor()
         #Mi accerto che tutti i thread siano stati distrutti prima di svuotare la lista
         Dispositivo.semaforoThreadAttivi.acquire()
         Dispositivo.semaforoThreadAttivi.release()
-        self.__informazioniConnessioniDispositivi = []
+        self.__dispositivi = []
         self.__numOf_dispositivi = 0
-        self.__semaforoAccessiStatusConnessione.release()
-
-
-    #Ritorna le stabilità di connessioni
-    def __getStatConnessioni(self) -> list[tuple[int,bool,str,int]]: #Ritorna una lista (idDispositivo : int, status : bool, host : str, stabilitàConnessione : int): 
-
-        #Creo la lista di stabilità (ordinate in ordine crescente, il primo ha coefficente minore)
-        outputArray = [None] * len(self.__informazioniConnessioniDispositivi) #La alloco prima per risparmiare prestazioni
-
-        #Per ogni dispositivo
-        i_idDispositivoAnalizzato = 0
-        for informazioneConnessioneDispositivo in self.__informazioniConnessioniDispositivi:
-            
-            #Popolo l'output array
-            stabilitaConnessioneDispAnalizzato = informazioneConnessioneDispositivo.GetStabilitaConnessione()
-            stabilitaConnessione_int = int(round((stabilitaConnessioneDispAnalizzato/(100*self.__precisioneCalcoloStabilita)), 2)/self.__precisioneCalcoloStabilita)
-            outputArray[i_idDispositivoAnalizzato] = (i_idDispositivoAnalizzato, 
-                                                      informazioneConnessioneDispositivo.GetStatusConnessione(), 
-                                                      GestoreDispositivi.IGetDispositivo(i_idDispositivoAnalizzato).GetHost(),
-                                                      stabilitaConnessione_int)
-            i_idDispositivoAnalizzato += 1
-
-        #L'array avrà valore massimo 
-        return InsertionSort(outputArray, lambda t : t[0][3] > t[1][3])
-
-
-    # METODI PING
-    def __ping_host(self, host) -> bool:
-        try:
-            param = '-n 1' if os.sys.platform.lower() == 'win32' else '-c 1'
-            command = f"ping {param} {host} -w 200"
-            result = subprocess.run(command, capture_output=True, text=True, timeout=1)
-
-            # Se il returncode è 0, nessun errore
-            return result.returncode == 0
-        except subprocess.TimeoutExpired:
-            return False
-        
-    def __AggiornamentoStatusConnessioni(self):
-        #Creo i threads
-        threads = [Thread(target = self.__AggiornamentoStatusSingolaConnessione, args=[i]) for i in range(len(self.__informazioniConnessioniDispositivi))]
-
-        #Blocco l'accesso agli status
-        self.__semaforoAccessiStatusConnessione.acquire()
-        for t in threads:
-            t.start()
-        #Aspetto che joinino prima di riconsentire l'accesso allo status dispositivi
-        for t in threads:
-            t.join()
-        self.__semaforoAccessiStatusConnessione.release()
-
-    def __AggiornamentoStatusSingolaConnessione(self, idPosizionaleDispositivo : int):
-        risultatoConnessione = self.__ping_host(GestoreDispositivi.IGetDispositivo(idPosizionaleDispositivo).GetHost())
-        self.__informazioniConnessioniDispositivi[idPosizionaleDispositivo].SetPingResult(risultatoConnessione)
-    
+        self.__semaforoAccessiStatusConnessione.release()    
     
     
 GestoreDispositivi.GetGestoreConnessioni()

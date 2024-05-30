@@ -118,7 +118,7 @@ class PaginaModificaDispositivo(PaginaGenerica): #Singleton
         # LOGO
         self.__cCanvasLogo = tk.Canvas(master = self.__fFrameSecondarioLogo) #Creo il logo in alto a sinistra
         self.__cCanvasLogo.grid(row = 0, column = 0, sticky = "nsew") 
-        self.__myImgLogo = MyImageTk(self.__cCanvasLogo, PATH_IMMAGINE_LOGO)
+        self.__myImgLogo = MyImageTk(self.__cCanvasLogo, Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMMAGINE_LOGO))
         self.__myImgLogo.Resize(int((1/18) * Impostazioni.sistema.dimensioniFinestra[0]),
                               int((1/18) * Impostazioni.sistema.dimensioniFinestra[1]))
         self.__myImgLogo.Show()

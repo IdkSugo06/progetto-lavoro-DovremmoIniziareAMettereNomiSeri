@@ -1,37 +1,37 @@
-: Ping eseguito
-: Ping eseguito
-: Ping eseguito
+: Costruttore gestore mail concluso
+: Thread terminati correttamente
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "Ip host (es: 192.0.0.1 / www.google.com)", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "Ip host (es: 192.0.0.1 / www.google.com)", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "Ip host (es: 192.0.0.1 / www.google.com)", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "Ip host (es: 192.0.0.1 / www.google.com)", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "Ip host (es: 192.0.0.1 / www.google.com)", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "Ip host (es: 192.0.0.1 / www.google.com)", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "Ip host (es: 192.0.0.1 / www.google.com)", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "Ip host (es: 192.0.0.1 / www.google.com)", try verify your DNS or host file
+: Ping manuale inviato
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "Ip host (es: 192.0.0.1 / www.google.com)", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "Ip host (es: 192.0.0.1 / www.google.com)", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "Ip host (es: 192.0.0.1 / www.google.com)", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "Ip host (es: 192.0.0.1 / www.google.com)", try verify your DNS or host file
+: Ping manuale inviato
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "Ip host (es: 192.0.0.1 / www.google.com)", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "Ip host (es: 192.0.0.1 / www.google.com)", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "Ip host (es: 192.0.0.1 / www.google.com)", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "Ip host (es: 192.0.0.1 / www.google.com)", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "Ip host (es: 192.0.0.1 / www.google.com)", try verify your DNS or host file
 : Mail inviata
-: Ping eseguito
-: Ping eseguito
-: Mail inviata
-: Mail inviata
-: Mail inviata
-: Mail inviata
-: Mail inviata
-: Mail inviata
-: Mail inviata
-: Mail inviata
-: Mail inviata
-: Mail inviata
-: Mail inviata
-: Mail inviata
-: Mail inviata
-: Mail inviata
-: Mail inviata
-: Mail inviata
-: Mail inviata
-: Mail inviata
-: Ping eseguito
-: Mail inviata
-: Ping eseguito
-: Mail inviata
-: Ping eseguito
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "Ip host (es: 192.0.0.1 / www.google.com)", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "Ip host (es: 192.0.0.1 / www.google.com)", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "Ip host (es: 192.0.0.1 / www.google.com)", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "Ip host (es: 192.0.0.1 / www.google.com)", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "Ip host (es: 192.0.0.1 / www.google.com)", try verify your DNS or host file
 : Avvio decostruttori
+: Thread terminati correttamente
+: Semaforo thread ping attivi spento
 : Decostruttore dispositivi eseguito
 : Distruttore gestore email eseguito
 : Distruttori chiamati
 : Richiesta autorizzazione chiusura finestra....
 : Autorizzazione chiusura finestra approvata
-: Update thread concluso
+: Thread update pagine concluso
 : Finestra chiusa, fine programma

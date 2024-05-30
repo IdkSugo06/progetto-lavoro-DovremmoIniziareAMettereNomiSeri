@@ -1,5 +1,5 @@
 from GestionePagine.Pagine.PaginaGenerica import *
-from GestioneDispositivi.InterfacciaGestioneDispositivi import *
+from GestioneDispositivi.InterfacciaGestoreDispositivi import *
 
 
 #Gestirà il caricamento pagina, conterra tutte le pagine, 
@@ -27,7 +27,9 @@ class GestorePagine(): #Singleton
         return GestorePagine.__gestorePagine
     
     @staticmethod 
-    def IGetWindow(): #Chiamerà l'ononima funzione dell'istanza statica 
+    def IGetWindow(): #Chiamerà l'ononima funzione dell'istanza statica
+        if GestorePagine.__gestorePagine == None: 
+            return None 
         return GestorePagine.GetGestorePagine().__GetWindow() 
     
     @staticmethod 
@@ -96,32 +98,38 @@ class GestorePagine(): #Singleton
         Impostazioni.sleepTimeBetweenUpdate = 0.5
     @staticmethod
     def EventConfigureCalled(eventTk = None):
-
         #Quando il metodo quit viene chiamato, il configure viene chiamato as well, controllo se l'esecuzione del programma è finita
         Impostazioni.sistema.semaforoSpegnimento.acquire()
-        if Impostazioni.sistema.running == False: return
+        if Impostazioni.sistema.running == False: 
+            Impostazioni.sistema.semaforoSpegnimento.release()
+            return
         Impostazioni.sistema.semaforoSpegnimento.release()
-        
+
         #Se è il thread principale, chiamo i change
         if eventTk.widget == eventTk.widget.winfo_toplevel():
             Impostazioni.sistema.dimensioniFinestra[0] = eventTk.width
             Impostazioni.sistema.dimensioniFinestra[1] = eventTk.height
             Impostazioni.sistema.ConfigureHandler.ChangeCapted()
+         #Finche non ho finito il resize, nn posso chiudere
+
     def __ResizeRequested(self):
+        Impostazioni.sistema.semaforoSpegnimento.acquire()
+        if Impostazioni.sistema.running == False: 
+            Impostazioni.sistema.semaforoSpegnimento.release()
+            return
+        Impostazioni.sistema.semaforoSpegnimento.release()
         self.__menu.CambioDimFrame()
         self.__pagine[self.__idPaginaCaricataAttualmente].CambioDimFrame()
 
     
 # METODI -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- METODI
-    # COSTRUTTORI
+    # COSTRUTTORI    
     def __init__(self): #Costruttore dovrebbe essere privato
         
-
         #Salvo una referenza alle istanze delle pagine (singleton) così da poterle utilizzare quando necessario
         self.__idPaginaCaricataAttualmente = 0 #id posizionale della pagina caricata attualmente
         self.__pagine = [] #La lista sarà popolata durante la definizione delle classi Pagina (per problemi di accesso ai file)
         self.__menu = None #La classe sarà inizializzata durante la definizione della classe Menu (per problemi di accesso ai file)
-
 
         #Creo un istanza della finestra principale e setto qualche attributo
         self.__window = tk.Tk()
@@ -130,21 +138,18 @@ class GestorePagine(): #Singleton
         self.__window.minsize(MIN_LARGHEZZA_SCHERMO, MIN_ALTEZZA_SCHERMO)
         self.__window.maxsize(MAX_LARGHEZZA_SCHERMO, MAX_ALTEZZA_SCHERMO)
 
-        
         #Divido la finestra principale in due sezioni orizzontali per il supporto dei due frame
         self.__window.rowconfigure(0, weight=1)
         self.__window.columnconfigure(0, weight=int(100 * Impostazioni.PROPORZIONE_MENU_PAGINA))
         self.__window.columnconfigure(1, weight=int(100 * (1 - Impostazioni.PROPORZIONE_MENU_PAGINA)))
         self.__window.grid_propagate(False)
-        
-
+    
         # FRAME PARTE MENU
         self.__fFrameMenu = tk.Frame(master = self.__window)
         self.__fFrameMenu.columnconfigure(0, weight=1)
         self.__fFrameMenu.rowconfigure(0, weight=1)
         self.__fFrameMenu.grid(row = 0, column = 0, sticky = "nsew")
         self.__fFrameMenu.grid_propagate(False)
-
 
         # FRAME PARTE PAGINA
         self.__fFramePagina = tk.Frame(master = self.__window)

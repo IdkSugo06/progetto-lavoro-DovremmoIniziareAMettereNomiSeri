@@ -42,6 +42,7 @@ class PaginaImpostazioni(PaginaGenerica): #Singleton
         self.__cCanvasScorrevole = tk.Canvas(master = self.__fFramePrincipale, 
                                              scrollregion = (0, 0, self.__dimensioniPaginaScorrevole[0], self.__dimensioniPaginaScorrevole[1]),
                                              bg = PaginaImpostazioni.sfondoPaginaImpostazioni)
+        self.__cCanvasScorrevole.configure(yscrollincrement='1')
         self.__cCanvasScorrevole.grid(row = 0, column = 0, sticky = "nsew")
         self.__cCanvasScorrevole.grid_propagate(False)
         self.__cCanvasScorrevole.pack_propagate(False)

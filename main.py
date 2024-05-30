@@ -2,7 +2,12 @@ from GestionePagine.Pagine.Pagine import *
 
 #Definisco il main
 def main():
-        
+
+    #Creo la funzione per distruggere la finestra
+    def QuitEvento(eventTk = None):
+        t = Thread(target = Exit)
+        t.start()
+         
     #Creo una funzione che verrà eseguita sempre da un thread separato
     def Update():
         chrono = Chrono()
@@ -14,7 +19,7 @@ def main():
         
             #Se viene rilevato un evento di errore fatale, interrompi il programma
             if MyEventHandler.CheckFatalErrorOccurred():
-                GestorePagine.ChiusuraFinestraEvento()
+                QuitEvento()
                 return 
     
             #Controllo se continuare
@@ -29,29 +34,27 @@ def main():
             Impostazioni.sistema.semaforoSpegnimento.release()
             time.sleep(Impostazioni.sistema.sleepTimeBetweenUpdate)
         
-        LOG.log("Update thread concluso")
+        LOG.log("Thread update pagine concluso")
         Impostazioni.sistema.semaforoUpdateThreadFinito.release()
         
   
-      #Creo la funzione start, che crea e avvia un thread separato prima di avviare il loop di tkInter
+      #Creo la funzione start, che crea e avvia un thread separato 'pri'ma di avviare il loop di tkInter
     def Start():
         t = Thread(target=Update)
         t.start()
         #Assegno la funzione di uscita
-        GestorePagine.IGetWindow().protocol("WM_DELETE_WINDOW", QuitEvento)
         GestorePagine.ICaricaPagina(PaginaGenerica.GetIdPagina(PAGINA_DEFAULT))
+        GestorePagine.IGetWindow().protocol("WM_DELETE_WINDOW", QuitEvento)
         GestorePagine.IMainLoop()
         t.join()
-  
-      #Creo la funzione per distruggere la finestra
-    def QuitEvento(eventTk = None):
-        t = Thread(target=Exit)
-        t.start()
 
     def Exit():
         #Chiamo tutti i distruttori prima di chiudere la finestra
         LOG.log("Avvio decostruttori")
+        Impostazioni.sistema.semaforoSpegnimento.acquire()
+        Impostazioni.sistema.running = False
         GestoreDispositivi.IDecostruttore()
+        Impostazioni.sistema.semaforoSpegnimento.release()
         LOG.log("Decostruttore dispositivi eseguito")
         GestoreInvioMail.IDecostruttore()
         LOG.log("Distruttore gestore email eseguito")
@@ -61,7 +64,6 @@ def main():
         LOG.log("Richiesta autorizzazione chiusura finestra....")
         Impostazioni.sistema.semaforoSpegnimento.acquire()
         LOG.log("Autorizzazione chiusura finestra approvata")
-        Impostazioni.sistema.running = False
         Impostazioni.sistema.semaforoUpdateThreadFinito.acquire()
         GestorePagine.IGetWindow().quit()
         Impostazioni.sistema.semaforoUpdateThreadFinito.release()
@@ -71,9 +73,9 @@ def main():
         #Decostruttore log
         LOG.IDecostruttore()
     
-      #Avvio il programma
-    GestorePagine.IGetWindow().bind("<Escape>", QuitEvento)
+    #Avvio il programma
     Start()  
+    GestorePagine.IGetWindow().bind("<Escape>", QuitEvento)
 
 
 #Avvio il main

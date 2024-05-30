@@ -1,6 +1,3 @@
-import sys
-sys.path.append("c:\\users\\utente\\appdata\\local\\packages\\pythonsoftwarefoundation.python.3.12_qbz5n2kfra8p0\\localcache\\local-packages\\python312\\site-packages")
-
 from Utility.Chrono import *
 from Utility.Costanti import *
 from Utility.Log import *
@@ -15,9 +12,11 @@ from PIL import Image, ImageTk
 from math import *
 import random
 
+import json
 import smtplib
-import subprocess
+import pythonping
 
+import sys
 import os
 from threading import * 
 
@@ -51,7 +50,7 @@ def RicercaInListaOrdinata(lista : list,
     elif funzioneDiComparazione(variabileDiComparazione) == -1:
         return RicercaInListaOrdinata(lista[0:puntatore], elemento, funzioneElementoLista, funzioneElementoDato, funzioneDiComparazione)
     else:
-        LOG.IPrint("errore durante la ricerca di un elemento in una lista ordinata",2)
+        LOG.log("errore durante la ricerca di un elemento in una lista ordinata",2)
         return [-1,False]
     
 #Ritorno la lista ordinata

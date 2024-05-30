@@ -9,7 +9,7 @@ mousePosFrameCorrente = [0,0]
 mousePosFramePrecedente = [0,0]
 semaforoSpegnimento = Lock()
 semaforoUpdateThreadFinito = Lock()
-sensibilita_scorrimento_rotella = (8.3/120)
+sensibilita_scorrimento_rotella = (45/120)
 coeff_stabilizzazione_connessione = 0.05
 sleepTimeBetweenUpdate = 1
 tipoOrdinamentoDashboard = "off_on"
@@ -40,13 +40,17 @@ class ConfigureHandler:
         t = Thread(target=ConfigureHandler.__Thread_StartConfigureMethods)
         t.start()
 
+
     @staticmethod
     def __Thread_StartConfigureMethods():
         #Finche capta cambiamenti nel frame, aspetta e riprova
         ConfigureHandler.__configureThreadStarted = True
         while ConfigureHandler.__changeCapted:
+            
             ConfigureHandler.__changeCapted = False
             time.sleep(ConfigureHandler.__timeBetweenConfigures)
         #Altrimenti chiama il notificatore e finisce
+
         ConfigureHandler.__notifier()
         ConfigureHandler.__configureThreadStarted = False
+

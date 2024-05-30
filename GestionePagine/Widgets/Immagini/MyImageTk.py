@@ -21,14 +21,13 @@ class MyImageTk:
         if path == "":
             LOG.log("Non è satata inserita una path nel costruttore delle immagini", LOG_WARNING)
         else:
-
             #Cerco di accedere alla path
             try:
                 #Salvo attributi riguardo l'immagine default
                 self._originalImage = Image.open(path)
                 self._originalImage.resize(qualitaImmagineRichiesta) #Diminuisco la qualità per non avere problemi di prestazioni
                 self._aspectRatio = self._originalImage.size[0] / self._originalImage.size[1]
-
+                
                 #Salvo altre copie dell'immagine
                 self._resizedImage = Image.open(path)
                 self._resizedImageTk = ImageTk.PhotoImage(self._resizedImage)
@@ -59,7 +58,6 @@ class MyImageTk:
         self._canvasWidth = width
         self._canvasHeight = height
         self._canvasAspectRatio = width / height
-
         #Controllo l'aspect ratio e ridimensiono l'immagine in base a quello
         if rispettaProporzioni:
             if self._aspectRatio < self._canvasAspectRatio: 

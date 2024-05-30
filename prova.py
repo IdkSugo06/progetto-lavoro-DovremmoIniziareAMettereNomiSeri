@@ -1,50 +1,32 @@
-import subprocess
-import threading
-import time
+import tkinter as tk
+from PIL import Image, ImageTk
+from GestionePagine.Widgets.Immagini.MySharedMultiImg import *
+root = tk.Tk()
 
-numOfThread = 100
+canvas1 = tk.Canvas()
+canvas1.place(x = 0,y = 0,width=5000,height=5000, anchor="nw")
+canvas2 = tk.Canvas()
+canvas2.place(x = 100,y = 0,width=5000,height=5000, anchor="nw")
+canvas3 = tk.Canvas()
+canvas3.place(x = 200,y = 0,width=5000,height=5000, anchor="nw")
 
-
-def InvioPing_semplice():
-    try:
-        #Invio il ping
-        subprocessResult = subprocess.run("ping -n 1 -l 1 www.google.com -w 200", capture_output=True, text=True, timeout=0.2)
-        # Se il returncode è 0, nessun errore
-        #print(subprocessResult.returncode == 0)
-    except subprocess.TimeoutExpired:
-        #print("TimeOut")
-        pass
-def AvvoInvioPing_parallelizzato_semplice():
-    global numOfThread
-    tl = [threading.Thread(target = InvioPing_semplice) for i in range(numOfThread)]
-    for t in tl:
-        t.start()
-    for t in tl:
-        t.join()
-def Start_semplice():
-    for i in range(20):
-        startTime = time.time()
-        AvvoInvioPing_parallelizzato_semplice()
-        deltaTime = time.time() - startTime
-        print(deltaTime)
-        time.sleep(max(1 - deltaTime, 0))
-
-
-def InvioPing():
-    for i in range(20):
-        startTime = time.time()
-        InvioPing_semplice()
-        deltaTime = time.time() - startTime
-        time.sleep(max(1 - deltaTime, 0))
-    print("finito")
-def AvvoInvioPing_parallelizzato():
-    global numOfThread
-    tl = [threading.Thread(target = InvioPing) for i in range(numOfThread)]
-    for t in tl:
-        t.start()
-    for t in tl:
-        t.join()
-def Start():
-    AvvoInvioPing_parallelizzato()
-
-Start()
+path = "ImmagineLogo.png"
+path2 = "ImmagineLogo copy.png"
+smi = MySharedMultiImg(pathsDict={"1" : path, "2" : path2})
+i1 = 0
+i2 = 0
+i3 = 0
+def f():
+    i1 = smi.Show(canvas1, "1")
+    i2 = smi.Show(canvas2, "1")
+    i3 = smi.Show(canvas3, "1")
+def g():
+    global i1,i2,i3
+    i1 = smi.Show(canvas1, "2", i1)
+    i2 = smi.Show(canvas2, "2", i2)
+    i3 = smi.Show(canvas3, "2", i3)
+f() 
+smi.ChangePaths({"1" : path, "2" : path2})
+smi.ResizeAll(25,25)
+g()
+root.mainloop()

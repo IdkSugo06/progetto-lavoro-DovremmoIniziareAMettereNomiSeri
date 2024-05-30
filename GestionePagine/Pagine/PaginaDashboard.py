@@ -66,14 +66,13 @@ class PaginaDashboard(PaginaGenerica): #Singleton
         self.__dimensioniTabellaDashboard = [int(self.__dimensioniPagina[0] - SPAZIO_LATI_PAGINA_DISPOSITIVI * 2),
                                                 self.__dimensioniPagina[1] - SPAZIO_ALTO_PAGINA_DISPOSITIVI * 2]
         # CREO LE TABELLE
-        self.__tabellaDashboard = TabellaDashboard(master = self.__fFrameInternoCanvasScorrevole,
+        self.__tabellaDashboard = FakeTabellaDashboard(master = self.__fFrameInternoCanvasScorrevole,
                                             xPos = SPAZIO_LATI_PAGINA_DISPOSITIVI,
                                             yPos = SPAZIO_ALTO_PAGINA_DISPOSITIVI + Impostazioni.personalizzazioni.altezza_elemento_tabella_paginaDashboard,
                                             tableWidth = self.__dimensioniTabellaDashboard[0],
                                             tableHeight = self.__dimensioniTabellaDashboard[1],
                                             elementWidth = self.__dimensioniTabellaDashboard[0],
                                             elementHeight = Impostazioni.personalizzazioni.altezza_elemento_tabella_paginaDashboard)
-        self.__tabellaDashboard.RefreshFrameDispositivi()
 
         #FRAME SUPPORTO TITOLO
         self.__fFrameTitoloDashboard = tk.Frame(master = self.__fFrameInternoCanvasScorrevole, background = self.__coloreSfondo)
@@ -183,7 +182,6 @@ class PaginaDashboard(PaginaGenerica): #Singleton
     def CaricaPagina(self, args = []):
         #Mostro la pagina
         self.MostraPagina()
-
         #Aggiorno i dispositivi
         self.__tabellaDashboard.CaricaTabella()
 
@@ -196,7 +194,6 @@ class PaginaDashboard(PaginaGenerica): #Singleton
         self.__fFramePrincipale.grid_propagate(True)
         self.__fFramePrincipale.grid(row = 0, column = 0, sticky = "nsew")
         self.__fFramePrincipale.grid_propagate(False)
-        Dispositivo.pausaFinitaEvent.set()
 
     def UpdatePagina(self, deltaTime : float = 0): #Disabled
         return

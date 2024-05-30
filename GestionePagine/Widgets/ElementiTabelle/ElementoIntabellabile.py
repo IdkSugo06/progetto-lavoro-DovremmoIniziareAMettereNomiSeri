@@ -63,6 +63,9 @@ class ElementoIntabellabile(tk.Frame): #Verrà posizionato col metodo place
 
     def CambioColore(self, coloreElemento : str, coloreBordoElemento : str):
         return
+    
+    def myDeconstructor(self):
+        self.place_forget()
         
     def myBind(self, evento : str, funzione):
         self.bind(evento, funzione)

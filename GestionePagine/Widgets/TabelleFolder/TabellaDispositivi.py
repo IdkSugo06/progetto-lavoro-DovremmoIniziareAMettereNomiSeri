@@ -1,5 +1,7 @@
 from GestionePagine.Widgets.TabelleFolder.FakeTabellaScorribile import *
 from GestionePagine.Widgets.ElementiTabelle.FrameDispositivoIntabellabile import *
+from GestioneFiltri.GestoreFiltri import * 
+
 
 class  TabellaDispositivi(FakeTabellaScorribile):
 
@@ -17,11 +19,16 @@ class  TabellaDispositivi(FakeTabellaScorribile):
                  coloreElementi = Impostazioni.Tema.IGetColoriSfondo("secondario")[2],
                  coloreBordoElementi = Impostazioni.Tema.IGetColoriSfondo("secondario")[3]):
 
-
+        #Filtro
+        self.__gestoreFiltri = GestoreFiltri(nomeFiltro = "filtroNoFiltri",
+                                             funzioneElementoCambiato = lambda x,y : self.__Notifica_AggiornamentoElementoNecessario(x,y),
+                                             funzioneRefreshTabella = self.__Notifica_RefreshListaNecessario,
+                                             funzioneRebuildTabella = self.__Notifica_RebuildListaNecessario)
+        
         #Chiamo il costruttore della classe padre
         super().__init__(
                         master = master,
-                        funzionePopolamentoListaPerIndice = lambda i : i,
+                        funzionePopolamentoListaPerIndice = lambda i : self.__gestoreFiltri.GetIdDispositivo(i),
                         xPos = xPos,
                         yPos = yPos,
                         tableWidth = tableWidth,
@@ -32,28 +39,7 @@ class  TabellaDispositivi(FakeTabellaScorribile):
                         coloreElementi = coloreElementi,
                         coloreBordoElementi = coloreBordoElementi
                         )
-
-
-
-    # METODI MODIFICA LISTA
-    def AggiungiDispositivo(self, idDispositivo : int):
-        self.AggiungiElemento(FrameDispositivoIntabellabile(master = self.GetFrameTabella(),
-                                                                    x = 0, 
-                                                                    y = self._numOf_elementiIntabellabili * self.dimensioniElemento[1], 
-                                                                    width = self.dimensioniElemento[0], 
-                                                                    height = self.dimensioniElemento[1],
-                                                                    isShown = True,
-                                                                    idDispositivo = idDispositivo))
-    
-    def RimuoviDispositivo(self, idPosizionale : int):
-        self._elementiIntabellabili.pop(idPosizionale)
-        self._numOf_elementiIntabellabili -= 1
-
-    def ClearFrameDispositivi(self): # NON FUNZIONANTE SE NON VUOTA
-        self._elementiIntabellabili = []
-        self._numOf_elementiIntabellabili = 0
-
-    
+   
     
     # AGGIORNAMENTO FRAME
     def CaricaTabella(self):
@@ -61,8 +47,8 @@ class  TabellaDispositivi(FakeTabellaScorribile):
         self.Show()
 
     #Aggiorna il numero di frame presenti sulla dashboard
-    def RefreshFrameDispositivi(self, aggiornaAttributi : bool = False): 
-        numDispositiviRichiesto = len(GestoreDispositivi.IGetListaDispositivi())
+    def RefreshFrameDispositivi(self, aggiornaAttributi : bool = False):
+        numDispositiviRichiesto = self.__gestoreFiltri.GetNumElementi()
         #Aggiunge e rimuove gli elementi in base a quanti ne mancano e l'iteratore
         self.RefreshNumeroFrame(numDispositiviRichiesto, lambda i : FrameDispositivoIntabellabile(master = self.GetFrame(),
                                                                     x = 0, 
@@ -73,6 +59,18 @@ class  TabellaDispositivi(FakeTabellaScorribile):
                                                                     idDispositivo = i))
         if aggiornaAttributi: 
             self.AggiornaAttributi()
+
+    
+    # FUNZIONI NOTIFICA
+    def __Notifica_AggiornamentoElementoNecessario(self, idElemento : int, stato : bool):
+        if idElemento < self._indiciElementiInterni[0] or idElemento > self._indiciElementiInterni[1]: 
+            return
+        idFakeElemento = idElemento - self._indiciElementiInterni[0]
+        self._elementiIntabellabili[idFakeElemento].AggiornaAttributiElemento(idDispositivo = self.__gestoreFiltri.GetIdDispositivo(idElemento), status = stato)
+    def __Notifica_RefreshListaNecessario(self):
+        self.RefreshFrameDispositivi(aggiornaAttributi = True)
+    def __Notifica_RebuildListaNecessario(self):
+        self.RefreshFrameDispositivi(aggiornaAttributi = True)
 
 
     # METODI PERSONALIZZAZIONE

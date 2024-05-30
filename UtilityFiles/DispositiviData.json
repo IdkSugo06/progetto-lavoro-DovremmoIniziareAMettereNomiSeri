@@ -1,6 +1,5 @@
 {
 	"dispositivi" : {
-		"0" : {	"nomeMacchina" : "Router","host" : "www.google.it","porta" : "0","timeTraPing" : "10.0"},
-		"1" : {	"nomeMacchina" : "Router","host" : "www.google.it","porta" : "1","timeTraPing" : "10.0"}
+		"0" : {	"nomeMacchina" : "Nome macchina","host" : "172.16.0.1","porta" : "Porta","timeTraPing" : "1.0"}
 	}
 }

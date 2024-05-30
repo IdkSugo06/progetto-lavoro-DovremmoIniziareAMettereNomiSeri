@@ -13,6 +13,7 @@ PATH_IMG_BOTTONE_MODIFICA_PAG_DISPOSITIVI = os.path.join(PATH_IMMAGINI, "Immagin
 PATH_IMG_BOTTONE_ELIMINAZIONE_PAG_DISPOSITIVI = os.path.join(PATH_IMMAGINI, "ImmagineBottoneEliminaPagDispositivo.png")
 PATH_IMG_ICONA_DISPOSITIVO = os.path.join(PATH_IMMAGINI, "ImmagineDispositivo.png")
 PATH_JSON_TEMI = os.path.join(PATH_CARTELLA_CORRENTE,"UtilityFiles","ThemeData.json")
+PATH_JSON_INVIOMAIL = os.path.join(PATH_CARTELLA_CORRENTE,"UtilityFiles","InfoEmail.json")
 PATH_JSON_DISPOSITIVI = os.path.join(PATH_CARTELLA_CORRENTE,"UtilityFiles","DispositiviData.json")
 LOG_PATH = os.path.join(PATH_CARTELLA_CORRENTE,"UtilityFiles","log.txt")
 

@@ -75,24 +75,24 @@ class MyFilterChanged(MyEvent):
 
 class MyFilterRefreshed(MyEvent):
     functionsBound = []
-    def __init__(self, args : dict[str : any]):
+    def __init__(self, args : dict[tuple(("tipoFiltro")) : any]):
         super().__init__()
         for function in MyFilterRefreshed.functionsBound:
-            function()
+            function(args["tipoFiltro"])
 
 class MyFilterRebuilt(MyEvent):
     functionsBound = []
-    def __init__(self, args : dict[str : any]):
+    def __init__(self, args : dict[tuple(("tipoFiltro")) : any]):
         super().__init__()
         for function in MyFilterRebuilt.functionsBound:
-            function()
+            function(args["tipoFiltro"])
 
 class MyFilterElementChanged(MyEvent):
     functionsBound = []
-    def __init__(self, args : dict[tuple("idElemento") : any]):
+    def __init__(self, args : dict[tuple(("tipoFiltro", "idElemento", "stato")) : any]):
         super().__init__()
         for function in MyFilterElementChanged.functionsBound:
-            function(args["idElemento"])
+            function(args["tipoFiltro"], args["idElemento"], args["stato"])
 
             
 

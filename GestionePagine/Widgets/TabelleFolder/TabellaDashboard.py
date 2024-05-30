@@ -15,11 +15,16 @@ class FakeTabellaDashboard(FakeTabellaScorribile):
                  elementWidth : int = 50,
                  elementHeight : int = 50):
 
-
+        #Filtro
+        self.__gestoreFiltri = GestoreFiltri(nomeFiltro = "statusOffOn",
+                                             funzioneElementoCambiato = lambda x,y : self.__Notifica_AggiornamentoElementoNecessario(x,y),
+                                             funzioneRefreshTabella = self.__Notifica_RefreshListaNecessario,
+                                             funzioneRebuildTabella = self.__Notifica_RebuildListaNecessario)
+        
         #Chiamo il costruttore della classe padre
         super().__init__(
                         master = master,
-                        funzionePopolamentoListaPerIndice = lambda i : GestoreDispositivi.IGetIdDispositivoDaIdListaOrdinata(i),
+                        funzionePopolamentoListaPerIndice = lambda i : self.__gestoreFiltri.GetIdDispositivo(i),
                         xPos = xPos,
                         yPos = yPos,
                         tableWidth = tableWidth,
@@ -33,11 +38,7 @@ class FakeTabellaDashboard(FakeTabellaScorribile):
         
         #Attributi ordinamento frame
         self.__semaforoPosizionamentoDispositivi = Lock()
-        self.__gestoreFiltri = GestoreFiltri(nomeFiltro = "statusOffOn")
-        MyEventHandler.BindEvent(eventType = MyFilterChanged, functionToBind = lambda args : self.__Notifica_CambioStatoDispositivo(args))
-        MyEventHandler.BindEvent(eventType = MyFilterElementChanged, functionToBind = lambda idElemento : self.__Notifica_AggiornamentoElementoNecessario(idElemento))
-        MyEventHandler.BindEvent(eventType = MyFilterRefreshed, functionToBind = self.__Notifica_RefreshListaNecessario)
-        MyEventHandler.BindEvent(eventType = MyFilterRebuilt, functionToBind = self.__Notifica_RebuildListaNecessario)
+        
 
 
     # AGGIORNA FRAMES E MOSTRA
@@ -50,7 +51,7 @@ class FakeTabellaDashboard(FakeTabellaScorribile):
         
 
     #Aggiorna i frame e gli attributi di essi
-    def RefreshFrameDispositivi(self): 
+    def RefreshFrameDispositivi(self, aggiornaAttributi : bool = False): 
         #Aggiorno il numero di frame
         self.__semaforoPosizionamentoDispositivi.acquire()
         numDispositiviRichiesto = self.__gestoreFiltri.GetNumElementi()
@@ -61,23 +62,20 @@ class FakeTabellaDashboard(FakeTabellaScorribile):
                                                                     height = self._dimensioniElemento[1],
                                                                     isShown = True,
                                                                     idDispositivo = i)) #Li aggiornerò dopo aver riassegnato gli id
-
+        if aggiornaAttributi: 
+            self.AggiornaAttributi()
         self.__semaforoPosizionamentoDispositivi.release()
 
     # FUNZIONI NOTIFICA
-    def __Notifica_CambioStatoDispositivo(self, idDispositivo : int, nuovoStato : bool = True): #Viene chiamata quando c'è un cambio stato
-        LOG.log("A notification was not handled in: \"TabellaDashboard\"", LOG_WARNING)
-    def __Notifica_AggiornamentoElementoNecessario(self, idElemento : int):
-        idFakeElemento = idElemento - self._indiciElementiInterni[0]
-        print("cambio Funcz tabella", idElemento, idFakeElemento)
-        if idFakeElemento < 0 or idFakeElemento > self._numOf_elementiMassimo - 1: 
+    def __Notifica_AggiornamentoElementoNecessario(self, idElemento : int, stato : bool):
+        if idElemento < self._indiciElementiInterni[0] or idElemento > self._indiciElementiInterni[1]: 
             return
-        print("allgood")
-        self._elementiIntabellabili[idFakeElemento].AggiornaAttributiElemento(idDispositivo = self.__gestoreFiltri.GetIdDispositivo(idElemento))
+        idFakeElemento = idElemento - self._indiciElementiInterni[0]
+        self._elementiIntabellabili[idFakeElemento].AggiornaAttributiElemento(idDispositivo = self.__gestoreFiltri.GetIdDispositivo(idElemento), status = stato)
     def __Notifica_RefreshListaNecessario(self):
-        self.RefreshFrameDispositivi() 
+        self.RefreshFrameDispositivi(aggiornaAttributi = True) 
     def __Notifica_RebuildListaNecessario(self):
-        self.RefreshFrameDispositivi()
+        self.RefreshFrameDispositivi(aggiornaAttributi = True)
 
 
     # METODI RESIZE E PERSONALIZZAZIONE

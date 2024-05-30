@@ -27,7 +27,6 @@ class Dispositivo:
         
         #Attributi aggiornamento
         self.__timeBetweenPing_sec = timeTraPing
-        self.__idPosElementoDashboardAssociato = idPosizionale
 
         #Attributi thread
         self.__iBufferCircolare = 0
@@ -61,10 +60,6 @@ class Dispositivo:
         self.__porta = nuovaPorta
         self.__timeBetweenPing_sec = float(tempoTraPing)
         self.ResetAttesaPing()
-    def GetIdPosElementoDashboardAssociato(self) -> int:
-        return self.__idPosElementoDashboardAssociato
-    def SetIdPosElementoDashboardAssociato(self, value : int):
-        self.__idPosElementoDashboardAssociato = value
     def GetId(self) -> int:
         return self.__idPosizionale
     def SetFunzioneNotificaCambioStatus(self, funzioneNotificaCambioStatus : any):
@@ -180,7 +175,6 @@ class Dispositivo:
             #Il ping è stato rilevato falso 
             if result[0] == False:
                 self.__PingPerso_4pp() #Esce quando ping true trovato
-            
             #Attendo
             self.__eventoAttesaPing.wait(self.__timeBetweenPing_sec)
             self.__eventoAttesaPing.clear()
@@ -254,6 +248,7 @@ class Dispositivo:
             return False
         
     def InvioMail(self):
-        LOG.log("Mail inviata (yet to be implemented)")
+        GestoreInvioMail.InvioMailDispositivoDisconnesso(self.__nomeMacchina, self.__host, self.__porta)
+        LOG.log("Mail inviata")
     
 Dispositivo.pausaFinitaEvent.clear()

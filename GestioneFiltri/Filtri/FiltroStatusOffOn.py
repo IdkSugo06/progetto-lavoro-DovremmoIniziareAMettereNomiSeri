@@ -15,7 +15,7 @@ class FiltroStatusOffOn(FiltroGenerico):
         FiltroStatusOffOn.GetFiltro()._RimuoviDispositivo(idDispositivo)
     @staticmethod
     def _Notifica_ModificatoDispositivo(idDispositivo : int):
-        return #La modifica non cambia lo stato
+        MyEventHandler.Throw(MyFilterElementChanged, {"tipoFiltro" : MyFilterElementChanged, "idElemento" : FiltroStatusOffOn.GetFiltro().GetIdElemento(idDispositivo), "stato" : None})
     @staticmethod
     def _Notifica_OrdinaLista():
         FiltroStatusOffOn.GetFiltro()._OrdinaLista()
@@ -47,7 +47,7 @@ class FiltroStatusOffOn(FiltroGenerico):
         MyEventHandler.BindEvent(eventType = MyFiltroRefreshNeeded, functionToBind = FiltroStatusOffOn._Notifica_OrdinaLista)
         MyEventHandler.BindEvent(eventType = MyFiltroRebuildNeeded, functionToBind = FiltroStatusOffOn._Notifica_RebuildLista)
 
-    
+
     # ORDINAMENTO LISTA
     def _CambioStatoDispositivo(self, idDispositivo1 : int, nuovoStato = True):
         #Trovo l'id posizionale del dispositivo da swappare
@@ -62,10 +62,9 @@ class FiltroStatusOffOn(FiltroGenerico):
         #Mi salvo gli id dei dispositivi sulla lista ordinata attuale
         idSuListaOrdinataDisp1 = self._idDispToIdListaOrdinata[idDispositivo1] 
         idSuListaOrdinataDisp2 = self._idDispToIdListaOrdinata[idDispositivo2] 
-        print("cambio ")
         #Se i dispositivi sono gli stessi cambio lo stato e basta
         if idSuListaOrdinataDisp1 == idSuListaOrdinataDisp2:
-            MyEventHandler.Throw(MyFilterElementChanged, {"idElemento" : idSuListaOrdinataDisp1, "stato" : nuovoStato})
+            MyEventHandler.Throw(MyFilterElementChanged, {"tipoFiltro" : type(self), "idElemento" : idSuListaOrdinataDisp1, "stato" : nuovoStato})
             return
         
         #Inverto gli id nella lista di associazione id
@@ -76,8 +75,8 @@ class FiltroStatusOffOn(FiltroGenerico):
         self._listaOrdinata[idSuListaOrdinataDisp2] = idDispositivo1
 
         #Notifico il cambio
-        MyEventHandler.Throw(MyFilterElementChanged, {"idElemento" : idSuListaOrdinataDisp1, "stato" : nuovoStato})
-        MyEventHandler.Throw(MyFilterElementChanged, {"idElemento" : idSuListaOrdinataDisp2, "stato" : not nuovoStato})
+        MyEventHandler.Throw(MyFilterElementChanged, {"tipoFiltro" : type(self), "idElemento" : self._idDispToIdListaOrdinata[idDispositivo1], "stato" : nuovoStato})
+        MyEventHandler.Throw(MyFilterElementChanged, {"tipoFiltro" : type(self), "idElemento" : self._idDispToIdListaOrdinata[idDispositivo2], "stato" : not nuovoStato})
     
     def _AggiungiDispositivo(self, idDispositivo : int):
         #L'elmento inizializzato sarà offline, lo aggiungo come primo elemento alla lista
@@ -89,16 +88,28 @@ class FiltroStatusOffOn(FiltroGenerico):
         for i in range(1, len(self._idDispToIdListaOrdinata)):
             self._idDispToIdListaOrdinata[i] += 1
 
+        MyEventHandler.Throw(MyFilterRefreshed, {"tipoFiltro" : type(self)})
+
     def _RimuoviDispositivo(self, idDispositivo : int):
         #Riassegno le liste
         idDispositivoSuListaOrdinata = self._idDispToIdListaOrdinata[idDispositivo]
-        self._listaOrdinata = self._listaOrdinata[:idDispositivoSuListaOrdinata] + self._listaOrdinata[idDispositivoSuListaOrdinata+1:]
+
+        #Reimposto gli id posizionali
+        for i_dispositivo in range(idDispositivo, self._numOf_elementi):
+            i_elemento = self._idDispToIdListaOrdinata[i_dispositivo]
+            self._listaOrdinata[i_elemento] -= 1
+        for i in range(len(self._idDispToIdListaOrdinata)):
+            if self._idDispToIdListaOrdinata[i] > idDispositivoSuListaOrdinata:
+                self._idDispToIdListaOrdinata[i] -= 1
+        #Ricostruisco la lista ordinata  
         self._idDispToIdListaOrdinata = self._idDispToIdListaOrdinata[:idDispositivo] + self._idDispToIdListaOrdinata[idDispositivo+1:] 
+        self._listaOrdinata = self._listaOrdinata[:idDispositivoSuListaOrdinata] + self._listaOrdinata[idDispositivoSuListaOrdinata+1:]
 
         #Modifico i contatori
         if idDispositivoSuListaOrdinata <= self._numOf_dispositiviOffline: #Se era offline
             self._numOf_dispositiviOffline -= 1
         self._numOf_elementi -= 1
+        MyEventHandler.Throw(MyFilterRefreshed, {"tipoFiltro" : type(self)})
 
     def _OrdinaLista(self):
         #Resetto i contatori
@@ -119,12 +130,12 @@ class FiltroStatusOffOn(FiltroGenerico):
                 self._idDispToIdListaOrdinata[i_dispositivo] = self._numOf_dispositiviOffline
                 self._numOf_dispositiviOffline += 1
             i_dispositivo += 1
+        MyEventHandler.Throw(MyFilterRefreshed, {"tipoFiltro" : type(self)})
     
     def _RebuildLista(self):
         self._numOf_elementi = GestoreDispositivi.IGetNumDispositivi()
         self._listaOrdinata = [None] * self._numOf_elementi
         self._idDispToIdListaOrdinata = [None] * self._numOf_elementi
-        print(self._numOf_elementi, self._listaOrdinata, self._idDispToIdListaOrdinata)
         self._OrdinaLista()
 
 

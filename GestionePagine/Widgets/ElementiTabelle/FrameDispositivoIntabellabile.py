@@ -200,14 +200,13 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
         return (int(self.__proporzioneBottoniPaginaX * (1-Impostazioni.PROPORZIONE_MENU_PAGINA) * Impostazioni.sistema.dimensioniFinestra[0]), int(self.__proporzioneBottoniAltezzaElDispositivo * Impostazioni.personalizzazioni.altezza_elemento_tabella_paginaDispositivi))
 
 
-
     # METODI GESTIONE DISPOSITIVI
     def AggiornaAttributiElemento(self, i_dispositivo : int):
-        self.AssociaDispositivo(i_dispositivo)
+        self.AssociaDispositivo(i_dispositivo, aggiornamentoForzato = True)
         
-    def AssociaDispositivo(self, idDispositivo : int):
+    def AssociaDispositivo(self, idDispositivo : int, aggiornamentoForzato : bool = False):
         #Controllo se è un nuovo dispositivo
-        if (self.__idDispositivoAssociato == idDispositivo):
+        if ((self.__idDispositivoAssociato == idDispositivo) and not aggiornamentoForzato):
             return
 
         #Se no aggiorno i valori

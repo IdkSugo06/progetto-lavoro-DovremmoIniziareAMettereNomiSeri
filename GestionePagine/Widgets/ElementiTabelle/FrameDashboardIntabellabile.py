@@ -168,8 +168,7 @@ class FrameDashboardIntabellabile(ElementoIntabellabile):
         return self.__idDispositivoAssociato
     def GetDispositivoAssociato(self) -> Dispositivo:
         return GestoreDispositivi.IGetDispositivo(self.__idDispositivoAssociato)
-
-
+    
 
     # METODI AGGIORNAMENTO FRAME
     def AggiornaAttributiElemento(self, idDispositivo : int, status : bool = None):

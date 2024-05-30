@@ -1,5 +1,12 @@
 {
 	"dispositivi" : {
-		"0" : {	"nomeMacchina" : "Nome macchina","host" : "172.16.0.1","porta" : "Porta","timeTraPing" : "1.0"}
+		"0" : {	"nomeMacchina" : "Nome macchina","host" : "172.16.0.1","porta" : "Porta","timeTraPing" : "1.0"},
+		"1" : {	"nomeMacchina" : "w","host" : "Ip host (es: 192.0.0.1 / www.google.com)","porta" : "Porta","timeTraPing" : "1.0"},
+		"2" : {	"nomeMacchina" : "o","host" : "","porta" : "Porta","timeTraPing" : "1.0"},
+		"3" : {	"nomeMacchina" : "a","host" : "Ip host (es: 192.0.0.1 / www.google.com)","porta" : "Porta","timeTraPing" : "1.0"},
+		"4" : {	"nomeMacchina" : "0","host" : "","porta" : "Porta","timeTraPing" : "1.0"},
+		"5" : {	"nomeMacchina" : "4","host" : "Ip host (es: 192.0.0.1 / www.google.com)","porta" : "Porta","timeTraPing" : "1.0"},
+		"6" : {	"nomeMacchina" : "z","host" : "Ip host (es: 192.0.0.1 / www.google.com)","porta" : "Porta","timeTraPing" : "1.0"},
+		"7" : {	"nomeMacchina" : "","host" : "Ip host (es: 192.0.0.1 / www.google.com)","porta" : "Porta","timeTraPing" : "1.0"}
 	}
 }

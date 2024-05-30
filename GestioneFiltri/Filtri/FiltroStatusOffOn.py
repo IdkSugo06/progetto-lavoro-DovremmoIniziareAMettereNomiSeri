@@ -38,7 +38,7 @@ class FiltroStatusOffOn(FiltroGenerico):
         return FiltroStatusOffOn._filtroStatus
     
     def __init__(self):
-        super().__init__("statusOffOn")
+        super().__init__(NOME_INTERNO_FILTRO_STATUSOFFON)
         self._numOf_dispositiviOffline = 0
         MyEventHandler.BindEvent(eventType = MyDispositivoAggiunto, functionToBind = lambda idDispositivo : FiltroStatusOffOn._Notifica_AggiuntoDispositivo(idDispositivo))
         MyEventHandler.BindEvent(eventType = MyDispositivoRimosso, functionToBind = lambda idDispositivo : FiltroStatusOffOn._Notifica_RimossoDispositivo(idDispositivo))

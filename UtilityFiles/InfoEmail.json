@@ -3,6 +3,7 @@
         "server" : "hosting.dzcomputers.it",
         "from" : "test@dysoft.cloud",
         "to" : "jamesscotti873@gmail.com",
-        "password" : "a6K05ga4@"
+        "password" : "a6K05ga4@",
+        "attivo" : "False"
     }
 }

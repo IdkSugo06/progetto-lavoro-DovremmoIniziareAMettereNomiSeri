@@ -20,7 +20,7 @@ class  TabellaDispositivi(FakeTabellaScorribile):
                  coloreBordoElementi = Impostazioni.Tema.IGetColoriSfondo("secondario")[3]):
 
         #Filtro
-        self.__gestoreFiltri = GestoreFiltri(nomeFiltro = "filtroNoFiltri",
+        self.__gestoreFiltri = GestoreFiltri(nomeFiltro = NOME_INTERNO_FILTRO_NOME,
                                              funzioneElementoCambiato = lambda x,y : self.__Notifica_AggiornamentoElementoNecessario(x,y),
                                              funzioneRefreshTabella = self.__Notifica_RefreshListaNecessario,
                                              funzioneRebuildTabella = self.__Notifica_RebuildListaNecessario)
@@ -70,6 +70,7 @@ class  TabellaDispositivi(FakeTabellaScorribile):
     def __Notifica_RefreshListaNecessario(self):
         self.RefreshFrameDispositivi(aggiornaAttributi = True)
     def __Notifica_RebuildListaNecessario(self):
+        print("PASSATO")
         self.RefreshFrameDispositivi(aggiornaAttributi = True)
 
 

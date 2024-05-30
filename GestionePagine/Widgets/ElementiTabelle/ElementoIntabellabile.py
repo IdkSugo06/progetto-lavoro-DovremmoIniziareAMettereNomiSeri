@@ -49,6 +49,9 @@ class ElementoIntabellabile(tk.Frame): #Verrà posizionato col metodo place
     def SetColore(self, coloreElemento : str, coloreBordo : str):
         self.configure(background=coloreElemento, highlightcolor=coloreBordo)
     
+    def AggiornaAttributiElemento(self, any : any): #Astratto
+        return
+    
     def RefreshAttributiElemento(self): #Astratta
         pass
 

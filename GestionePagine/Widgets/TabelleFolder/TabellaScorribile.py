@@ -74,10 +74,8 @@ class TabellaScorribile(tk.Frame): #Occuperà tutto lo spazio disponibile
         return self
     def GetFrameTabella(self):
         return self.__fFrameInternoCanvasScorrevole
-    def GetScrollBar(self):
-        return self.__scrollbar
-    def MakeScrollBar(self, master):
-        self.__scrollbar = tk.Scrollbar(master = master, orient = "vertical",  command = lambda event: self.__Event_Scrolled(event))       
+        
+   
 
     # METODI TABELLA
     # MODIFICA ELEMENTI
@@ -209,7 +207,7 @@ class TabellaScorribile(tk.Frame): #Occuperà tutto lo spazio disponibile
 
 
     # EVENT METHODS
-    def __Event_Scrolled(self, eventTk = None, pos=0):
+    def __Event_Scrolled(self, eventTk = None):
         #Controllo che si debba scrollare e salvo le variabilii che serviranno in seguito
         altezzaElementoSingolo = self.dimensioniElemento[1]
         altezzaElementi = len(self._elementiIntabellabili) * altezzaElementoSingolo
@@ -218,10 +216,8 @@ class TabellaScorribile(tk.Frame): #Occuperà tutto lo spazio disponibile
             return
         
         #Calcolo il coefficente di scroll e scrollo
-        move= pos * (altezzaElementi - self.__dimensioniTabella[1]) 
         kScroll = int(-eventTk.delta * Impostazioni.sistema.sensibilita_scorrimento_rotella)
         self.__cCanvasScorrevole.yview_scroll(kScroll, "units")
-        
 
         #Controllo chi è dentro e chi fuori dalla tabella prima
         idPrimoDentroPrima = floor(self._pointerCanvas / altezzaElementoSingolo)

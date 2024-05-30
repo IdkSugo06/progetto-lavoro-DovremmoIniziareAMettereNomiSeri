@@ -1,7 +1,7 @@
-from GestionePagine.Widgets.TabelleFolder.TabellaScorribile import *
-from GestionePagine.Widgets.ElementiTabelle.FrameDispositivoIntabellabile import *
+from GestionePagine.Widgets.TabelleFolder.FakeTabellaScorribile import *
+from GestionePagine.Widgets.ElementiTabelle.FrameDashboardIntabellabile import *
 
-class  TabellaDispositivi(TabellaScorribile):
+class FakeTabellaDashboard(FakeTabellaScorribile):
 
 
     # COSTRUTTORE
@@ -12,70 +12,54 @@ class  TabellaDispositivi(TabellaScorribile):
                  tableWidth : int = 250,
                  tableHeight : int = 250,
                  elementWidth : int = 50,
-                 elementHeight : int = 50,
-                 coloreSfondo = Impostazioni.Tema.IGetColoriSfondo("secondario")[1],
-                 coloreElementi = Impostazioni.Tema.IGetColoriSfondo("secondario")[2],
-                 coloreBordoElementi = Impostazioni.Tema.IGetColoriSfondo("secondario")[3]):
+                 elementHeight : int = 50):
 
 
         #Chiamo il costruttore della classe padre
         super().__init__(
                         master = master,
+                        funzionePopolamentoListaPerIndice = lambda i : GestoreDispositivi.IGetIdDispositivoDaIdListaOrdinata(i),
                         xPos = xPos,
                         yPos = yPos,
                         tableWidth = tableWidth,
                         tableHeight = tableHeight,
                         elementWidth = elementWidth,
                         elementHeight = elementHeight,
-                        coloreSfondo = coloreSfondo,
-                        coloreElementi = coloreElementi,
-                        coloreBordoElementi = coloreBordoElementi
+                        coloreSfondo = Impostazioni.Tema.IGetColoriSfondo("secondario")[1],
+                        coloreElementi = Impostazioni.Tema.IGetColoriSfondo("secondario")[2],
+                        coloreBordoElementi = Impostazioni.Tema.IGetColoriSfondo("terziario")[0]
                         )
+        
+        #Attributi ordinamento frame
+        self.__semaforoPosizionamentoDispositivi = Lock()
+        GestoreDispositivi.ISetFunzioneNotificaCambioStatus(self.__Notifica_CambioStatoDispositivo)
 
 
-
-    # METODI MODIFICA LISTA
-    def AggiungiDispositivo(self, idDispositivo : int):
-        self.AggiungiElemento(FrameDispositivoIntabellabile(master = self.GetFrameTabella(),
-                                                                    x = 0, 
-                                                                    y = self._numOf_elementiIntabellabili * self.dimensioniElemento[1], 
-                                                                    width = self.dimensioniElemento[0], 
-                                                                    height = self.dimensioniElemento[1],
-                                                                    isShown = True,
-                                                                    idDispositivo = idDispositivo))
-    
-    def RimuoviDispositivo(self, idPosizionale : int):
-        self._elementiIntabellabili.pop(idPosizionale)
-        self._numOf_elementiIntabellabili -= 1
-
-    def ClearFrameDispositivi(self): # NON FUNZIONANTE SE NON VUOTA
-        self._elementiIntabellabili = []
-        self._numOf_elementiIntabellabili = 0
-
-    
-    
-    # AGGIORNAMENTO FRAME
+    # AGGIORNA FRAMES E MOSTRA
+    def GetFrameTabella(self):
+        return self
     def CaricaTabella(self):
-        self.RefreshFrameDispositivi(aggiornaAttributi=True)
-        self.Show()
+        GestoreDispositivi.IOrdinaListaDispositivi()
+        self.RefreshFrameDispositivi()
+        print("pausa set")
+        Dispositivo.pausaFinitaEvent.set()
+        
 
-    #Aggiorna il numero di frame presenti sulla dashboard
-    def RefreshFrameDispositivi(self, aggiornaAttributi : bool = False): 
+    #Aggiorna i frame e gli attributi di essi
+    def RefreshFrameDispositivi(self): 
+        #Aggiorno il numero di frame
+        self.__semaforoPosizionamentoDispositivi.acquire()
         numDispositiviRichiesto = len(GestoreDispositivi.IGetListaDispositivi())
-        #Aggiunge e rimuove gli elementi in base a quanti ne mancano e l'iteratore
-        self.RefreshNumeroFrame(numDispositiviRichiesto, lambda i : FrameDispositivoIntabellabile(master = self.GetFrameTabella(),
+        self.RefreshNumeroFrame(numDispositiviRichiesto, lambda i : FrameDashboardIntabellabile(master = self.GetFrameTabella(),
                                                                     x = 0, 
-                                                                    y = self._numOf_elementiIntabellabili * self.dimensioniElemento[1], 
-                                                                    width = self.dimensioniElemento[0], 
-                                                                    height = self.dimensioniElemento[1],
+                                                                    y = 0, 
+                                                                    width = self._dimensioniElemento[0], 
+                                                                    height = self._dimensioniElemento[1],
                                                                     isShown = True,
-                                                                    idDispositivo = i),
-                                                                    aggiornaAttributi = False)
-        if aggiornaAttributi:
-            self.RefreshAttributiElementi()
+                                                                    idDispositivo = i)) #Li aggiornerò dopo aver riassegnato gli id
 
-
-
+        self.__semaforoPosizionamentoDispositivi.release()
+    
     # METODI PERSONALIZZAZIONE
     def AggiornaColoriTema(self):
         #Aggiorno i colori
@@ -85,13 +69,55 @@ class  TabellaDispositivi(TabellaScorribile):
         self.CambioColore(coloreSfondo, coloreElementi, coloreBordoElementi, cambioColoreElementi = False)
         
         #Per ogni elemento aggiorno i colori
+        FrameDashboardIntabellabile.AggiornaTemaImmagini()
         for elemento in self._elementiIntabellabili:
             elemento.AggiornaColoriTema()
 
 
+    # FUNZIONI NOTIFICA
+    def __Notifica_CambioStatoDispositivo(self, idDispositivo : int, nuovoStato : bool = True): #Viene chiamata quando c'è un cambio stato
+        idDispSuListaOrdinata = GestoreDispositivi.IGetIdListaOrdinataDaIdDispositivo(idDispositivo)
+        if idDispSuListaOrdinata < self._indiciElementiInterni[0] or idDispSuListaOrdinata > self._indiciElementiInterni[1]:
+            return
+        self._elementiIntabellabili[idDispSuListaOrdinata - self._indiciElementiInterni[0]].AggiornaAttributiElemento(idDispositivo = idDispositivo, status = nuovoStato)
 
-    # METODI UPDATE FRAME
-    def Update(self, deltaTime : float = 0): #Disabled
-        return
-        for elementoIntabellabile in self._elementiIntabellabili:
-            elementoIntabellabile.Update(deltaTime)
+    # METODI RESIZE E PERSONALIZZAZIONE
+    def CambioColore(self, coloreSfondo : str, coloreElementi : str, coloreBordoElementi : str, cambioColoreElementi : bool = False):
+        #Imposto i colori
+        self._coloreSfondo = coloreSfondo
+        self._coloreElementi = coloreElementi
+        self._coloreBordoElementi = coloreBordoElementi
+
+        #Aggiorno i colori
+        self.configure(background=coloreSfondo, highlightthickness=0)
+
+        if cambioColoreElementi == False:
+            return
+        
+        #Per ogni elemento aggiorno i colori
+        for elemento in self._elementiIntabellabili:
+            elemento.CambioColore(coloreElementi, coloreBordoElementi)
+
+    def ChangeDim(self, 
+                 xPos : int = 0,
+                 yPos : int = 0,
+                 tableWidth : int = 250,
+                 tableHeight : int = 250,
+                 elementWidth : int = 50,
+                 elementHeight : int = 50,
+                 coloreSfondo : str = "#FFFFFF",
+                 coloreElementi : str = "#DDDDDD",
+                 coloreBordoElementi : str = "#555555"
+                 ):
+        
+        #Piazzo il frame
+        self.place(x = xPos, y = yPos, width = tableWidth, height = tableHeight)
+        #Aggiorno i colori
+        self.CambioColore(coloreSfondo, coloreElementi, coloreBordoElementi)
+        #Aggiorno le dimensioni
+        self._dimensioniTabella = [tableWidth, tableHeight]
+        self._dimensioniElemento = [elementWidth, elementHeight]
+        #Aggiorno i numeri elementi
+        self._numOf_elementiMassimo = (tableHeight // elementHeight) + 1
+        self.RefreshFrameDispositivi()
+        self.Show()

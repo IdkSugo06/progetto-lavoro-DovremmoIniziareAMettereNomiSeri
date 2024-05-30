@@ -19,7 +19,7 @@ class InterfacciaGestioneDispositivi:
     # INTERFACCIA
     @staticmethod
     def IAddDispositivo(nome : str, host : str, porta : str, timeTraPing : float):
-        GestoreDispositivi.IAddInformazioneDispositivoConnessione(nome, host, porta, timeTraPing)
+        GestoreDispositivi.IAddInformazioneDispositivoConnessione(str(nome), str(host), str(porta), timeTraPing)
 
     @staticmethod
     def IModificaDispositivo(idDispositvo : int, nome : str, host : str, porta : str, tempoTraPing : float):

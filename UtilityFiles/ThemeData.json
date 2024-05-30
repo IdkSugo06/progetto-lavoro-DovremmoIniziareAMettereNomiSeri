@@ -42,7 +42,7 @@
         "titolo": ["arial", 36, "#FFFFFF", ["bold"]],
         "sottotitolo": ["arial", 14, "#FFFFFF", []],
         "testo": ["arial", 12, "#FFFFFF", []],
-        "modificatoreFinePath" : "_temaBlu"
+        "modificatoreFinePath" : "_temaDefault"
       }
     },
 

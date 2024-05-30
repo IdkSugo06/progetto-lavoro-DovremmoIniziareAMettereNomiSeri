@@ -27,7 +27,7 @@ class MyImageTk:
                 self._originalImage = Image.open(path)
                 self._originalImage.resize(qualitaImmagineRichiesta) #Diminuisco la qualità per non avere problemi di prestazioni
                 self._aspectRatio = self._originalImage.size[0] / self._originalImage.size[1]
-
+                
                 #Salvo altre copie dell'immagine
                 self._resizedImage = Image.open(path)
                 self._resizedImageTk = ImageTk.PhotoImage(self._resizedImage)

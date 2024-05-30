@@ -1,6 +1,10 @@
 from GestionePagine.Widgets.ElementiTabelle.ElementoIntabellabile import *
+from GestionePagine.Widgets.Immagini.MySharedMultiImgButton import *
 
 class FrameDispositivoIntabellabile(ElementoIntabellabile):
+
+    __mySMIB_immagini = MySharedMultiImgButton(pathsDict = {"modifica" : Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMG_BOTTONE_MODIFICA_PAG_DISPOSITIVI), "elimina" : Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMG_BOTTONE_ELIMINAZIONE_PAG_DISPOSITIVI)})
+    __mySMIB_immagini.ResizeAll(DIMENSIONI_PULSANTI_MODIFICA_ELIMINA[0], DIMENSIONI_PULSANTI_MODIFICA_ELIMINA[1])
 
     def __init__(self,
                  master, 
@@ -158,10 +162,8 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
         self.__cCanvasBottoneModifica.grid_propagate(False)
         self.__cCanvasBottoneModifica.pack_propagate(False)
         #Creo il bottone
-        self.__myImgbBottoneModifica = MyImageButton(canvas = self.__cCanvasBottoneModifica, command = lambda event : self.__ModificaDispositivoAssociato(event), path = Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMG_BOTTONE_MODIFICA_PAG_DISPOSITIVI))
-        self.__myImgbBottoneModifica.Resize(dimBottoni[0], dimBottoni[1], self.__mantieniProporzioniImmagine)
-        self.__myImgbBottoneModifica.Show()
-        
+        self.__mySMIBi_immagineModifica = FrameDispositivoIntabellabile.__mySMIB_immagini.Show(canvas = self.__cCanvasBottoneModifica, pathKey = "modifica")
+        self.__mySMIB_immagini.myBind(canvas = self.__cCanvasBottoneModifica, evento= "<Button-1>", command= self.__ModificaDispositivoAssociato)
 
 
         self.__fFrameBottoneElimina = tk.Frame(master = self.__fFrameSupportoBottoni, bg =  self.__coloreSfondo, highlightbackground=  self.__coloreBordo)
@@ -178,9 +180,8 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
         self.__cCanvasBottoneElimina.grid_propagate(False)
         self.__cCanvasBottoneElimina.pack_propagate(False)
         #Creo il bottone
-        self.__myImgbBottoneElimina = MyImageButton(canvas = self.__cCanvasBottoneElimina, command = lambda event : self.__EliminaDispositivoAssociato(event), path = Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMG_BOTTONE_ELIMINAZIONE_PAG_DISPOSITIVI))
-        self.__myImgbBottoneElimina.Resize(dimBottoni[0], dimBottoni[1], self.__mantieniProporzioniImmagine)
-        self.__myImgbBottoneElimina.Show()
+        self.__mySMIBi_immagineElimina = FrameDispositivoIntabellabile.__mySMIB_immagini.Show(canvas = self.__cCanvasBottoneElimina, pathKey="elimina")
+        self.__mySMIB_immagini.myBind(canvas = self.__cCanvasBottoneElimina, evento= "<Button-1>", command= self.__EliminaDispositivoAssociato)
 
 
         #Associo il dispositivo specificato
@@ -202,6 +203,9 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
 
 
     # METODI GESTIONE DISPOSITIVI
+    def AggiornaAttributiElemento(self, i_dispositivo : int):
+        self.AssociaDispositivo(i_dispositivo)
+        
     def AssociaDispositivo(self, idDispositivo : int):
         #Controllo se è un nuovo dispositivo
         if (self.__idDispositivoAssociato == idDispositivo):
@@ -234,6 +238,11 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
 
 
     # METODI PERSONALIZZAZIONE
+    @staticmethod
+    def AggiornaTemaImmagini():
+        FrameDispositivoIntabellabile.__mySMIB_immagini.ChangePaths(newPathsDict = {"modifica" : Impostazioni.Tema.IGetPathTemaCorrente(Impostazioni.PATH_IMG_BOTTONE_MODIFICA_PAG_DISPOSITIVI),
+                                                                    "elimina" : Impostazioni.Tema.IGetPathTemaCorrente(Impostazioni.PATH_IMG_BOTTONE_ELIMINAZIONE_PAG_DISPOSITIVI)})
+        FrameDispositivoIntabellabile.__mySMIB_immagini.ResizeAll(DIMENSIONI_PULSANTI_MODIFICA_ELIMINA[0], DIMENSIONI_PULSANTI_MODIFICA_ELIMINA[1])
     def AggiornaColoriTema(self):
         self.__coloreSfondo = Impostazioni.Tema.IGetColoriSfondo("secondario")[2]
         self.__coloreSfondoEvidenziato = Impostazioni.Tema.IGetColoriSfondo("terziario")[0]
@@ -241,12 +250,9 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
         self.__fontTesto = Impostazioni.Tema.IGetFont("testo")
         self.__coloreTesto = Impostazioni.Tema.IGetFontColor("testo")
         dimBottoni = self.__getDimensioniPulsantiBottoni()
-        self.__myImgbBottoneModifica.ChangeImage(Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMG_BOTTONE_MODIFICA_PAG_DISPOSITIVI))
-        self.__myImgbBottoneModifica.Resize(dimBottoni[0], dimBottoni[1], self.__mantieniProporzioniImmagine)
-        self.__myImgbBottoneModifica.Show()
-        self.__myImgbBottoneElimina.ChangeImage(Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMG_BOTTONE_ELIMINAZIONE_PAG_DISPOSITIVI))
-        self.__myImgbBottoneElimina.Resize(dimBottoni[0], dimBottoni[1], self.__mantieniProporzioniImmagine)
-        self.__myImgbBottoneElimina.Show()
+        self.__mySMIBi_immagineModifica = FrameDispositivoIntabellabile.__mySMIB_immagini.Show(canvas = self.__cCanvasBottoneModifica, pathKey="modifica", instanceId= self.__mySMIBi_immagineModifica)
+        self.__mySMIBi_immagineElimina = FrameDispositivoIntabellabile.__mySMIB_immagini.Show(canvas = self.__cCanvasBottoneElimina, pathKey="elimina", instanceId = self.__mySMIBi_immagineElimina)
+
         self.AggiornaColori()
 
     def AggiornaColori(self):

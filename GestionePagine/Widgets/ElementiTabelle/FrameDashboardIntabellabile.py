@@ -2,6 +2,10 @@ from GestionePagine.Widgets.ElementiTabelle.ElementoIntabellabile import *
 
 class FrameDashboardIntabellabile(ElementoIntabellabile):
 
+    __mySMI_statusImage = MySharedMultiImg(pathsDict = {"offline" : Impostazioni.Tema.IGetPathTemaCorrente(Impostazioni.PATH_IMG_STATUS_OFFLINE_PAG_DASHBOARD),
+                                                         "online" : Impostazioni.Tema.IGetPathTemaCorrente(Impostazioni.PATH_IMG_STATUS_ONLINE_PAG_DASHBOARD)})
+    __mySMI_statusImage.ResizeAll(DIMENSIONI_IMMAGINE_STATUS_DASHBOARD[0], DIMENSIONI_IMMAGINE_STATUS_DASHBOARD[1])
+
     def __init__(self,
                  master, 
                  x : int = 0, 
@@ -137,11 +141,7 @@ class FrameDashboardIntabellabile(ElementoIntabellabile):
         self.__cCanvasStatusDispositivo.pack_propagate(False)
 
         # IMMAGINE STATUS ONLINE
-        self.__myMImgStatusDispositivo = MyMultiImage(canvas = self.__cCanvasStatusDispositivo, 
-                                                      pathsDict = {"online" : Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMG_STATUS_ONLINE_PAG_DASHBOARD), "offline" : Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMG_STATUS_OFFLINE_PAG_DASHBOARD)})
-        self.__myMImgStatusDispositivo.ResizeAll(DIMENSIONI_IMMAGINE_STATUS_DASHBOARD[0], DIMENSIONI_IMMAGINE_STATUS_DASHBOARD[1])
-        self.__myMImgStatusDispositivo.ShowImg("offline")
-
+        self.__mySMIi_status = FrameDashboardIntabellabile.__mySMI_statusImage.Show(canvas = self.__cCanvasStatusDispositivo, pathKey = "offline")
 
         # FRAME SUPPORTO BOTTONE PING MANUALE
         self.__fFrameBottonePingManuale = tk.Frame(master = self.__fFramePrincipale, bg = self.__coloreSfondo, highlightbackground= self.__coloreBordo, highlightthickness=0.5)
@@ -152,17 +152,15 @@ class FrameDashboardIntabellabile(ElementoIntabellabile):
         self.__fFrameBottonePingManuale.pack_propagate(False)
         #Creo il bottone
         self.__bBottonePingManuale = tk.Button(master = self.__fFrameBottonePingManuale, bg = self.__coloreSfondo, highlightbackground = self.__coloreBordo, highlightthickness=0.5, command = self.__BottonePingManuale)
-        self.__bBottonePingManuale.grid(row = 0, column=0, sticky="nsew")
+        self.__bBottonePingManuale.grid(row = 0, column = 0, sticky="nsew")
 
         #Associo il dispositivo specificato
         self.AssociaDispositivo(idDispositivo)
         self.Show()
 
-
         # METODI EVENTI
         self.myBind("<Enter>", lambda event : self.__CursorEntered(event))
         self.myBind("<Leave>", lambda event : self.__CursorExited(event))
-
 
 
     # GETTER E SETTER
@@ -174,29 +172,32 @@ class FrameDashboardIntabellabile(ElementoIntabellabile):
 
 
     # METODI AGGIORNAMENTO FRAME
-    def AssociaDispositivo(self, idDispositvo : int, aggiornamentoForzato : bool = False):
+    def AggiornaAttributiElemento(self, idDispositivo : int, status : bool = None):
+        self.AssociaDispositivo(idDispositvo = idDispositivo, aggiornamentoForzato = True, status = status)
 
+    def AssociaDispositivo(self, idDispositvo : int, aggiornamentoForzato : bool = False, status : bool = None):
         #Controllo se è un nuovo dispositivo
-        if ((self.__idDispositivoAssociato == idDispositvo and not aggiornamentoForzato) and False):
+        if (self.__idDispositivoAssociato == idDispositvo and not aggiornamentoForzato):
             return
-
+        
         #Se no aggiorno i valori
         self.__idDispositivoAssociato = idDispositvo
-        self.RefreshAttributiElemento()
+        self.RefreshAttributiElemento(status)
 
-    def RefreshAttributiElemento(self):
+    def RefreshAttributiElemento(self, status : bool = None):
         dispositivo = GestoreDispositivi.IGetDispositivo(self.__idDispositivoAssociato)
         self.__vScrittaNome_str.set(dispositivo.GetNome())
         self.__vScrittaIndirizzoIP_str.set(dispositivo.GetHost())
         self.__vScrittaPorta_str.set(dispositivo.GetPorta())
         self.__vScrittaTempoTraPing_str.set(str(dispositivo.GetTempoTraPing()))
-        self.SetStatus(dispositivo.GetStatusConnessione()[1])
+        if status == None: status = dispositivo.GetStatusConnessione() 
+        self.SetStatus(status)
 
-    def SetStatus(self, status : bool = False):
+    def SetStatus(self, status : bool):
         if status == True: 
-            self.__myMImgStatusDispositivo.ShowImg("online")
+            self.__mySMIi_status = FrameDashboardIntabellabile.__mySMI_statusImage.Show(self.__cCanvasStatusDispositivo, pathKey = "online", instanceId = self.__mySMIi_status)
         else:
-            self.__myMImgStatusDispositivo.ShowImg("offline")
+            self.__mySMIi_status = FrameDashboardIntabellabile.__mySMI_statusImage.Show(self.__cCanvasStatusDispositivo, pathKey = "offline", instanceId = self.__mySMIi_status)
     
     
 
@@ -207,15 +208,20 @@ class FrameDashboardIntabellabile(ElementoIntabellabile):
     
 
     # METODI PERSONALIZZAZIONE
+    @staticmethod
+    def AggiornaTemaImmagini():
+        FrameDashboardIntabellabile.__mySMI_statusImage.ChangePaths(newPathsDict = {"offline" : Impostazioni.Tema.IGetPathTemaCorrente(Impostazioni.PATH_IMG_STATUS_OFFLINE_PAG_DASHBOARD),
+                                                                    "online" : Impostazioni.Tema.IGetPathTemaCorrente(Impostazioni.PATH_IMG_STATUS_ONLINE_PAG_DASHBOARD)})
+        FrameDashboardIntabellabile.__mySMI_statusImage.ResizeAll(DIMENSIONI_IMMAGINE_STATUS_DASHBOARD[0], DIMENSIONI_IMMAGINE_STATUS_DASHBOARD[1])
+    
     def AggiornaColoriTema(self):
         self.__coloreSfondo = Impostazioni.Tema.IGetColoriSfondo("secondario")[2]
         self.__coloreSfondoEvidenziato = Impostazioni.Tema.IGetColoriSfondo("terziario")[0]
         self.__coloreBordo = Impostazioni.Tema.IGetColoriSfondo("secondario")[3]
         self.__fontTesto = Impostazioni.Tema.IGetFont("testo")
         self.__coloreTesto = Impostazioni.Tema.IGetFontColor("testo")
-        self.__myMImgStatusDispositivo.ChangePaths(newPathsDict = {"offline" : Impostazioni.Tema.IGetPathTemaCorrente(Impostazioni.PATH_IMG_STATUS_OFFLINE_PAG_DASHBOARD),
-                                                                   "online" : Impostazioni.Tema.IGetPathTemaCorrente(Impostazioni.PATH_IMG_STATUS_ONLINE_PAG_DASHBOARD)})
-        self.__myMImgStatusDispositivo.ResizeAll(DIMENSIONI_IMMAGINE_STATUS_DASHBOARD[0], DIMENSIONI_IMMAGINE_STATUS_DASHBOARD[1])
+        pathKey = "online" if GestoreDispositivi.IGetDispositivo(self.__idDispositivoAssociato).GetStatusConnessione() == True else "offline"
+        self.__mySMIi_status = FrameDashboardIntabellabile.__mySMI_statusImage.Show(canvas = self.__cCanvasStatusDispositivo, pathKey = pathKey, instanceId = self.__mySMIi_status)
         self.AggiornaColori()
 
     def AggiornaColori(self):

@@ -4,7 +4,8 @@ from Utility.Costanti import *
 LOG_WARNING = 1
 LOG_ERROR = 2
 LOG_FATAL_ERROR = 3
-LOG_ISENABLE = False
+LOG_PRINTENABLED = True
+LOG_ISENABLED = True
 
 #Log sarà una classe singleton che si occuperà di gestire i feedback all'interno del programma
 class LOG: #singleton
@@ -38,7 +39,7 @@ class LOG: #singleton
     # METODI INTERFACCIA
     @staticmethod 
     def IPrint(testo : str, lvlErrore : int = 0):
-        if LOG_ISENABLE == False:
+        if LOG_PRINTENABLED == False:
             return
         if lvlErrore >= LOG.__livelloFiltroDebug:
             LOG.GetLog().__Print(testo, lvlErrore)
@@ -63,7 +64,7 @@ class LOG: #singleton
         print(avviso, testo)
 
     def __SalvaSuFile(self):
-        if LOG_ISENABLE == False:
+        if LOG_ISENABLED == False:
             return
         #Creo la stringa
         _str = ""
@@ -74,7 +75,7 @@ class LOG: #singleton
         fileStream = open(LOG_PATH, "w")
         fileStream.write(_str)
         fileStream.close()
-        if LOG_ISENABLE: 
+        if LOG_PRINTENABLED: 
             print("Log salvato su file")
     
 

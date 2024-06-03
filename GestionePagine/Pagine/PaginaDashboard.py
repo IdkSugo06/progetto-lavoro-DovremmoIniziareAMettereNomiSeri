@@ -93,6 +93,26 @@ class PaginaDashboard(PaginaGenerica): #Singleton
                                            )
         self.__lTitoloDashboard.pack(side = "left", fill="both", anchor="sw")
 
+
+        #FRAME SUPPORTO COMBOBOX FILTRI
+        self.__fFrameComboboxFiltri = tk.Frame(master = self.__fFrameInternoCanvasScorrevole)
+        self.__dimCombobox = (150, 40)
+        self.__offsetCombobox = (25,8)
+        self.__fFrameComboboxFiltri.place(x = self.__dimensioniTabellaDashboard[0] - (self.__dimCombobox[0] - self.__offsetCombobox[0]), 
+                                                      y = SPAZIO_ALTO_PAGINA_DISPOSITIVI - (self.__dimCombobox[1] + self.__offsetCombobox[1]), width = self.__dimCombobox[0], height = self.__dimCombobox[1], anchor= "nw")
+        self.__fFrameComboboxFiltri.columnconfigure(0, weight = 1)
+        self.__fFrameComboboxFiltri.rowconfigure(0, weight = 1)
+        self.__fFrameComboboxFiltri.grid_propagate(False)
+        self.__fFrameComboboxFiltri.pack_propagate(False)
+
+        # COMBOBOX FILTRI
+        self.__cComboboxCambioFiltro = MyCombobox(master = self.__fFrameComboboxFiltri,
+                                                        command = None,
+                                                        values= ["Alfabetico", ""]
+                                                        )
+        self.__cComboboxCambioFiltro.grid(row = 0, column=0, sticky="nsew")
+
+
         #FRAME DELLE SCRITTE SOPRA LA TABELLA
         self.__fFrameTextLabel = tk.Frame(master = self.__fFrameInternoCanvasScorrevole)
         self.__fFrameTextLabel.place(x = SPAZIO_LATI_PAGINA_DISPOSITIVI, y = SPAZIO_ALTO_PAGINA_DISPOSITIVI, width = self.__dimensioniTabellaDashboard[0], height = Impostazioni.personalizzazioni.altezza_elemento_tabella_paginaDashboard, anchor = "nw")
@@ -160,7 +180,7 @@ class PaginaDashboard(PaginaGenerica): #Singleton
         # Create and position the text labels
         for i in range(6):
             textLabel = tk.Label(master= self.__fFrameScrittaNome if i==0 else self.__fFrameScrittaIndirizzoIP if i==1 else self.__fFrameScrittaPorta if i==2 else self.__fFrameScrittaTempoTraPing if i==3 else self.__fFrameScrittaStatus if i==4 else self.__fFrameScrittaPingManuale,
-                                text = "Nome dispositivo" if i==0 else "Indirizzo ip" if i==1 else "Porta" if i==2 else "Frequenza ping (sec)" if i==3 else "Status" if i==4 else "Ping",
+                                text = "Nome dispositivo" if i==0 else "Indirizzo ip" if i==1 else "Porta" if i==2 else "Tempo tra ping (sec)" if i==3 else "Status" if i==4 else "Ping",
                                 font = self.__font,
                                 fg = self.__fontColor,
                                 bg = self.__coloreSfondo

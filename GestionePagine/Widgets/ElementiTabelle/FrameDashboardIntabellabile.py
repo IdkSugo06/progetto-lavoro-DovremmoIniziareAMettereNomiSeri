@@ -151,7 +151,7 @@ class FrameDashboardIntabellabile(ElementoIntabellabile):
         self.__fFrameBottonePingManuale.grid_propagate(False)
         self.__fFrameBottonePingManuale.pack_propagate(False)
         #Creo il bottone
-        self.__bBottonePingManuale = tk.Button(master = self.__fFrameBottonePingManuale, bg = self.__coloreSfondo, highlightbackground = self.__coloreBordo, highlightthickness=0.5, command = self.__BottonePingManuale)
+        self.__bBottonePingManuale = tk.Button(master = self.__fFrameBottonePingManuale, text = "Test", font = self.__fontTesto, fg = self.__coloreTesto, bg = self.__coloreSfondo, highlightbackground = self.__coloreBordo, highlightthickness=0.5, command = self.__BottonePingManuale)
         self.__bBottonePingManuale.grid(row = 0, column = 0, sticky="nsew")
 
         #Associo il dispositivo specificato
@@ -240,7 +240,7 @@ class FrameDashboardIntabellabile(ElementoIntabellabile):
         self.__cCanvasStatusDispositivo.configure(background=self.__coloreSfondo, highlightcolor=self.__coloreBordo)
         #Bottone
         self.__fFrameBottonePingManuale.configure(background=self.__coloreSfondo, highlightbackground= self.__coloreBordo)
-        self.__bBottonePingManuale.configure(background=self.__coloreSfondo, highlightbackground= self.__coloreBordo)
+        self.__bBottonePingManuale.configure(background=self.__coloreSfondo, font = self.__fontTesto, foreground=self.__coloreTesto, highlightcolor=self.__coloreBordo)
 
 
     # METODI EVENTI

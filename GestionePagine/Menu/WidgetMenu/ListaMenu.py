@@ -90,7 +90,7 @@ class ListaMenu(tk.Frame): #Occuperà tutto il frame master occupabile
                                             pathImmagine = TUPLA_PAGINA_IMPOSTAZIONI[1], 
                                             nomePaginaMostrato = TUPLA_PAGINA_IMPOSTAZIONI[2],  
                                             xPos = 0, 
-                                            yPos = self.__dimensioniListaMenu[1] - Impostazioni.personalizzazioni.altezza_elemento_tabella_menu + 5,
+                                            yPos = self.__dimensioniListaMenu[1] - Impostazioni.personalizzazioni.altezza_elemento_tabella_menu - 4,
                                             width = self.__dimensioniListaMenu[0],
                                             height = Impostazioni.personalizzazioni.altezza_elemento_tabella_menu)
         
@@ -146,7 +146,7 @@ class ListaMenu(tk.Frame): #Occuperà tutto il frame master occupabile
         self.__cCanvasScorrevole.delete(self.__ultimoCanvasId)
         self.__ultimoCanvasId = thisCanvasId
         #Refresho il menu
-        self.__elementoImpostazione.SetPos(x = 0, y = self.__dimensioniListaMenu[1] - Impostazioni.personalizzazioni.altezza_elemento_tabella_menu + 5)
+        self.__elementoImpostazione.SetPos(x = 0, y = self.__dimensioniListaMenu[1] - Impostazioni.personalizzazioni.altezza_elemento_tabella_menu - 4)
         self.__elementoImpostazione.CambioDimFrame(width = self.__dimensioniListaMenu[0], height = Impostazioni.personalizzazioni.altezza_elemento_tabella_menu)
         for elementoMenu in self.__listaElementi:
             elementoMenu.CambioDimFrame(width = self.__dimensioniListaMenu[0], height = Impostazioni.personalizzazioni.altezza_elemento_tabella_menu)

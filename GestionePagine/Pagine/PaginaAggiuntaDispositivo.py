@@ -117,7 +117,7 @@ class PaginaAggiuntaDispositivo(PaginaGenerica): #Singleton
         self.__fFrameSecondarioLogo.grid(row = 1, column=0, sticky="nsew")
         self.__fFrameSecondarioLogo.grid_propagate(False)
         # LOGO
-        self.__cCanvasLogo = tk.Canvas(master = self.__fFrameSecondarioLogo) #Creo il logo in alto a sinistra
+        self.__cCanvasLogo = tk.Canvas(master = self.__fFrameSecondarioLogo, highlightthickness = 0) #Creo il logo in alto a sinistra
         self.__cCanvasLogo.grid(row = 0, column = 0, sticky = "nsew") 
         self.__myImgLogo = MyImageTk(self.__cCanvasLogo, Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMMAGINE_LOGO))
         self.__myImgLogo.Resize(int((1/18) * Impostazioni.sistema.dimensioniFinestra[0]),

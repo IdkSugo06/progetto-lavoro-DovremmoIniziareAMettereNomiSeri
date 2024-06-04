@@ -35,7 +35,6 @@ class Menu:
                                                       path = Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMMAGINE_LOGO))
         self.__myMImgLogo.Resize(int(Impostazioni.sistema.dimensioniFinestra[0] * (PROPORZIONE_MENU_PAGINA)), int(Impostazioni.sistema.dimensioniFinestra[1] * (1-PROPORZIONE_LISTA_MENU_ALTEZZA_PAGINA)))
         self.__myMImgLogo.Show()
-#TODO aggiungere il logo!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         # FRAME LISTA MENU
         self.__fFrameListaMenu = tk.Frame(master = self.__fFramePrincipale, bg = Impostazioni.Tema.IGetColoriSfondo("secondario")[1], highlightbackground= "#000000", highlightthickness=1)

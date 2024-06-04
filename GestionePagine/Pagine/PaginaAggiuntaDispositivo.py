@@ -97,7 +97,10 @@ class PaginaAggiuntaDispositivo(PaginaGenerica): #Singleton
         
         self.__fFrameSchedaAggiuntaDispositivo.rowconfigure(11, weight = 2)
         self.__fFrameSchedaAggiuntaDispositivo.rowconfigure(12, weight = 1)
-        self.__fFrameSchedaAggiuntaDispositivo.rowconfigure(13, weight = 5)
+        self.__fFrameSchedaAggiuntaDispositivo.rowconfigure(13, weight = 2)
+        self.__fFrameSchedaAggiuntaDispositivo.rowconfigure(14, weight = 2)
+        self.__fFrameSchedaAggiuntaDispositivo.rowconfigure(15, weight = 4)
+        self.__fFrameSchedaAggiuntaDispositivo.rowconfigure(16, weight = 1)
         self.__fFrameSchedaAggiuntaDispositivo.grid_propagate(False)
 
 
@@ -178,6 +181,21 @@ class PaginaAggiuntaDispositivo(PaginaGenerica): #Singleton
         self.__myBarraInserimentoTempoTraPing.grid(row = 12, column = 2, columnspan=3, sticky="nsew")
 
 
+        #Creo la scritta categoria
+        self.__fFrameSupportoCategoria = tk.Frame(master = self.__fFrameSchedaAggiuntaDispositivo, background = self.__coloreSfondoInterno)
+        self.__fFrameSupportoCategoria.grid(row = 14, column = 2, columnspan=3, sticky= "nsew")
+        self.__fFrameSupportoCategoria.rowconfigure(0, weight=1)
+        self.__fFrameSupportoCategoria.columnconfigure(0,weight=1)
+        self.__fFrameSupportoCategoria.grid_propagate(False)
+        self.__fFrameSupportoCategoria.pack_propagate(False)
+        self.__lScrittaCategoria = tk.Label(master = self.__fFrameSupportoCategoria, text = "Categoria:", background= self.__coloreSfondoInterno, font = self.__fontTesto, foreground = self.__coloreFontTesto)
+        self.__lScrittaCategoria.pack(side = "left", fill = "both")
+
+        #Creo il combobox per selezionare la categoria
+        self.__myComboboxCategoria = MyCombobox(master = self.__fFrameSchedaAggiuntaDispositivo, values=["",""], command = None)
+        self.__myComboboxCategoria.grid(row = 15, column = 2, columnspan=3, sticky="nsew")
+
+
     # METODI
     #Override metodo virtuale classe PaginaGenerica, visualizzo il contenuto della pagina
     def CaricaPagina(self, args = []): 
@@ -224,6 +242,7 @@ class PaginaAggiuntaDispositivo(PaginaGenerica): #Singleton
         self.__lScrittaPorta.configure(background=self.__coloreSfondoInterno, font = self.__fontTesto, foreground = self.__coloreFontTesto)
         self.__lScrittaTempoTraPing.configure(background=self.__coloreSfondoInterno, font = self.__fontTesto, foreground = self.__coloreFontTesto)
         self.__lScrittaAggiuntaDispositivo.configure(background=self.__coloreSfondoInterno, font = self.__fontTitolo, foreground = self.__coloreFontTitolo)
+        self.__lScrittaCategoria.configure(background=self.__coloreSfondoInterno, font = self.__fontTesto, foreground = self.__coloreFontTesto)
 
         #Frame
         self.__fFramePrincipale.configure(background = self.__coloreSfondo)
@@ -233,6 +252,7 @@ class PaginaAggiuntaDispositivo(PaginaGenerica): #Singleton
         self.__fFrameLogo.configure(background = self.__coloreSfondoInterno)
         self.__fFrameSecondarioLogo.configure(background = self.__coloreSfondoInterno)
         self.__cCanvasLogo.configure(background = self.__coloreSfondoInterno)
+        self.__fFrameSupportoCategoria.configure(background = self.__coloreSfondoInterno) 
 
         #Bottone aggiunta
         self.__bPulsanteAggiungiDispositivo.configure(
@@ -250,6 +270,7 @@ class PaginaAggiuntaDispositivo(PaginaGenerica): #Singleton
         self.__myBarraInserimentoIpHost.AggiornaColoriTema()
         self.__myBarraInserimentoPorta.AggiornaColoriTema()
         self.__myBarraInserimentoTempoTraPing.AggiornaColoriTema()
+        self.__myComboboxCategoria.AggiornaColoriTema()
 
 
     # METODI EVENTI

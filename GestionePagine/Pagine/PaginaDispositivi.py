@@ -198,7 +198,7 @@ class PaginaDispositivi(PaginaGenerica): #Singleton
         # Create and position the text labels
         for i in range(5):
             textLabel = tk.Label(master= self.__fFrameScrittaNome if i==0 else self.__fFrameScrittaIndirizzoIP if i==1 else self.__fFrameScrittaPorta if i==2 else self.__fFrameScrittaTempoTraPing if i==3 else self.__fFrameScrittaTastiModdel,
-                                text = "Nome dispositivo" if i==0 else "Indirizzo ip" if i==1 else "Porta" if i==2 else "Frequenza ping (sec)" if i==3 else "",
+                                text = "Nome dispositivo" if i==0 else "Indirizzo ip" if i==1 else "Porta" if i==2 else "Tempo tra ping (sec)" if i==3 else "",
                                 bg = self.__coloreSfondo,
                                 font = self.__font,
                                 fg = self.__fontColor

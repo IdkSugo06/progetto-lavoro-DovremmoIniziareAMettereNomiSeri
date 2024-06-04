@@ -271,6 +271,8 @@ class PaginaDashboard(PaginaGenerica): #Singleton
 
         self.__fFrameTextLabel.place(x = SPAZIO_LATI_PAGINA_DISPOSITIVI, y = SPAZIO_ALTO_PAGINA_DISPOSITIVI, width = self.__dimensioniTabellaDashboard[0], height = Impostazioni.personalizzazioni.altezza_elemento_tabella_paginaDashboard, anchor = "nw")
 
+        self.__fFrameComboboxFiltri.place(x = self.__dimensioniTabellaDashboard[0] - (self.__dimCombobox[0] - self.__offsetCombobox[0]), 
+                                y = SPAZIO_ALTO_PAGINA_DISPOSITIVI - (self.__dimCombobox[1] + self.__offsetCombobox[1]), width = self.__dimCombobox[0], height = self.__dimCombobox[1], anchor= "nw")
         #Resize tabella
         self.__tabellaDashboard.ChangeDim(
                                             xPos = SPAZIO_LATI_PAGINA_DISPOSITIVI,

@@ -66,7 +66,7 @@ ALTEZZA_PAGINA_IMPOSTAZIONI = 3500
 NOME_INTERNO_PAGINA_DISPOSITIVI = "paginaDispositivi"
 NOME_INTERNO_PAGINA_DASHBOARD = "paginaDashboard"
 NOME_INTERNO_PAGINA_AGGIUNGI_DISPOSITIVO = "paginaAggiungiDispositivo"
-NOME_INTERNO_PAGINA_MODIFICA_DISPOSITIVO = "paginaModifica"
+NOME_INTERNO_PAGINA_MODIFICA_DISPOSITIVO = "paginaModificaDispositivo"
 NOME_INTERNO_PAGINA_IMPOSTAZIONI = "paginaImpostazioni"
 NOME_INTERNO_PAGINA_CATEGORIE = "paginaCategorie"
 
@@ -84,7 +84,8 @@ TUPLA_PAGINA_IMPOSTAZIONI = (NOME_INTERNO_PAGINA_IMPOSTAZIONI, os.path.join(PATH
 LISTA_PAGINE_MENU = [
     #("nomePaginaInterno", "pathImmagine", "nomePaginaMostrato") 
     (NOME_INTERNO_PAGINA_DISPOSITIVI, os.path.join(PATH_IMMAGINI,"ImmagineDispositivo.png"), "Dispositivi"),
-    (NOME_INTERNO_PAGINA_DASHBOARD, os.path.join(PATH_IMMAGINI,"ImmagineDashboard.png"), "Dashboard")
+    (NOME_INTERNO_PAGINA_DASHBOARD, os.path.join(PATH_IMMAGINI,"ImmagineDashboard.png"), "Dashboard"),
+    (NOME_INTERNO_PAGINA_CATEGORIE, os.path.join(PATH_IMMAGINI,"ImmagineDispositivo.png"), "Tag")
 ]
 
 # IMPOSTAZIONI GENERALI FINESTRA

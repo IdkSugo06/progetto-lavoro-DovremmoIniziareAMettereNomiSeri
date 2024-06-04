@@ -1,11 +1,8 @@
 {
 	"dispositivi" : {
-		"0" : {	"nomeMacchina" : "Router","host" : "172.16.0.1","porta" : "Porta","timeTraPing" : "0.3","tag" : "iii"},
-		"1" : {	"nomeMacchina" : "Google Italia","host" : "www.google.it","porta" : "Porta","timeTraPing" : "5.0","tag" : "iii"},
-		"2" : {	"nomeMacchina" : "Amazon","host" : "www.amazon.com","porta" : "Porta","timeTraPing" : "1.0","tag" : "iii"},
-		"3" : {	"nomeMacchina" : "Amazon","host" : "www.amazon.com","porta" : "Porta","timeTraPing" : "1.0","tag" : "iii"},
-		"4" : {	"nomeMacchina" : "Host non valido","host" : "host non valido","porta" : "Porta","timeTraPing" : "1.0","tag" : "iii"},
-		"5" : {	"nomeMacchina" : "Host non valido","host" : "10.1.1.1","porta" : "Porta","timeTraPing" : "1.0","tag" : "iii"},
-		"6" : {	"nomeMacchina" : "Host non valido","host" : "192.0.0.0","porta" : "Porta","timeTraPing" : "1.0","tag" : "iii"}
+		"0" : {	"nomeMacchina" : "Amazon","host" : "www.amazon.com","porta" : "Porta","timeTraPing" : "1.0","tag" : "iii"},
+		"1" : {	"nomeMacchina" : "Host non valido","host" : "host non valido","porta" : "Porta","timeTraPing" : "1.0","tag" : "iii"},
+		"2" : {	"nomeMacchina" : "Host non valido","host" : "10.1.1.1","porta" : "Porta","timeTraPing" : "1.0","tag" : "iii"},
+		"3" : {	"nomeMacchina" : "Host non valido","host" : "192.0.0.0","porta" : "Porta","timeTraPing" : "1.0","tag" : "iii"}
 	}
 }

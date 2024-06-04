@@ -74,7 +74,7 @@ class ElementoMenu(tk.Frame): #Occuperà meno del frame a disposizione
                                          font = self.__font, 
                                          fg =  self.__coloreFont,
                                          bg = self.__coloreStandard)
-        self.__lScrittaPagina.pack(side = "left", fill = "both", expand = True)
+        self.__lScrittaPagina.pack(side = "left", expand = True, anchor="nw")
 
 
         #Bindo gli eventi importanti

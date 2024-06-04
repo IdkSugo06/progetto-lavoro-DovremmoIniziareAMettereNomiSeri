@@ -29,6 +29,7 @@ class GestoreInvioMail:
     # COSTRUTTORE
     def __init__(self):
         #Leggo le informazioni del server dal file
+        self.__isAttivo = False
         try:
             with open(PATH_JSON_INVIOMAIL, 'r') as file:
                 fileData = json.load(file).get("connectionInfo")
@@ -39,6 +40,9 @@ class GestoreInvioMail:
             self.__isAttivo = True if fileData["attivo"] == "True" else False
         except Exception as e:
             LOG.log("Costruttore Gestore mail fallito, unreadable. Error: " + str(e), LOG_ERROR)
+            return
+
+        if self.__isAttivo == False:
             return
 
         #Creo il canale di comunicazione

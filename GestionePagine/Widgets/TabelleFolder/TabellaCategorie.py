@@ -1,10 +1,9 @@
 from GestionePagine.Widgets.TabelleFolder.FakeTabellaScorribile import *
-from GestionePagine.Widgets.ElementiTabelle.FrameDispositivoIntabellabile import *
+from GestionePagine.Widgets.ElementiTabelle.FrameCategoriaIntabellabile import *
 from GestioneFiltri.GestoreFiltri import * 
 
 
-class  TabellaDispositivi(FakeTabellaScorribile):
-
+class TabellaCategorie(FakeTabellaScorribile):
 
     # COSTRUTTORE
     def __init__(self, 
@@ -19,16 +18,11 @@ class  TabellaDispositivi(FakeTabellaScorribile):
                  coloreElementi = Impostazioni.Tema.IGetColoriSfondo("secondario")[2],
                  coloreBordoElementi = Impostazioni.Tema.IGetColoriSfondo("secondario")[3]):
 
-        #Filtro
-        self.__gestoreFiltri = GestoreFiltri(nomeFiltro = NOME_INTERNO_FILTRO_NOFILTRI,
-                                             funzioneElementoCambiato = lambda x,y : self.__Notifica_AggiornamentoElementoNecessario(x,y),
-                                             funzioneRefreshTabella = self.__Notifica_RefreshListaNecessario,
-                                             funzioneRebuildTabella = self.__Notifica_RebuildListaNecessario)
         
         #Chiamo il costruttore della classe padre
         super().__init__(
                         master = master,
-                        funzionePopolamentoListaPerIndice = lambda i : self.__gestoreFiltri.GetIdDispositivo(i),
+                        funzionePopolamentoListaPerIndice = lambda i : i,
                         xPos = xPos,
                         yPos = yPos,
                         tableWidth = tableWidth,
@@ -39,50 +33,54 @@ class  TabellaDispositivi(FakeTabellaScorribile):
                         coloreElementi = coloreElementi,
                         coloreBordoElementi = coloreBordoElementi
                         )
+        
+        MyEventHandler.BindEvent(MyCategoriaAggiunta, lambda iCategoria : self.__Notifica_RebuildListaNecessario(iCategoria))
+        MyEventHandler.BindEvent(MyCategoriaEliminata, lambda iCategoria : self.__Notifica_RebuildListaNecessario(iCategoria))
+        MyEventHandler.BindEvent(MyCategoriaModificata, lambda iCategoria : self.__Notifica_RefreshListaNecessario(iCategoria))
    
     
     # AGGIORNAMENTO FRAME
     def CaricaTabella(self):
-        self.RefreshFrameDispositivi(aggiornaAttributi=True)
+        self.RefreshFrameElementi(aggiornaAttributi=True)
         self.Show()
 
     #Aggiorna il numero di frame presenti sulla dashboard
-    def RefreshFrameDispositivi(self, aggiornaAttributi : bool = False):
-        numDispositiviRichiesto = self.__gestoreFiltri.GetNumElementi()
+    def RefreshFrameElementi(self, aggiornaAttributi : bool = False):
+        numElementiRichiesto = len(Dispositivo.categorie)
         #Aggiunge e rimuove gli elementi in base a quanti ne mancano e l'iteratore
-        self.RefreshNumeroFrame(numDispositiviRichiesto, lambda i : FrameDispositivoIntabellabile(master = self.GetFrame(),
+        self.RefreshNumeroFrame(numElementiRichiesto, lambda i : FrameCategoriaIntabellabile(master = self.GetFrame(),
                                                                     x = 0, 
                                                                     y = self._numOf_elementiIntabellabili * self._dimensioniElemento[1], 
                                                                     width = self._dimensioniElemento[0], 
                                                                     height = self._dimensioniElemento[1],
                                                                     isShown = True,
-                                                                    idDispositivo = i))
+                                                                    idCategoria = i))
         if aggiornaAttributi: 
             self.AggiornaAttributi()
-
+        self.Show()
     
     # FUNZIONI NOTIFICA
     def __Notifica_AggiornamentoElementoNecessario(self, idElemento : int, stato : bool):
         if idElemento < self._indiciElementiInterni[0] or idElemento > self._indiciElementiInterni[1]: 
             return
         idFakeElemento = idElemento - self._indiciElementiInterni[0]
-        self._elementiIntabellabili[idFakeElemento].AggiornaAttributiElemento(idDispositivo = self.__gestoreFiltri.GetIdDispositivo(idElemento), status = stato)
-    def __Notifica_RefreshListaNecessario(self):
-        self.RefreshFrameDispositivi(aggiornaAttributi = True)
-    def __Notifica_RebuildListaNecessario(self):
-        self.RefreshFrameDispositivi(aggiornaAttributi = True)
+        self._elementiIntabellabili[idFakeElemento].AggiornaAttributiElemento(i_categoria = idElemento)
+    def __Notifica_RefreshListaNecessario(self, iCategoria : int):
+        self.RefreshFrameElementi(aggiornaAttributi = True)
+    def __Notifica_RebuildListaNecessario(self, iCategoria : int):
+        self.RefreshFrameElementi(aggiornaAttributi = True)
 
 
     # METODI PERSONALIZZAZIONE
     def AggiornaColoriTema(self):
         #Aggiorno i colori
-        coloreSfondo = Impostazioni.Tema.IGetColoriSfondo("secondario")[1],
-        coloreElementi = Impostazioni.Tema.IGetColoriSfondo("secondario")[2],
+        coloreSfondo = Impostazioni.Tema.IGetColoriSfondo("secondario")[1]
+        coloreElementi = Impostazioni.Tema.IGetColoriSfondo("secondario")[2]
         coloreBordoElementi = Impostazioni.Tema.IGetColoriSfondo("terziario")[0]
         self.CambioColore(coloreSfondo, coloreElementi, coloreBordoElementi, cambioColoreElementi = False)
         
         #Per ogni elemento aggiorno i colori
-        FrameDispositivoIntabellabile.AggiornaImmagineTema()
+        FrameCategoriaIntabellabile.AggiornaImmagineTema()
         for elemento in self._elementiIntabellabili:
             elemento.AggiornaColoriTema()
 

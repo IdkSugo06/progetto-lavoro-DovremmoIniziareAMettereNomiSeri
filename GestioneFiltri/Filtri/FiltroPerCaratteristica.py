@@ -49,6 +49,12 @@ class FiltroPerCaratteristica(FiltroGenerico):
                 break
             idSuListaOrdinata += 1
 
+        idUltimoElemento = len(self._listaOrdinata) - 1
+        while (self.__funzioneDiComparazione(idDispositivo, idSuListaOrdinata) == 1):
+            if idSuListaOrdinata >= idUltimoElemento: break
+            idSuListaOrdinata += 1
+
+
         print("add: ", idSuListaOrdinata)
         for i in range(idSuListaOrdinata, self._numOf_elementi):
             self._idDispToIdListaOrdinata[self._listaOrdinata[i]] += 1
@@ -76,7 +82,7 @@ class FiltroPerCaratteristica(FiltroGenerico):
             for i in range(idSuListaOrdinataDopo, idSuListaOrdinataPrima):
                 self._listaOrdinata[i+1] = self._listaOrdinata[i]
             self._listaOrdinata[idSuListaOrdinataDopo] = idDispositivo 
-        else:
+        elif idSuListaOrdinataPrima < idSuListaOrdinataDopo:
             #Aumento gli indici associati
             for i in range(idSuListaOrdinataPrima + 1, idSuListaOrdinataDopo + 1):
                 self._idDispToIdListaOrdinata[self._listaOrdinata[i]] -= 1

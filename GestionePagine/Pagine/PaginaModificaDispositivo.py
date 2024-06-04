@@ -62,7 +62,7 @@ class PaginaModificaDispositivo(PaginaGenerica): #Singleton
         #Bottone aggiunta dispositivo
         self.__bPulsanteAggiungiDispositivo = ctk.CTkButton(master = self.__fFrameSupportoPulsanteAggiungiDispositivo,
                                                          command = self.__TentaModificaDispositivo,
-                                                         text = "Aggiungi", 
+                                                         text = "Conferma modifica", 
                                                          fg_color = self.__coloreSfondoInterno,
                                                          font = Impostazioni.Tema.IGetFont_ctkFormat("testo"),
                                                          text_color = self.__coloreFontTesto,
@@ -147,7 +147,6 @@ class PaginaModificaDispositivo(PaginaGenerica): #Singleton
         self.__myBarraInserimentoNome.grid(row = 3, column = 2, columnspan=3, sticky="nsew")
 
         #Creo la scritta ipHost
-
         self.__fFrameSupportoIpHost = tk.Frame(master = self.__fFrameSchedaModificaDispositivo, background = self.__coloreSfondoInterno)
         self.__fFrameSupportoIpHost.grid(row = 5, column = 2, columnspan=3, sticky= "nsew")
         self.__fFrameSupportoIpHost.rowconfigure(0, weight=1)

@@ -3,6 +3,8 @@ from GestioneDispositivi.GestoreInvioEmail import *
 #Lo status si aggiorna solo quando viene calcolato un ping, dopo 5 ping falliti, mail
 class Dispositivo:
 
+    CATEGORIA_DEFAULT = "none"
+    categorie = [CATEGORIA_DEFAULT]
     funzioneNotificaStatoCambiato = lambda x,y : x #Dovra supportare self.__funzioneNotifica(idDispositivo, status)
     pausaFinitaEvent = Event()
     numOf_threadAttivi = 0
@@ -11,13 +13,14 @@ class Dispositivo:
 
 
     # COSTRUTTORE
-    def __init__(self, nomeMacchina : str, host : str, porta : str, timeTraPing : float = 1, idPosizionale : int = 0): #command sarà una funzione chiamata ogni volta che lo stato viene aggiornato, note: deve prendere come parametro la referenza al Dispositivo
+    def __init__(self, nomeMacchina : str, host : str, porta : str, timeTraPing : float, tag : str, idPosizionale : int = 0): #command sarà una funzione chiamata ogni volta che lo stato viene aggiornato, note: deve prendere come parametro la referenza al Dispositivo
         self.__idPosizionale = idPosizionale
         
         #Attributi dispositivo
         self.__nomeMacchina = nomeMacchina
         self.__host = host
         self.__porta = porta
+        self.__tag = tag
 
         #Attributi connessione
         self.__last5pigs = [False] * 5
@@ -52,13 +55,18 @@ class Dispositivo:
         return self.__nomeMacchina
     def GetTempoTraPing(self):
         return self.__timeBetweenPing_sec
+    def GetTag(self):
+        return self.__tag
+    def SetTag(self, tag : str):
+        self.__tag = tag
     def DecreseId(self):
         self.__idPosizionale -= 1
-    def Modifica(self, nuovoNome : str, nuovoHost : str, nuovaPorta : str, tempoTraPing : float):
+    def Modifica(self, nuovoNome : str, nuovoHost : str, nuovaPorta : str, tempoTraPing : float, nuovoTag : str):
         self.__nomeMacchina = nuovoNome
         self.__host = nuovoHost
         self.__porta = nuovaPorta
         self.__timeBetweenPing_sec = float(tempoTraPing)
+        self.__tag = nuovoTag
         self.ResetAttesaPing()
     def GetId(self) -> int:
         return self.__idPosizionale
@@ -66,6 +74,7 @@ class Dispositivo:
         self.__funzioneNotificaStatoCambiato = funzioneNotificaCambioStatus
     def ResetAttesaPing(self):
         self.__eventoAttesaPing.set()
+
 
     # GETTER E SETTER STATO CONNESSIONE E STABILITA
     def SetPingResult(self, pingResult : bool):

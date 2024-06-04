@@ -37,4 +37,5 @@ class FiltroPerNome(FiltroPerCaratteristica):
                          funzioneDiComparazione = lambda id1,id2 : FiltroPerNome.FunzioneDiComparazione(id1, id2)
                          )
         
+
 FiltroPerNome.Init()

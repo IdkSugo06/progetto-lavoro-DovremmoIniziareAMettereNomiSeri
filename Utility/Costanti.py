@@ -10,6 +10,7 @@ PATH_IMMAGINE_LOGO = os.path.join(PATH_IMMAGINI, "ImmagineLogo.png")
 PATH_IMG_STATUS_ONLINE_PAG_DASHBOARD = os.path.join(PATH_IMMAGINI, "ImmagineDashboardStatusOnline.png")
 PATH_IMG_STATUS_OFFLINE_PAG_DASHBOARD = os.path.join(PATH_IMMAGINI, "ImmagineDashboardStatusOffline.png")
 PATH_IMG_BOTTONE_MODIFICA_PAG_DISPOSITIVI = os.path.join(PATH_IMMAGINI, "ImmagineBottoneModificaPagDispositivo.png")
+PATH_IMG_BOTTONE_CONFERMA_AGGIUNTA_PAG_DISPOSITIVI = os.path.join(PATH_IMMAGINI, "ImmagineBottoneModificaPagDispositivo.png")
 PATH_IMG_BOTTONE_ELIMINAZIONE_PAG_DISPOSITIVI = os.path.join(PATH_IMMAGINI, "ImmagineBottoneEliminaPagDispositivo.png")
 PATH_IMG_ICONA_DISPOSITIVO = os.path.join(PATH_IMMAGINI, "ImmagineDispositivo.png")
 PATH_JSON_TEMI = os.path.join(PATH_CARTELLA_CORRENTE,"UtilityFiles","ThemeData.json")
@@ -62,9 +63,10 @@ ALTEZZA_PAGINA_IMPOSTAZIONI = 3500
 # COSTANTI GESTORE PAGINA
 NOME_INTERNO_PAGINA_DISPOSITIVI = "paginaDispositivi"
 NOME_INTERNO_PAGINA_DASHBOARD = "paginaDashboard"
-NOME_INTERNO_PAGINA_AGGIUNGI_DISPOSITIVO = "paginaAggiungiDispositivo"
-NOME_INTERNO_PAGINA_MODIFICA_DISPOSITIVO = "paginaModifica"
+NOME_INTERNO_PAGINA_AGGIUNGI_DISPOSITIVO = "paginaAggiuntaDispositivo"
+NOME_INTERNO_PAGINA_MODIFICA_DISPOSITIVO = "paginaModificaDispositivo"
 NOME_INTERNO_PAGINA_IMPOSTAZIONI = "paginaImpostazioni"
+NOME_INTERNO_PAGINA_CATEGORIE = "paginaCategorie"
 
 
 # COSTANTI MENU
@@ -80,7 +82,8 @@ TUPLA_PAGINA_IMPOSTAZIONI = (NOME_INTERNO_PAGINA_IMPOSTAZIONI, os.path.join(PATH
 LISTA_PAGINE_MENU = [
     #("nomePaginaInterno", "pathImmagine", "nomePaginaMostrato") 
     (NOME_INTERNO_PAGINA_DISPOSITIVI, os.path.join(PATH_IMMAGINI,"ImmagineDispositivo.png"), "Dispositivi"),
-    (NOME_INTERNO_PAGINA_DASHBOARD, os.path.join(PATH_IMMAGINI,"ImmagineDispositivo.png"), "Dashboard")
+    (NOME_INTERNO_PAGINA_DASHBOARD, os.path.join(PATH_IMMAGINI,"ImmagineDispositivo.png"), "Dashboard"),
+    (NOME_INTERNO_PAGINA_CATEGORIE, os.path.join(PATH_IMMAGINI,"ImmagineDispositivo.png"), "Tag")
 ]
 
 # IMPOSTAZIONI GENERALI FINESTRA

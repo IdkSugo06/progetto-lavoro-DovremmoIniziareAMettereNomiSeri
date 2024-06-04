@@ -62,7 +62,7 @@ class PaginaModificaDispositivo(PaginaGenerica): #Singleton
         #Bottone aggiunta dispositivo
         self.__bPulsanteAggiungiDispositivo = ctk.CTkButton(master = self.__fFrameSupportoPulsanteAggiungiDispositivo,
                                                          command = self.__TentaModificaDispositivo,
-                                                         text = "Aggiungi", 
+                                                         text = "Conferma modifica", 
                                                          fg_color = self.__coloreSfondoInterno,
                                                          font = Impostazioni.Tema.IGetFont_ctkFormat("testo"),
                                                          text_color = self.__coloreFontTesto,
@@ -119,7 +119,7 @@ class PaginaModificaDispositivo(PaginaGenerica): #Singleton
         self.__fFrameSecondarioLogo.grid(row = 1, column=0, sticky="nsew")
         self.__fFrameSecondarioLogo.grid_propagate(False)
         # LOGO
-        self.__cCanvasLogo = tk.Canvas(master = self.__fFrameSecondarioLogo) #Creo il logo in alto a sinistra
+        self.__cCanvasLogo = tk.Canvas(master = self.__fFrameSecondarioLogo, highlightthickness = 0) #Creo il logo in alto a sinistra
         self.__cCanvasLogo.grid(row = 0, column = 0, sticky = "nsew") 
         self.__myImgLogo = MyImageTk(self.__cCanvasLogo, Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMMAGINE_LOGO))
         self.__myImgLogo.Resize(int((1/18) * Impostazioni.sistema.dimensioniFinestra[0]),
@@ -150,7 +150,6 @@ class PaginaModificaDispositivo(PaginaGenerica): #Singleton
         self.__myBarraInserimentoNome.grid(row = 3, column = 2, columnspan=3, sticky="nsew")
 
         #Creo la scritta ipHost
-
         self.__fFrameSupportoIpHost = tk.Frame(master = self.__fFrameSchedaModificaDispositivo, background = self.__coloreSfondoInterno)
         self.__fFrameSupportoIpHost.grid(row = 5, column = 2, columnspan=3, sticky= "nsew")
         self.__fFrameSupportoIpHost.rowconfigure(0, weight=1)
@@ -205,7 +204,6 @@ class PaginaModificaDispositivo(PaginaGenerica): #Singleton
         #Creo il combobox per selezionare la categoria
         self.__myComboboxCategoria = MyCombobox(master = self.__fFrameSchedaModificaDispositivo, values=["",""], command = None)
         self.__myComboboxCategoria.grid(row = 15, column = 2, columnspan=3, sticky="nsew")
-
 
     # METODI
     #Override metodo virtuale classe PaginaGenerica, visualizzo il contenuto della pagina

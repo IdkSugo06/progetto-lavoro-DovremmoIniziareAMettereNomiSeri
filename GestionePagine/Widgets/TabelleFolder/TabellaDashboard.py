@@ -16,7 +16,7 @@ class FakeTabellaDashboard(FakeTabellaScorribile):
                  elementHeight : int = 50):
 
         #Filtro
-        self.__gestoreFiltri = GestoreFiltri(nomeFiltro = "statusOffOn",
+        self.__gestoreFiltri = GestoreFiltri(nomeFiltro = NOME_INTERNO_FILTRO_STATUSOFFON,
                                              funzioneElementoCambiato = lambda x,y : self.__Notifica_AggiornamentoElementoNecessario(x,y),
                                              funzioneRefreshTabella = self.__Notifica_RefreshListaNecessario,
                                              funzioneRebuildTabella = self.__Notifica_RebuildListaNecessario)

@@ -22,7 +22,7 @@ class MyThemeChanged(MyEvent):
         for function in MyThemeChanged.functionsBound:
             function()
 
-# DEVICES
+# DEVICES CHANGES
 class MyDispositivoAggiunto(MyEvent):
     functionsBound = []
     def __init__(self, args : dict[tuple(("idDispositivo")) : any]): 
@@ -65,13 +65,33 @@ class MyFiltroRebuildNeeded(MyEvent):
         for function in MyFiltroRebuildNeeded.functionsBound:
             function()    
 
+# CATEGORY CHANGES
+class MyCategoriaAggiunta(MyEvent):
+    functionsBound = []
+    def __init__(self, args : dict[tuple(("idCategoria")) : any]): 
+        super().__init__()
+        for function in MyCategoriaAggiunta.functionsBound:
+            function(args["idCategoria"])
+class MyCategoriaModificata(MyEvent):
+    functionsBound = []
+    def __init__(self, args : dict[tuple(("idCategoria")) : any]): 
+        super().__init__()
+        for function in MyCategoriaModificata.functionsBound:
+            function(args["idCategoria"])
+class MyCategoriaEliminata(MyEvent):
+    functionsBound = []
+    def __init__(self, args : dict[tuple(("idCategoria")) : any]): 
+        super().__init__()
+        for function in MyCategoriaEliminata.functionsBound:
+            function(args["idCategoria"])
+
 # FILTERS
 class MyFilterChanged(MyEvent):
     functionsBound = []
-    def __init__(self, args : dict[tuple(("tipoFiltro", "codice", "args")) : any]):
+    def __init__(self, tipoFiltro : type, args : dict[str : any]):
         super().__init__()
         for function in MyFilterChanged.functionsBound:
-            function(args["tipoFiltro", args["codice"], args["args"]])
+            function(tipoFiltro, args)
 
 class MyFilterRefreshed(MyEvent):
     functionsBound = []

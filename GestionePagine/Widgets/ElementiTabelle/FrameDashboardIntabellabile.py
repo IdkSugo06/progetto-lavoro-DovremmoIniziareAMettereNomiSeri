@@ -240,7 +240,7 @@ class FrameDashboardIntabellabile(ElementoIntabellabile):
         self.__cCanvasStatusDispositivo.configure(background=self.__coloreSfondo, highlightcolor=self.__coloreBordo)
         #Bottone
         self.__fFrameBottonePingManuale.configure(background=self.__coloreSfondo, highlightbackground= self.__coloreBordo)
-        self.__bBottonePingManuale.configure(background=self.__coloreSfondo, font = self.__fontTesto, foreground=self.__coloreTesto, highlightcolor=self.__coloreBordo)
+        self.__bBottonePingManuale.configure(background=self.__coloreSfondo, font = self.__fontTesto, foreground=self.__coloreTesto, highlightbackground = self.__coloreBordo, highlightcolor = self.__coloreBordo)
 
 
     # METODI EVENTI

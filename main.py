@@ -38,7 +38,7 @@ def main():
         Impostazioni.sistema.semaforoUpdateThreadFinito.release()
         
   
-      #Creo la funzione start, che crea e avvia un thread separato 'pri'ma di avviare il loop di tkInter
+    #Creo la funzione start, che crea e avvia un thread separato prima di avviare il loop di tkInter
     def Start():
         t = Thread(target=Update)
         t.start()

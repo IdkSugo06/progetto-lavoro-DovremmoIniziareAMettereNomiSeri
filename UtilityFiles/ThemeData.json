@@ -44,21 +44,7 @@
         "testo": ["arial", 12, "#FFFFFF", []],
         "modificatoreFinePath" : "_temaBlu"
       }
-    },
-
-
-    "temaC" : {
-      "coloriSfondo": {
-        "primario": "#2C2C2C",
-        "secondario": ["#151520", "#252555", "#202050", "#AAAAAA"],
-        "terziario": ["#444466", "#777788"]
-      },
-      "fonts": {
-        "titolo": ["arial", 36, "#FFFFFF", ["bold"]],
-        "sottotitolo": ["arial", 14, "#FFFFFF", []],
-        "testo": ["arial", 12, "#FFFFFF", []],
-        "modificatoreFinePath" : "_temaDefault"
-      }
+      
     }
   }
 }

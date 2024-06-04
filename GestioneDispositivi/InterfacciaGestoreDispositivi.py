@@ -18,12 +18,12 @@ class InterfacciaGestioneDispositivi:
 
     # INTERFACCIA
     @staticmethod
-    def IAddDispositivo(nome : str, host : str, porta : str, timeTraPing : float):
-        GestoreDispositivi.IAddInformazioneDispositivoConnessione(str(nome), str(host), str(porta), timeTraPing)
+    def IAddDispositivo(nome : str, host : str, porta : str, timeTraPing : float, tag : str):
+        GestoreDispositivi.IAddInformazioneDispositivoConnessione(str(nome), str(host), str(porta), timeTraPing, tag)
 
     @staticmethod
-    def IModificaDispositivo(idDispositvo : int, nome : str, host : str, porta : str, tempoTraPing : float):
-        GestoreDispositivi.IModificaInformazioneDispositivoConnessione(idDispositvo, nome, host, porta, tempoTraPing)
+    def IModificaDispositivo(idDispositvo : int, nome : str, host : str, porta : str, tempoTraPing : float, tag : str):
+        GestoreDispositivi.IModificaInformazioneDispositivoConnessione(idDispositvo, nome, host, porta, tempoTraPing, tag)
 
     @staticmethod
     def IRemoveDispositivo(idDispositivo : int):
@@ -32,10 +32,6 @@ class InterfacciaGestioneDispositivi:
     @staticmethod
     def IClearDispositivo():
         GestoreDispositivi.IClearInformazioniConnessioniDispositivi()
-
-    @staticmethod
-    def IGetStatusConnessioni() -> list[tuple[int, bool, str, int]]:
-        return GestoreDispositivi.IGetStatConnessioni()
 
     # COSTRUTTORE
     def __init__(self):

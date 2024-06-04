@@ -180,7 +180,6 @@ class PaginaAggiuntaDispositivo(PaginaGenerica): #Singleton
         self.__myBarraInserimentoTempoTraPing = MyBarraInserimento(master = self.__fFrameSchedaAggiuntaDispositivo, text = "Tempo tra ping", looseContentOnFirstFocus = True)
         self.__myBarraInserimentoTempoTraPing.grid(row = 12, column = 2, columnspan=3, sticky="nsew")
 
-
         #Creo la scritta categoria
         self.__fFrameSupportoCategoria = tk.Frame(master = self.__fFrameSchedaAggiuntaDispositivo, background = self.__coloreSfondoInterno)
         self.__fFrameSupportoCategoria.grid(row = 14, column = 2, columnspan=3, sticky= "nsew")
@@ -253,6 +252,7 @@ class PaginaAggiuntaDispositivo(PaginaGenerica): #Singleton
         self.__fFrameSecondarioLogo.configure(background = self.__coloreSfondoInterno)
         self.__cCanvasLogo.configure(background = self.__coloreSfondoInterno)
         self.__fFrameSupportoCategoria.configure(background = self.__coloreSfondoInterno) 
+
 
         #Bottone aggiunta
         self.__bPulsanteAggiungiDispositivo.configure(

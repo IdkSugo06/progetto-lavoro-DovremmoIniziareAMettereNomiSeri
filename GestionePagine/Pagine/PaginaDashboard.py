@@ -93,7 +93,6 @@ class PaginaDashboard(PaginaGenerica): #Singleton
                                            )
         self.__lTitoloDashboard.pack(side = "left", fill="both", anchor="sw")
 
-
         #FRAME SUPPORTO COMBOBOX FILTRI
         self.__fFrameComboboxFiltri = tk.Frame(master = self.__fFrameInternoCanvasScorrevole)
         self.__dimCombobox = (150, 40)
@@ -111,7 +110,6 @@ class PaginaDashboard(PaginaGenerica): #Singleton
                                                         values= ["Alfabetico", ""]
                                                         )
         self.__cComboboxCambioFiltro.grid(row = 0, column=0, sticky="nsew")
-
 
         #FRAME DELLE SCRITTE SOPRA LA TABELLA
         self.__fFrameTextLabel = tk.Frame(master = self.__fFrameInternoCanvasScorrevole)
@@ -273,6 +271,7 @@ class PaginaDashboard(PaginaGenerica): #Singleton
 
         self.__fFrameComboboxFiltri.place(x = self.__dimensioniTabellaDashboard[0] - (self.__dimCombobox[0] - self.__offsetCombobox[0]), 
                                 y = SPAZIO_ALTO_PAGINA_DISPOSITIVI - (self.__dimCombobox[1] + self.__offsetCombobox[1]), width = self.__dimCombobox[0], height = self.__dimCombobox[1], anchor= "nw")
+        
         #Resize tabella
         self.__tabellaDashboard.ChangeDim(
                                             xPos = SPAZIO_LATI_PAGINA_DISPOSITIVI,

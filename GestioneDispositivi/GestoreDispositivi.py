@@ -19,11 +19,11 @@ class GestoreDispositivi:
 
     # INTERFACCE ADD MOD CLEAR
     @staticmethod
-    def IAddInformazioneDispositivoConnessione(nome : str, host : str, porta : str, timeTraPing : float):
-        return GestoreDispositivi.GetGestoreConnessioni().__addConnessione(nome, host, porta, float(timeTraPing))
+    def IAddInformazioneDispositivoConnessione(nome : str, host : str, porta : str, timeTraPing : float, tag : str):
+        return GestoreDispositivi.GetGestoreConnessioni().__addConnessione(nome, host, porta, float(timeTraPing), tag)
     @staticmethod
-    def IModificaInformazioneDispositivoConnessione(idPosizionale : int, nome : str, host : str, porta : str, tempoTraPing : float):
-        return GestoreDispositivi.GetGestoreConnessioni().__modificaConnessione(idPosizionale, nome, host, porta, tempoTraPing)
+    def IModificaInformazioneDispositivoConnessione(idPosizionale : int, nome : str, host : str, porta : str, tempoTraPing : float, tag : str):
+        return GestoreDispositivi.GetGestoreConnessioni().__modificaConnessione(idPosizionale, nome, host, porta, tempoTraPing, tag)
     @staticmethod
     def IRemoveInformazioneDispositivoConnessione(idDispositivo : int):
         return GestoreDispositivi.GetGestoreConnessioni().__rimuoviConnessione(idDispositivo)
@@ -112,7 +112,8 @@ class GestoreDispositivi:
                 self.__addConnessione(nome = dispositivoSingoloJson["nomeMacchina"],
                                       host = dispositivoSingoloJson["host"],
                                       porta = dispositivoSingoloJson["porta"],
-                                      timeTraPing = float(dispositivoSingoloJson["timeTraPing"]))
+                                      timeTraPing = float(dispositivoSingoloJson["timeTraPing"]),
+                                      tag = dispositivoSingoloJson["tag"])
             except Exception as e:
                 LOG.log("Errore durante il caricamento del dispositivo: " + str(key) + " errore: " + str(e), LOG_ERROR)
         
@@ -126,6 +127,7 @@ class GestoreDispositivi:
             newLine += ',\"host\" : \"' + dispositivo.GetHost() + "\""
             newLine += ',\"porta\" : \"' + dispositivo.GetPorta() + "\""
             newLine += ',\"timeTraPing\" : \"' + str(dispositivo.GetTempoTraPing()) + "\""
+            newLine += ',\"tag\" : \"' + str(dispositivo.GetTag()) + "\""
             newLine += "},"
             newStr += newLine
             i_dispositivo += 1
@@ -137,23 +139,65 @@ class GestoreDispositivi:
         filestream.close()
 
 
+    # METODI CATEGORIA
+    @staticmethod 
+    def IGetCategorie():
+        return Dispositivo.categorie
+    @staticmethod
+    def IAddCategoria(nuovaCategoria : str):
+        if nuovaCategoria in Dispositivo.categorie:
+            LOG.log("Categoria già esistente")
+            return False
+        Dispositivo.categorie.append(nuovaCategoria)
+        MyEventHandler.Throw(MyCategoriaAggiunta, args = {"idCategoria" : len(Dispositivo.categorie) - 1})
+        return True
+    @staticmethod
+    def IModificaCategoria(idCategoria : int, nuovaCategoria : str):
+        if nuovaCategoria in Dispositivo.categorie:
+            LOG.log("Categoria già esistente")
+            return False
+        try:
+            #Controllo ogni dispositivo per controllare se sia della categoria appena cambiata
+            self = GestoreDispositivi.GetGestoreConnessioni()
+            categoriaPrecedente = Dispositivo.categorie[idCategoria] 
+            for dispositivo in self.__dispositivi:
+                if dispositivo.GetTag() == categoriaPrecedente:
+                    dispositivo.SetTag(nuovaCategoria)
+            Dispositivo.categorie[idCategoria] = nuovaCategoria
+            return True
+        except:
+            return False
+    @staticmethod
+    def IRimuoviCategoria(idCategoria : int):
+        self = GestoreDispositivi.GetGestoreConnessioni()
+        categoria = Dispositivo.categorie[idCategoria]
+        for dispositivo in self.__dispositivi:
+            if dispositivo.GetTag() == categoria:
+                dispositivo.SetTag(Dispositivo.CATEGORIA_DEFAULT)
+                MyEventHandler.Throw(MyDispositivoModificato, {"idDispositivo" : dispositivo.GetId()})
+        try:
+            Dispositivo.categorie.pop(idCategoria)
+            MyEventHandler.Throw(MyCategoriaEliminata, {"idCategoria" : idCategoria})
+        except:
+            LOG.log("Tentata rimozione categoria non definita", LOG_ERROR)    
+
     # METODI ADD MOD CLEAR
-    def __addConnessione(self, nome : str, host : str, porta : str, timeTraPing : float): #Riordinamento NON necessario
+    def __addConnessione(self, nome : str, host : str, porta : str, timeTraPing : float, tag = str): #Riordinamento NON necessario
         self.__semaforoAccessiStatusConnessione.acquire()
         #Se è il primo thread, acquisice il semaforo
         Dispositivo.ThreadInizializzato()
 
         #Aggiungo il dispositivo
-        self.__dispositivi.append(Dispositivo(nome, host, porta, timeTraPing, self.__numOf_dispositivi))
+        self.__dispositivi.append(Dispositivo(nome, host, porta, timeTraPing, tag, self.__numOf_dispositivi))
 
         #Lancio l'evento
         MyEventHandler.Throw(MyDispositivoAggiunto, args = {"idDispositivo" : self.__numOf_dispositivi - 1})
         self.__numOf_dispositivi += 1
         self.__semaforoAccessiStatusConnessione.release()
 
-    def __modificaConnessione(self, idPosizionale : int, nome : str, host : str, porta : str, tempoTraPing : float):
+    def __modificaConnessione(self, idPosizionale : int, nome : str, host : str, porta : str, tempoTraPing : float, tag : str):
         self.__semaforoAccessiStatusConnessione.acquire()
-        self.__dispositivi[idPosizionale].Modifica(nome, host, porta, tempoTraPing)
+        self.__dispositivi[idPosizionale].Modifica(nome, host, porta, tempoTraPing, tag)
         MyEventHandler.Throw(MyDispositivoModificato, args = {"idDispositivo" : idPosizionale})
         self.__semaforoAccessiStatusConnessione.release()
 
@@ -179,7 +223,7 @@ class GestoreDispositivi:
         #Mi accerto che tutti i thread siano stati distrutti prima di svuotare la lista
         Dispositivo.semaforoThreadAttivi.acquire()
         Dispositivo.semaforoThreadAttivi.release()
-        self.__dispositivi = []
+        self.__dispositivi : list[Dispositivo] = []
         self.__numOf_dispositivi = 0
         self.__semaforoAccessiStatusConnessione.release()    
     

@@ -29,15 +29,20 @@ class GestoreInvioMail:
     # COSTRUTTORE
     def __init__(self):
         #Leggo le informazioni del server dal file
+        self.__isAttivo = False
         try:
             with open(PATH_JSON_INVIOMAIL, 'r') as file:
                 fileData = json.load(file).get("connectionInfo")
             self.__server = fileData["server"]
             self.__from_add = fileData["from"]
             self.__to_add = fileData["to"]
-            self.__password = fileData ["password"]
+            self.__password = fileData["password"]
+            self.__isAttivo = True if fileData["attivo"] == "True" else False
         except Exception as e:
             LOG.log("Costruttore Gestore mail fallito, unreadable. Error: " + str(e), LOG_ERROR)
+            return
+
+        if self.__isAttivo == False:
             return
 
         #Creo il canale di comunicazione
@@ -52,6 +57,7 @@ class GestoreInvioMail:
         LOG.log("Costruttore gestore mail concluso")
         
     def InvioMail(self, messaggio : str = ""):
+        if self.__isAttivo == False: return
         fullMessaggio = self.__DecoratoreMail() + messaggio
         self.__canaleCriptato.sendmail(self.__from_add, self.__to_add, fullMessaggio)
 

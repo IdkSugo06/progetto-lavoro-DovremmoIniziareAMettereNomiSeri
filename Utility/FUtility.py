@@ -26,7 +26,7 @@ def RicercaInListaOrdinata(lista : list,
                             elemento, 
                             funzioneElementoLista = lambda a : a, #funzione da applicare ad agli elementi della lista prima della comparazione (returnType any)
                             funzioneElementoDato = lambda a : a, #funzione da applicare ad all'elemento dato prima della comparazione (returnType any)
-                            funzioneDiComparazione = lambda t : 0 if t[0] == t[1] else 1 if t[0] > t[1] else -1 #a (dopo,in quel punto, o prima) di b se ... (returnType [1,0,-1])
+                            funzioneDiComparazione = lambda a,b : 0 if a == b else 1 if a > b else -1 #a (dopo,in quel punto, o prima) di b se ... (returnType [1,0,-1])
                             ) -> list[int, bool]: 
     #Calcolo la lunghezza della lista
     lunghezzaLista = len(lista)
@@ -36,21 +36,20 @@ def RicercaInListaOrdinata(lista : list,
     puntatore = lunghezzaLista//2
 
     #Se gli elementi sono uguali, ritorno la posizione
-    variabileDiComparazione = [funzioneElementoDato(elemento), funzioneElementoLista(lista[puntatore])]
-    if funzioneDiComparazione(variabileDiComparazione) == 0:
+    if funzioneDiComparazione(funzioneElementoDato(elemento), funzioneElementoLista(lista[puntatore])) == 0:
         return [puntatore,True]
     
     #Altrimenti analizzo richiamo la funzione 
-    if funzioneDiComparazione(variabileDiComparazione) == 1:
+    if funzioneDiComparazione(funzioneElementoDato(elemento), funzioneElementoLista(lista[puntatore])) == 1:
         #Se la lista è di lunghezza 1 e l'elemento è maggiore, ritorno il puntatore successivo
         if lunghezzaLista == 1:
             return [puntatore+1,False]
         result = RicercaInListaOrdinata(lista[puntatore:lunghezzaLista], elemento, funzioneElementoLista, funzioneElementoDato, funzioneDiComparazione)
         return [puntatore + result[0], result[1]]
-    elif funzioneDiComparazione(variabileDiComparazione) == -1:
+    elif funzioneDiComparazione(funzioneElementoDato(elemento), funzioneElementoLista(lista[puntatore])) == -1:
         return RicercaInListaOrdinata(lista[0:puntatore], elemento, funzioneElementoLista, funzioneElementoDato, funzioneDiComparazione)
     else:
-        LOG.log("errore durante la ricerca di un elemento in una lista ordinata",2)
+        LOG.log("errore durante la ricerca di un elemento in una lista ordinata", LOG_FATAL_ERROR)
         return [-1,False]
     
 #Ritorno la lista ordinata
@@ -85,7 +84,7 @@ def CountingSort(inputArray : list[int], minVal = None, maxVal = None, funzioneS
 
 
 #Insertion sort
-def InsertionSort(inputArray : list[int], funzioneDiConfronto = lambda t : t[0] > t[1]):
+def InsertionSort(inputArray : list[any], funzioneDiConfronto = lambda t : t[0] > t[1]) -> list[any]:
     for i in range(1, len(inputArray)):
         value = inputArray[i]
         j = i-1

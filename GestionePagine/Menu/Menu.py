@@ -45,6 +45,13 @@ class Menu:
         # creo la lista menu
         self.__listaMenu = ListaMenu(self.__fFrameListaMenu, LISTA_PAGINE_MENU)
 
+        #Aggiungo anche tutte le categorie
+        for categoria in Dispositivo.categorie:
+            if categoria == Dispositivo.CATEGORIA_DEFAULT:
+                continue
+            nomeInternoPagina = NomeInternoPaginaCategoria(categoria = categoria)
+            self.AddPagina(nomeInternoPagina, PATH_IMG_STATUS_ONLINE_PAG_DASHBOARD, NomeEsternoPaginaCategoria(categoria))
+        
         # CARICA MENU
         self.CaricaMenu()
 
@@ -78,7 +85,15 @@ class Menu:
         coloreBordo = Impostazioni.Tema.IGetColoriSfondo("secondario")[3]
         self.__fFrameLogo.configure(background=coloreSfondo, highlightcolor=coloreBordo)
         self.__fFrameListaMenu.configure(background=coloreSfondo, highlightcolor=coloreBordo)
+    
+    
+    def AddPagina(self, nomeInterno : str, pathImmagine : str, nomeEsterno : str):
+        self.__listaMenu.AddPagina(nomeInterno, pathImmagine, nomeEsterno)
+
         
+    def AddPagina(self, nomeInterno : str, pathImmagine : str, nomeEsterno : str):
+        self.__listaMenu.AddPagina(nomeInterno, pathImmagine, nomeEsterno)
+
     # METODI EVENTI    
     # METODO RICONFIGURAZIONE
     def CambioFont(self):

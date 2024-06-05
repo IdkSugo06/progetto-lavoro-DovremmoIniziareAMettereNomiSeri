@@ -63,6 +63,11 @@ class ListaMenu(tk.Frame): #Occuperà tutto il frame master occupabile
         self.__cCanvasScorrevole.bind("<MouseWheel>", lambda event : self.Scroll(event))
 
 
+    def AddPagina(self, nomeInterno : str, pathImmagine : str, nomeEsterno : str):
+        self.__listaPagine.append((nomeInterno, pathImmagine, nomeEsterno))
+        self.RefreshMenu()
+        self.CambioDimFrame()
+
     # METODI START UPDATE FINISH
     def Update(self, deltaTime : float = 0): #Disabled
         return

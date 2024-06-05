@@ -1,5 +1,5 @@
-from GestionePagine.GestorePagine import *
-from GestionePagine.Widgets.Tabelle import *
+from GestionePagine.Pagine.PaginaCategoriaSingola import *
+
 
 #Stati di una statemachine (stati derivati da paginaGenerica, statemachine : GestorePagine)
 class PaginaGestioneCategorie(PaginaGenerica): #Singleton
@@ -157,7 +157,7 @@ class PaginaGestioneCategorie(PaginaGenerica): #Singleton
         self.__cCanvasBottoneAggiuntaCategoria.grid_propagate(False)
         self.__cCanvasBottoneAggiuntaCategoria.pack_propagate(False)
         #Creo il bottone
-        self.__myImgbBottoneAggiuntaCategoria = MyImageButton(canvas = self.__cCanvasBottoneAggiuntaCategoria, command = lambda event : self.__ConfermaAggiuntaDispositivo(event), path = Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMG_BOTTONE_ELIMINAZIONE_PAG_DISPOSITIVI))
+        self.__myImgbBottoneAggiuntaCategoria = MyImageButton(canvas = self.__cCanvasBottoneAggiuntaCategoria, command = lambda event : self.__ConfermaAggiuntaCategoria(event), path = Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMG_BOTTONE_CONFERMA_AGGIUNTA_PAG_DISPOSITIVI))
         self.__myImgbBottoneAggiuntaCategoria.Resize(dimBottoni[0], dimBottoni[1], self.__mantieniProporzioniImmagine)
         self.__myImgbBottoneAggiuntaCategoria.Show()
 
@@ -213,6 +213,7 @@ class PaginaGestioneCategorie(PaginaGenerica): #Singleton
         self.__fFrameIntroTabella.configure(background=self.__coloreSfondoTabella, highlightcolor=self.__coloreBordo)
         self.__fFramePrincipale.configure(background=self.__coloreSfondoTabella, highlightcolor=self.__coloreBordo)
         self.__fFrameAggiuntaCategoria.configure(background=self.__coloreSfondoTabella, highlightcolor=self.__coloreBordo)
+        self.__cCanvasBottoneAggiuntaCategoria.configure(background=self.__coloreSfondoTabella)
         self.__fFrameSupportoBottoneAggiuntaCategoria.configure(background=self.__coloreSfondoTabella, highlightcolor=self.__coloreBordo)
         self.__myBarraInserimentoNome.AggiornaColoriTema()
         self.__lIntroTabella.configure(background = self.__coloreSfondoTabella,
@@ -226,7 +227,7 @@ class PaginaGestioneCategorie(PaginaGenerica): #Singleton
         
         #Aggiorno i bottoni
         dimBottoni = (20,20)
-        self.__myImgbBottoneAggiuntaCategoria.ChangeImage(Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMG_BOTTONE_CONFERMA_AGGIUNTA_PAG_DISPOSITIVI))
+        #self.__myImgbBottoneAggiuntaCategoria.ChangeImage(Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMG_BOTTONE_CONFERMA_AGGIUNTA_PAG_DISPOSITIVI))
         self.__myImgbBottoneAggiuntaCategoria.Resize(dimBottoni[0], dimBottoni[1], self.__mantieniProporzioniImmagine)
         self.__myImgbBottoneAggiuntaCategoria.Show()
             
@@ -266,13 +267,14 @@ class PaginaGestioneCategorie(PaginaGenerica): #Singleton
                                             coloreBordoElementi = Impostazioni.Tema.IGetColoriSfondo("secondario")[3])
 
     # METODI EVENTI
-    def __ConfermaAggiuntaDispositivo(self, eventTk = None):
+    def __ConfermaAggiuntaCategoria(self, eventTk = None):
         nomeCategoria = self.__myBarraInserimentoNome.Get()
-        categoriaInserita = GestoreDispositivi.IAddCategoria(nomeCategoria)
-        if categoriaInserita == True:
-            FiltroStatusCategoria(nomeCategoria)
+
+        if  GestoreDispositivi.IAddCategoria(nomeCategoria):
+            GestorePagine.ICategoriaAggiunta(nomeCategoria)
             self.__myBarraInserimentoNome.Set("Categoria aggiunta")
-        else:
-            self.__myBarraInserimentoNome.Set("Categoria già presente")
-            
+            return
+        
+        self.__myBarraInserimentoNome.Set("Categoria già presente")
+        
 PaginaGestioneCategorie.Init()

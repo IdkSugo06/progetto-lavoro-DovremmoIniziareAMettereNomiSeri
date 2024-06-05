@@ -27,7 +27,6 @@ class FiltroPerNome(FiltroPerCaratteristica):
     def FunzioneDiComparazione(id1 : int, id2 : int) -> int: #[-1,0,1]
         nome1 = GestoreDispositivi.IGetDispositivo(id1).GetNome().lower() 
         nome2 = GestoreDispositivi.IGetDispositivo(id2).GetNome().lower()
-        print(id1,id2,nome1,nome2)
         return 0 if nome1 == nome2 else -1 if nome1 < nome2 else 1
 
     # COSTRUTTORE

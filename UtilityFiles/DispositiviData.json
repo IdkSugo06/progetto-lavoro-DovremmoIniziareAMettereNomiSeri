@@ -1,8 +1,7 @@
 {
 	"dispositivi" : {
-		"0" : {	"nomeMacchina" : "Amazon","host" : "www.amazon.com","porta" : "Porta","timeTraPing" : "1.0","tag" : "iii"},
-		"1" : {	"nomeMacchina" : "Host non valido","host" : "host non valido","porta" : "Porta","timeTraPing" : "1.0","tag" : "iii"},
-		"2" : {	"nomeMacchina" : "Host non valido","host" : "10.1.1.1","porta" : "Porta","timeTraPing" : "1.0","tag" : "iii"},
-		"3" : {	"nomeMacchina" : "Host non valido","host" : "192.0.0.0","porta" : "Porta","timeTraPing" : "1.0","tag" : "iii"}
+	},
+	"categorie" : {
+		"0" : {	"nomeCategoria" : "senza categoria"}
 	}
 }

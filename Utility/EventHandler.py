@@ -88,10 +88,10 @@ class MyCategoriaEliminata(MyEvent):
 # FILTERS
 class MyFilterChanged(MyEvent):
     functionsBound = []
-    def __init__(self, tipoFiltro : type, args : dict[str : any]):
+    def __init__(self, args : dict[tuple(("tipoFiltro", "args")) : any]):
         super().__init__()
         for function in MyFilterChanged.functionsBound:
-            function(tipoFiltro, args)
+            function(args["tipoFiltro"], args["args"])
 
 class MyFilterRefreshed(MyEvent):
     functionsBound = []
@@ -114,7 +114,12 @@ class MyFilterElementChanged(MyEvent):
         for function in MyFilterElementChanged.functionsBound:
             function(args["tipoFiltro"], args["idElemento"], args["stato"])
 
-            
+class MyCategoriaCreata(MyEvent):
+    functionsBound = []
+    def __init__(self, args : dict[tuple(("nomeCategoria")) : any]):
+        super().__init__()
+        for function in MyCategoriaCreata.functionsBound:
+            function(args["nomeCategoria"])
 
 #Singleton
 class MyEventHandler:

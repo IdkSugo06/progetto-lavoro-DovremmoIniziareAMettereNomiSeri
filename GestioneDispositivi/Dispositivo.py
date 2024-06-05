@@ -3,7 +3,7 @@ from GestioneDispositivi.GestoreInvioEmail import *
 #Lo status si aggiorna solo quando viene calcolato un ping, dopo 5 ping falliti, mail
 class Dispositivo:
 
-    CATEGORIA_DEFAULT = "none"
+    CATEGORIA_DEFAULT = "senza categoria"
     categorie = [CATEGORIA_DEFAULT]
     funzioneNotificaStatoCambiato = lambda x,y : x #Dovra supportare self.__funzioneNotifica(idDispositivo, status)
     pausaFinitaEvent = Event()
@@ -180,7 +180,7 @@ class Dispositivo:
             #Controllo il ping
             result = self.InvioPing(setWhen = setWhen)
             setWhen = "WhenFalse"
-
+            print("ping", self.GetNome(), self.GetHost(), result)
             #Il ping è stato rilevato falso 
             if result[0] == False:
                 self.__PingPerso_4pp() #Esce quando ping true trovato
@@ -200,7 +200,7 @@ class Dispositivo:
             #Controllo il ping
             result = self.InvioPing(setWhen = "WhenTrue")
             #Ritorno se trovato un ping vero
-            if result[1] == True:
+            if result[0] == True:
                 return result
 
             numOf_pingMissed += 1
@@ -223,7 +223,7 @@ class Dispositivo:
             result = self.InvioPing(setWhen = "WhenTrue")
 
             #Ritorno se trovato un ping vero
-            if result[1] == True:
+            if result[0] == True:
                 return result
             
             #Attendo

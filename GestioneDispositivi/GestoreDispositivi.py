@@ -102,9 +102,11 @@ class GestoreDispositivi:
         #Leggo il file dei dispositivi
         try:
             dispositiviJson = data["dispositivi"]
+            categorieJson = data["categorie"]
         except:
-            LOG.log("Errore durante la ricerca dei dispositivi: ", LOG_ERROR)
+            LOG.log("Errore durante la ricerca dei dispositivi e categorie: ", LOG_ERROR)
             return
+        
         #Inizializzo i dispositivi
         for key in dispositiviJson:
             try:
@@ -116,10 +118,19 @@ class GestoreDispositivi:
                                       tag = dispositivoSingoloJson["tag"])
             except Exception as e:
                 LOG.log("Errore durante il caricamento del dispositivo: " + str(key) + " errore: " + str(e), LOG_ERROR)
+
+        #Inizializzo le categorie
+        for key in categorieJson:
+            try:
+                categoriaSingolaJson = categorieJson[key]
+                self.IAddCategoria(nuovaCategoria = categoriaSingolaJson["nomeCategoria"])
+            except Exception as e:
+                LOG.log("Errore durante il caricamento del dispositivo: " + str(key) + " errore: " + str(e), LOG_ERROR)
         
+
     def __SalvaDispositiviSuFile(self):
         #Creo la stringa dei dispositivi
-        newStr = '{\n\t\"dispositivi\" : {'
+        newStrDispositivi = '{\n\t\"dispositivi\" : {\n'
         i_dispositivo = 0
         for dispositivo in self.__dispositivi:
             newLine = f'\n\t\t"{i_dispositivo}" : '
@@ -129,13 +140,24 @@ class GestoreDispositivi:
             newLine += ',\"timeTraPing\" : \"' + str(dispositivo.GetTempoTraPing()) + "\""
             newLine += ',\"tag\" : \"' + str(dispositivo.GetTag()) + "\""
             newLine += "},"
-            newStr += newLine
+            newStrDispositivi += newLine
             i_dispositivo += 1
-        newStr = newStr[:-1] +"\n\t}\n}"
+        newStrDispositivi = newStrDispositivi[:-1] +"\n\t}"
+
+        newStrCategorie = ',\n\t\"categorie\" : {'
+        i_categoria = 0
+        for categoria in Dispositivo.categorie:
+            newLine = f'\n\t\t"{i_categoria}" : '
+            newLine += '{\t\"nomeCategoria\" : \"' + str(categoria) + "\""
+            newLine += "},"
+            newStrCategorie += newLine
+            i_categoria += 1
+        newStrCategorie += "}," if i_categoria == 0 else ""
+        newStrCategorie = newStrCategorie[:-1] +"\n\t}\n}"
         
         #Scrivo sul file la stringa calcolata
         filestream = open(PATH_JSON_DISPOSITIVI, "w")
-        filestream.write(newStr)
+        filestream.write(newStrDispositivi + newStrCategorie)
         filestream.close()
 
 
@@ -149,6 +171,7 @@ class GestoreDispositivi:
             LOG.log("Categoria già esistente")
             return False
         Dispositivo.categorie.append(nuovaCategoria)
+        MyEventHandler.Throw(MyCategoriaCreata, {"nomeCategoria" : nuovaCategoria})
         MyEventHandler.Throw(MyCategoriaAggiunta, args = {"idCategoria" : len(Dispositivo.categorie) - 1})
         return True
     @staticmethod

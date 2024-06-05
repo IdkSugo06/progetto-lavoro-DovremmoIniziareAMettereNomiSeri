@@ -4,7 +4,7 @@ from Utility.Costanti import *
 LOG_WARNING = 1
 LOG_ERROR = 2
 LOG_FATAL_ERROR = 3
-LOG_PRINTENABLED = True
+LOG_PRINTENABLED = False
 LOG_ISENABLED = True
 
 #Log sarà una classe singleton che si occuperà di gestire i feedback all'interno del programma

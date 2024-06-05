@@ -41,7 +41,6 @@ class FiltroPerCaratteristica(FiltroGenerico):
         return
     
     def _AggiungiDispositivo(self, idDispositivo : int): # PROBLEMA: LISTA FA RIFERIMENTO AGLI ID
-        print("Chiamato_AggiungiDispositivo")
         #Trovo la nuova posizione e aggiorno le liste
         idSuListaOrdinata = 0
         for id in self._listaOrdinata:
@@ -55,20 +54,16 @@ class FiltroPerCaratteristica(FiltroGenerico):
             idSuListaOrdinata += 1
 
 
-        print("add: ", idSuListaOrdinata)
         for i in range(idSuListaOrdinata, self._numOf_elementi):
             self._idDispToIdListaOrdinata[self._listaOrdinata[i]] += 1
         #Lo aggiungo alla lista
         self._listaOrdinata = self._listaOrdinata[:idSuListaOrdinata] + [idDispositivo] + self._listaOrdinata[idSuListaOrdinata:]
         self._idDispToIdListaOrdinata.append(idSuListaOrdinata)
-        print(self._listaOrdinata)
-        print(self._idDispToIdListaOrdinata)
         #Aggiorno il contatore
         self._numOf_elementi += 1
         MyEventHandler.Throw(MyFilterRebuilt, {"tipoFiltro" : type(self)})
 
     def _ModificaDispositivo(self, idDispositivo : int):
-        print("Chiamato_ModificaDispositivo")
         #Trovo la posizione
         idSuListaOrdinataPrima = self._idDispToIdListaOrdinata[idDispositivo]
         idSuListaOrdinataDopo = RicercaInListaOrdinata(self._listaOrdinata, idDispositivo, funzioneDiComparazione = self.__funzioneDiComparazione)[0]
@@ -95,7 +90,6 @@ class FiltroPerCaratteristica(FiltroGenerico):
         MyEventHandler.Throw(MyFilterRebuilt, {"tipoFiltro" : type(self)})
 
     def _RimuoviDispositivo(self, idDispositivo : int):
-        print("Chiamato_RimuoviDispositivo")
         #Cambio gli id a tutti i dispositivi con id maggiore
         for i in range(idDispositivo + 1, self._numOf_elementi):
             self._listaOrdinata[self._idDispToIdListaOrdinata[i]] -= 1

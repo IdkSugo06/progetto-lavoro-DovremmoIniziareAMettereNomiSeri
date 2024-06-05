@@ -35,7 +35,6 @@ class Menu:
                                                       path = Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMMAGINE_LOGO))
         self.__myMImgLogo.Resize(int(Impostazioni.sistema.dimensioniFinestra[0] * (PROPORZIONE_MENU_PAGINA)), int(Impostazioni.sistema.dimensioniFinestra[1] * (1-PROPORZIONE_LISTA_MENU_ALTEZZA_PAGINA)))
         self.__myMImgLogo.Show()
-#TODO aggiungere il logo!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         # FRAME LISTA MENU
         self.__fFrameListaMenu = tk.Frame(master = self.__fFramePrincipale, bg = Impostazioni.Tema.IGetColoriSfondo("secondario")[1], highlightbackground= "#000000", highlightthickness=1)
@@ -46,6 +45,13 @@ class Menu:
         # creo la lista menu
         self.__listaMenu = ListaMenu(self.__fFrameListaMenu, LISTA_PAGINE_MENU)
 
+        #Aggiungo anche tutte le categorie
+        for categoria in Dispositivo.categorie:
+            if categoria == Dispositivo.CATEGORIA_DEFAULT:
+                continue
+            nomeInternoPagina = NomeInternoPaginaCategoria(categoria = categoria)
+            self.AddPagina(nomeInternoPagina, PATH_IMG_STATUS_ONLINE_PAG_DASHBOARD, NomeEsternoPaginaCategoria(categoria))
+        
         # CARICA MENU
         self.CaricaMenu()
 
@@ -79,12 +85,11 @@ class Menu:
         coloreBordo = Impostazioni.Tema.IGetColoriSfondo("secondario")[3]
         self.__fFrameLogo.configure(background=coloreSfondo, highlightcolor=coloreBordo)
         self.__fFrameListaMenu.configure(background=coloreSfondo, highlightcolor=coloreBordo)
-        
-    # METODI EVENTI    
-    # METODO RICONFIGURAZIONE
-    def CambioFont(self):
-        pass
+    
+    def AddPagina(self, nomeInterno : str, pathImmagine : str, nomeEsterno : str):
+        self.__listaMenu.AddPagina(nomeInterno, pathImmagine, nomeEsterno)
 
+    # METODI EVENTI    
     def CambioDimFrame(self):
         #Resetto i frame
         self.__myMImgLogo.Resize(int(Impostazioni.sistema.dimensioniFinestra[0] * (PROPORZIONE_MENU_PAGINA)), int(Impostazioni.sistema.dimensioniFinestra[1] * (1-PROPORZIONE_LISTA_MENU_ALTEZZA_PAGINA)))

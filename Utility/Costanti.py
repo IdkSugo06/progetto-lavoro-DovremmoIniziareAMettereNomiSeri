@@ -26,6 +26,7 @@ DIMENSIONI_IMMAGINE_LOGO = (25,25)
 NOME_INTERNO_FILTRO_NOFILTRI = "filtroNoFiltri"
 NOME_INTERNO_FILTRO_STATUSOFFON = "filtroOffOn"
 NOME_INTERNO_FILTRO_NOME = "filtroNome"
+NOME_INTERNO_FILTRO_CATEGORIA = "filtroCategoria"
 
 
 # COSTANTI PAGINA DISPOSITIVI
@@ -67,7 +68,10 @@ NOME_INTERNO_PAGINA_AGGIUNGI_DISPOSITIVO = "paginaAggiuntaDispositivo"
 NOME_INTERNO_PAGINA_MODIFICA_DISPOSITIVO = "paginaModificaDispositivo"
 NOME_INTERNO_PAGINA_IMPOSTAZIONI = "paginaImpostazioni"
 NOME_INTERNO_PAGINA_CATEGORIE = "paginaCategorie"
-
+def NomeInternoPaginaCategoria(categoria : str):
+    return "paginaCategorie_" + categoria
+def NomeEsternoPaginaCategoria(categoria : str):
+    return "\tDashboard - [" + categoria + "]"
 
 # COSTANTI MENU
 PROPORZIONE_MENU_PAGINA = round(1/4,2)

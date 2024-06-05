@@ -38,6 +38,9 @@ class GestorePagine(): #Singleton
     @staticmethod 
     def IGetFrameMenu(): #Chiamerà l'ononima funzione dell'istanza statica 
         return GestorePagine.GetGestorePagine().__GetFrameMenu() 
+    @staticmethod 
+    def IGetMenu():
+        return GestorePagine.GetGestorePagine().__menu
     
     @staticmethod
     def ICaricaPagina(idPagina : int, *args): #Chiamerà l'ononima funzione dell'istanza statica 
@@ -121,6 +124,11 @@ class GestorePagine(): #Singleton
         self.__menu.CambioDimFrame()
         self.__pagine[self.__idPaginaCaricataAttualmente].CambioDimFrame()
 
+    @staticmethod
+    def ICategoriaAggiunta(nuovaCategoria : str):
+        nomeInternoPagina = NomeInternoPaginaCategoria(categoria = nuovaCategoria)
+        GestorePagine.IGetMenu().AddPagina(nomeInternoPagina, PATH_IMG_STATUS_ONLINE_PAG_DASHBOARD, NomeEsternoPaginaCategoria(nuovaCategoria))
+        GestorePagine.GetGestorePagine().__CaricaPagina(PaginaGenerica.GetIdPagina(nomeInternoPagina), args = [])
     
 # METODI -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- METODI
     # COSTRUTTORI    
@@ -163,7 +171,6 @@ class GestorePagine(): #Singleton
         self.__window.bind("<FocusOut>", self.EventFocusOut)
         self.__window.bind("<Configure>", lambda event: GestorePagine.EventConfigureCalled(event))
         MyEventHandler.BindEvent(MyThemeChanged, self.Event_MyThemeChanged)
-        
     
     # GETTER    
     def __GetWindow(self):

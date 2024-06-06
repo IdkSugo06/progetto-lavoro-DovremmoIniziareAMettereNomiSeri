@@ -195,10 +195,8 @@ class FrameDashboardIntabellabile(ElementoIntabellabile):
 
     def SetStatus(self, status : bool):
         if status == True: 
-            print("ONLINE inserito")
             self.__mySMIi_status = FrameDashboardIntabellabile.__mySMI_statusImage.Show(self.__cCanvasStatusDispositivo, pathKey = "online", instanceId = self.__mySMIi_status)
         else:
-            print("OFFLINE inserito")
             self.__mySMIi_status = FrameDashboardIntabellabile.__mySMI_statusImage.Show(self.__cCanvasStatusDispositivo, pathKey = "offline", instanceId = self.__mySMIi_status)
     
     

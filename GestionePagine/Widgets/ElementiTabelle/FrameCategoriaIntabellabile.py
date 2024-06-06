@@ -2,6 +2,9 @@ from GestionePagine.Widgets.ElementiTabelle.ElementoIntabellabile import *
 
 class FrameCategoriaIntabellabile(ElementoIntabellabile):
     
+    def myDistruttore(self):
+        self.place_forget()
+
     def __init__(self,
                  master, 
                  x : int = 0, 
@@ -217,11 +220,17 @@ class FrameCategoriaIntabellabile(ElementoIntabellabile):
         self.__ImpostaModalitaModifica()
 
     def __EliminaCategoriaAssociata(self, eventTk = None):
+        nomeCategoria = Dispositivo.categorie[self.__idCategoriaAssociato]
         GestoreDispositivi.IRimuoviCategoria(self.__idCategoriaAssociato)
+        MyEventHandler.Throw(MyCategoriaEliminata, {"nomeCategoria" : nomeCategoria})
+        GestorePagine.IRicaricaMenu()
+        GestorePagine.ICaricaPagina(PaginaGenerica.GetIdPagina(NOME_INTERNO_PAGINA_CATEGORIE))
 
     def __ConfermaModificaCategoriaAssociata(self, eventTk = None):
         if self.__modalitaModificaAttiva != True: return
+        nomePrecedente = Dispositivo.categorie[self.__idCategoriaAssociato]
         GestoreDispositivi.IModificaCategoria(self.__idCategoriaAssociato, self.__myBarraInserimentoNome.Get())
+        MyEventHandler.Throw(MyCategoriaModificata, {"nomeCategoriaPrecedente" : nomePrecedente, "nomeCategoriaNuovo" : self.__myBarraInserimentoNome.Get()})
         self.__ImpostaModalitaMostraAttributi()
 
     # METODI START UPDATE FINISH

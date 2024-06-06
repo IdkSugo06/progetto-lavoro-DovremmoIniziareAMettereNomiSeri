@@ -7,17 +7,22 @@ import os
 PATH_CARTELLA_CORRENTE = os.getcwd()
 PATH_IMMAGINI  = os.path.join(PATH_CARTELLA_CORRENTE, "Immagini")
 PATH_IMMAGINE_LOGO = os.path.join(PATH_IMMAGINI, "ImmagineLogo.png")
+
 PATH_IMG_STATUS_ONLINE_PAG_DASHBOARD = os.path.join(PATH_IMMAGINI, "ImmagineDashboardStatusOnline.png")
 PATH_IMG_STATUS_OFFLINE_PAG_DASHBOARD = os.path.join(PATH_IMMAGINI, "ImmagineDashboardStatusOffline.png")
 PATH_IMG_BOTTONE_MODIFICA_PAG_DISPOSITIVI = os.path.join(PATH_IMMAGINI, "ImmagineBottoneModificaPagDispositivo.png")
 PATH_IMG_BOTTONE_CONFERMA_AGGIUNTA_PAG_DISPOSITIVI = os.path.join(PATH_IMMAGINI, "ImmagineBottoneModificaPagDispositivo.png")
 PATH_IMG_BOTTONE_ELIMINAZIONE_PAG_DISPOSITIVI = os.path.join(PATH_IMMAGINI, "ImmagineBottoneEliminaPagDispositivo.png")
 PATH_IMG_ICONA_DISPOSITIVO = os.path.join(PATH_IMMAGINI, "ImmagineDispositivo.png")
+
+LOG_PATH = os.path.join(PATH_CARTELLA_CORRENTE,"UtilityFiles","log.txt")
+PATH_JSON_LOG = os.path.join(PATH_CARTELLA_CORRENTE,"UtilityFiles","InfoLog.json")
 PATH_JSON_TEMI = os.path.join(PATH_CARTELLA_CORRENTE,"UtilityFiles","ThemeData.json")
 PATH_JSON_INVIOMAIL = os.path.join(PATH_CARTELLA_CORRENTE,"UtilityFiles","InfoEmail.json")
 PATH_JSON_DISPOSITIVI = os.path.join(PATH_CARTELLA_CORRENTE,"UtilityFiles","DispositiviData.json")
-LOG_PATH = os.path.join(PATH_CARTELLA_CORRENTE,"UtilityFiles","log.txt")
 
+PATH_ICONA_PAGINA_DASHBOARD = os.path.join(PATH_IMMAGINI,"ImmagineDispositivo.png")
+PATH_ICONA_PAGINA_CATEGORIA = os.path.join(PATH_IMMAGINI,"ImmagineDispositivo.png")
 
 DIMENSIONI_IMMAGINE_LOGO = (25,25)
 
@@ -68,8 +73,9 @@ NOME_INTERNO_PAGINA_AGGIUNGI_DISPOSITIVO = "paginaAggiuntaDispositivo"
 NOME_INTERNO_PAGINA_MODIFICA_DISPOSITIVO = "paginaModificaDispositivo"
 NOME_INTERNO_PAGINA_IMPOSTAZIONI = "paginaImpostazioni"
 NOME_INTERNO_PAGINA_CATEGORIE = "paginaCategorie"
+
 def NomeInternoPaginaCategoria(categoria : str):
-    return "paginaCategorie_" + categoria
+    return NOME_INTERNO_PAGINA_CATEGORIE + "_" + categoria
 def NomeEsternoPaginaCategoria(categoria : str):
     return "\tDashboard - [" + categoria + "]"
 

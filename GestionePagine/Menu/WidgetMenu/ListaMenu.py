@@ -18,7 +18,7 @@ class ListaMenu(tk.Frame): #Occuperà tutto il frame master occupabile
                                   int(Impostazioni.sistema.dimensioniFinestra[1] * PROPORZIONE_LISTA_MENU_ALTEZZA_PAGINA)]
         self.__listaPagine = listaPagine #Se vuota riassegno la lista in modo che non sia statica (statica se default come parametro)
         if len(listaPagine) == 0:  
-            self.__listaPagine = [] 
+            self.__listaPagine : list[ElementoMenu] = [] 
            
         
         # FRAME PRINCIPALE
@@ -60,6 +60,7 @@ class ListaMenu(tk.Frame): #Occuperà tutto il frame master occupabile
         self.RefreshMenu()
 
         # BIND
+        MyEventHandler.BindEvent(MyCategoriaModificata, lambda nomePrecedente, nuovoNome : self.ModificaPaginaCategoria(nomePrecedente, nuovoNome))
         self.__cCanvasScorrevole.bind("<MouseWheel>", lambda event : self.Scroll(event))
 
     
@@ -67,6 +68,15 @@ class ListaMenu(tk.Frame): #Occuperà tutto il frame master occupabile
         self.__listaPagine.append((nomeInterno, pathImmagine, nomeEsterno))
         self.RefreshMenu()
         self.CambioDimFrame()
+
+    def RemovePagina(self, nomeInterno : str):
+        i = 0
+        for tuplaPagina in self.__listaPagine:
+            if tuplaPagina[0] == nomeInterno:
+                self.__listaPagine = self.__listaPagine[:i] + self.__listaPagine[i+1:]
+                break
+            i += 1
+        self.RefreshMenu()
 
     # METODI START UPDATE FINISH
     def Update(self, deltaTime : float = 0): #Disabled
@@ -85,19 +95,42 @@ class ListaMenu(tk.Frame): #Occuperà tutto il frame master occupabile
     # METODI EVENTI
     def Scroll(self, event):
         self.__cCanvasScorrevole.yview_scroll(int(-event.delta * Impostazioni.sistema.sensibilita_scorrimento_rotella), "units")
+    
+    def ModificaPaginaCategoria(self, nomePrecedentecategoria : str, nuovoNomeCategoria : str):
+        nomePrecedenteInterno = NomeInternoPaginaCategoria(nomePrecedentecategoria)
+        i = 0
+        for pagina_tupla in self.__listaPagine:
+            if pagina_tupla[0] == nomePrecedenteInterno:
+                self.__listaPagine[i] = (NomeInternoPaginaCategoria(nuovoNomeCategoria), 
+                                PATH_ICONA_PAGINA_CATEGORIA, 
+                                NomeEsternoPaginaCategoria(nuovoNomeCategoria))
+                PaginaGenerica.ModificaPagina(pagina_tupla[0], NomeInternoPaginaCategoria(nuovoNomeCategoria))
+                self.RefreshMenu()
+                self.EvidenziaPaginaSelezionata(NOME_INTERNO_PAGINA_CATEGORIE)
+                break
+            i += 1
 
     # METODI RICONFIGURAZIONE
     def RefreshMenu(self):
-        self.__listaElementi = []
+        #Elimino gli elementi
+        if self.__elementoImpostazione != None:
+            self.__elementoImpostazione.myDistruttore()
+        for elemento in self.__listaElementi:
+            elemento.myDistruttore()
+
+        #Ricostruisco gli elementi
+        self.__listaElementi : list[ElementoMenu] = []
         contatoreElementi = 0
+
         self.__elementoImpostazione = ElementoMenu(master = self.__cCanvasScorrevole, 
-                                            nomePaginaInterno = TUPLA_PAGINA_IMPOSTAZIONI[0],
-                                            pathImmagine = TUPLA_PAGINA_IMPOSTAZIONI[1], 
-                                            nomePaginaMostrato = TUPLA_PAGINA_IMPOSTAZIONI[2],  
-                                            xPos = 0, 
-                                            yPos = self.__dimensioniListaMenu[1] - Impostazioni.personalizzazioni.altezza_elemento_tabella_menu + 5,
-                                            width = self.__dimensioniListaMenu[0],
-                                            height = Impostazioni.personalizzazioni.altezza_elemento_tabella_menu)
+                                                   nomePaginaInterno = TUPLA_PAGINA_IMPOSTAZIONI[0],
+                                                   pathImmagine = TUPLA_PAGINA_IMPOSTAZIONI[1], 
+                                                   nomePaginaMostrato = TUPLA_PAGINA_IMPOSTAZIONI[2],  
+                                                   xPos = 0, 
+                                                   yPos = self.__dimensioniListaMenu[1] - Impostazioni.personalizzazioni.altezza_elemento_tabella_menu + 5,
+                                                   width = self.__dimensioniListaMenu[0],
+                                                   height = Impostazioni.personalizzazioni.altezza_elemento_tabella_menu
+                                                )
         
         for pagina_tupla in self.__listaPagine:
             self.__listaElementi.append(ElementoMenu(
@@ -113,7 +146,6 @@ class ListaMenu(tk.Frame): #Occuperà tutto il frame master occupabile
             self.__listaElementi[contatoreElementi].myBind("<MouseWheel>", lambda event : self.Scroll(event))
             contatoreElementi += 1
         
-
 
     # METODI PERSONALIZZAZIONE
     def AggiornaColoriTema(self):

@@ -180,10 +180,16 @@ class Dispositivo:
             #Controllo il ping
             result = self.InvioPing(setWhen = setWhen)
             setWhen = "WhenFalse"
-            print("ping", self.GetNome(), self.GetHost(), result)
+
+
             #Il ping è stato rilevato falso 
             if result[0] == False:
+                LOG.log(self.GetNome() + " " + self.GetHost() + " ping falso rilevato", LOG_DEBUG)
                 self.__PingPerso_4pp() #Esce quando ping true trovato
+
+
+            LOG.log(self.GetNome() + " " + self.GetHost() + " è connesso", LOG_DEBUG)
+
             #Attendo
             self.__eventoAttesaPing.wait(self.__timeBetweenPing_sec)
             self.__eventoAttesaPing.clear()
@@ -207,11 +213,14 @@ class Dispositivo:
             if numOf_pingMissed == 4:
                 return self.__HostDisconnesso() 
 
+            LOG.log(self.GetNome() + " " + self.GetHost() + " sembra essere disconnesso", LOG_DEBUG)
+
             #Attendo
             self.__eventoAttesaPing.wait(1)
             self.__eventoAttesaPing.clear()
 
     def __HostDisconnesso(self):
+        LOG.log(self.GetNome() + " " + self.GetHost() + " non raggiungibile, mail inviata", LOG_DEBUG)
         self.InvioMail()
         while self.__running:
 
@@ -226,6 +235,8 @@ class Dispositivo:
             if result[0] == True:
                 return result
             
+            LOG.log(self.GetNome() + " " + self.GetHost() + " non raggiungibile", LOG_DEBUG)
+
             #Attendo
             self.__eventoAttesaPing.wait(1)
             self.__eventoAttesaPing.clear()

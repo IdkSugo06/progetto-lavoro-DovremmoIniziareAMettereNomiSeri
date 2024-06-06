@@ -5,16 +5,30 @@ from GestionePagine.Widgets.Tabelle import *
 class PaginaCategoriaSingola(PaginaGenerica): #Singleton
 
 
+    def myDistruttore(self, nomeCategoria : str):
+        if nomeCategoria == self.__nomeCategoria:
+            MyEventHandler.UnBindEvent(MyCategoriaModificata, self.__funzioneModifica)
+            MyEventHandler.UnBindEvent(MyCategoriaEliminata, self.__funzioneElimina)
+            self.__tabellaDashboard.myDistruttore()
+            GestorePagine.IRimuoviPagina(NomeInternoPaginaCategoria(nomeCategoria))
+
+    def ModificaCategoriaFiltrata(self, nomeCategoriaPrecedente : str, nomeCategoriaNuovo : str):
+        print("nome cat", nomeCategoriaPrecedente, self.__nomeCategoria)
+        if nomeCategoriaPrecedente == self.__nomeCategoria:
+            self.__tabellaDashboard.ModificaCategoriaFiltrata(nomeCategoriaPrecedente, nomeCategoriaNuovo)
+
+
     # COSTRUTTORE 
     def __init__(self, nomeCategoria : str):
-        
+        print("PAGINA CAT CREATA", nomeCategoria)
         #Attributi
         self.__coloreSfondo = Impostazioni.Tema.IGetColoriSfondo("secondario")[1]
         self.__font = Impostazioni.Tema.IGetFont("testo")
         self.__fontColor = Impostazioni.Tema.IGetFontColor("testo")
 
         #Aggiungo la pagina
-        PaginaGenerica.AggiungiPagina(NOME_INTERNO_PAGINA_CATEGORIE + "_" + nomeCategoria)
+        self.__nomeCategoria = nomeCategoria
+        PaginaGenerica.AggiungiPagina(NomeInternoPaginaCategoria(categoria = nomeCategoria))
         GestorePagine.IAddPagina(self)
         self.__dimensioniPagina = [int(Impostazioni.sistema.dimensioniFinestra[0] * (1 - PROPORZIONE_MENU_PAGINA)), Impostazioni.sistema.dimensioniFinestra[1]]
         self.__dimensioniPaginaScorrevole = [self.__dimensioniPagina[0], ALTEZZA_PAGINA_DISPOSITIVI]
@@ -158,7 +172,10 @@ class PaginaCategoriaSingola(PaginaGenerica): #Singleton
             #textLabel.configure(highlightthickness = 1, highlightcolor = Impostazioni.Tema.IGetColoriSfondo("secondario")[3])
             self.__textLabels.append(textLabel)
 
-
+        self.__funzioneModifica = lambda nomeCategoriaPrecedente, nomeCategoriaNuovo : self.ModificaCategoriaFiltrata(nomeCategoriaPrecedente, nomeCategoriaNuovo)
+        self.__funzioneElimina = lambda nomeCategoria : self.myDistruttore(nomeCategoria = nomeCategoria)
+        MyEventHandler.BindEvent(MyCategoriaModificata, self.__funzioneModifica)
+        MyEventHandler.BindEvent(MyCategoriaEliminata, self.__funzioneElimina)
 
         # EVENT BIND
         self.__fFramePrincipale.bind("<MouseWheel>", lambda event : self.__cCanvasScorrevole.yview_scroll(int(-event.delta * Impostazioni.sistema.sensibilita_scorrimento_rotella), "units"))
@@ -252,3 +269,7 @@ class PaginaCategoriaSingola(PaginaGenerica): #Singleton
                                             coloreBordoElementi = Impostazioni.Tema.IGetColoriSfondo("secondario")[3])
 
 MyEventHandler.BindEvent(MyCategoriaCreata, lambda nomeCategoria : PaginaCategoriaSingola(nomeCategoria = nomeCategoria))
+for categoria in Dispositivo.categorie:
+    if categoria == Dispositivo.CATEGORIA_DEFAULT:
+        continue
+    MyEventHandler.Throw(MyCategoriaCreata, {"nomeCategoria" : categoria})

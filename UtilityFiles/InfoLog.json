@@ -1,0 +1,6 @@
+{
+    "LOG_INFO" : {
+        "LOG_ISENABLED" : "True",
+        "LOG_DEBUG_LEVEL" : "DEBUG"
+    }
+}

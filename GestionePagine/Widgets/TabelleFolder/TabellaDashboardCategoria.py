@@ -5,6 +5,14 @@ from GestioneFiltri.GestoreFiltri import *
 
 class FakeTabellaDashboardCategoria(FakeTabellaScorribile):
 
+
+    def myDistruttore(self):
+        self.__gestoreFiltri.myDistruttore()
+        del self
+
+    def ModificaCategoriaFiltrata(self, nomeCategoriaPrecedente : str, nomeCategoriaNuovo : str):
+        self.__gestoreFiltri.ModificaCategoriaFiltrata(nomeCategoriaPrecedente, nomeCategoriaNuovo)
+
     # COSTRUTTORE
     def __init__(self, 
                  categoriaFiltrata : str,
@@ -18,8 +26,8 @@ class FakeTabellaDashboardCategoria(FakeTabellaScorribile):
 
         #Filtro
         self.__categoriaFiltrata = categoriaFiltrata
-        self.__gestoreFiltri = GestoreFiltri(nomeFiltro = NOME_INTERNO_PAGINA_CATEGORIE + "_" + self.__categoriaFiltrata,
-                                             funzioneFiltroCambiatoGenerica = lambda args : self.__Notifica_FiltroCambiatoGenerico(args))
+        self.__gestoreFiltri : GestoreFiltri = GestoreFiltri(nomeFiltro = NomeInternoPaginaCategoria(categoriaFiltrata),
+                                                            funzioneFiltroCambiatoGenerica = lambda args : self.__Notifica_FiltroCambiatoGenerico(args))
         
         #Chiamo il costruttore della classe padre
         super().__init__(
@@ -71,17 +79,14 @@ class FakeTabellaDashboardCategoria(FakeTabellaScorribile):
         if args["codiceFiltro"] != self.__categoriaFiltrata:
             return
         if args["evento"] == "cambioStato":
-            print("\n\nNotifica ricevuta di cambio stato, idElemento:", args["idElemento"], "idDisp:", args["idDispositivo"])
             self.__Notifica_AggiornamentoElementoNecessario(args["idElemento"], args["stato"])
         if args["evento"] == "refresh":
             self.__Notifica_RefreshListaNecessario()
 
     def __Notifica_AggiornamentoElementoNecessario(self, idElemento : int, stato : bool):
         if idElemento < self._indiciElementiInterni[0] or idElemento > self._indiciElementiInterni[1]: 
-            print("Notifica scartata, indici: ", self._indiciElementiInterni)
             return
         idFakeElemento = idElemento - self._indiciElementiInterni[0]
-        print("Notifica accettata, idFakeElemento: ", idFakeElemento)
         self._elementiIntabellabili[idFakeElemento].AggiornaAttributiElemento(idDispositivo = self.__gestoreFiltri.GetIdDispositivo(idElemento), status = stato)
     def __Notifica_RefreshListaNecessario(self):
         self.RefreshFrameDispositivi(aggiornaAttributi = True) 

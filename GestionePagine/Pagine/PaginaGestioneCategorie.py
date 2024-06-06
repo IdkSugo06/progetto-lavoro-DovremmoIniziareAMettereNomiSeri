@@ -3,6 +3,7 @@ from GestionePagine.Pagine.PaginaCategoriaSingola import *
 
 #Stati di una statemachine (stati derivati da paginaGenerica, statemachine : GestorePagine)
 class PaginaGestioneCategorie(PaginaGenerica): #Singleton
+
     #Creo un'istanza statica
     paginaDispositivi = None
 

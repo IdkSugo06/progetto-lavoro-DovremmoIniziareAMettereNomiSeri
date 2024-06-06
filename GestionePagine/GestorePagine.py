@@ -54,7 +54,9 @@ class GestorePagine(): #Singleton
     def IRicaricaPagina(*args): #Chiamerà l'ononima funzione dell'istanza statica 
         idPaginaAttuale = GestorePagine.GetGestorePagine().__idPaginaCaricataAttualmente
         GestorePagine.GetGestorePagine().__CaricaPagina(idPaginaAttuale, list(args))
-
+    @staticmethod
+    def IRicaricaMenu(*args): #Chiamerà l'ononima funzione dell'istanza statica 
+        GestorePagine.IGetMenu().RefreshMenu()
     @staticmethod
     def IChiusuraFinestra(): #Chiamerà l'ononima funzione dell'istanza statica 
         GestorePagine.GetGestorePagine().ChiusuraFinestraEvento()
@@ -79,6 +81,14 @@ class GestorePagine(): #Singleton
     @staticmethod 
     def IAddPagina(paginaDaAggiungere : PaginaGenerica): #Chiamerà l'ononima funzione dell'istanza statica 
         GestorePagine.GetGestorePagine().__AddPagina(paginaDaAggiungere)
+    @staticmethod 
+    def IRimuoviPagina(nomePaginaDaRimuovere : str): #Chiamerà l'ononima funzione dell'istanza statica 
+        idPagina = PaginaGenerica.GetIdPagina(nomePaginaDaRimuovere)
+        GestorePagine.IRimuoviPaginaDaMenu(nomePaginaDaRimuovere)
+        PaginaGenerica.RimuoviPagina(nomePaginaDaRimuovere)
+        GestorePagine.GetGestorePagine().__pagine.pop(idPagina)
+        GestorePagine.GetGestorePagine().__idPaginaCaricataAttualmente = 0
+        GestorePagine.IRicaricaMenu()
 
     @staticmethod
     def ISetMenu(menu):
@@ -127,9 +137,16 @@ class GestorePagine(): #Singleton
     @staticmethod
     def ICategoriaAggiunta(nuovaCategoria : str):
         nomeInternoPagina = NomeInternoPaginaCategoria(categoria = nuovaCategoria)
-        GestorePagine.IGetMenu().AddPagina(nomeInternoPagina, PATH_IMG_STATUS_ONLINE_PAG_DASHBOARD, NomeEsternoPaginaCategoria(nuovaCategoria))
+        GestorePagine.IAggiungiPaginaAMenu(nomeInterno = nomeInternoPagina, pathImmagine = PATH_IMG_STATUS_ONLINE_PAG_DASHBOARD, nomeEsterno = NomeEsternoPaginaCategoria(nuovaCategoria))
         GestorePagine.GetGestorePagine().__CaricaPagina(PaginaGenerica.GetIdPagina(nomeInternoPagina), args = [])
-    
+
+    @staticmethod
+    def IAggiungiPaginaAMenu(nomeInterno : str, pathImmagine : str, nomeEsterno : str):
+        GestorePagine.IGetMenu().AddPagina(nomeInterno, pathImmagine, nomeEsterno)
+    @staticmethod
+    def IRimuoviPaginaDaMenu(nomeInterno : str):
+        GestorePagine.IGetMenu().RemovePagina(nomeInterno)
+
 # METODI -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- METODI
     # COSTRUTTORI    
     def __init__(self): #Costruttore dovrebbe essere privato
@@ -189,7 +206,7 @@ class GestorePagine(): #Singleton
     def __AddPagina(self, paginaDaAggiungere : PaginaGenerica):
         #Aggiungo la pagina alla lista di pagine
         self.__pagine.append(paginaDaAggiungere) 
-        
+
     # METODI GENERALI
     def __CaricaPagina(self, idPagina : int, args = []):
         #Chiudo la pagina precedente e carico la nuova
@@ -208,7 +225,8 @@ class GestorePagine(): #Singleton
     
     def __Update(self, deltaTime : float):
         #Chiamo Update di menu, pagina corrente e impostazioni
-        self.__pagine[self.__idPaginaCaricataAttualmente].UpdatePagina(deltaTime)
+        #self.__pagine[self.__idPaginaCaricataAttualmente].UpdatePagina(deltaTime)
+        pass
 
     def __UpdatePaginaCorrente(self, deltaTime : float): #Chiamerà l'ononima funzione dell'istanza statica 
         self.__pagine[self.__idPaginaCaricataAttualmente].UpdatePagina(deltaTime)
@@ -221,8 +239,3 @@ class GestorePagine(): #Singleton
 
 #Inizializzo il gestore pagina
 GestorePagine.Init()
-
-    
-
-        
-    

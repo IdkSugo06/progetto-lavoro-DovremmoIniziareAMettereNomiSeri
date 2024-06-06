@@ -61,10 +61,8 @@ class Menu:
         self.__fFramePrincipale.grid_propagate(True)
         self.__fFramePrincipale.grid(row = 0, column=0, sticky="nsew")
         self.__fFramePrincipale.grid_propagate(False)
-
-    def Update(self, deltaTime : float = 0):
-        self.__listaMenu.Update(deltaTime)
-
+    def RefreshMenu(self):
+        self.__listaMenu.RefreshMenu()
     
     # ALTRI METODI
     def EvidenziaPaginaSelezionata(self, nomePaginaInternoSelezionato : str):
@@ -88,6 +86,8 @@ class Menu:
     
     def AddPagina(self, nomeInterno : str, pathImmagine : str, nomeEsterno : str):
         self.__listaMenu.AddPagina(nomeInterno, pathImmagine, nomeEsterno)
+    def RemovePagina(self, nomeInterno : str):
+        self.__listaMenu.RemovePagina(nomeInterno)
 
     # METODI EVENTI    
     def CambioDimFrame(self):

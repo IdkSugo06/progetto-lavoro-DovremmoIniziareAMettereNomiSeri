@@ -68,22 +68,28 @@ class MyFiltroRebuildNeeded(MyEvent):
 # CATEGORY CHANGES
 class MyCategoriaAggiunta(MyEvent):
     functionsBound = []
-    def __init__(self, args : dict[tuple(("idCategoria")) : any]): 
+    def __init__(self, args : dict[tuple(("nomeCategoria")) : any]): 
         super().__init__()
         for function in MyCategoriaAggiunta.functionsBound:
-            function(args["idCategoria"])
+            function(args["nomeCategoria"])
 class MyCategoriaModificata(MyEvent):
     functionsBound = []
-    def __init__(self, args : dict[tuple(("idCategoria")) : any]): 
+    def __init__(self, args : dict[tuple(("nomeCategoriaPrecedente", "nomeCategoriaNuovo")) : any]): 
         super().__init__()
         for function in MyCategoriaModificata.functionsBound:
-            function(args["idCategoria"])
+            function(args["nomeCategoriaPrecedente"], args["nomeCategoriaNuovo"])
 class MyCategoriaEliminata(MyEvent):
     functionsBound = []
-    def __init__(self, args : dict[tuple(("idCategoria")) : any]): 
+    def __init__(self, args : dict[tuple(("nomeCategoria")) : any]): 
         super().__init__()
         for function in MyCategoriaEliminata.functionsBound:
-            function(args["idCategoria"])
+            function(args["nomeCategoria"])
+class MyCategoriaCreata(MyEvent):
+    functionsBound = []
+    def __init__(self, args : dict[tuple(("nomeCategoria")) : any]):
+        super().__init__()
+        for function in MyCategoriaCreata.functionsBound:
+            function(args["nomeCategoria"])
 
 # FILTERS
 class MyFilterChanged(MyEvent):
@@ -114,12 +120,6 @@ class MyFilterElementChanged(MyEvent):
         for function in MyFilterElementChanged.functionsBound:
             function(args["tipoFiltro"], args["idElemento"], args["stato"])
 
-class MyCategoriaCreata(MyEvent):
-    functionsBound = []
-    def __init__(self, args : dict[tuple(("nomeCategoria")) : any]):
-        super().__init__()
-        for function in MyCategoriaCreata.functionsBound:
-            function(args["nomeCategoria"])
 
 #Singleton
 class MyEventHandler:
@@ -162,5 +162,9 @@ class MyEventHandler:
     @staticmethod
     def BindEvent(eventType : type, functionToBind : any): #Has to be void
         eventType.functionsBound.append(functionToBind)
+    
+    @staticmethod
+    def UnBindEvent(eventType : type, functionToBind : any): #Has to be void
+        eventType.functionsBound.remove(functionToBind)
         
 MyEventHandler.Init()

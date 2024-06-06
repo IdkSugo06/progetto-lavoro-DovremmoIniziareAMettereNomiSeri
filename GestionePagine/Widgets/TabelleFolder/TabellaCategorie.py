@@ -34,9 +34,9 @@ class TabellaCategorie(FakeTabellaScorribile):
                         coloreBordoElementi = coloreBordoElementi
                         )
         
-        MyEventHandler.BindEvent(MyCategoriaAggiunta, lambda iCategoria : self.__Notifica_RebuildListaNecessario(iCategoria))
-        MyEventHandler.BindEvent(MyCategoriaEliminata, lambda iCategoria : self.__Notifica_RebuildListaNecessario(iCategoria))
-        MyEventHandler.BindEvent(MyCategoriaModificata, lambda iCategoria : self.__Notifica_RefreshListaNecessario(iCategoria))
+        MyEventHandler.BindEvent(MyCategoriaAggiunta, lambda nomeCategoria : self.__Notifica_RebuildListaNecessario(nomeCategoria))
+        MyEventHandler.BindEvent(MyCategoriaEliminata, lambda nomeCategoria : self.__Notifica_RebuildListaNecessario(nomeCategoria))
+        MyEventHandler.BindEvent(MyCategoriaModificata, lambda nomeCategoriaPrecedente, nomeCategoriaNuovo : self.__Notifica_RefreshListaNecessario(nomeCategoriaNuovo))
    
     
     # AGGIORNAMENTO FRAME
@@ -65,9 +65,9 @@ class TabellaCategorie(FakeTabellaScorribile):
             return
         idFakeElemento = idElemento - self._indiciElementiInterni[0]
         self._elementiIntabellabili[idFakeElemento].AggiornaAttributiElemento(i_categoria = idElemento)
-    def __Notifica_RefreshListaNecessario(self, iCategoria : int):
+    def __Notifica_RefreshListaNecessario(self, nomeCategoria : int):
         self.RefreshFrameElementi(aggiornaAttributi = True)
-    def __Notifica_RebuildListaNecessario(self, iCategoria : int):
+    def __Notifica_RebuildListaNecessario(self, nomeCategoria : int):
         self.RefreshFrameElementi(aggiornaAttributi = True)
 
 

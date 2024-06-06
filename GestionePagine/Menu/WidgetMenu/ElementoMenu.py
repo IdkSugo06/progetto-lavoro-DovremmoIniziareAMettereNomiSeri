@@ -5,7 +5,9 @@ import Utility.Impostazioni.Impostazioni as Impostazioni
 #Conterra le informazioni del frame, nome mostrato e nome pagina interno
 class ElementoMenu(tk.Frame): #Occuperà meno del frame a disposizione
 
-
+    def myDistruttore(self):
+        self.place_forget()
+        
     def __init__(self, 
                  master : tk.Frame,
                  nomePaginaMostrato : str,

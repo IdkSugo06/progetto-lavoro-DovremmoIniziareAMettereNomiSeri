@@ -4,6 +4,21 @@ from GestioneFiltri.Filtri.Filtri import *
 #potranno accedere a funzioni interfaccia e comunicare con le liste filtrate ordinate
 class GestoreFiltri:
 
+    def myDistruttore(self):
+        MyEventHandler.UnBindEvent(eventType = MyFilterChanged, functionToBind = self.__functionToBind_MyFilterChanged)
+        MyEventHandler.UnBindEvent(eventType = MyFilterElementChanged, functionToBind = self.__functionToBind_MyFilterElementChanged)
+        MyEventHandler.UnBindEvent(eventType = MyFilterRefreshed, functionToBind = self.__functionToBind_MyFilterRefreshed)
+        MyEventHandler.UnBindEvent(eventType = MyFilterRebuilt, functionToBind = self.__functionToBind_MyFilterRebuilt)
+        self.__filtroImpostato.myDistruttore()
+        del self
+
+    def ModificaCategoriaFiltrata(self, nomeCategoriaPrecedente : str, nomeCategoriaNuovo : str):
+
+        if type(self.__filtroImpostato) == FiltroStatusCategoria:
+            self.__filtroImpostato.ModificaCategoriaFiltrata(nomeCategoriaPrecedente, nomeCategoriaNuovo)
+            self.__filtroImpostato = FiltroGenerico.GetIstanzaFiltro(NomeInternoPaginaCategoria(nomeCategoriaNuovo))
+            
+        
     def __init__(self,
                 nomeFiltro : str,
                 funzioneFiltroCambiatoGenerica : any = lambda x : x,
@@ -12,17 +27,26 @@ class GestoreFiltri:
                 funzioneRebuildTabella : any = lambda x : x
                 ):
         #Filtro
-        self.__filtroImpostato = FiltroGenerico.GetIstanzaFiltro(nomeFiltro)
+        self.__filtroImpostato : FiltroGenerico = FiltroGenerico.GetIstanzaFiltro(nomeFiltro)
         #Funzioni tabella
         self.__funzioneFiltroCambiatoGenerica = funzioneFiltroCambiatoGenerica
         self.__funzioneElementoCambiato = funzioneElementoCambiato
         self.__funzioneRefreshTabella = funzioneRefreshTabella
         self.__funzioneRebuildTabella = funzioneRebuildTabella
         #Bind eventi
-        MyEventHandler.BindEvent(eventType = MyFilterChanged, functionToBind = lambda tipoFiltro, args : self.__Notifica_FiltroCambiatoGenerico(tipoFiltro, args))
-        MyEventHandler.BindEvent(eventType = MyFilterElementChanged, functionToBind = lambda tipoFiltro, idElemento, stato : self.__Notifica_ElementoCambiato(tipoFiltro, idElemento, stato))
-        MyEventHandler.BindEvent(eventType = MyFilterRefreshed, functionToBind = lambda tipoFiltro : self.__Notifica_RefreshListaNecessario(tipoFiltro))
-        MyEventHandler.BindEvent(eventType = MyFilterRebuilt, functionToBind = lambda tipoFiltro : self.__Notifica_RebuildListaNecessario(tipoFiltro))
+        self.__functionToBind_MyFilterChanged = functionToBind = lambda tipoFiltro, args : self.__Notifica_FiltroCambiatoGenerico(tipoFiltro, args)
+        self.__functionToBind_MyFilterElementChanged = functionToBind = lambda tipoFiltro, idElemento, stato : self.__Notifica_ElementoCambiato(tipoFiltro, idElemento, stato)
+        self.__functionToBind_MyFilterRefreshed = functionToBind = lambda tipoFiltro : self.__Notifica_RefreshListaNecessario(tipoFiltro)
+        self.__functionToBind_MyFilterRebuilt = functionToBind = lambda tipoFiltro : self.__Notifica_RebuildListaNecessario(tipoFiltro)
+        
+        self.__functionToBind__MyFilterChanged = self.__functionToBind_MyFilterChanged
+        self.__functionToBind__MyFilterElementChanged = self.__functionToBind_MyFilterElementChanged
+        self.__functionToBind__MyFilterRefreshed = self.__functionToBind_MyFilterRefreshed
+        self.__functionToBind__MyFilterRebuilt = self.__functionToBind_MyFilterRebuilt
+        MyEventHandler.BindEvent(eventType = MyFilterChanged, functionToBind = self.__functionToBind_MyFilterChanged)
+        MyEventHandler.BindEvent(eventType = MyFilterElementChanged, functionToBind = self.__functionToBind_MyFilterElementChanged)
+        MyEventHandler.BindEvent(eventType = MyFilterRefreshed, functionToBind = self.__functionToBind_MyFilterRefreshed)
+        MyEventHandler.BindEvent(eventType = MyFilterRebuilt, functionToBind = self.__functionToBind_MyFilterRebuilt)
 
 
     # FUNZIONI NOTIFICA
@@ -43,7 +67,6 @@ class GestoreFiltri:
     # METODI INTERFACCIA FILTRO
     def ImpostaFiltro(self, nomeFiltro : str):
         self.__filtroImpostato = FiltroGenerico.GetIstanzaFiltro(nomeFiltro)
-
 
     # INTERFACCE GETTER E SETTER FILTRO IMPOSTATO
     def GetIdDispositivo(self, idElemento : int) -> int:

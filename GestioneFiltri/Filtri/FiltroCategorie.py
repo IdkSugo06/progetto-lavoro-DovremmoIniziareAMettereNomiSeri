@@ -6,15 +6,32 @@ from GestioneFiltri.Filtri.FiltroGenerico import *
 
 class FiltroStatusCategoria(FiltroGenerico):
 
+    
+    def myDistruttore(self):
+        MyEventHandler.UnBindEvent(eventType = MyStatoDispositivoCambiato, functionToBind = self.__functionToBind__MyStatoDispositivoCambiato)
+        MyEventHandler.UnBindEvent(eventType = MyDispositivoAggiunto, functionToBind = self.__functionToBind__MyDispositivoAggiunto)
+        MyEventHandler.UnBindEvent(eventType = MyDispositivoModificato, functionToBind = self.__functionToBind__MyDispositivoModificato)
+        MyEventHandler.UnBindEvent(eventType = MyDispositivoRimosso, functionToBind = self.__functionToBind__MyDispositivoRimosso)
+        MyEventHandler.UnBindEvent(eventType = MyFiltroRefreshNeeded, functionToBind = self.__functionToBind__MyFiltroRefreshNeeded)
+        MyEventHandler.UnBindEvent(eventType = MyFiltroRebuildNeeded, functionToBind = self.__functionToBind__MyFiltroRebuildNeeded)
+        del FiltroGenerico.filtri[NomeInternoPaginaCategoria(self._categoriaFiltrata)]
+
+    def ModificaCategoriaFiltrata(self, nomeCategoriaPrecedente : str, nomeCategoriaNuovo : str):
+        print("Modifica entered")
+        if self._categoriaFiltrata == nomeCategoriaPrecedente:
+            print("Modifica eseguita")
+            del FiltroGenerico.filtri[NomeInternoPaginaCategoria(nomeCategoriaPrecedente)]
+            self._categoriaFiltrata = nomeCategoriaNuovo
+            FiltroGenerico.filtri[NomeInternoPaginaCategoria(nomeCategoriaNuovo)] = self
+            self._RebuildLista()
+
     @staticmethod
     def NotificaCategoriaCreata(nomeCategoria : str):
         FiltroStatusCategoria(nomeCategoria = nomeCategoria)
 
     # Funzioni aggiornamento lista
     def _Notifica_CambioStatoDispositivo(self, idDispositivo : int, nuovoStato : bool):
-        print("Notifica ricevuta")
         if GestoreDispositivi.IGetDispositivo(idDispositivo).GetTag() == self._categoriaFiltrata:
-            print("Notifica accettata")
             self._CambioStatoDispositivo(idDispositivo, nuovoStato)
 
     def _Notifica_AggiuntoDispositivo(self, idDispositivo : int):
@@ -42,8 +59,6 @@ class FiltroStatusCategoria(FiltroGenerico):
         if isInList == False and shouldBeInList == True:
             self._AggiungiDispositivo(idDispositivo)
 
-
-    
     def __init__(self, nomeCategoria : str):
         self._categoriaFiltrata = nomeCategoria
         self._numOf_ElementiOffline = 0
@@ -52,49 +67,43 @@ class FiltroStatusCategoria(FiltroGenerico):
         self._idElToIdDisp_dict = {}
         self._idElToIdListaOrdinata = []
 
-        MyEventHandler.BindEvent(eventType = MyStatoDispositivoCambiato, functionToBind = lambda idDispositivo, nuovoStato : self._Notifica_CambioStatoDispositivo(idDispositivo, nuovoStato))
-        MyEventHandler.BindEvent(eventType = MyDispositivoAggiunto, functionToBind = lambda idDispositivo : self._Notifica_AggiuntoDispositivo(idDispositivo))
-        MyEventHandler.BindEvent(eventType = MyDispositivoModificato, functionToBind = lambda idDispositivo : self._Notifica_ModificatoDispositivo(idDispositivo))
-        MyEventHandler.BindEvent(eventType = MyDispositivoRimosso, functionToBind = lambda idDispositivo : self._Notifica_RimossoDispositivo(idDispositivo))
-        MyEventHandler.BindEvent(eventType = MyFiltroRefreshNeeded, functionToBind = self._RebuildLista)
-        MyEventHandler.BindEvent(eventType = MyFiltroRebuildNeeded, functionToBind = self._RebuildLista)
+        self.__functionToBind__MyStatoDispositivoCambiato = lambda idDispositivo, nuovoStato : self._Notifica_CambioStatoDispositivo(idDispositivo, nuovoStato)
+        self.__functionToBind__MyDispositivoAggiunto = lambda idDispositivo : self._Notifica_AggiuntoDispositivo(idDispositivo)
+        self.__functionToBind__MyDispositivoModificato = lambda idDispositivo : self._Notifica_ModificatoDispositivo(idDispositivo)
+        self.__functionToBind__MyDispositivoRimosso = lambda idDispositivo : self._Notifica_RimossoDispositivo(idDispositivo)
+        self.__functionToBind__MyFiltroRefreshNeeded = self._RebuildLista
+        self.__functionToBind__MyFiltroRebuildNeeded = self._RebuildLista
+        MyEventHandler.BindEvent(eventType = MyStatoDispositivoCambiato, functionToBind = self.__functionToBind__MyStatoDispositivoCambiato)
+        MyEventHandler.BindEvent(eventType = MyDispositivoAggiunto, functionToBind = self.__functionToBind__MyDispositivoAggiunto)
+        MyEventHandler.BindEvent(eventType = MyDispositivoModificato, functionToBind = self.__functionToBind__MyDispositivoModificato)
+        MyEventHandler.BindEvent(eventType = MyDispositivoRimosso, functionToBind = self.__functionToBind__MyDispositivoRimosso)
+        MyEventHandler.BindEvent(eventType = MyFiltroRefreshNeeded, functionToBind = self.__functionToBind__MyFiltroRefreshNeeded)
+        MyEventHandler.BindEvent(eventType = MyFiltroRebuildNeeded, functionToBind = self.__functionToBind__MyFiltroRebuildNeeded)
 
 
     def GetIdDispositivo(self, idElemento: int):
-        print("idElementoAssociato", self._listaOrdinata[idElemento])
-        print("idDispositivoAssociato", self._idElToIdDisp_dict[self._listaOrdinata[idElemento]]) 
         return self._idElToIdDisp_dict[self._listaOrdinata[idElemento]]
 
     # FUNZIONI AGGIORNAMENTO LISTA
     def _CambioStatoDispositivo(self, idDispositivo1 : int, nuovoStato : bool):
-        print("\n\nNuovo cambio stato")
-        print("idDispToIdEl_dict", self._idDispToIdEl_dict)
-        print("idElToIdListaOrdinata", self._idElToIdListaOrdinata)
-        print("listaOrdinata", self._listaOrdinata)
-        print("idElToIdDisp_dict", self._idElToIdDisp_dict)
         #Trovo l'id posizionale del dispositivo da swappare
         if nuovoStato == True:
-            print("Disp",idDispositivo1,"now ONLINE, numOff",self._numOf_ElementiOffline - 1)
             self._numOf_ElementiOffline -= 1
             idElemento2 = self._listaOrdinata[self._numOf_ElementiOffline]
             idDispositivo2 = self._idElToIdDisp_dict[idElemento2]
         elif nuovoStato == False:
-            print("Disp",idDispositivo1,"now OFFLINE, numOff",self._numOf_ElementiOffline + 1)
             idElemento2 = self._listaOrdinata[self._numOf_ElementiOffline]
             idDispositivo2 = self._idElToIdDisp_dict[idElemento2]
             self._numOf_ElementiOffline += 1
         #Salvo gli id degli elementi (dispositivi con categoria giusta, teoricamente messi in ordine di idDispositivo)
         idElemento1 = self._idDispToIdEl_dict[idDispositivo1]
-        print("idDisp 1/2", idDispositivo1, idDispositivo2, "idEl 1/2",idElemento1, idElemento2)
 
         #Salvo gli id dei dispositivi sulla lista ordinata attuale
         idSuListaOrdinataDisp1 = self._idElToIdListaOrdinata[idElemento1] 
         idSuListaOrdinataDisp2 = self._idElToIdListaOrdinata[idElemento2] 
-        print("idSuListaOrdinata 1/2", idSuListaOrdinataDisp1, idSuListaOrdinataDisp2)
 
         #Se i dispositivi sono gli stessi cambio lo stato e basta
         if idSuListaOrdinataDisp1 == idSuListaOrdinataDisp2:
-            print("No change")
             MyEventHandler.Throw(MyFilterChanged, {"tipoFiltro" : type(self), "args" : {"codiceFiltro" : self._categoriaFiltrata, "evento" : "cambioStato", "idElemento" : idSuListaOrdinataDisp1, "idDispositivo" : idDispositivo1, "stato" : nuovoStato}})
             return
 
@@ -105,10 +114,6 @@ class FiltroStatusCategoria(FiltroGenerico):
         self._listaOrdinata[idSuListaOrdinataDisp1] = idElemento2 
         self._listaOrdinata[idSuListaOrdinataDisp2] = idElemento1
         
-        print("idDispToIdEl_dict", self._idDispToIdEl_dict)
-        print("idElToIdListaOrdinata", self._idElToIdListaOrdinata)
-        print("listaOrdinata", self._listaOrdinata)
-        print("idElToIdDisp_dict", self._idElToIdDisp_dict)
         #Notifico il cambio
         MyEventHandler.Throw(MyFilterChanged, {"tipoFiltro" : type(self), "args" : {"codiceFiltro" : self._categoriaFiltrata, "evento" : "cambioStato",  "idElemento" : idSuListaOrdinataDisp1, "idDispositivo" : idDispositivo1, "stato" : not nuovoStato}})
         MyEventHandler.Throw(MyFilterChanged, {"tipoFiltro" : type(self), "args" : {"codiceFiltro" : self._categoriaFiltrata, "evento" : "cambioStato",  "idElemento" : idSuListaOrdinataDisp2, "idDispositivo" : idDispositivo2, "stato" : nuovoStato}})
@@ -129,11 +134,6 @@ class FiltroStatusCategoria(FiltroGenerico):
         for i in range(1, len(self._idElToIdListaOrdinata)):
             self._idElToIdListaOrdinata[i] += 1
         
-        print("\n\nAggiunta elemento")
-        print("idDispToIdEl_dict", self._idDispToIdEl_dict)
-        print("idElToIdListaOrdinata", self._idElToIdListaOrdinata)
-        print("listaOrdinata", self._listaOrdinata)
-        print("idElToIdDisp_dict", self._idElToIdDisp_dict)
         MyEventHandler.Throw(MyFilterChanged, {"tipoFiltro" : type(self), "args" : {"codiceFiltro" : self._categoriaFiltrata, "evento" : "refresh"}})
 
 
@@ -174,32 +174,26 @@ class FiltroStatusCategoria(FiltroGenerico):
             statusDispCorrente = dispositivo.GetStatusConnessione()
             #Se connesso lo inserisco alla fine della lista
             if statusDispCorrente == True:
-                print("Ordinamento -- online")
                 self._listaOrdinata[i_dispositivoOnline] = i_dispositivo
                 self._idElToIdListaOrdinata[i_dispositivo] = i_dispositivoOnline
                 i_dispositivoOnline -= 1
             elif statusDispCorrente == False:
-                print("Ordinamento -- offline")
                 self._listaOrdinata[self._numOf_ElementiOffline] = i_dispositivo
                 self._idElToIdListaOrdinata[i_dispositivo] = self._numOf_ElementiOffline
                 self._numOf_ElementiOffline += 1
             i_dispositivo += 1
 
-        print("\n\nOrdina lista")
-        print("idDispToIdEl_dict", self._idDispToIdEl_dict)
-        print("idElToIdListaOrdinata", self._idElToIdListaOrdinata)
-        print("listaOrdinata", self._listaOrdinata)
-        print("idElToIdDisp_dict", self._idElToIdDisp_dict)
         MyEventHandler.Throw(MyFilterChanged, {"tipoFiltro" : type(self), "args" : {"codiceFiltro" : self._categoriaFiltrata, "evento" : "refresh"}})
 
     def _RebuildLista(self):
         #Ricostruisco il dizionario
         self._idDispToIdEl_dict = {}
         self._idElToIdDisp_dict = {}
-        
+        print("Rebild")
         #Conto gli elementi e scarto quelli non della categoria giusta
         self._numOf_elementi = 0
         for dispositivo in GestoreDispositivi.IGetListaDispositivi():
+            print("Rebild: ", self._categoriaFiltrata, dispositivo.GetTag())
             if dispositivo.GetTag() == self._categoriaFiltrata:
                 self._idDispToIdEl_dict[dispositivo.GetId()] = self._numOf_elementi
                 self._idElToIdDisp_dict[self._numOf_elementi] = dispositivo.GetId()

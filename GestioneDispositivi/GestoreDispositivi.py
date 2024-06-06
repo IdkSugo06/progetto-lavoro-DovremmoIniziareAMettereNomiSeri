@@ -171,8 +171,8 @@ class GestoreDispositivi:
             LOG.log("Categoria già esistente")
             return False
         Dispositivo.categorie.append(nuovaCategoria)
+        print("Event thrown", nuovaCategoria)
         MyEventHandler.Throw(MyCategoriaCreata, {"nomeCategoria" : nuovaCategoria})
-        MyEventHandler.Throw(MyCategoriaAggiunta, args = {"idCategoria" : len(Dispositivo.categorie) - 1})
         return True
     @staticmethod
     def IModificaCategoria(idCategoria : int, nuovaCategoria : str):
@@ -197,10 +197,8 @@ class GestoreDispositivi:
         for dispositivo in self.__dispositivi:
             if dispositivo.GetTag() == categoria:
                 dispositivo.SetTag(Dispositivo.CATEGORIA_DEFAULT)
-                MyEventHandler.Throw(MyDispositivoModificato, {"idDispositivo" : dispositivo.GetId()})
         try:
             Dispositivo.categorie.pop(idCategoria)
-            MyEventHandler.Throw(MyCategoriaEliminata, {"idCategoria" : idCategoria})
         except:
             LOG.log("Tentata rimozione categoria non definita", LOG_ERROR)    
 

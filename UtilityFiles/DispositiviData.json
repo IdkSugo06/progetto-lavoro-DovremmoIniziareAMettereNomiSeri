@@ -1,6 +1,15 @@
 {
 	"dispositivi" : {
+
+		"0" : {	"nomeMacchina" : "Google It","host" : "www.google.it","porta" : "porta","timeTraPing" : "1.0","tag" : "senza categoria"},
+		"1" : {	"nomeMacchina" : "Google It","host" : "www.google.it","porta" : "porta","timeTraPing" : "1.0","tag" : "senza categoria"},
+		"2" : {	"nomeMacchina" : "Router","host" : "172.16.0.1","porta" : "porta","timeTraPing" : "5.0","tag" : "de"},
+		"3" : {	"nomeMacchina" : "Google It","host" : "8.8.8.8","porta" : "porta","timeTraPing" : "100.0","tag" : "senza categoria"}
 	},
-	"categorie" : {}
+	"categorie" : {
+		"0" : {	"nomeCategoria" : "senza categoria"},
+		"1" : {	"nomeCategoria" : "de"},
+		"2" : {	"nomeCategoria" : "d"},
+		"3" : {	"nomeCategoria" : ""}
 	}
 }

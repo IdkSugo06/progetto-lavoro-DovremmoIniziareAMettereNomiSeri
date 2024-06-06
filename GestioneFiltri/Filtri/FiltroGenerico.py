@@ -3,17 +3,24 @@ from GestioneDispositivi.GestoreDispositivi import *
 #Classe astratta
 class FiltroGenerico:
 
+    def myDistruttore(self):
+        return
+
     # ATTRIBUTI STATICI
-    __filtri : dict[str : any] = {}
+    filtri : dict[str : any] = {}
 
     # METODI STATICI
     @staticmethod
     def GetIstanzaFiltro(nomeFiltro : str):
-        return FiltroGenerico.__filtri[nomeFiltro]
-
+        try:
+            return FiltroGenerico.filtri[nomeFiltro]
+        except:
+            LOG.log("Filtro non trovato: " + nomeFiltro, LOG_ERROR)
+            return FiltroGenerico.filtri[NOME_INTERNO_FILTRO_NOFILTRI]
+        
     # COSTRUTTORE ("ASTRATTO")
     def __init__(self, nomeFiltro):
-        FiltroGenerico.__filtri[nomeFiltro] = self
+        FiltroGenerico.filtri[nomeFiltro] = self
         self._numOf_elementi = 0
         self._listaOrdinata = []
         self._idDispToIdListaOrdinata = []

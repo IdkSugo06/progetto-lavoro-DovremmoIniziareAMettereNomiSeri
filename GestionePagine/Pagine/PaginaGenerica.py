@@ -21,7 +21,34 @@ class PaginaGenerica():
         PaginaGenerica.PagIdToName_dict[PaginaGenerica.numOf_pagineEsistenti] = nomePagina
         PaginaGenerica.numOf_pagineEsistenti += 1
         return (PaginaGenerica.numOf_pagineEsistenti - 1)
+    
+    @staticmethod
+    def ModificaPagina(nomePrecedenteInternoPagina : str, nuovoNomeInternoPagina):
+        id = PaginaGenerica.PagNameToId_dict[nomePrecedenteInternoPagina]
+        del PaginaGenerica.PagNameToId_dict[nomePrecedenteInternoPagina]
+        PaginaGenerica.PagNameToId_dict[nuovoNomeInternoPagina] = id
+
+        PaginaGenerica.PagIdToName_dict[id] = nuovoNomeInternoPagina
+
+
+    @staticmethod
+    def RimuoviPagina(nomePagina : str):
+        idPagina = PaginaGenerica.PagNameToId_dict[nomePagina]
+        #Rimuovo gli id e pagine associate
+        del PaginaGenerica.PagNameToId_dict[nomePagina]
+        del PaginaGenerica.PagIdToName_dict[idPagina]
+        #Per ogni id pagina lo diminuisco
+        for idPaginaCorrente in range(idPagina+1, PaginaGenerica.numOf_pagineEsistenti): #Sono presenti tutti gli id
+            #Salvo il nome pagina corrente
+            nomePaginaCorrente = PaginaGenerica.PagIdToName_dict[idPaginaCorrente]
+            #Rimuovo l'id corrente e aggiungo quello prima
+            del PaginaGenerica.PagIdToName_dict[idPaginaCorrente]
+            PaginaGenerica.PagIdToName_dict[idPaginaCorrente - 1] = nomePaginaCorrente
+            #Diminuisco l'id associato alla pagina
+            PaginaGenerica.PagNameToId_dict[nomePaginaCorrente] -= 1
         
+        PaginaGenerica.numOf_pagineEsistenti -= 1
+    
     @staticmethod
     def GetIdPagina(nomePagina : str):
         try:

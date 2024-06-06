@@ -240,7 +240,7 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
 
     # METODI PERSONALIZZAZIONE
     @staticmethod
-    def AggiornaTemaImmagini():
+    def AggiornaImmagineTema():
         FrameDispositivoIntabellabile.__mySMIB_immagini.ChangePaths(newPathsDict = {"modifica" : Impostazioni.Tema.IGetPathTemaCorrente(Impostazioni.PATH_IMG_BOTTONE_MODIFICA_PAG_DISPOSITIVI),
                                                                     "elimina" : Impostazioni.Tema.IGetPathTemaCorrente(Impostazioni.PATH_IMG_BOTTONE_ELIMINAZIONE_PAG_DISPOSITIVI)})
         FrameDispositivoIntabellabile.__mySMIB_immagini.ResizeAll(DIMENSIONI_PULSANTI_MODIFICA_ELIMINA[0], DIMENSIONI_PULSANTI_MODIFICA_ELIMINA[1])

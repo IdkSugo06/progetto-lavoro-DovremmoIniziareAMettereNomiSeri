@@ -162,7 +162,7 @@ class FrameCategoriaIntabellabile(ElementoIntabellabile):
         self.__cCanvasBottoneConfermaModifica.grid_propagate(False)
         self.__cCanvasBottoneConfermaModifica.pack_propagate(False)
         #Creo il bottone
-        self.__myImgbBottoneConfermaModifica = MyImageButton(canvas = self.__cCanvasBottoneConfermaModifica, command = lambda event : self.__ConfermaModificaCategoriaAssociata(event), path = Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMG_BOTTONE_ELIMINAZIONE_PAG_DISPOSITIVI))
+        self.__myImgbBottoneConfermaModifica = MyImageButton(canvas = self.__cCanvasBottoneConfermaModifica, command = lambda event : self.__ConfermaModificaCategoriaAssociata(event), path = Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMG_BOTTONE_CONFERMA_AGGIUNTA_PAG_DISPOSITIVI))
         self.__myImgbBottoneConfermaModifica.Resize(dimBottoni[0], dimBottoni[1], self.__mantieniProporzioniImmagine)
         self.__myImgbBottoneConfermaModifica.Show()
 
@@ -256,7 +256,7 @@ class FrameCategoriaIntabellabile(ElementoIntabellabile):
         self.__myImgbBottoneElimina.ChangeImage(Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMG_BOTTONE_ELIMINAZIONE_PAG_DISPOSITIVI))
         self.__myImgbBottoneElimina.Resize(dimBottoni[0], dimBottoni[1], self.__mantieniProporzioniImmagine)
         self.__myImgbBottoneElimina.Show()
-        self.__myImgbBottoneConfermaModifica.ChangeImage(Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMG_BOTTONE_ELIMINAZIONE_PAG_DISPOSITIVI))
+        self.__myImgbBottoneConfermaModifica.ChangeImage(Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMG_BOTTONE_CONFERMA_AGGIUNTA_PAG_DISPOSITIVI))
         self.__myImgbBottoneConfermaModifica.Resize(dimBottoni[0], dimBottoni[1], self.__mantieniProporzioniImmagine)
         self.__myImgbBottoneConfermaModifica.Show()
         self.AggiornaColori()
@@ -268,6 +268,7 @@ class FrameCategoriaIntabellabile(ElementoIntabellabile):
         self.__fFrameSupportoBottoni.configure(background=self.__coloreSfondo, highlightcolor=self.__coloreBordo)
         self.__fFrameBottoneModifica.configure(background=self.__coloreSfondo, highlightcolor=self.__coloreBordo)
         self.__fFrameBottoneElimina.configure(background=self.__coloreSfondo, highlightcolor=self.__coloreBordo)
+        self.__fFrameBottoneConfermaModifica.configure(background=self.__coloreSfondo, highlightcolor=self.__coloreBordo)
         #Canvas
         self.__cCanvasBottoneElimina.configure(background=self.__coloreSfondo)
         self.__cCanvasBottoneModifica.configure(background=self.__coloreSfondo)

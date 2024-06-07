@@ -49,6 +49,9 @@ class FakeTabellaDashboard(FakeTabellaScorribile):
         self.RefreshFrameDispositivi()
         Dispositivo.pausaFinitaEvent.set()
         
+    def CambioFiltro(self, nomeInternoFiltro : str):
+        self.__gestoreFiltri.ImpostaFiltro(nomeFiltro = nomeInternoFiltro)
+        self.RefreshFrameDispositivi(aggiornaAttributi = True)
 
     #Aggiorna i frame e gli attributi di essi
     def RefreshFrameDispositivi(self, aggiornaAttributi : bool = False): 

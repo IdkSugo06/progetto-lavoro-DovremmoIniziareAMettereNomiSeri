@@ -18,8 +18,7 @@ class ListaMenu(tk.Frame): #Occuperà tutto il frame master occupabile
                                   int(Impostazioni.sistema.dimensioniFinestra[1] * PROPORZIONE_LISTA_MENU_ALTEZZA_PAGINA)]
         self.__listaPagine = listaPagine #Se vuota riassegno la lista in modo che non sia statica (statica se default come parametro)
         if len(listaPagine) == 0:  
-            self.__listaPagine : list[ElementoMenu] = [] 
-           
+            self.__listaPagine : list[tuple] = [] 
         
         # FRAME PRINCIPALE
         super().__init__(master = self.__master, bg = self.__coloreSfondo)
@@ -63,7 +62,7 @@ class ListaMenu(tk.Frame): #Occuperà tutto il frame master occupabile
         MyEventHandler.BindEvent(MyCategoriaModificata, lambda nomePrecedente, nuovoNome : self.ModificaPaginaCategoria(nomePrecedente, nuovoNome))
         self.__cCanvasScorrevole.bind("<MouseWheel>", lambda event : self.Scroll(event))
 
-    
+
     def AddPagina(self, nomeInterno : str, pathImmagine : str, nomeEsterno : str):
         self.__listaPagine.append((nomeInterno, pathImmagine, nomeEsterno))
         self.RefreshMenu()
@@ -102,7 +101,7 @@ class ListaMenu(tk.Frame): #Occuperà tutto il frame master occupabile
         for pagina_tupla in self.__listaPagine:
             if pagina_tupla[0] == nomePrecedenteInterno:
                 self.__listaPagine[i] = (NomeInternoPaginaCategoria(nuovoNomeCategoria), 
-                                PATH_ICONA_PAGINA_CATEGORIA, 
+                                PATH_IMG_ICONA_CATEGORIE, 
                                 NomeEsternoPaginaCategoria(nuovoNomeCategoria))
                 PaginaGenerica.ModificaPagina(pagina_tupla[0], NomeInternoPaginaCategoria(nuovoNomeCategoria))
                 self.RefreshMenu()
@@ -147,6 +146,7 @@ class ListaMenu(tk.Frame): #Occuperà tutto il frame master occupabile
             contatoreElementi += 1
         
 
+
     # METODI PERSONALIZZAZIONE
     def AggiornaColoriTema(self):
         #Aggiorno i colori
@@ -183,7 +183,7 @@ class ListaMenu(tk.Frame): #Occuperà tutto il frame master occupabile
         self.__cCanvasScorrevole.delete(self.__ultimoCanvasId)
         self.__ultimoCanvasId = thisCanvasId
         #Refresho il menu
-        self.__elementoImpostazione.SetPos(x = 0, y = self.__dimensioniListaMenu[1] - Impostazioni.personalizzazioni.altezza_elemento_tabella_menu + 5)
+        self.__elementoImpostazione.SetPos(x = 0, y = self.__dimensioniListaMenu[1] - Impostazioni.personalizzazioni.altezza_elemento_tabella_menu - 4)
         self.__elementoImpostazione.CambioDimFrame(width = self.__dimensioniListaMenu[0], height = Impostazioni.personalizzazioni.altezza_elemento_tabella_menu)
         for elementoMenu in self.__listaElementi:
             elementoMenu.CambioDimFrame(width = self.__dimensioniListaMenu[0], height = Impostazioni.personalizzazioni.altezza_elemento_tabella_menu)

@@ -1,4 +1,5 @@
 from Utility.FUtility import *
+import math
 
 dimensioniFinestra = [LARGHEZZA_SCHERMO_INIZIALE, ALTEZZA_SCHERMO_INIZIALE]
 #Impostazioni di sistema
@@ -16,6 +17,19 @@ tipoOrdinamentoDashboard = "off_on"
 # PERSONALIZZAZIONE FINESTRA
 PROPORZIONE_MENU_PAGINA = round(1/4,2)
 
+
+#tempoPerStabilizzareConnessione = 64
+#coefficenteStabilizzazioneConnessione = 0.5 * tempoPerStabilizzareConnessione * tempoPerStabilizzareConnessione
+#def CalcoloNuovaStabilitaConnessione(stabilitaConnessione : float, tempoPassatoDaUltimoPing : float, pingResult : bool):
+#    if pingResult == True:
+#        return FunzioneStabilitaConnessione(Inv_FunzioneInversaStabilitaConnessione(stabilitaConnessione) + tempoPassatoDaUltimoPing)
+#    elif pingResult == False:
+#        return (1 - FunzioneStabilitaConnessione((tempoPerStabilizzareConnessione - Inv_FunzioneInversaStabilitaConnessione(stabilitaConnessione)) + tempoPassatoDaUltimoPing))
+#    return 0
+#def FunzioneStabilitaConnessione(x : float) -> float:
+#    return ((-((x*x)/2) + (tempoPerStabilizzareConnessione * x)) / coefficenteStabilizzazioneConnessione)
+#def Inv_FunzioneInversaStabilitaConnessione(y : float) -> float:
+#    return (tempoPerStabilizzareConnessione - math.sqrt(tempoPerStabilizzareConnessione - 2*y*coefficenteStabilizzazioneConnessione))
 
 #This will call the notifier when it reads no changes in the time set
 class ConfigureHandler:

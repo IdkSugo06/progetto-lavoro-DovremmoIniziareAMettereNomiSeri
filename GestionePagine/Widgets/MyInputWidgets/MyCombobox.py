@@ -62,6 +62,9 @@ class MyCombobox(MyInputWidget):
     def Get(self):
         return self.__cbCombobox_str.get()
     
+    def ChangeValues(self, values : list[any]):
+        self.__cbCombobox["values"] = values
+    
     
     # METODI PERSONALIZZAZIONE
     def AggiornaColoriTema(self):

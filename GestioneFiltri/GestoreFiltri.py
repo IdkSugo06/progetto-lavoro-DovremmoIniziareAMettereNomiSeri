@@ -36,7 +36,7 @@ class GestoreFiltri:
         #Bind eventi
         self.__functionToBind_MyFilterChanged = functionToBind = lambda tipoFiltro, args : self.__Notifica_FiltroCambiatoGenerico(tipoFiltro, args)
         self.__functionToBind_MyFilterElementChanged = functionToBind = lambda tipoFiltro, idElemento, stato : self.__Notifica_ElementoCambiato(tipoFiltro, idElemento, stato)
-        self.__functionToBind_MyFilterRefreshed = functionToBind = lambda tipoFiltro : self.__Notifica_RefreshListaNecessario(tipoFiltro)
+        self.__functionToBind_MyFilterRefreshed = functionToBind = lambda tipoFiltro : self.__Notifica_RebuildListaNecessario(tipoFiltro)
         self.__functionToBind_MyFilterRebuilt = functionToBind = lambda tipoFiltro : self.__Notifica_RebuildListaNecessario(tipoFiltro)
         
         self.__functionToBind__MyFilterChanged = self.__functionToBind_MyFilterChanged

@@ -171,7 +171,6 @@ class GestoreDispositivi:
             LOG.log("Categoria già esistente")
             return False
         Dispositivo.categorie.append(nuovaCategoria)
-        print("Event thrown", nuovaCategoria)
         MyEventHandler.Throw(MyCategoriaCreata, {"nomeCategoria" : nuovaCategoria})
         return True
     @staticmethod
@@ -212,8 +211,8 @@ class GestoreDispositivi:
         self.__dispositivi.append(Dispositivo(nome, host, porta, timeTraPing, tag, self.__numOf_dispositivi))
 
         #Lancio l'evento
-        MyEventHandler.Throw(MyDispositivoAggiunto, args = {"idDispositivo" : self.__numOf_dispositivi - 1})
         self.__numOf_dispositivi += 1
+        MyEventHandler.Throw(MyDispositivoAggiunto, args = {"idDispositivo" : self.__numOf_dispositivi - 1})
         self.__semaforoAccessiStatusConnessione.release()
 
     def __modificaConnessione(self, idPosizionale : int, nome : str, host : str, porta : str, tempoTraPing : float, tag : str):

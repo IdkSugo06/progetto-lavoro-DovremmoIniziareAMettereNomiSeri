@@ -60,6 +60,10 @@ class  TabellaDispositivi(FakeTabellaScorribile):
         if aggiornaAttributi: 
             self.AggiornaAttributi()
 
+
+    def CambioFiltro(self, nomeInternoFiltro : str):
+        self.__gestoreFiltri.ImpostaFiltro(nomeFiltro = nomeInternoFiltro)
+        self.RefreshFrameDispositivi(aggiornaAttributi = True)
     
     # FUNZIONI NOTIFICA
     def __Notifica_AggiornamentoElementoNecessario(self, idElemento : int, stato : bool):

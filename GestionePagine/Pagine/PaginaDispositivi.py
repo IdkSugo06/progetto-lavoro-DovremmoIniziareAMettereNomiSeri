@@ -119,6 +119,24 @@ class PaginaDispositivi(PaginaGenerica): #Singleton
                                                         corner_radius = 15)
         self.__bBottoneAggiuntaDispositivo.grid(row = 0, column=0, sticky="nsew")
 
+        #FRAME SUPPORTO COMBOBOX FILTRI
+        self.__fFrameComboboxFiltri = tk.Frame(master = self.__fFrameInternoCanvasScorrevole)
+        self.__dimCombobox = (150, 40)
+        self.__offsetCombobox = (8,8)
+        self.__fFrameComboboxFiltri.place(x = self.__dimensioniTabellaDispositivi[0] - (self.__dimCombobox[0] + self.__offsetCombobox[0]) - (self.__dimBottone[0] + self.__offsetBottone[0]), 
+                                                      y = SPAZIO_ALTO_PAGINA_DISPOSITIVI - (self.__dimCombobox[1] + self.__offsetCombobox[1]), width = self.__dimCombobox[0], height = self.__dimCombobox[1], anchor= "nw")
+        self.__fFrameComboboxFiltri.columnconfigure(0, weight = 1)
+        self.__fFrameComboboxFiltri.rowconfigure(0, weight = 1)
+        self.__fFrameComboboxFiltri.grid_propagate(False)
+        self.__fFrameComboboxFiltri.pack_propagate(False)
+
+        # COMBOBOX FILTRI
+        self.__cComboboxCambioFiltro = MyCombobox(master = self.__fFrameComboboxFiltri,
+                                                        command = self.__Notifica_CambioFiltro,
+                                                        values = list(nomiFiltriEsterniToIterni_dict)
+                                                        )
+        self.__cComboboxCambioFiltro.grid(row = 0, column=0, sticky="nsew")
+
 
         #FRAME DELLE SCRITTE SOPRA LA TABELLA
         self.__fFrameTextLabel = tk.Frame(master = self.__fFrameInternoCanvasScorrevole)
@@ -126,8 +144,9 @@ class PaginaDispositivi(PaginaGenerica): #Singleton
         self.__fFrameTextLabel.columnconfigure(0, weight = int(100 * PROPORZIONI_NOME_DISPOSITIVO_FRAMEDISPOSITIVO))
         self.__fFrameTextLabel.columnconfigure(1, weight = int(100 * PROPORZIONI_INDIRIZZO_DISPOSITIVO_FRAMEDISPOSITIVO))
         self.__fFrameTextLabel.columnconfigure(2, weight = int(100 * PROPORZIONI_PORTA_DISPOSITIVO_FRAMEDISPOSITIVO))
-        self.__fFrameTextLabel.columnconfigure(3, weight = int(100 * PROPORZIONI_TEMPOPING_DISPOSITIVO_FRAMEDISPOSITIVO))
-        self.__fFrameTextLabel.columnconfigure(4, weight = int(100 * PROPORZIONI_TASTI_MODDEL_TABELLA_DISPOSITIVI))
+        self.__fFrameTextLabel.columnconfigure(3, weight = int(100 * PROPORZIONI_TAG_TABELLA_DISPOSITIVI))
+        self.__fFrameTextLabel.columnconfigure(4, weight = int(100 * PROPORZIONI_TEMPOPING_DISPOSITIVO_FRAMEDISPOSITIVO))
+        self.__fFrameTextLabel.columnconfigure(5, weight = int(100 * PROPORZIONI_TASTI_MODDEL_TABELLA_DISPOSITIVI))
         self.__fFrameTextLabel.rowconfigure(0, weight = 1)
         self.__fFrameTextLabel.grid_propagate(False)
         self.__fFrameTextLabel.pack_propagate(False)
@@ -157,9 +176,17 @@ class PaginaDispositivi(PaginaGenerica): #Singleton
         self.__fFrameScrittaPorta.grid_propagate(False)
         self.__fFrameScrittaPorta.pack_propagate(False)
 
+        # FRAME SUPPORTO SCRITTA TASTI MODDEL
+        self.__fFrameScrittaTag = tk.Frame(master = self.__fFrameTextLabel, bg = Impostazioni.Tema.IGetColoriSfondo("secondario")[1], highlightbackground= Impostazioni.Tema.IGetColoriSfondo("secondario")[3], highlightthickness=1)
+        self.__fFrameScrittaTag.grid(row = 0, column = 3, sticky = "nsew")
+        self.__fFrameScrittaTag.rowconfigure(0, weight = 1)
+        self.__fFrameScrittaTag.columnconfigure(0, weight = 1)
+        self.__fFrameScrittaTag.grid_propagate(False)
+        self.__fFrameScrittaTag.pack_propagate(False)
+
         # FRAME SUPPORTO SCRITTA TEMPO TRA PING
         self.__fFrameScrittaTempoTraPing = tk.Frame(master = self.__fFrameTextLabel, bg = Impostazioni.Tema.IGetColoriSfondo("secondario")[1], highlightbackground= Impostazioni.Tema.IGetColoriSfondo("secondario")[3], highlightthickness=1)
-        self.__fFrameScrittaTempoTraPing.grid(row = 0, column = 3, sticky = "nsew")
+        self.__fFrameScrittaTempoTraPing.grid(row = 0, column = 4, sticky = "nsew")
         self.__fFrameScrittaTempoTraPing.rowconfigure(0, weight = 1)
         self.__fFrameScrittaTempoTraPing.columnconfigure(0, weight = 1)
         self.__fFrameScrittaTempoTraPing.grid_propagate(False)
@@ -167,7 +194,7 @@ class PaginaDispositivi(PaginaGenerica): #Singleton
 
         # FRAME SUPPORTO SCRITTA TASTI MODDEL
         self.__fFrameScrittaTastiModdel = tk.Frame(master = self.__fFrameTextLabel, bg = Impostazioni.Tema.IGetColoriSfondo("secondario")[1], highlightbackground= Impostazioni.Tema.IGetColoriSfondo("secondario")[3], highlightthickness=1)
-        self.__fFrameScrittaTastiModdel.grid(row = 0, column = 4, sticky = "nsew")
+        self.__fFrameScrittaTastiModdel.grid(row = 0, column = 5, sticky = "nsew")
         self.__fFrameScrittaTastiModdel.rowconfigure(0, weight = 1)
         self.__fFrameScrittaTastiModdel.columnconfigure(0, weight = 1)
         self.__fFrameScrittaTastiModdel.grid_propagate(False)
@@ -176,9 +203,9 @@ class PaginaDispositivi(PaginaGenerica): #Singleton
         #SCRITTE SOPRA LA TABELLA
         self.__textLabels = []
         # Create and position the text labels
-        for i in range(5):
-            textLabel = tk.Label(master= self.__fFrameScrittaNome if i==0 else self.__fFrameScrittaIndirizzoIP if i==1 else self.__fFrameScrittaPorta if i==2 else self.__fFrameScrittaTempoTraPing if i==3 else self.__fFrameScrittaTastiModdel,
-                                text = "Nome dispositivo" if i==0 else "Indirizzo ip" if i==1 else "Porta" if i==2 else "Frequenza ping (sec)" if i==3 else "",
+        for i in range(6):
+            textLabel = tk.Label(master= self.__fFrameScrittaNome if i==0 else self.__fFrameScrittaIndirizzoIP if i==1 else self.__fFrameScrittaPorta if i==2 else self.__fFrameScrittaTag if i==3 else self.__fFrameScrittaTempoTraPing if i==4 else self.__fFrameScrittaTastiModdel if i==5 else "",
+                                text = "Nome dispositivo" if i==0 else "Indirizzo ip" if i==1 else "Porta" if i==2 else "Tag" if i==3 else "Tempo tra ping (sec)" if i==4 else "",
                                 bg = self.__coloreSfondo,
                                 font = self.__font,
                                 fg = self.__fontColor
@@ -192,8 +219,11 @@ class PaginaDispositivi(PaginaGenerica): #Singleton
         self.__fFramePrincipale.bind("<MouseWheel>", lambda event : self.__cCanvasScorrevole.yview_scroll(int(-event.delta * Impostazioni.sistema.sensibilita_scorrimento_rotella), "units"))
         self.__fFrameInternoCanvasScorrevole.bind("<MouseWheel>", lambda event : self.__cCanvasScorrevole.yview_scroll(int(-event.delta * Impostazioni.sistema.sensibilita_scorrimento_rotella), "units"))
         
-                                           
 
+    def __Notifica_CambioFiltro(self):
+        nomeFiltro = self.__cComboboxCambioFiltro.Get()
+        nomeInternoFiltro = nomiFiltriEsterniToIterni_dict[nomeFiltro]
+        self.__tabellaDispositivi.CambioFiltro(nomeInternoFiltro)
 
     # METODI CAMBIO PAGINA E UPDATE
     def CaricaPagina(self, args = []):
@@ -247,6 +277,7 @@ class PaginaDispositivi(PaginaGenerica): #Singleton
         self.__fFrameScrittaIndirizzoIP.configure(background=coloreSfondo, highlightcolor=coloreBordo)
         self.__fFrameScrittaPorta.configure(background=coloreSfondo, highlightcolor=coloreBordo)
         self.__fFrameScrittaTempoTraPing.configure(background=coloreSfondo, highlightcolor=coloreBordo)
+        self.__fFrameScrittaTag.configure(background=coloreSfondo, highlightcolor=coloreBordo)
         self.__fFrameScrittaTastiModdel.configure(background=coloreSfondo, highlightcolor=coloreBordo)
         for textLabel in self.__textLabels:
             textLabel.configure(background = coloreSfondo,
@@ -277,6 +308,9 @@ class PaginaDispositivi(PaginaGenerica): #Singleton
                                                       y = SPAZIO_ALTO_PAGINA_DISPOSITIVI - (self.__dimBottone[1] + self.__offsetBottone[1]), width = self.__dimBottone[0], height = self.__dimBottone[1], anchor= "nw")
         
         self.__fFrameTextLabel.place(x = SPAZIO_LATI_PAGINA_DISPOSITIVI, y = SPAZIO_ALTO_PAGINA_DISPOSITIVI, width = self.__dimensioniTabellaDispositivi[0], height = Impostazioni.personalizzazioni.altezza_elemento_tabella_paginaDashboard, anchor = "nw")
+
+        self.__fFrameComboboxFiltri.place(x = self.__dimensioniTabellaDispositivi[0] - (self.__dimCombobox[0] + self.__offsetCombobox[0]) - (self.__dimBottone[0] + self.__offsetBottone[0]), 
+                              y = SPAZIO_ALTO_PAGINA_DISPOSITIVI - (self.__dimCombobox[1] + self.__offsetCombobox[1]), width = self.__dimCombobox[0], height = self.__dimCombobox[1], anchor= "nw")
 
 
         #Resize tabella

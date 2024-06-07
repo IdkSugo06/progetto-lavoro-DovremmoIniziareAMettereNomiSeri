@@ -119,8 +119,8 @@ class PaginaGestioneCategorie(PaginaGenerica): #Singleton
         self.__fFrameAggiuntaCategoria = tk.Frame(master = self.__fFrameInternoCanvasScorrevole, background = self.__coloreSfondo, highlightcolor = Impostazioni.Tema.IGetColoriSfondo("secondario")[3], highlightthickness = 1)
         self.__fFrameAggiuntaCategoria.place(x = SPAZIO_LATI_PAGINA_DISPOSITIVI, y = SPAZIO_ALTO_PAGINA_DISPOSITIVI + Impostazioni.personalizzazioni.altezza_elemento_tabella_paginaDispositivi, width = self.__dimensioniTabellaDispositivi[0], height = Impostazioni.personalizzazioni.altezza_elemento_tabella_paginaDispositivi, anchor = "nw")
         self.__fFrameAggiuntaCategoria.rowconfigure(0, weight = 1)
-        self.__fFrameAggiuntaCategoria.columnconfigure(0, weight = int(100 * (1 - (PROPORZIONI_TASTI_MODDEL_TABELLA_DISPOSITIVI/2))))
-        self.__fFrameAggiuntaCategoria.columnconfigure(1, weight = int(100 * (PROPORZIONI_TASTI_MODDEL_TABELLA_DISPOSITIVI/2)))
+        self.__fFrameAggiuntaCategoria.columnconfigure(0, weight = int(100 * (1 - ((PROPORZIONI_TASTI_MODDEL_TABELLA_DISPOSITIVI/2) + 0.01))))
+        self.__fFrameAggiuntaCategoria.columnconfigure(1, weight = int(100 * ((PROPORZIONI_TASTI_MODDEL_TABELLA_DISPOSITIVI/2) + 0.01)))
         self.__fFrameAggiuntaCategoria.grid_propagate(False)
 
         # BARRA INSERIMENTO NOME
@@ -158,7 +158,7 @@ class PaginaGestioneCategorie(PaginaGenerica): #Singleton
         self.__cCanvasBottoneAggiuntaCategoria.grid_propagate(False)
         self.__cCanvasBottoneAggiuntaCategoria.pack_propagate(False)
         #Creo il bottone
-        self.__myImgbBottoneAggiuntaCategoria = MyImageButton(canvas = self.__cCanvasBottoneAggiuntaCategoria, command = lambda event : self.__ConfermaAggiuntaCategoria(event), path = Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMG_BOTTONE_ELIMINAZIONE_PAG_DISPOSITIVI))
+        self.__myImgbBottoneAggiuntaCategoria = MyImageButton(canvas = self.__cCanvasBottoneAggiuntaCategoria, command = lambda event : self.__ConfermaAggiuntaCategoria(event), path = Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMG_BOTTONE_CONFERMA_AGGIUNTA_PAG_DISPOSITIVI))
         self.__myImgbBottoneAggiuntaCategoria.Resize(dimBottoni[0], dimBottoni[1], self.__mantieniProporzioniImmagine)
         self.__myImgbBottoneAggiuntaCategoria.Show()
 
@@ -215,6 +215,8 @@ class PaginaGestioneCategorie(PaginaGenerica): #Singleton
         self.__fFramePrincipale.configure(background=self.__coloreSfondoTabella, highlightcolor=self.__coloreBordo)
         self.__fFrameAggiuntaCategoria.configure(background=self.__coloreSfondoTabella, highlightcolor=self.__coloreBordo)
         self.__fFrameSupportoBottoneAggiuntaCategoria.configure(background=self.__coloreSfondoTabella, highlightcolor=self.__coloreBordo)
+        self.__fFrameBottoneAggiuntaCategoria.configure(background=self.__coloreSfondoTabella, highlightcolor=self.__coloreBordo)
+        self.__cCanvasBottoneAggiuntaCategoria.configure(background=self.__coloreSfondoTabella, highlightcolor=self.__coloreBordo)
         self.__myBarraInserimentoNome.AggiornaColoriTema()
         self.__lIntroTabella.configure(background = self.__coloreSfondoTabella,
                                  font = self.__font, 

@@ -13,14 +13,12 @@ class PaginaCategoriaSingola(PaginaGenerica): #Singleton
             GestorePagine.IRimuoviPagina(NomeInternoPaginaCategoria(nomeCategoria))
 
     def ModificaCategoriaFiltrata(self, nomeCategoriaPrecedente : str, nomeCategoriaNuovo : str):
-        print("nome cat", nomeCategoriaPrecedente, self.__nomeCategoria)
         if nomeCategoriaPrecedente == self.__nomeCategoria:
             self.__tabellaDashboard.ModificaCategoriaFiltrata(nomeCategoriaPrecedente, nomeCategoriaNuovo)
 
 
     # COSTRUTTORE 
     def __init__(self, nomeCategoria : str):
-        print("PAGINA CAT CREATA", nomeCategoria)
         #Attributi
         self.__coloreSfondo = Impostazioni.Tema.IGetColoriSfondo("secondario")[1]
         self.__font = Impostazioni.Tema.IGetFont("testo")

@@ -22,7 +22,7 @@ class Menu:
         self.__fFrameLogo.grid_propagate(False)
 
 
-        # CAVAS IMMAGINE STATUS DISPOSITIVO
+        # CAVAS IMMAGINE LOGO
         self.__cCanvasLogo = tk.Canvas(master = self.__fFrameLogo, bg = Impostazioni.Tema.IGetColoriSfondo("secondario")[2], highlightthickness = 0)
         self.__cCanvasLogo.grid(row = 0, column = 0, sticky = "nsew")
         self.__cCanvasLogo.rowconfigure(0, weight = 1)
@@ -30,7 +30,7 @@ class Menu:
         self.__cCanvasLogo.grid_propagate(False)
         self.__cCanvasLogo.pack_propagate(False)
 
-        # IMMAGINE STATUS ONLINE
+        # IMMAGINE LOGO
         self.__myMImgLogo = MyImageTk(canvas = self.__cCanvasLogo, 
                                                       path = Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMMAGINE_LOGO))
         self.__myMImgLogo.Resize(int(Impostazioni.sistema.dimensioniFinestra[0] * (PROPORZIONE_MENU_PAGINA)), int(Impostazioni.sistema.dimensioniFinestra[1] * (1-PROPORZIONE_LISTA_MENU_ALTEZZA_PAGINA)))
@@ -61,6 +61,7 @@ class Menu:
         self.__fFramePrincipale.grid_propagate(True)
         self.__fFramePrincipale.grid(row = 0, column=0, sticky="nsew")
         self.__fFramePrincipale.grid_propagate(False)
+
     def RefreshMenu(self):
         self.__listaMenu.RefreshMenu()
     
@@ -84,12 +85,18 @@ class Menu:
         self.__fFrameLogo.configure(background=coloreSfondo, highlightcolor=coloreBordo)
         self.__fFrameListaMenu.configure(background=coloreSfondo, highlightcolor=coloreBordo)
     
+    
     def AddPagina(self, nomeInterno : str, pathImmagine : str, nomeEsterno : str):
         self.__listaMenu.AddPagina(nomeInterno, pathImmagine, nomeEsterno)
+        
     def RemovePagina(self, nomeInterno : str):
         self.__listaMenu.RemovePagina(nomeInterno)
 
     # METODI EVENTI    
+    # METODO RICONFIGURAZIONE
+    def CambioFont(self):
+        pass
+
     def CambioDimFrame(self):
         #Resetto i frame
         self.__myMImgLogo.Resize(int(Impostazioni.sistema.dimensioniFinestra[0] * (PROPORZIONE_MENU_PAGINA)), int(Impostazioni.sistema.dimensioniFinestra[1] * (1-PROPORZIONE_LISTA_MENU_ALTEZZA_PAGINA)))

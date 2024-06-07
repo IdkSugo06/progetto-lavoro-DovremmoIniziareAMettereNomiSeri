@@ -1,15 +1,20 @@
 {
 	"dispositivi" : {
 
-		"0" : {	"nomeMacchina" : "Google It","host" : "www.google.it","porta" : "porta","timeTraPing" : "1.0","tag" : "senza categoria"},
-		"1" : {	"nomeMacchina" : "Google It","host" : "www.google.it","porta" : "porta","timeTraPing" : "1.0","tag" : "senza categoria"},
-		"2" : {	"nomeMacchina" : "Router","host" : "172.16.0.1","porta" : "porta","timeTraPing" : "5.0","tag" : "de"},
-		"3" : {	"nomeMacchina" : "Google It","host" : "8.8.8.8","porta" : "porta","timeTraPing" : "100.0","tag" : "senza categoria"}
+		"0" : {	"nomeMacchina" : "Google it","host" : "www.google.it","porta" : "6","timeTraPing" : "1.0","tag" : "Google"},
+		"1" : {	"nomeMacchina" : "Google cn","host" : "www.google.cn","porta" : "5","timeTraPing" : "1.0","tag" : "Google"},
+		"2" : {	"nomeMacchina" : "Google com","host" : "www.google.com","porta" : "4","timeTraPing" : "1.0","tag" : "Google"},
+		"3" : {	"nomeMacchina" : "Amazon com","host" : "www.amazon.com","porta" : "3","timeTraPing" : "1.0","tag" : "Amazon"},
+		"4" : {	"nomeMacchina" : "Amazon com","host" : "www.amazon.com","porta" : "2","timeTraPing" : "1.0","tag" : "Amazon"},
+		"5" : {	"nomeMacchina" : "Amazon com","host" : "www.amazon.com","porta" : "1","timeTraPing" : "1.0","tag" : "Amazon"},
+		"6" : {	"nomeMacchina" : "Router","host" : "172.16.0.1","porta" : "0","timeTraPing" : "1.0","tag" : "Privato"},
+		"7" : {	"nomeMacchina" : "Host non valido","host" : "192.0.0.0","porta" : "-1","timeTraPing" : "0.2","tag" : "Host non validi"},
+		"8" : {	"nomeMacchina" : "-1","host" : "Ip host (es: 192.0.0.1 / www.google.com)","porta" : "Porta","timeTraPing" : "1.0","tag" : "Host non validi"}
 	},
 	"categorie" : {
 		"0" : {	"nomeCategoria" : "senza categoria"},
-		"1" : {	"nomeCategoria" : "de"},
-		"2" : {	"nomeCategoria" : "d"},
-		"3" : {	"nomeCategoria" : ""}
+		"1" : {	"nomeCategoria" : "Google"},
+		"2" : {	"nomeCategoria" : "Amazon"},
+		"3" : {	"nomeCategoria" : "Host non validi"}
 	}
 }

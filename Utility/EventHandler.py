@@ -160,7 +160,10 @@ class MyEventHandler:
         return MyEventHandler.__myEventHandler.errors
 
     @staticmethod
-    def BindEvent(eventType : type, functionToBind : any): #Has to be void
+    def BindEvent(eventType : type, functionToBind : any, first : bool = False): #Has to be void
+        if first == True:
+            eventType.functionsBound = [functionToBind] + eventType.functionsBound
+            return  
         eventType.functionsBound.append(functionToBind)
     
     @staticmethod

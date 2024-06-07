@@ -41,7 +41,7 @@ class FiltroStatusOffOn(FiltroGenerico):
         super().__init__(NOME_INTERNO_FILTRO_STATUSOFFON)
         self._numOf_dispositiviOffline = 0
         MyEventHandler.BindEvent(eventType = MyDispositivoAggiunto, functionToBind = lambda idDispositivo : FiltroStatusOffOn._Notifica_AggiuntoDispositivo(idDispositivo))
-        MyEventHandler.BindEvent(eventType = MyDispositivoRimosso, functionToBind = lambda idDispositivo : FiltroStatusOffOn._Notifica_RimossoDispositivo(idDispositivo))
+        MyEventHandler.BindEvent(eventType = MyDispositivoRimosso, functionToBind = lambda idDispositivo : FiltroStatusOffOn._Notifica_RimossoDispositivo(idDispositivo), first = True)
         MyEventHandler.BindEvent(eventType = MyDispositivoModificato, functionToBind = lambda idDispositivo : FiltroStatusOffOn._Notifica_ModificatoDispositivo(idDispositivo))
         MyEventHandler.BindEvent(eventType = MyStatoDispositivoCambiato, functionToBind = lambda idDispositivo, nuovoStato : FiltroStatusOffOn._Notifica_CambioStatoDispositivo(idDispositivo, nuovoStato))
         MyEventHandler.BindEvent(eventType = MyFiltroRefreshNeeded, functionToBind = FiltroStatusOffOn._Notifica_OrdinaLista)
@@ -85,9 +85,8 @@ class FiltroStatusOffOn(FiltroGenerico):
         self._listaOrdinata = [idDispositivo] + self._listaOrdinata
         self._idDispToIdListaOrdinata.append(0) #0 perchè primo elemento
         #Aumento tutti di un indice avanti
-        for i in range(1, len(self._idDispToIdListaOrdinata)):
+        for i in range(0, len(self._idDispToIdListaOrdinata)-1):
             self._idDispToIdListaOrdinata[i] += 1
-
         MyEventHandler.Throw(MyFilterRefreshed, {"tipoFiltro" : type(self)})
 
     def _RimuoviDispositivo(self, idDispositivo : int):

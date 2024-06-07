@@ -8,11 +8,11 @@ class FiltroPerCaratteristica(FiltroGenerico):
     def _Notifica_CambioStatoDispositivo(self, idDispositivo : int, nuovoStato : bool):
         self.GetFiltro()._CambioStatoDispositivo(idDispositivo, nuovoStato)
     def _Notifica_AggiuntoDispositivo(self, idDispositivo : int):
-        self.GetFiltro()._AggiungiDispositivo(idDispositivo)
+        self.GetFiltro()._RebuildLista()
     def _Notifica_RimossoDispositivo(self, idDispositivo : int):
-        self.GetFiltro()._RimuoviDispositivo(idDispositivo)
+        self.GetFiltro()._RebuildLista()
     def _Notifica_ModificatoDispositivo(self, idDispositivo : int):
-        return
+        self.GetFiltro()._RebuildLista()
     def _Notifica_OrdinaLista(self):
         self.GetFiltro()._OrdinaLista()
     def _Notifica_RebuildLista(self):
@@ -52,7 +52,6 @@ class FiltroPerCaratteristica(FiltroGenerico):
         while (self.__funzioneDiComparazione(idDispositivo, idSuListaOrdinata) == 1):
             if idSuListaOrdinata >= idUltimoElemento: break
             idSuListaOrdinata += 1
-
 
         for i in range(idSuListaOrdinata, self._numOf_elementi):
             self._idDispToIdListaOrdinata[self._listaOrdinata[i]] += 1

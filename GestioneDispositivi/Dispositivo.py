@@ -30,6 +30,7 @@ class Dispositivo:
         
         #Attributi aggiornamento
         self.__timeBetweenPing_sec = timeTraPing
+        self.__attesaUltimoPing = 1
 
         #Attributi thread
         self.__iBufferCircolare = 0
@@ -87,8 +88,7 @@ class Dispositivo:
         self.__iBufferCircolare = (self.__iBufferCircolare + 1) % 5
 
         #Aggiorno la stabilita connessione
-        if pingResult: self.__stabilitaConnessione += Impostazioni.sistema.coeff_stabilizzazione_connessione * (1-self.__stabilitaConnessione)
-        else: self.__stabilitaConnessione -= Impostazioni.sistema.coeff_stabilizzazione_connessione * (self.__stabilitaConnessione)
+        #self.__stabilitaConnessione = Impostazioni.sistema.CalcoloNuovaStabilitaConnessione(self.__stabilitaConnessione, self.__attesaUltimoPing, pingResult)
 
         #Calcolo lo status
         self.__status[0] = self.__status[1]
@@ -192,6 +192,7 @@ class Dispositivo:
 
             #Attendo
             self.__eventoAttesaPing.wait(self.__timeBetweenPing_sec)
+            self.__attesaUltimoPing = self.__timeBetweenPing_sec
             self.__eventoAttesaPing.clear()
 
     def __PingPerso_4pp(self): #4 ping protocol
@@ -217,6 +218,7 @@ class Dispositivo:
 
             #Attendo
             self.__eventoAttesaPing.wait(1)
+            self.__attesaUltimoPing = 1
             self.__eventoAttesaPing.clear()
 
     def __HostDisconnesso(self):
@@ -239,6 +241,7 @@ class Dispositivo:
 
             #Attendo
             self.__eventoAttesaPing.wait(1)
+            self.__attesaUltimoPing = 1
             self.__eventoAttesaPing.clear()
 
     # PROCEDURE INVIO PING
@@ -257,7 +260,7 @@ class Dispositivo:
     def __ping(self):
         try:
             #Invio il ping
-            result = pythonping.ping(target=self.__host, timeout = 1, count = 1, size = 1)
+            result = pythonping.ping(target=self.__host, timeout = 1, count = 1, size = 32)
             if result.success():
                 return True
             else:

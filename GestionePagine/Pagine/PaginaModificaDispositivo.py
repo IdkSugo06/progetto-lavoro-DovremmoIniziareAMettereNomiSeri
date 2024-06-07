@@ -99,12 +99,16 @@ class PaginaModificaDispositivo(PaginaGenerica): #Singleton
         
         self.__fFrameSchedaModificaDispositivo.rowconfigure(11, weight = 2)
         self.__fFrameSchedaModificaDispositivo.rowconfigure(12, weight = 1)
-        self.__fFrameSchedaModificaDispositivo.rowconfigure(13, weight = 5)
+        self.__fFrameSchedaModificaDispositivo.rowconfigure(13, weight = 2)
+
+        self.__fFrameSchedaModificaDispositivo.rowconfigure(14, weight = 2)
+        self.__fFrameSchedaModificaDispositivo.rowconfigure(15, weight = 4)
+        self.__fFrameSchedaModificaDispositivo.rowconfigure(16, weight = 5)
         self.__fFrameSchedaModificaDispositivo.grid_propagate(False)
 
 
         # FRAME LOGO
-        self.__fFrameLogo = tk.Frame(master = self.__fFrameSchedaModificaDispositivo, background=self.__coloreSfondoInterno) #Creo il logo in alto a sinistra
+        self.__fFrameLogo = tk.Frame(master = self.__fFrameSchedaModificaDispositivo, background=self.__coloreSfondoInterno, highlightthickness = 0) #Creo il logo in alto a sinistra
         self.__fFrameLogo.grid(row = 0, column=1, columnspan=2, sticky="nsew")
         self.__fFrameLogo.columnconfigure(0, weight = 1)
         self.__fFrameLogo.rowconfigure(0, weight = 5)
@@ -116,11 +120,11 @@ class PaginaModificaDispositivo(PaginaGenerica): #Singleton
         self.__fFrameSecondarioLogo.grid(row = 1, column=0, sticky="nsew")
         self.__fFrameSecondarioLogo.grid_propagate(False)
         # LOGO
-        self.__cCanvasLogo = tk.Canvas(master = self.__fFrameSecondarioLogo) #Creo il logo in alto a sinistra
+        self.__cCanvasLogo = tk.Canvas(master = self.__fFrameSecondarioLogo, highlightthickness = 0) #Creo il logo in alto a sinistra
         self.__cCanvasLogo.grid(row = 0, column = 0, sticky = "nsew") 
         self.__myImgLogo = MyImageTk(self.__cCanvasLogo, Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMMAGINE_LOGO))
         self.__myImgLogo.Resize(int((1/18) * Impostazioni.sistema.dimensioniFinestra[0]),
-                              int((1/18) * Impostazioni.sistema.dimensioniFinestra[1]))
+                              int((1/12) * Impostazioni.sistema.dimensioniFinestra[1]))
         self.__myImgLogo.Show()
 
         
@@ -188,6 +192,23 @@ class PaginaModificaDispositivo(PaginaGenerica): #Singleton
         self.__myBarraInserimentoTempoTraPing.grid(row = 12, column = 2, columnspan=3, sticky="nsew")
 
 
+        #Creo la scritta categoria
+        self.__fFrameSupportoCategoria = tk.Frame(master = self.__fFrameSchedaModificaDispositivo, background = self.__coloreSfondoInterno)
+        self.__fFrameSupportoCategoria.grid(row = 14, column = 2, columnspan=3, sticky= "nsew")
+        self.__fFrameSupportoCategoria.rowconfigure(0, weight=1)
+        self.__fFrameSupportoCategoria.columnconfigure(0,weight=1)
+        self.__fFrameSupportoCategoria.grid_propagate(False)
+        self.__fFrameSupportoCategoria.pack_propagate(False)
+        self.__lScrittaCategoria = tk.Label(master = self.__fFrameSupportoCategoria, text = "Categoria:", background= self.__coloreSfondoInterno, font = self.__fontTesto, foreground = self.__coloreFontTesto)
+        self.__lScrittaCategoria.pack(side = "left", fill = "both")
+
+        #Creo il combobox per selezionare la categoria
+        self.__myComboboxCategoria = MyCombobox(master = self.__fFrameSchedaModificaDispositivo, values=Dispositivo.categorie)
+        self.__myComboboxCategoria.grid(row = 15, column = 2, columnspan=3, sticky="nsew")
+        MyEventHandler.BindEvent(MyCategoriaCreata, lambda nomeCategoria : self.__myComboboxCategoria.ChangeValues(Dispositivo.categorie))
+        MyEventHandler.BindEvent(MyCategoriaModificata, lambda nomeCategoriaP, nomeCategoriaN : self.__myComboboxCategoria.ChangeValues(Dispositivo.categorie))
+        MyEventHandler.BindEvent(MyCategoriaEliminata, lambda nomeCategoria : self.__myComboboxCategoria.ChangeValues(Dispositivo.categorie))
+
     # METODI
     #Override metodo virtuale classe PaginaGenerica, visualizzo il contenuto della pagina
     def CaricaPagina(self, args = []): 
@@ -206,6 +227,7 @@ class PaginaModificaDispositivo(PaginaGenerica): #Singleton
         self.__myBarraInserimentoIpHost.Set(dispositivo.GetHost())
         self.__myBarraInserimentoPorta.Set(dispositivo.GetPorta())
         self.__myBarraInserimentoTempoTraPing.Set(dispositivo.GetTempoTraPing())
+        self.__myComboboxCategoria.Set(dispositivo.GetTag())
 
     #Override metodo virtuale classe PaginaGenerica, nascondo il contenuto della pagina
     def NascondiPagina(self):
@@ -238,6 +260,7 @@ class PaginaModificaDispositivo(PaginaGenerica): #Singleton
         self.__lScrittaPorta.configure(background=self.__coloreSfondoInterno, font = self.__fontTesto, foreground = self.__coloreFontTesto)
         self.__lScrittaTempoTraPing.configure(background=self.__coloreSfondoInterno, font = self.__fontTesto, foreground = self.__coloreFontTesto)
         self.__lScrittaModificaDispositivo.configure(background=self.__coloreSfondoInterno, font = self.__fontTitolo, foreground = self.__coloreFontTitolo)
+        self.__lScrittaCategoria.configure(background=self.__coloreSfondoInterno, font = self.__fontTesto, foreground = self.__coloreFontTesto)
 
         #Frame
         self.__fFramePrincipale.configure(background = self.__coloreSfondo)
@@ -247,6 +270,7 @@ class PaginaModificaDispositivo(PaginaGenerica): #Singleton
         self.__fFrameLogo.configure(background = self.__coloreSfondoInterno)
         self.__fFrameSecondarioLogo.configure(background = self.__coloreSfondoInterno)
         self.__cCanvasLogo.configure(background = self.__coloreSfondoInterno)
+        self.__fFrameSupportoCategoria.configure(background = self.__coloreSfondoInterno)
 
         #Bottone aggiunta
         self.__bPulsanteAggiungiDispositivo.configure(
@@ -264,6 +288,7 @@ class PaginaModificaDispositivo(PaginaGenerica): #Singleton
         self.__myBarraInserimentoIpHost.AggiornaColoriTema()
         self.__myBarraInserimentoPorta.AggiornaColoriTema()
         self.__myBarraInserimentoTempoTraPing.AggiornaColoriTema()
+        self.__myComboboxCategoria.AggiornaColoriTema()
     
     # METODI EVENTI
     def __TentaModificaDispositivo(self):
@@ -277,8 +302,8 @@ class PaginaModificaDispositivo(PaginaGenerica): #Singleton
                                                             self.__myBarraInserimentoNome.Get(), 
                                                             self.__myBarraInserimentoIpHost.Get(), 
                                                             self.__myBarraInserimentoPorta.Get(),
-                                                            tempFloat
-                                                            )
+                                                            tempFloat,
+                                                            self.__myComboboxCategoria.Get())
         GestorePagine.ICaricaPaginaConNome(NOME_INTERNO_PAGINA_DISPOSITIVI)
 
 #Inizializzo la pagina home

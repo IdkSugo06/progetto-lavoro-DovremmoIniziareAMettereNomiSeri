@@ -1,7 +1,11 @@
 from GestionePagine.Widgets.ElementiTabelle.ElementoIntabellabile import *
+from GestionePagine.Widgets.Immagini.MySharedMultiImgButton import *
 
 class FrameDispositivoIntabellabile(ElementoIntabellabile):
     
+    __mySMIB_immagini = MySharedMultiImgButton(pathsDict = {"modifica" : Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMG_BOTTONE_MODIFICA_PAG_DISPOSITIVI), "elimina" : Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMG_BOTTONE_ELIMINAZIONE_PAG_DISPOSITIVI)})
+    __mySMIB_immagini.ResizeAll(DIMENSIONI_PULSANTI_MODIFICA_ELIMINA[0], DIMENSIONI_PULSANTI_MODIFICA_ELIMINA[1])
+
     def __init__(self,
                  master, 
                  x : int = 0, 
@@ -40,8 +44,9 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
         self.__fFramePrincipale.columnconfigure(0, weight = int(100 * PROPORZIONI_NOME_DISPOSITIVO_FRAMEDISPOSITIVO))
         self.__fFramePrincipale.columnconfigure(1, weight = int(100 * PROPORZIONI_INDIRIZZO_DISPOSITIVO_FRAMEDISPOSITIVO))
         self.__fFramePrincipale.columnconfigure(2, weight = int(100 * PROPORZIONI_PORTA_DISPOSITIVO_FRAMEDISPOSITIVO))
-        self.__fFramePrincipale.columnconfigure(3, weight = int(100 * PROPORZIONI_TEMPOPING_DISPOSITIVO_FRAMEDISPOSITIVO))
-        self.__fFramePrincipale.columnconfigure(4, weight = int(100 * PROPORZIONI_TASTI_MODDEL_TABELLA_DISPOSITIVI))
+        self.__fFramePrincipale.columnconfigure(3, weight = int(100 * PROPORZIONI_TAG_TABELLA_DISPOSITIVI))
+        self.__fFramePrincipale.columnconfigure(4, weight = int(100 * PROPORZIONI_TEMPOPING_DISPOSITIVO_FRAMEDISPOSITIVO))
+        self.__fFramePrincipale.columnconfigure(5, weight = int(100 * PROPORZIONI_TASTI_MODDEL_TABELLA_DISPOSITIVI))
         self.__fFramePrincipale.grid_propagate(False)
         
 
@@ -101,10 +106,29 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
                                          bg = self.__coloreSfondo)
         self.__lScrittaPorta.pack(side = "left")
 
-    
+
+        # FRAME SUPPORTO SCRITTA TEMPO PING
+        self.__fFrameScrittaTag = tk.Frame(master = self.__fFramePrincipale, bg =  self.__coloreSfondo, highlightbackground = self.__coloreBordo, highlightthickness=0.5)
+        self.__fFrameScrittaTag.grid(row = 0, column = 3, sticky = "nsew")
+        self.__fFrameScrittaTag.rowconfigure(0, weight = 1)
+        self.__fFrameScrittaTag.columnconfigure(0, weight = 1)
+        self.__fFrameScrittaTag.grid_propagate(False)
+        self.__fFrameScrittaTag.pack_propagate(False)
+        #Creo la variabile della scritta
+        self.__vScrittaTag_str = tk.StringVar() 
+        self.__vScrittaTag_str.set("tag")
+        #Creo la scritta
+        self.__lScrittaTag = tk.Label(master = self.__fFrameScrittaTag, 
+                                         textvariable = self.__vScrittaTag_str, 
+                                         font = self.__fontTesto, 
+                                         fg = self.__coloreTesto,
+                                         bg = self.__coloreSfondo)
+        self.__lScrittaTag.pack(side = "left")
+
+
         # FRAME SUPPORTO SCRITTA TEMPO PING
         self.__fFrameScrittaTempoPing = tk.Frame(master = self.__fFramePrincipale, bg =  self.__coloreSfondo, highlightbackground=  self.__coloreBordo, highlightthickness=0.5)
-        self.__fFrameScrittaTempoPing.grid(row = 0, column = 3, sticky = "nsew")
+        self.__fFrameScrittaTempoPing.grid(row = 0, column = 4, sticky = "nsew")
         self.__fFrameScrittaTempoPing.rowconfigure(0, weight = 1)
         self.__fFrameScrittaTempoPing.columnconfigure(0, weight = 1)
         self.__fFrameScrittaTempoPing.grid_propagate(False)
@@ -131,7 +155,7 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
 
         # SUPPORTO BOTTONI
         self.__fFrameSupportoBottoni = tk.Frame(master = self.__fFramePrincipale, bg =  self.__coloreSfondo, highlightbackground=  self.__coloreBordo, highlightthickness=0.5)
-        self.__fFrameSupportoBottoni.grid(row = 0, column = 4, sticky = "nsew")
+        self.__fFrameSupportoBottoni.grid(row = 0, column = 5, sticky = "nsew")
         self.__fFrameSupportoBottoni.rowconfigure(0, weight = int(100 * self.__rapportoSpaziAltoBottoni))
         self.__fFrameSupportoBottoni.rowconfigure(1, weight = int(100 * (1 - self.__rapportoSpaziAltoBottoni * 2)))
         self.__fFrameSupportoBottoni.rowconfigure(2, weight = int(100 * self.__rapportoSpaziAltoBottoni))
@@ -158,10 +182,9 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
         self.__cCanvasBottoneModifica.grid_propagate(False)
         self.__cCanvasBottoneModifica.pack_propagate(False)
         #Creo il bottone
-        self.__myImgbBottoneModifica = MyImageButton(canvas = self.__cCanvasBottoneModifica, command = lambda event : self.__ModificaDispositivoAssociato(event), path = Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMG_BOTTONE_MODIFICA_PAG_DISPOSITIVI))
-        self.__myImgbBottoneModifica.Resize(dimBottoni[0], dimBottoni[1], self.__mantieniProporzioniImmagine)
-        self.__myImgbBottoneModifica.Show()
-        
+        self.__mySMIBi_immagineModifica = FrameDispositivoIntabellabile.__mySMIB_immagini.Show(canvas = self.__cCanvasBottoneModifica, pathKey = "modifica")
+        self.__mySMIB_immagini.myBind(canvas = self.__cCanvasBottoneModifica, evento= "<Button-1>", command= self.__ModificaDispositivoAssociato)
+ 
 
 
         self.__fFrameBottoneElimina = tk.Frame(master = self.__fFrameSupportoBottoni, bg =  self.__coloreSfondo, highlightbackground=  self.__coloreBordo)
@@ -178,9 +201,9 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
         self.__cCanvasBottoneElimina.grid_propagate(False)
         self.__cCanvasBottoneElimina.pack_propagate(False)
         #Creo il bottone
-        self.__myImgbBottoneElimina = MyImageButton(canvas = self.__cCanvasBottoneElimina, command = lambda event : self.__EliminaDispositivoAssociato(event), path = Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMG_BOTTONE_ELIMINAZIONE_PAG_DISPOSITIVI))
-        self.__myImgbBottoneElimina.Resize(dimBottoni[0], dimBottoni[1], self.__mantieniProporzioniImmagine)
-        self.__myImgbBottoneElimina.Show()
+        self.__mySMIBi_immagineElimina = FrameDispositivoIntabellabile.__mySMIB_immagini.Show(canvas = self.__cCanvasBottoneElimina, pathKey="elimina")
+        self.__mySMIB_immagini.myBind(canvas = self.__cCanvasBottoneElimina, evento= "<Button-1>", command= self.__EliminaDispositivoAssociato)
+
 
 
         #Associo il dispositivo specificato
@@ -201,8 +224,8 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
 
 
     # METODI GESTIONE DISPOSITIVI
-    def AggiornaAttributiElemento(self, i_dispositivo : int):
-        self.AssociaDispositivo(i_dispositivo, aggiornamentoForzato = True)
+    def AggiornaAttributiElemento(self, idDispositivo : int):
+        self.AssociaDispositivo(idDispositivo, aggiornamentoForzato = True)
         
     def AssociaDispositivo(self, idDispositivo : int, aggiornamentoForzato : bool = False):
         #Controllo se è un nuovo dispositivo
@@ -219,6 +242,7 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
         self.__vScrittaIndirizzoIP_str.set(dispositivo.GetHost())
         self.__vScrittaPorta_str.set(dispositivo.GetPorta())
         self.__vScrittaTempoPing_str.set(str(dispositivo.GetTempoTraPing()))
+        self.__vScrittaTag_str.set(str(dispositivo.GetTag()))
 
     def __ModificaDispositivoAssociato(self, eventTk = None):
         GestorePagine.ICaricaPagina(PaginaGenerica.GetIdPagina(NOME_INTERNO_PAGINA_MODIFICA_DISPOSITIVO), self.__idDispositivoAssociato)
@@ -236,9 +260,11 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
 
 
     # METODI PERSONALIZZAZIONE
-    @staticmethod 
+    @staticmethod
     def AggiornaImmagineTema():
-        return
+        FrameDispositivoIntabellabile.__mySMIB_immagini.ChangePaths(newPathsDict = {"modifica" : Impostazioni.Tema.IGetPathTemaCorrente(Impostazioni.PATH_IMG_BOTTONE_MODIFICA_PAG_DISPOSITIVI),
+                                                                    "elimina" : Impostazioni.Tema.IGetPathTemaCorrente(Impostazioni.PATH_IMG_BOTTONE_ELIMINAZIONE_PAG_DISPOSITIVI)})
+        FrameDispositivoIntabellabile.__mySMIB_immagini.ResizeAll(DIMENSIONI_PULSANTI_MODIFICA_ELIMINA[0], DIMENSIONI_PULSANTI_MODIFICA_ELIMINA[1])
     def AggiornaColoriTema(self):
         self.__coloreSfondo = Impostazioni.Tema.IGetColoriSfondo("secondario")[2]
         self.__coloreSfondoEvidenziato = Impostazioni.Tema.IGetColoriSfondo("terziario")[0]
@@ -246,12 +272,9 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
         self.__fontTesto = Impostazioni.Tema.IGetFont("testo")
         self.__coloreTesto = Impostazioni.Tema.IGetFontColor("testo")
         dimBottoni = self.__getDimensioniPulsantiBottoni()
-        self.__myImgbBottoneModifica.ChangeImage(Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMG_BOTTONE_MODIFICA_PAG_DISPOSITIVI))
-        self.__myImgbBottoneModifica.Resize(dimBottoni[0], dimBottoni[1], self.__mantieniProporzioniImmagine)
-        self.__myImgbBottoneModifica.Show()
-        self.__myImgbBottoneElimina.ChangeImage(Impostazioni.Tema.IGetPathTemaCorrente(PATH_IMG_BOTTONE_ELIMINAZIONE_PAG_DISPOSITIVI))
-        self.__myImgbBottoneElimina.Resize(dimBottoni[0], dimBottoni[1], self.__mantieniProporzioniImmagine)
-        self.__myImgbBottoneElimina.Show()
+        self.__mySMIBi_immagineModifica = FrameDispositivoIntabellabile.__mySMIB_immagini.Show(canvas = self.__cCanvasBottoneModifica, pathKey="modifica", instanceId= self.__mySMIBi_immagineModifica)
+        self.__mySMIBi_immagineElimina = FrameDispositivoIntabellabile.__mySMIB_immagini.Show(canvas = self.__cCanvasBottoneElimina, pathKey="elimina", instanceId = self.__mySMIBi_immagineElimina)
+
         self.AggiornaColori()
 
     def AggiornaColori(self):
@@ -261,6 +284,7 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
         self.__fFrameScrittaIndirizzoIP.configure(background=self.__coloreSfondo, highlightcolor=self.__coloreBordo)
         self.__fFrameScrittaPorta.configure(background=self.__coloreSfondo, highlightcolor=self.__coloreBordo)
         self.__fFrameScrittaTempoPing.configure(background=self.__coloreSfondo, highlightcolor=self.__coloreBordo)
+        self.__fFrameScrittaTag.configure(background=self.__coloreSfondo, highlightcolor=self.__coloreBordo)
         self.__fFrameSupportoBottoni.configure(background=self.__coloreSfondo, highlightcolor=self.__coloreBordo)
         self.__fFrameBottoneModifica.configure(background=self.__coloreSfondo, highlightcolor=self.__coloreBordo)
         self.__fFrameBottoneElimina.configure(background=self.__coloreSfondo, highlightcolor=self.__coloreBordo)
@@ -272,6 +296,7 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
         self.__lScrittaIndirizzoIP.configure(background=self.__coloreSfondo, font = self.__fontTesto, foreground=self.__coloreTesto, highlightcolor=self.__coloreBordo)
         self.__lScrittaPorta.configure(background=self.__coloreSfondo, font = self.__fontTesto, foreground=self.__coloreTesto, highlightcolor=self.__coloreBordo)
         self.__lScrittaTempoPing.configure(background=self.__coloreSfondo, font = self.__fontTesto, foreground=self.__coloreTesto, highlightcolor=self.__coloreBordo)
+        self.__lScrittaTag.configure(background=self.__coloreSfondo, font = self.__fontTesto, foreground=self.__coloreTesto, highlightcolor=self.__coloreBordo)
 
 
     # METODI EVENTI
@@ -282,6 +307,7 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
         self.__fFrameScrittaIndirizzoIP.configure(background=self.__coloreSfondoEvidenziato)
         self.__fFrameScrittaPorta.configure(background=self.__coloreSfondoEvidenziato)
         self.__fFrameScrittaTempoPing.configure(background=self.__coloreSfondoEvidenziato)
+        self.__fFrameScrittaTag.configure(background=self.__coloreSfondoEvidenziato)
         self.__fFrameSupportoBottoni.configure(background=self.__coloreSfondoEvidenziato)
         self.__fFrameBottoneModifica.configure(background=self.__coloreSfondoEvidenziato)
         self.__fFrameBottoneElimina.configure(background=self.__coloreSfondoEvidenziato)
@@ -293,6 +319,7 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
         self.__lScrittaIndirizzoIP.configure(background=self.__coloreSfondoEvidenziato)
         self.__lScrittaPorta.configure(background=self.__coloreSfondoEvidenziato)
         self.__lScrittaTempoPing.configure(background=self.__coloreSfondoEvidenziato)
+        self.__lScrittaTag.configure(background=self.__coloreSfondoEvidenziato)
 
     def __TogliEvidenziatura(self):
         #Frame
@@ -301,6 +328,7 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
         self.__fFrameScrittaIndirizzoIP.configure(background=self.__coloreSfondo)
         self.__fFrameScrittaPorta.configure(background=self.__coloreSfondo)
         self.__fFrameScrittaTempoPing.configure(background=self.__coloreSfondo)
+        self.__fFrameScrittaTag.configure(background=self.__coloreSfondo)
         self.__fFrameSupportoBottoni.configure(background=self.__coloreSfondo)
         self.__fFrameBottoneModifica.configure(background=self.__coloreSfondo)
         self.__fFrameBottoneElimina.configure(background=self.__coloreSfondo)
@@ -312,6 +340,7 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
         self.__lScrittaIndirizzoIP.configure(background=self.__coloreSfondo)
         self.__lScrittaPorta.configure(background=self.__coloreSfondo)
         self.__lScrittaTempoPing.configure(background=self.__coloreSfondo)
+        self.__lScrittaTag.configure(background=self.__coloreSfondo)
         
 
     def __CursorEntered(self, tkEvent = None):
@@ -331,6 +360,7 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
         self.__fFrameScrittaNome.bind(evento, funzione)
         self.__fFrameScrittaPorta.bind(evento, funzione)
         self.__fFrameScrittaTempoPing.bind(evento, funzione)
+        self.__fFrameScrittaTag.bind(evento, funzione)
 
         #Scritte
         self.__lScrittaIndirizzoIP.bind(evento, funzione)
@@ -346,10 +376,3 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
         #Canvas
         self.__cCanvasBottoneElimina.bind(evento, funzione)
         self.__cCanvasBottoneModifica.bind(evento, funzione)
-
-
-
-    # METODI DI SPECIFICA LAYOUT
-
-    
-

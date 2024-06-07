@@ -17,9 +17,7 @@ class FiltroStatusCategoria(FiltroGenerico):
         del FiltroGenerico.filtri[NomeInternoPaginaCategoria(self._categoriaFiltrata)]
 
     def ModificaCategoriaFiltrata(self, nomeCategoriaPrecedente : str, nomeCategoriaNuovo : str):
-        print("Modifica entered")
         if self._categoriaFiltrata == nomeCategoriaPrecedente:
-            print("Modifica eseguita")
             del FiltroGenerico.filtri[NomeInternoPaginaCategoria(nomeCategoriaPrecedente)]
             self._categoriaFiltrata = nomeCategoriaNuovo
             FiltroGenerico.filtri[NomeInternoPaginaCategoria(nomeCategoriaNuovo)] = self
@@ -36,28 +34,25 @@ class FiltroStatusCategoria(FiltroGenerico):
 
     def _Notifica_AggiuntoDispositivo(self, idDispositivo : int):
         if GestoreDispositivi.IGetDispositivo(idDispositivo).GetTag() == self._categoriaFiltrata:
-            self._AggiungiDispositivo(idDispositivo)
+            self._RebuildLista()
 
     def _Notifica_RimossoDispositivo(self, idDispositivo : int):
-        if GestoreDispositivi.IGetDispositivo(idDispositivo).GetTag() == self._categoriaFiltrata:
-            self._AggiungiDispositivo(idDispositivo)
+        if idDispositivo in self._idDispToIdEl_dict:
+            self._RebuildLista()
+            
 
     def _Notifica_ModificatoDispositivo(self, idDispositivo : int):
         #Controllo se ce o se dovrebbe essere nella lista
         shouldBeInList = GestoreDispositivi.IGetDispositivo(idDispositivo).GetTag() == self._categoriaFiltrata #Dovrebbe essere nella lista?
         isInList = False
-        for _idDispositivo in self._listaOrdinata:
+        for _idDispositivo in self._idDispToIdEl_dict:
             if idDispositivo == _idDispositivo:
                 isInList = True
                 break
-        
         #Controllo se aggiungere o rimuovere il dispositivo
         if shouldBeInList == isInList: 
             return
-        if isInList == True and shouldBeInList == False:
-            self._RimuoviDispositivo(idDispositivo)
-        if isInList == False and shouldBeInList == True:
-            self._AggiungiDispositivo(idDispositivo)
+        self._RebuildLista()
 
     def __init__(self, nomeCategoria : str):
         self._categoriaFiltrata = nomeCategoria
@@ -74,9 +69,9 @@ class FiltroStatusCategoria(FiltroGenerico):
         self.__functionToBind__MyFiltroRefreshNeeded = self._RebuildLista
         self.__functionToBind__MyFiltroRebuildNeeded = self._RebuildLista
         MyEventHandler.BindEvent(eventType = MyStatoDispositivoCambiato, functionToBind = self.__functionToBind__MyStatoDispositivoCambiato)
-        MyEventHandler.BindEvent(eventType = MyDispositivoAggiunto, functionToBind = self.__functionToBind__MyDispositivoAggiunto)
-        MyEventHandler.BindEvent(eventType = MyDispositivoModificato, functionToBind = self.__functionToBind__MyDispositivoModificato)
-        MyEventHandler.BindEvent(eventType = MyDispositivoRimosso, functionToBind = self.__functionToBind__MyDispositivoRimosso)
+        MyEventHandler.BindEvent(eventType = MyDispositivoAggiunto, functionToBind = self.__functionToBind__MyDispositivoAggiunto, first = True)
+        MyEventHandler.BindEvent(eventType = MyDispositivoModificato, functionToBind = self.__functionToBind__MyDispositivoModificato, first = True)
+        MyEventHandler.BindEvent(eventType = MyDispositivoRimosso, functionToBind = self.__functionToBind__MyDispositivoRimosso, first = True)
         MyEventHandler.BindEvent(eventType = MyFiltroRefreshNeeded, functionToBind = self.__functionToBind__MyFiltroRefreshNeeded)
         MyEventHandler.BindEvent(eventType = MyFiltroRebuildNeeded, functionToBind = self.__functionToBind__MyFiltroRebuildNeeded)
 
@@ -141,7 +136,7 @@ class FiltroStatusCategoria(FiltroGenerico):
         #Salvo gli id
         idElemento = self._idDispToIdEl_dict[idDispositivo]
         idElSuListaOrdinata = self._idElToIdListaOrdinata[idElemento]
-
+        
         #Reimposto gli id posizionali
         for i_elemento in range(idElemento, self._numOf_elementi):
             self._listaOrdinata[self._idElToIdListaOrdinata[i_elemento]] -= 1
@@ -189,11 +184,9 @@ class FiltroStatusCategoria(FiltroGenerico):
         #Ricostruisco il dizionario
         self._idDispToIdEl_dict = {}
         self._idElToIdDisp_dict = {}
-        print("Rebild")
         #Conto gli elementi e scarto quelli non della categoria giusta
         self._numOf_elementi = 0
         for dispositivo in GestoreDispositivi.IGetListaDispositivi():
-            print("Rebild: ", self._categoriaFiltrata, dispositivo.GetTag())
             if dispositivo.GetTag() == self._categoriaFiltrata:
                 self._idDispToIdEl_dict[dispositivo.GetId()] = self._numOf_elementi
                 self._idElToIdDisp_dict[self._numOf_elementi] = dispositivo.GetId()

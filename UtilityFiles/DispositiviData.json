@@ -7,9 +7,20 @@
 		"3" : {	"nomeMacchina" : "Amazon com","host" : "www.amazon.com","porta" : "3","timeTraPing" : "1.0","tag" : "Amazon"},
 		"4" : {	"nomeMacchina" : "Amazon com","host" : "www.amazon.com","porta" : "2","timeTraPing" : "1.0","tag" : "Amazon"},
 		"5" : {	"nomeMacchina" : "Amazon com","host" : "www.amazon.com","porta" : "1","timeTraPing" : "1.0","tag" : "Amazon"},
-		"6" : {	"nomeMacchina" : "Router","host" : "172.16.0.1","porta" : "0","timeTraPing" : "1.0","tag" : "Privato"},
-		"7" : {	"nomeMacchina" : "Host non valido","host" : "192.0.0.0","porta" : "-1","timeTraPing" : "0.2","tag" : "Host non validi"},
-		"8" : {	"nomeMacchina" : "-1","host" : "Ip host (es: 192.0.0.1 / www.google.com)","porta" : "Porta","timeTraPing" : "1.0","tag" : "Host non validi"}
+		"6" : {	"nomeMacchina" : "Amazon com","host" : "www.amazon.com","porta" : "3","timeTraPing" : "1.0","tag" : "Amazon"},
+		"7" : {	"nomeMacchina" : "Amazon com","host" : "www.amazon.com","porta" : "2","timeTraPing" : "1.0","tag" : "Amazon"},
+		"8" : {	"nomeMacchina" : "Amazon com","host" : "www.amazon.com","porta" : "1","timeTraPing" : "1.0","tag" : "Amazon"},
+		"9" : {	"nomeMacchina" : "Amazon com","host" : "www.amazon.com","porta" : "3","timeTraPing" : "1.0","tag" : "Amazon"},
+		"10" : {	"nomeMacchina" : "Amazon com","host" : "www.amazon.com","porta" : "2","timeTraPing" : "1.0","tag" : "Amazon"},
+		"11" : {	"nomeMacchina" : "Amazon com","host" : "www.amazon.com","porta" : "1","timeTraPing" : "1.0","tag" : "Amazon"},
+		"12" : {	"nomeMacchina" : "Amazon com","host" : "www.amazon.com","porta" : "3","timeTraPing" : "1.0","tag" : "Amazon"},
+		"13" : {	"nomeMacchina" : "Amazon com","host" : "www.amazon.com","porta" : "2","timeTraPing" : "1.0","tag" : "Amazon"},
+		"14" : {	"nomeMacchina" : "Amazon com","host" : "www.amazon.com","porta" : "1","timeTraPing" : "1.0","tag" : "Amazon"},
+		"15" : {	"nomeMacchina" : "Amazon com","host" : "www.amazon.com","porta" : "3","timeTraPing" : "1.0","tag" : "Amazon"},
+		"16" : {	"nomeMacchina" : "Amazon com","host" : "www.amazon.com","porta" : "2","timeTraPing" : "1.0","tag" : "Amazon"},
+		"17" : {	"nomeMacchina" : "Amazon com","host" : "www.amazon.com","porta" : "1","timeTraPing" : "1.0","tag" : "Amazon"},
+		"18" : {	"nomeMacchina" : "Router","host" : "172.16.0.1","porta" : "0","timeTraPing" : "1.0","tag" : "Privato"},
+		"19" : {	"nomeMacchina" : "Host non valido","host" : "192.0.0.0","porta" : "-1","timeTraPing" : "0.2","tag" : "Host non validi"}
 	},
 	"categorie" : {
 		"0" : {	"nomeCategoria" : "senza categoria"},

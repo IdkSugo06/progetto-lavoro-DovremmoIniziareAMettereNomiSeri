@@ -1,0 +1,728 @@
+[ERRORE]: Costruttore Gestore mail fallito, connessione o login falliti. Error: [WinError 10060] Impossibile stabilire la connessione. Risposta non corretta della parte connessa dopo l'intervallo di tempo oppure mancata risposta dall'host collegato
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.google.cn", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.google.cn", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.google.cn", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.google.cn", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.google.cn", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.google.cn", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.google.cn", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.google.cn", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.google.cn", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.google.cn", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.google.cn", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.google.cn", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.google.it", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.google.cn", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.google.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.google.cn", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.google.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.google.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.google.it", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.google.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Errore durante l'invio di una mail Errore:'GestoreInvioMail' object has no attribute '_GestoreInvioMail__canaleCriptato'
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file
+[ERRORE]: Ping non andato a buon fine, errore: Cannot resolve address "www.amazon.com", try verify your DNS or host file

@@ -7,7 +7,7 @@ LOG_DEBUG = -1
 LOG_WARNING = 1
 LOG_ERROR = 2
 LOG_FATAL_ERROR = 3
-LOG_PRINTENABLED = True
+LOG_PRINTENABLED = False
 LOG_ISENABLED = True
 LOG_DEBUG_LEVEL = 1
 
@@ -15,7 +15,7 @@ LOG_DEBUG_LEVEL = 1
 try:
     with open(PATH_JSON_LOG, 'r') as file:
         fileData = json.load(file).get("LOG_INFO")
-    LOG_ISENABLED = fileData["LOG_ISENABLED"]
+    LOG_ISENABLED = True if fileData["LOG_ISENABLED"] == "TRUE" else False
 
     debugLevel_str = fileData["LOG_DEBUG_LEVEL"]
     LOG_DEBUG_LEVEL = -1 if debugLevel_str == "DEBUG" else 0 if debugLevel_str == "COMMENTS" else 1 if "WARNINGS" else 2

@@ -1,6 +1,11 @@
 {
     "LOG_INFO" : {
-        "LOG_ISENABLED" : "True",
-        "LOG_DEBUG_LEVEL" : "DEBUG"
+        "LOG_ISENABLED" : "TRUE",
+        "LOG_DEBUG_LEVEL" : "WARNINGS"
+    },
+    
+    "POSSIBLE OPTIONS" : {
+        "LOG_ISENABLED" : ["TRUE", "FALSE"],
+        "LOG_DEBUG_LEVEL" : ["DEBUG", "WARNINGS", "ERRORS"]
     }
 }

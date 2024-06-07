@@ -59,8 +59,10 @@ class GestoreInvioMail:
     def InvioMail(self, messaggio : str = ""):
         if self.__isAttivo == False: return
         fullMessaggio = self.__DecoratoreMail() + messaggio
-        self.__canaleCriptato.sendmail(self.__from_add, self.__to_add, fullMessaggio)
-
+        try:
+            self.__canaleCriptato.sendmail(self.__from_add, self.__to_add, fullMessaggio)
+        except Exception as e:
+            LOG.log("Errore durante l'invio di una mail Errore:" + str(e), LOG_ERROR)
     def __DecoratoreMail(self):
         return f"From:{self.__from_add}\nTo:{self.__to_add}\nSubject:[DISCONNESSIONE] dispositivo rilevata -- mail autogenerata\n\n" 
 

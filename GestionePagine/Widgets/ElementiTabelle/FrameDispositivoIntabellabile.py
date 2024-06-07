@@ -367,6 +367,7 @@ class FrameDispositivoIntabellabile(ElementoIntabellabile):
         self.__lScrittaNome.bind(evento, funzione)
         self.__lScrittaPorta.bind(evento, funzione)
         self.__lScrittaTempoPing.bind(evento, funzione)
+        self.__lScrittaTag.bind(evento, funzione)
 
         #Frame bottoni
         self.__fFrameSupportoBottoni.bind(evento, funzione)
